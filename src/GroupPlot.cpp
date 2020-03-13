@@ -7,8 +7,6 @@
 #include "StringsScaleDraw.h"
 #include "Utilities.h"
 
-const int GroupPlot::maxCharsInLabel_ = 20;
-
 GroupPlot::GroupPlot(QWidget* parent)
     : PlotBase(tr("Grouping"), parent),
       marker_(&quantiles_), picker_(canvas())

@@ -12,13 +12,14 @@
 #include "PlotBase.h"
 #include "Picker.h"
 #include "Quantiles.h"
+#include "qwtble_global.h"
 
 class QwtPlotCurve;
 
 /**
  * @brief Plot on which user can group by text columns.
  */
-class GroupPlot : public PlotBase
+class QWTBLE_EXPORT GroupPlot : public PlotBase
 {
     Q_OBJECT
 public:
@@ -45,7 +46,7 @@ private:
                                        const QVector<Quantiles>& quantilesForIntervals);
 
     ///Maximum number of chars in label.
-    const static int maxCharsInLabel_;
+    static constexpr int maxCharsInLabel_ {20};
 
     NotchedMarker marker_;
 

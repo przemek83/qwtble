@@ -13,6 +13,7 @@
 #include "PlotData.h"
 
 #include "PlotMagnifier.h"
+#include "qwtble_global.h"
 
 class Zoomer;
 class QwtPlotPanner;
@@ -20,7 +21,7 @@ class QwtPlotPanner;
 /**
  * @brief PlotBase class for all plots.
  */
-class PlotBase : public QwtPlot
+class QWTBLE_EXPORT PlotBase : public QwtPlot
 {
     Q_OBJECT
 public:

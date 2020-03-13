@@ -74,29 +74,15 @@ set_target_properties(${PROJECT_NAME} PROPERTIES SOVERSION 1)
 set_property(TARGET ${PROJECT_NAME} PROPERTY PUBLIC_HEADER
     src/qwtble_global.h
     src/BasicDataPlot.h
-    src/BoxPicker.h
-    src/CustomMarker.h
-    src/GroupPicker.h
     src/GroupPlot.h
     src/HistogramPlot.h
-    src/HistPicker.h
-    src/LinearPicker.h
-    src/NotchedMarker.h
-    src/Picker.h
     src/PlotBase.h
-    src/PlotMagnifier.h
     src/QuantilesPlot.h
-    src/StringsScaleDraw.h
-    src/Zoomer.h
-    src/PlotData.h
-    src/Quantiles.h
     )
 target_include_directories(${PROJECT_NAME} PUBLIC src)
 include(GNUInstallDirs)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE Qt5::Core Qt5::Widgets optimized qwt debug qwtd)
-#target_link_libraries(${PROJECT_NAME} optimized qwt)
-#target_link_libraries(${PROJECT_NAME} debug qwtd)
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE QWTBLE_LIBRARY)
 

@@ -7,18 +7,18 @@
 #include <qwt_plot_curve.h>
 #include <qwt_scale_draw.h>
 
-#include "Quantiles.h"
-#include "PlotData.h"
-
-#include "PlotBase.h"
 #include "LinearPicker.h"
+#include "PlotData.h"
+#include "PlotBase.h"
+#include "Quantiles.h"
+#include "qwtble_global.h"
 
 class QMouseEvent;
 
 /**
  * @brief Linear regression plot with data and quantile 25, 50 and 75.
  */
-class BasicDataPlot : public PlotBase
+class QWTBLE_EXPORT BasicDataPlot : public PlotBase
 {
     Q_OBJECT
 public:

@@ -13,13 +13,14 @@
 #include "PlotData.h"
 #include "Picker.h"
 #include "Quantiles.h"
+#include "qwtble_global.h"
 
 class QMouseEvent;
 
 /**
  * @brief Histogram plot with actual density/distriburtion.
  */
-class HistogramPlot : public PlotBase
+class QWTBLE_EXPORT HistogramPlot : public PlotBase
 {
     Q_OBJECT
 public:

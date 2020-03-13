@@ -7,13 +7,14 @@
 #include "PlotBase.h"
 #include "Picker.h"
 #include "Quantiles.h"
+#include "qwtble_global.h"
 
 class CustomMarker;
 
 /**
  * @brief plot showing quantiles (q25, q50, q75, min, max, avg).
  */
-class QuantilesPlot : public PlotBase
+class QWTBLE_EXPORT QuantilesPlot : public PlotBase
 {
     Q_OBJECT
 public:
