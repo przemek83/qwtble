@@ -4,12 +4,13 @@
 #include <QResizeEvent>
 #include <qwt_scale_div.h>
 
+#include "BoxPicker.h"
 #include "NotchedMarker.h"
 #include "StringsScaleDraw.h"
 #include "Utilities.h"
 
 QuantilesPlot::QuantilesPlot(QWidget* parent) :
-    PlotBase(QObject::tr("Quantiles"), parent), picker_(canvas())
+    PlotBase(QObject::tr("Quantiles"), parent), picker_(new BoxPicker(canvas()))
 {
     marker_ = new NotchedMarker(&quantiles_);
 

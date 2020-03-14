@@ -3,12 +3,11 @@
 
 #include <qwt_scale_draw.h>
 
-#include "BoxPicker.h"
 #include "PlotBase.h"
-#include "Picker.h"
 #include "Quantiles.h"
 #include "qwtble_global.h"
 
+class BoxPicker;
 class CustomMarker;
 
 /**
@@ -59,7 +58,7 @@ private:
     //One, but marker expects vector.
     QVector<Quantiles> quantiles_;
 
-    BoxPicker picker_;
+    std::unique_ptr<BoxPicker> picker_;
 };
 
 #endif // QUANTILESPLOT_H
