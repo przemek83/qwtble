@@ -3,12 +3,14 @@
 
 #include <QObject>
 
+#include "qwtble_global.h"
+
 /**
  * @brief Data used by plots.
  * Due to dynamic memory reference, counter implemented to properly use and
  * clear memory without thinking about it.
  */
-class PlotData
+class QWTBLE_EXPORT PlotData
 {
 public:
     PlotData(double* dataX, double* dataY, int dataSize);

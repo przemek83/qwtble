@@ -4,10 +4,12 @@
 #include <QVector>
 #include <QString>
 
+#include "qwtble_global.h"
+
 /**
  * @brief Quantiles struct. Computes, creates tooltip display, stores values.
  */
-struct Quantiles
+struct QWTBLE_EXPORT Quantiles
 {
 public:
     Quantiles() = default;

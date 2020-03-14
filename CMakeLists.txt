@@ -78,6 +78,8 @@ set_property(TARGET ${PROJECT_NAME} PROPERTY PUBLIC_HEADER
     src/HistogramPlot.h
     src/PlotBase.h
     src/QuantilesPlot.h
+    src/PlotData.h
+    src/Quantiles.h
     )
 target_include_directories(${PROJECT_NAME} PUBLIC src)
 include(GNUInstallDirs)
