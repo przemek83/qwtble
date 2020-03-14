@@ -7,12 +7,12 @@
 #include <qwt_plot_curve.h>
 #include <qwt_scale_draw.h>
 
-#include "LinearPicker.h"
 #include "PlotData.h"
 #include "PlotBase.h"
 #include "Quantiles.h"
 #include "qwtble_global.h"
 
+class LinearPicker;
 class QMouseEvent;
 
 /**
@@ -68,7 +68,7 @@ private:
         [[nodiscard]] QwtText label(double v) const override;
     };
 
-    LinearPicker picker_;
+    std::unique_ptr<LinearPicker> picker_;
 
     /**
      * @brief set given item checked on legend.

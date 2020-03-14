@@ -3,11 +3,13 @@
 #include <QMouseEvent>
 #include <qwt_text_label.h>
 
+#include "PlotMagnifier.h"
 #include "Utilities.h"
 #include "Zoomer.h"
 
 PlotBase::PlotBase(const QString& title, QWidget* parent) :
-    QwtPlot(/*title,*/ parent), panner_(canvas()), magnifier_(canvas())
+    QwtPlot(/*title,*/ parent), panner_(canvas()),
+    magnifier_(new PlotMagnifier(canvas()))
 {
     //Used in export of images.
     setWindowTitle(title);
@@ -24,6 +26,8 @@ PlotBase::PlotBase(const QString& title, QWidget* parent) :
     initialScaleMap_.clear();
 }
 
+PlotBase::~PlotBase() = default;
+
 void PlotBase::mouseDoubleClickEvent(QMouseEvent* event)
 {
     QwtPlot::mouseDoubleClickEvent(event);
@@ -35,7 +39,7 @@ void PlotBase::mouseDoubleClickEvent(QMouseEvent* event)
 
 void PlotBase::resetPlot()
 {
-    magnifier_.reset();
+    magnifier_->reset();
     for (int i = 0; i < QwtPlot::axisCnt; ++i)
     {
         if (initialScaleMap_.contains(i))

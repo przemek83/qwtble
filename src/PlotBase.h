@@ -1,6 +1,8 @@
 #ifndef PLOTBASE_H
 #define PLOTBASE_H
 
+#include <memory>
+
 #include <QPointF>
 #include <qwt_plot_magnifier.h>
 #include <qwt_plot.h>
@@ -10,13 +12,11 @@
 #include <qwt_scale_div.h>
 #include <qwt_scale_draw.h>
 
-#include "PlotData.h"
-
-#include "PlotMagnifier.h"
 #include "qwtble_global.h"
 
 class Zoomer;
 class QwtPlotPanner;
+class PlotMagnifier;
 
 /**
  * @brief PlotBase class for all plots.
@@ -27,7 +27,7 @@ class QWTBLE_EXPORT PlotBase : public QwtPlot
 public:
     explicit PlotBase(const QString& /*title*/, QWidget* parent = nullptr);
 
-    virtual ~PlotBase() override = default;
+    virtual ~PlotBase() override;
 
     PlotBase& operator=(const PlotBase& other) = delete;
     PlotBase(const PlotBase& other) = delete;
@@ -44,7 +44,7 @@ public:
 protected:
     QwtPlotPanner panner_;
 
-    PlotMagnifier magnifier_;
+    std::unique_ptr<PlotMagnifier> magnifier_;
 
     void setStdScaleDraw(QwtPlot::Axis axis);
 
