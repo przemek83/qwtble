@@ -13,7 +13,7 @@ namespace QwtBleUtilities
  * @param daysToAdd amount of days to add.
  * @return date in for of string.
  **/
-QString QWTBLE_EXPORT stringFromDays(int daysToAdd);
+QString stringFromDays(int daysToAdd);
 
 ///Date 1/1/1970 used as reference for dates conversion.
 const QWTBLE_EXPORT QDate& getStartOfTheWorld();
