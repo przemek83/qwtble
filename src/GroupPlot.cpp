@@ -4,19 +4,21 @@
 #include <QToolTip>
 #include <qwt_plot_layout.h>
 
+#include "GroupPicker.h"
+#include "NotchedMarker.h"
 #include "StringsScaleDraw.h"
 #include "Utilities.h"
 
 GroupPlot::GroupPlot(QWidget* parent)
     : PlotBase(tr("Grouping"), parent),
-      marker_(&quantiles_), picker_(canvas())
+      marker_(new NotchedMarker(&quantiles_)), picker_(new GroupPicker(canvas()))
 {
     quantiles_.clear();
 
     setStdScaleDraw(yRight);
     setAxisScaleDraw(xBottom, new StringsScaleDraw(&shortIntervalNames_));
 
-    marker_.attach(this);
+    marker_->attach(this);
 
     //Font.
     enableAxis(QwtPlot::yRight, true);
@@ -24,6 +26,8 @@ GroupPlot::GroupPlot(QWidget* parent)
     font.setStyleStrategy(QFont::PreferAntialias);
     setAxisFont(QwtPlot::xBottom, font);
 }
+
+GroupPlot::~GroupPlot() = default;
 
 void GroupPlot::setNewData(const QVector<Quantiles>& quantiles,
                            QVector<QString>& intervalStrings)
@@ -77,10 +81,10 @@ bool GroupPlot::event(QEvent* event)
 {
     if (event->type() == QEvent::ToolTip)
     {
-        int x =  picker_.getAreaOfMouse();
+        int x =  picker_->getAreaOfMouse();
 
         // TODO: Bug: wrong position on group plot...
-        if (x >= 1 && x <= quantiles_.size() && picker_.getMouseInWidget())
+        if (x >= 1 && x <= quantiles_.size() && picker_->getMouseInWidget())
         {
             setToolTip("<B>" + longIntervalNames_.at(x - 1) +
                        "</B></BR>" + quantiles_.at(x - 1).getValuesAsToolTip());

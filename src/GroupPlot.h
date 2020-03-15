@@ -6,14 +6,12 @@
 #include <qwt_scale_div.h>
 #include <qwt_plot_curve.h>
 
-#include "CustomMarker.h"
-#include "GroupPicker.h"
-#include "NotchedMarker.h"
 #include "PlotBase.h"
-#include "Picker.h"
 #include "Quantiles.h"
 #include "qwtble_global.h"
 
+class GroupPicker;
+class NotchedMarker;
 class QwtPlotCurve;
 
 /**
@@ -25,7 +23,7 @@ class QWTBLE_EXPORT GroupPlot : public PlotBase
 public:
     explicit GroupPlot(QWidget* parent = nullptr);
 
-    ~GroupPlot() override = default;
+    ~GroupPlot() override;
 
     GroupPlot& operator=(const GroupPlot& other) = delete;
     GroupPlot(const GroupPlot& other) = delete;
@@ -48,7 +46,7 @@ private:
     ///Maximum number of chars in label.
     static constexpr int maxCharsInLabel_ {20};
 
-    NotchedMarker marker_;
+    std::unique_ptr<NotchedMarker> marker_;
 
     //Quantiles.
     QVector<Quantiles> quantiles_;
@@ -59,6 +57,6 @@ private:
     ///Names used in tooltip.
     QVector<QString> longIntervalNames_;
 
-    GroupPicker picker_;
+    std::unique_ptr<GroupPicker> picker_;
 };
 #endif // GROUPPLOT_H
