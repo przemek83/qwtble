@@ -5,7 +5,7 @@
 #include <QDebug>
 #include <qwt_plot_canvas.h>
 
-#include "Utilities.h"
+#include "QwtBleUtilities.h"
 
 Picker::Picker(QWidget* parent)
     : QwtPlotPicker(parent)

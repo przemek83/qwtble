@@ -1,8 +1,8 @@
-#include "Utilities.h"
+#include "QwtBleUtilities.h"
 
 #include <QLocale>
 
-namespace Utilities
+namespace QwtBleUtilities
 {
 QString stringFromDays(int daysToAdd)
 {

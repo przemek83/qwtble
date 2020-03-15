@@ -11,7 +11,7 @@
 #include <qwt_symbol.h>
 
 #include "LinearPicker.h"
-#include "Utilities.h"
+#include "QwtBleUtilities.h"
 
 BasicDataPlot::BasicDataPlot(QWidget* parent) :
     PlotBase(QObject::tr("Basic"), parent), picker_(new LinearPicker(canvas())),
@@ -51,7 +51,7 @@ void BasicDataPlot::initPlotCurve()
     pen0.setColor(QColor(Qt::blue));
     pen0.setWidth(3);
     plotCurve_.setPen(pen0);
-    plotCurve_.setZ(Utilities::LOW_ORDER);
+    plotCurve_.setZ(QwtBleUtilities::LOW_ORDER);
     plotCurve_.setRenderHint(QwtPlotItem::RenderAntialiased, true);
     plotCurve_.attach(this);
     plotCurve_.setTitle(QObject::tr("Data"));
@@ -64,7 +64,7 @@ void BasicDataPlot::initQ25()
     pen2.setColor(QColor(Qt::yellow));
     pen2.setWidth(3);
     plotQ25_.setPen(pen2);
-    plotQ25_.setZ(Utilities::MEDIUM_ORDER);
+    plotQ25_.setZ(QwtBleUtilities::MEDIUM_ORDER);
     plotQ25_.setRenderHint(QwtPlotItem::RenderAntialiased, true);
     plotQ25_.attach(this);
     plotQ25_.setTitle(QStringLiteral("Q25"));
@@ -77,7 +77,7 @@ void BasicDataPlot::initQ50()
     pen1.setColor(QColor(Qt::magenta));
     pen1.setWidth(4);
     plotQ50_.setPen(pen1);
-    plotQ50_.setZ(Utilities::MEDIUM_ORDER);
+    plotQ50_.setZ(QwtBleUtilities::MEDIUM_ORDER);
     plotQ50_.setRenderHint(QwtPlotItem::RenderAntialiased, true);
     plotQ50_.attach(this);
     plotQ50_.setTitle(QStringLiteral("Q50"));
@@ -90,7 +90,7 @@ void BasicDataPlot::initQ75()
     pen3.setColor(QColor(Qt::green));
     pen3.setWidth(3);
     plotQ75_.setPen(pen3);
-    plotQ75_.setZ(Utilities::MEDIUM_ORDER);
+    plotQ75_.setZ(QwtBleUtilities::MEDIUM_ORDER);
     plotQ75_.setRenderHint(QwtPlotItem::RenderAntialiased, true);
     plotQ75_.attach(this);
     plotQ75_.setTitle(QStringLiteral("Q75"));
@@ -103,7 +103,7 @@ void BasicDataPlot::initLinearRegression()
     pen4.setColor(QColor(Qt::cyan));
     pen4.setWidth(4);
     plotLinearRegression_.setPen(pen4);
-    plotLinearRegression_.setZ(Utilities::HIGH_ORDER);
+    plotLinearRegression_.setZ(QwtBleUtilities::HIGH_ORDER);
     plotLinearRegression_.setRenderHint(QwtPlotItem::RenderAntialiased, true);
     plotLinearRegression_.attach(this);
     plotLinearRegression_.setTitle(tr("Linear regression"));
@@ -175,13 +175,13 @@ void BasicDataPlot::setNewData(const PlotData& plotData,
 
 BasicDataPlot::TimeScaleDraw::TimeScaleDraw()
 {
-    setLabelRotation(Utilities::DEFAULT_LABEL_ROTATION);
+    setLabelRotation(QwtBleUtilities::DEFAULT_LABEL_ROTATION);
     setLabelAlignment(Qt::AlignLeft | Qt::AlignBottom);
 }
 
 QwtText BasicDataPlot::TimeScaleDraw::label(double v) const
 {
-    return QwtText(Utilities::stringFromDays(lround(v)));
+    return QwtText(QwtBleUtilities::stringFromDays(lround(v)));
 }
 
 void BasicDataPlot::legendItemChecked(const QVariant& itemInfo, bool on, int /*index*/)

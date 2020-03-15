@@ -2,7 +2,7 @@
 
 #include <cmath>
 
-#include "Utilities.h"
+#include "QwtBleUtilities.h"
 
 LinearPicker::LinearPicker(QWidget* parent)
     : Picker(parent)
@@ -12,7 +12,7 @@ LinearPicker::LinearPicker(QWidget* parent)
 
 QwtText LinearPicker::trackerTextF(const QPointF& pos) const
 {
-    QwtText coords(Utilities::stringFromDays(lround(pos.x())) + ", " +
+    QwtText coords(QwtBleUtilities::stringFromDays(lround(pos.x())) + ", " +
                    QString::number(pos.y(), 'f', 2));
 
     QColor bg(Qt::white);

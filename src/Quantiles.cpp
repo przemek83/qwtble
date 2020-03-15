@@ -4,7 +4,7 @@
 
 #include <QDebug>
 
-#include "Utilities.h"
+#include "QwtBleUtilities.h"
 
 void Quantiles::clear()
 {
@@ -44,12 +44,12 @@ void Quantiles::computeQuantiles(QVector<float>& valuePerUnit)
 
     for (float pricePerMeter : valuePerUnit)
     {
-        if (min_ > pricePerMeter || Utilities::floatsAreEqual(min_, 0.F))
+        if (min_ > pricePerMeter || QwtBleUtilities::floatsAreEqual(min_, 0.F))
         {
             min_ = pricePerMeter;
         }
 
-        if (max_ < pricePerMeter || Utilities::floatsAreEqual(max_, 0.F))
+        if (max_ < pricePerMeter || QwtBleUtilities::floatsAreEqual(max_, 0.F))
         {
             max_ = pricePerMeter;
         }
@@ -170,7 +170,7 @@ QString Quantiles::valueAsHtmlRow(PlotInfo name, float value)
     html.append(plotInfoNames.at(static_cast<size_t>(name)));
     html.append(QLatin1String("</td><td ALIGN=RIGHT>"));
     int precision = (PLOT_INFO_COUNT == name ? 0 : 2);
-    html.append(Utilities::floatToStringUsingLocale(value, precision));
+    html.append(QwtBleUtilities::floatToStringUsingLocale(value, precision));
     html.append(QLatin1String("</td></tr>\n"));
 
     return html;

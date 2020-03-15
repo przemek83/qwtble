@@ -2,7 +2,7 @@
 
 #include <QWheelEvent>
 
-#include "Utilities.h"
+#include "QwtBleUtilities.h"
 
 Zoomer::Zoomer(QwtPlotCanvas* canvas):
     QwtPlotZoomer(canvas)
@@ -28,7 +28,7 @@ Zoomer::Zoomer(QwtPlotCanvas* canvas):
 QwtText Zoomer::trackerTextF(const QPointF& pos) const
 {
     QColor bg(Qt::white);
-    bg.setAlpha(Utilities::SMALL_TRANSPARENCY_FACTOR);
+    bg.setAlpha(QwtBleUtilities::SMALL_TRANSPARENCY_FACTOR);
 
     QwtText text = QwtPlotZoomer::trackerTextF(pos);
     text.setBackgroundBrush(QBrush(bg));

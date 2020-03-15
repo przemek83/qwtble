@@ -7,13 +7,13 @@
 #include <qwt_scale_map.h>
 
 #include "PlotBase.h"
-#include "Utilities.h"
+#include "QwtBleUtilities.h"
 #include "Quantiles.h"
 
 CustomMarker::CustomMarker(QVector<Quantiles>* quantiles)
     : quantiles_(quantiles)
 {
-    setZ(Utilities::HIGH_ORDER);
+    setZ(QwtBleUtilities::HIGH_ORDER);
     setRenderHint(QwtPlotItem::RenderAntialiased, true);
 }
 
@@ -39,7 +39,7 @@ void CustomMarker::draw(QPainter* p,
     const QwtScaleDiv& scaleBottom = basePlot->axisScaleDiv(QwtPlot::xBottom);
 
     //If max scale = min scale than do not draw.
-    if (Utilities::doublesAreEqual(scaleLeft.lowerBound(), scaleLeft.upperBound()))
+    if (QwtBleUtilities::doublesAreEqual(scaleLeft.lowerBound(), scaleLeft.upperBound()))
     {
         return;
     }

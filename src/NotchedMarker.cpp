@@ -7,7 +7,7 @@
 #include <qwt_scale_map.h>
 
 #include "PlotBase.h"
-#include "Utilities.h"
+#include "QwtBleUtilities.h"
 #include "Quantiles.h"
 
 NotchedMarker::NotchedMarker(QVector<Quantiles>* quantiles)
@@ -16,9 +16,9 @@ NotchedMarker::NotchedMarker(QVector<Quantiles>* quantiles)
     QLinearGradient gradient;
     gradient.setCoordinateMode(QGradient::ObjectBoundingMode);
     QColor whiteAlpha(Qt::white);
-    whiteAlpha.setAlpha(Utilities::SMALL_TRANSPARENCY_FACTOR);
+    whiteAlpha.setAlpha(QwtBleUtilities::SMALL_TRANSPARENCY_FACTOR);
     QColor endAlpha(Qt::black);
-    endAlpha.setAlpha(Utilities::BIG_TRANSPARENCY_FACTOR);
+    endAlpha.setAlpha(QwtBleUtilities::BIG_TRANSPARENCY_FACTOR);
     gradient.setColorAt(0, whiteAlpha);
     gradient.setColorAt(1, endAlpha);
     markerBrush_ = QBrush(gradient);
@@ -39,7 +39,7 @@ void NotchedMarker::drawElement(QPainter* p,
     const double middleOfRightPartX {centerX + width / 2};
 
     //If min = max draw only one line.
-    if (Utilities::floatsAreEqual(quantiles.min_, quantiles.max_))
+    if (QwtBleUtilities::floatsAreEqual(quantiles.min_, quantiles.max_))
     {
         double pointY = yMap.transform(static_cast<double>(quantiles.min_));
         p->drawLine(QPointF(middleOfLeftPartX, pointY),

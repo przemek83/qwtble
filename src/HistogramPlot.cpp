@@ -10,7 +10,7 @@
 #include <qwt_symbol.h>
 
 #include "HistPicker.h"
-#include "Utilities.h"
+#include "QwtBleUtilities.h"
 
 HistogramPlot::HistogramPlot(QWidget* parent) :
     PlotBase(QObject::tr("Histogram"), parent),
@@ -32,7 +32,7 @@ HistogramPlot::~HistogramPlot() = default;
 void HistogramPlot::initHistogramPlot()
 {
     histPlot_.setStyle(QwtPlotHistogram::Columns);
-    histPlot_.setZ(Utilities::LOW_ORDER);
+    histPlot_.setZ(QwtBleUtilities::LOW_ORDER);
     histPlot_.setRenderHint(QwtPlotItem::RenderAntialiased, true);
     histPlot_.attach(this);
     histPlot_.setTitle(QObject::tr("Histogram"));
@@ -47,7 +47,7 @@ void HistogramPlot::initActualDensity()
     pen.setColor(QColor(Qt::blue));
     pen.setWidth(2);
     actualDensity_.setPen(pen);
-    actualDensity_.setZ(Utilities::HIGH_ORDER);
+    actualDensity_.setZ(QwtBleUtilities::HIGH_ORDER);
     actualDensity_.setRenderHint(QwtPlotItem::RenderAntialiased, true);
     actualDensity_.attach(this);
 }

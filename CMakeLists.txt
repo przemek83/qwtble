@@ -64,8 +64,8 @@ add_library(${PROJECT_NAME} SHARED
   src/PlotData.h
   src/Quantiles.cpp
   src/Quantiles.h
-  src/Utilities.cpp
-  src/Utilities.h
+  src/QwtBleUtilities.cpp
+  src/QwtBleUtilities.h
 )
 
 set_target_properties(${PROJECT_NAME} PROPERTIES VERSION ${PROJECT_VERSION})
@@ -80,6 +80,7 @@ set_property(TARGET ${PROJECT_NAME} PROPERTY PUBLIC_HEADER
     src/QuantilesPlot.h
     src/PlotData.h
     src/Quantiles.h
+    src/QwtBleUtilities.h
     )
 target_include_directories(${PROJECT_NAME} PUBLIC src)
 include(GNUInstallDirs)
@@ -88,21 +89,39 @@ target_link_libraries(${PROJECT_NAME} PRIVATE Qt5::Core Qt5::Widgets optimized q
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE QWTBLE_LIBRARY)
 
-add_custom_command(
-        TARGET ${PROJECT_NAME} POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy
-                ${CMAKE_BINARY_DIR}/libqwtble.dll
-                ${CMAKE_BINARY_DIR}/examples/libqwtble.dll)
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+                   COMMAND ${CMAKE_COMMAND} -E copy
+                           ${CMAKE_BINARY_DIR}/libqwtble.dll
+                           ${CMAKE_BINARY_DIR}/examples/libqwtble.dll)
 
-add_custom_command(
-        TARGET ${PROJECT_NAME} POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy
-                ${CMAKE_BINARY_DIR}/libqwtble.dll
-                ${CMAKE_BINARY_DIR}/tests/libqwtble.dll)
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+                   COMMAND ${CMAKE_COMMAND} -E copy
+                           ${CMAKE_BINARY_DIR}/libqwtble.dll
+                           ${CMAKE_BINARY_DIR}/tests/libqwtble.dll)
+
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+                   COMMAND ${CMAKE_COMMAND} -E copy
+                           ${CMAKE_BINARY_DIR}/qwt/install/lib/qwt.dll
+                           ${CMAKE_BINARY_DIR}/tests/qwt.dll)
+
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+                   COMMAND ${CMAKE_COMMAND} -E copy
+                           ${CMAKE_BINARY_DIR}/qwt/install/lib/qwtd.dll
+                           ${CMAKE_BINARY_DIR}/tests/qwtd.dll)
+
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+                   COMMAND ${CMAKE_COMMAND} -E copy
+                           ${CMAKE_BINARY_DIR}/qwt/install/lib/qwt.dll
+                           ${CMAKE_BINARY_DIR}/examples/qwt.dll)
+
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+                   COMMAND ${CMAKE_COMMAND} -E copy
+                           ${CMAKE_BINARY_DIR}/qwt/install/lib/qwtd.dll
+                           ${CMAKE_BINARY_DIR}/examples/qwtd.dll)
 
 install(TARGETS ${PROJECT_NAME}
-    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-    PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 
 add_subdirectory(examples)
 

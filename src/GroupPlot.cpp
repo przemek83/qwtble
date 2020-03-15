@@ -7,7 +7,7 @@
 #include "GroupPicker.h"
 #include "NotchedMarker.h"
 #include "StringsScaleDraw.h"
-#include "Utilities.h"
+#include "QwtBleUtilities.h"
 
 GroupPlot::GroupPlot(QWidget* parent)
     : PlotBase(tr("Grouping"), parent),

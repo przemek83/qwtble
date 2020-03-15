@@ -7,7 +7,7 @@
 #include "BoxPicker.h"
 #include "NotchedMarker.h"
 #include "StringsScaleDraw.h"
-#include "Utilities.h"
+#include "QwtBleUtilities.h"
 
 QuantilesPlot::QuantilesPlot(QWidget* parent) :
     PlotBase(QObject::tr("Quantiles"), parent), picker_(new BoxPicker(canvas()))
@@ -69,7 +69,7 @@ QuantilesPlot::IntervalsScaleDraw::IntervalsScaleDraw(int count) :
 
 QwtText QuantilesPlot::IntervalsScaleDraw::label(double v) const
 {
-    if (Utilities::doublesAreEqual(v, 1.) && count_ != 0)
+    if (QwtBleUtilities::doublesAreEqual(v, 1.) && count_ != 0)
     {
         return QwtText(QString::number(count_));
     }

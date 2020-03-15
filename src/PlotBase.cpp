@@ -4,7 +4,7 @@
 #include <qwt_text_label.h>
 
 #include "PlotMagnifier.h"
-#include "Utilities.h"
+#include "QwtBleUtilities.h"
 #include "Zoomer.h"
 
 PlotBase::PlotBase(const QString& title, QWidget* parent) :
@@ -20,7 +20,7 @@ PlotBase::PlotBase(const QString& title, QWidget* parent) :
     setStdScaleDraw(xBottom);
     setStdScaleDraw(yLeft);
 
-    setAxisLabelRotation(QwtPlot::xBottom, Utilities::DEFAULT_LABEL_ROTATION);
+    setAxisLabelRotation(QwtPlot::xBottom, QwtBleUtilities::DEFAULT_LABEL_ROTATION);
     setAxisLabelAlignment(QwtPlot::xBottom, Qt::AlignLeft | Qt::AlignBottom);
 
     initialScaleMap_.clear();
@@ -67,12 +67,12 @@ void PlotBase::setAxisScale(int axisId, double min, double max, double step)
 
 QwtText PlotBase::IntervalsScaleDraw::label(double v) const
 {
-    if (!Utilities::doublesAreEqual(fmod(v, 1), 0.))
+    if (!QwtBleUtilities::doublesAreEqual(fmod(v, 1), 0.))
     {
-        return QwtText(Utilities::floatToStringUsingLocale(static_cast<float>(v), 1));
+        return QwtText(QwtBleUtilities::floatToStringUsingLocale(static_cast<float>(v), 1));
     }
 
-    return QwtText(Utilities::floatToStringUsingLocale(static_cast<float>(v), 0));
+    return QwtText(QwtBleUtilities::floatToStringUsingLocale(static_cast<float>(v), 0));
 }
 
 void PlotBase::setPlotTitle(const QString& title)

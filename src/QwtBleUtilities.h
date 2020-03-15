@@ -4,19 +4,21 @@
 #include <QDate>
 #include <QString>
 
-namespace Utilities
+#include "qwtble_global.h"
+
+namespace QwtBleUtilities
 {
 /**
  * Calculate date 1/1/1970 + given days and return string.
  * @param daysToAdd amount of days to add.
  * @return date in for of string.
  **/
-QString stringFromDays(int daysToAdd);
+QString QWTBLE_EXPORT stringFromDays(int daysToAdd);
 
 ///Date 1/1/1970 used as reference for dates conversion.
-const QDate& getStartOfTheWorld();
+const QWTBLE_EXPORT QDate& getStartOfTheWorld();
 
-QString getDefaultDateFormat();
+QString QWTBLE_EXPORT getDefaultDateFormat();
 
 bool doublesAreEqual(double left, double right);
 bool floatsAreEqual(float left, float right);
@@ -27,7 +29,7 @@ bool floatsAreEqual(float left, float right);
  * @param precison precision for visualization.
  * @return number as string conveted using locale.
  **/
-QString floatToStringUsingLocale(float value, int precison);
+QString QWTBLE_EXPORT floatToStringUsingLocale(float value, int precison);
 
 static constexpr int BIG_TRANSPARENCY_FACTOR {50};
 static constexpr int SMALL_TRANSPARENCY_FACTOR {200};
