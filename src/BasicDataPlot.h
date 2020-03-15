@@ -24,7 +24,7 @@ class QWTBLE_EXPORT BasicDataPlot : public PlotBase
 public:
     explicit BasicDataPlot(QWidget* parent = nullptr);
 
-    ~BasicDataPlot() override = default;
+    ~BasicDataPlot() override;
 
     BasicDataPlot& operator=(const BasicDataPlot& other) = delete;
     BasicDataPlot(const BasicDataPlot& other) = delete;

@@ -8,13 +8,12 @@
 #include <qwt_scale_draw.h>
 #include <qwt_plot_histogram.h>
 
-#include "HistPicker.h"
 #include "PlotBase.h"
 #include "PlotData.h"
-#include "Picker.h"
 #include "Quantiles.h"
 #include "qwtble_global.h"
 
+class HistPicker;
 class QMouseEvent;
 
 /**
@@ -26,7 +25,7 @@ class QWTBLE_EXPORT HistogramPlot : public PlotBase
 public:
     explicit HistogramPlot(QWidget* parent = nullptr);
 
-    ~HistogramPlot() override = default;
+    ~HistogramPlot() override;
 
     HistogramPlot& operator=(const HistogramPlot& other) = delete;
     HistogramPlot(const HistogramPlot& other) = delete;
@@ -54,7 +53,7 @@ private:
     ///Actual density plot (blue line).
     QwtPlotCurve actualDensity_;
 
-    HistPicker picker_;
+    std::unique_ptr<HistPicker> picker_;
 
     void setLegendItemChecked(QwtPlotItem* plot);
 

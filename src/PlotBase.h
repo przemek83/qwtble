@@ -27,7 +27,7 @@ class QWTBLE_EXPORT PlotBase : public QwtPlot
 public:
     explicit PlotBase(const QString& /*title*/, QWidget* parent = nullptr);
 
-    virtual ~PlotBase() override;
+    ~PlotBase() override;
 
     PlotBase& operator=(const PlotBase& other) = delete;
     PlotBase(const PlotBase& other) = delete;

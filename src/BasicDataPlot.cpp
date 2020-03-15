@@ -39,6 +39,8 @@ BasicDataPlot::BasicDataPlot(QWidget* parent) :
     setLegendItemChecked(&plotLinearRegression_);
 }
 
+BasicDataPlot::~BasicDataPlot() = default;
+
 void BasicDataPlot::initPlotCurve()
 {
     plotCurve_.setStyle(QwtPlotCurve::Dots);

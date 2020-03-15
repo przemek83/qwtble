@@ -9,11 +9,12 @@
 #include <qwt_samples.h>
 #include <qwt_symbol.h>
 
+#include "HistPicker.h"
 #include "Utilities.h"
 
 HistogramPlot::HistogramPlot(QWidget* parent) :
     PlotBase(QObject::tr("Histogram"), parent),
-    picker_(canvas()), plotData_(nullptr, nullptr, 0)
+    picker_(new HistPicker(canvas())), plotData_(nullptr, nullptr, 0)
 {
     initHistogramPlot();
 
@@ -25,6 +26,8 @@ HistogramPlot::HistogramPlot(QWidget* parent) :
     setLegendItemChecked(&histPlot_);
     setLegendItemChecked(&actualDensity_);
 }
+
+HistogramPlot::~HistogramPlot() = default;
 
 void HistogramPlot::initHistogramPlot()
 {
