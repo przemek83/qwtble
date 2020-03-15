@@ -1,13 +1,13 @@
 #include <QTest>
 
-#include "CheckTest.h"
+#include "UtilitiesTest.h"
 
 int main(int argc, char* argv[])
 {
     QApplication a(argc, argv);
 
-    CheckTest checkTest;
-    QTest::qExec(&checkTest);
+    UtilitiesTest utilitiesTest;
+    QTest::qExec(&utilitiesTest);
 
     return 0;
 }

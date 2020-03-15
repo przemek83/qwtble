@@ -3,13 +3,11 @@
 
 #include <QObject>
 
-class CheckTest: public QObject
+class UtilitiesTest: public QObject
 {
     Q_OBJECT
 private Q_SLOTS:
-    void initTestCase();
-
-    void testFirst();
+    void testStringFromDays();
 };
 
 #endif // CHECKTEST
