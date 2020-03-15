@@ -34,8 +34,6 @@ add_library(${PROJECT_NAME} SHARED
   src/BasicDataPlot.h
   src/BoxPicker.cpp
   src/BoxPicker.h
-  src/CustomMarker.cpp
-  src/CustomMarker.h
   src/GroupPicker.cpp
   src/GroupPicker.h
   src/GroupPlot.cpp

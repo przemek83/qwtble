@@ -8,7 +8,7 @@
 #include "qwtble_global.h"
 
 class BoxPicker;
-class CustomMarker;
+class NotchedMarker;
 
 /**
  * @brief plot showing quantiles (q25, q50, q75, min, max, avg).
@@ -53,7 +53,7 @@ private:
         int count_;
     };
 
-    CustomMarker* marker_ {nullptr};
+    std::unique_ptr<NotchedMarker> marker_;
 
     //One, but marker expects vector.
     QVector<Quantiles> quantiles_;

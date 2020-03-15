@@ -1,14 +1,14 @@
 #ifndef NOTCHEDMARKER_H
 #define NOTCHEDMARKER_H
 
-#include "CustomMarker.h"
+#include <qwt_plot_item.h>
 
 struct Quantiles;
 
 /**
  * @brief Notched marker for display of quantiles, min, max and avg in one item.
  */
-class NotchedMarker : public CustomMarker
+class NotchedMarker : public QwtPlotItem
 {
 public:
     explicit NotchedMarker(QVector<Quantiles>* quantiles);
@@ -21,15 +21,22 @@ public:
     NotchedMarker& operator=(NotchedMarker&& other) = delete;
     NotchedMarker(NotchedMarker&& other) = delete;
 
+    int rtti() const override;
+
+    void draw(QPainter* p, const QwtScaleMap& xMap, const QwtScaleMap& yMap,
+              const QRectF& rect) const override;
+
 protected:
-    void drawLegend(QPainter* p, const QRectF& rect) const override;
+    void drawLegend(QPainter* p, const QRectF& rect) const;
 
     void drawElement(QPainter* p, int elementNumber,
                      const QwtScaleMap& xMap, const QwtScaleMap& yMap,
-                     double width, const Quantiles& quantiles) const override;
+                     double width, const Quantiles& quantiles) const;
 
 private:
     QBrush markerBrush_;
+
+    QVector<Quantiles>* quantiles_;
 };
 
 #endif // NOTCHEDMARKER_H

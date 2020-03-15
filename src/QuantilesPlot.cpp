@@ -10,17 +10,16 @@
 #include "QwtBleUtilities.h"
 
 QuantilesPlot::QuantilesPlot(QWidget* parent) :
-    PlotBase(QObject::tr("Quantiles"), parent), picker_(new BoxPicker(canvas()))
+    PlotBase(QObject::tr("Quantiles"), parent),
+    marker_(new NotchedMarker(&quantiles_)),
+    picker_(new BoxPicker(canvas()))
 {
-    marker_ = new NotchedMarker(&quantiles_);
-
     quantiles_.clear();
 
     enableAxis(yLeft, false);
 
     marker_->attach(this);
 
-    //Font.
     QFont font = axisFont(xBottom);
     font.setStyleStrategy(QFont::PreferAntialias);
     setAxisFont(xBottom, font);
@@ -31,10 +30,7 @@ QuantilesPlot::QuantilesPlot(QWidget* parent) :
     setAxisMaxMajor(xBottom, 3);
 }
 
-QuantilesPlot::~QuantilesPlot()
-{
-    delete marker_;
-}
+QuantilesPlot::~QuantilesPlot() = default;
 
 void QuantilesPlot::forceResize()
 {
