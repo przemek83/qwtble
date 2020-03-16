@@ -4,7 +4,7 @@
 #include <QResizeEvent>
 #include <qwt_scale_div.h>
 
-#include "BoxPicker.h"
+#include "YAxisNumberPicker.h"
 #include "NotchedMarker.h"
 #include "StringsScaleDraw.h"
 #include "QwtBleUtilities.h"
@@ -12,7 +12,7 @@
 QuantilesPlot::QuantilesPlot(QWidget* parent) :
     PlotBase(QObject::tr("Quantiles"), parent),
     marker_(new NotchedMarker(&quantiles_)),
-    picker_(new BoxPicker(canvas()))
+    picker_(new YAxisNumberPicker(canvas()))
 {
     quantiles_.clear();
 

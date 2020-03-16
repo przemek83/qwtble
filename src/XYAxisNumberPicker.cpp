@@ -1,16 +1,16 @@
-#include "HistPicker.h"
+#include "XYAxisNumberPicker.h"
 
-HistPicker::HistPicker(QWidget* parent)
+XYAxisNumberPicker::XYAxisNumberPicker(QWidget* parent)
     : Picker(parent)
 {
 
 }
 
-QwtText HistPicker::trackerTextF(const QPointF& pos)const
+QwtText XYAxisNumberPicker::trackerTextF(const QPointF& pos)const
 {
     QwtText coords(QString::number(pos.x(), 'f', 0) +
                    ", " + QString::number(pos.y(), 'f', 0));
-    QColor bg(Qt::white);
+    const QColor bg(Qt::white);
     coords.setBackgroundBrush(QBrush(bg));
     return coords;
 }

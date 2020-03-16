@@ -9,12 +9,12 @@
 #include <qwt_samples.h>
 #include <qwt_symbol.h>
 
-#include "HistPicker.h"
+#include "XYAxisNumberPicker.h"
 #include "QwtBleUtilities.h"
 
 HistogramPlot::HistogramPlot(QWidget* parent) :
     PlotBase(QObject::tr("Histogram"), parent),
-    picker_(new HistPicker(canvas())), plotData_(nullptr, nullptr, 0)
+    picker_(new XYAxisNumberPicker(canvas())), plotData_(nullptr, nullptr, 0)
 {
     initHistogramPlot();
 

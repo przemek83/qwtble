@@ -10,11 +10,12 @@
 #include <qwt_plot_panner.h>
 #include <qwt_symbol.h>
 
-#include "LinearPicker.h"
+#include "XDateYAxisNumberPicker.h"
 #include "QwtBleUtilities.h"
 
 BasicDataPlot::BasicDataPlot(QWidget* parent) :
-    PlotBase(QObject::tr("Basic"), parent), picker_(new LinearPicker(canvas())),
+    PlotBase(QObject::tr("Basic"), parent),
+    picker_(new XDateYAxisNumberPicker(canvas())),
     plotData_(nullptr, nullptr, 0)
 {
     setAxisScaleDraw(xBottom, new TimeScaleDraw());

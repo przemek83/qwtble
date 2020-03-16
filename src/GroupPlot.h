@@ -10,9 +10,9 @@
 #include "Quantiles.h"
 #include "qwtble_global.h"
 
-class GroupPicker;
 class NotchedMarker;
 class QwtPlotCurve;
+class YAxisNumberPicker;
 
 /**
  * @brief Plot on which user can group by text columns.
@@ -57,6 +57,6 @@ private:
     ///Names used in tooltip.
     QVector<QString> longIntervalNames_;
 
-    std::unique_ptr<GroupPicker> picker_;
+    std::unique_ptr<YAxisNumberPicker> picker_;
 };
 #endif // GROUPPLOT_H

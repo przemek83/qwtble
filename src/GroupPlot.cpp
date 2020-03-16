@@ -4,14 +4,15 @@
 #include <QToolTip>
 #include <qwt_plot_layout.h>
 
-#include "GroupPicker.h"
 #include "NotchedMarker.h"
 #include "StringsScaleDraw.h"
 #include "QwtBleUtilities.h"
+#include "YAxisNumberPicker.h"
 
 GroupPlot::GroupPlot(QWidget* parent)
     : PlotBase(tr("Grouping"), parent),
-      marker_(new NotchedMarker(&quantiles_)), picker_(new GroupPicker(canvas()))
+      marker_(new NotchedMarker(&quantiles_)),
+      picker_(new YAxisNumberPicker(canvas()))
 {
     quantiles_.clear();
 

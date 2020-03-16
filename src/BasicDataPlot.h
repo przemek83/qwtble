@@ -12,7 +12,7 @@
 #include "Quantiles.h"
 #include "qwtble_global.h"
 
-class LinearPicker;
+class XDateYAxisNumberPicker;
 class QMouseEvent;
 
 /**
@@ -68,7 +68,7 @@ private:
         [[nodiscard]] QwtText label(double v) const override;
     };
 
-    std::unique_ptr<LinearPicker> picker_;
+    std::unique_ptr<XDateYAxisNumberPicker> picker_;
 
     /**
      * @brief set given item checked on legend.

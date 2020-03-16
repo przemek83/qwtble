@@ -7,8 +7,8 @@
 #include "Quantiles.h"
 #include "qwtble_global.h"
 
-class BoxPicker;
 class NotchedMarker;
+class YAxisNumberPicker;
 
 /**
  * @brief plot showing quantiles (q25, q50, q75, min, max, avg).
@@ -58,7 +58,7 @@ private:
     //One, but marker expects vector.
     QVector<Quantiles> quantiles_;
 
-    std::unique_ptr<BoxPicker> picker_;
+    std::unique_ptr<YAxisNumberPicker> picker_;
 };
 
 #endif // QUANTILESPLOT_H

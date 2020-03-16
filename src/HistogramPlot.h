@@ -13,7 +13,7 @@
 #include "Quantiles.h"
 #include "qwtble_global.h"
 
-class HistPicker;
+class XYAxisNumberPicker;
 class QMouseEvent;
 
 /**
@@ -53,7 +53,7 @@ private:
     ///Actual density plot (blue line).
     QwtPlotCurve actualDensity_;
 
-    std::unique_ptr<HistPicker> picker_;
+    std::unique_ptr<XYAxisNumberPicker> picker_;
 
     void setLegendItemChecked(QwtPlotItem* plot);
 

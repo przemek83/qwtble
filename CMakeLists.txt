@@ -32,18 +32,16 @@ add_library(${PROJECT_NAME} SHARED
   src/qwtble_global.h
   src/BasicDataPlot.cpp
   src/BasicDataPlot.h
-  src/BoxPicker.cpp
-  src/BoxPicker.h
-  src/GroupPicker.cpp
-  src/GroupPicker.h
+  src/YAxisNumberPicker.cpp
+  src/YAxisNumberPicker.h
   src/GroupPlot.cpp
   src/GroupPlot.h
   src/HistogramPlot.cpp
   src/HistogramPlot.h
-  src/HistPicker.cpp
-  src/HistPicker.h
-  src/LinearPicker.cpp
-  src/LinearPicker.h
+  src/XYAxisNumberPicker.cpp
+  src/XYAxisNumberPicker.h
+  src/XDateYAxisNumberPicker.cpp
+  src/XDateYAxisNumberPicker.h
   src/NotchedMarker.cpp
   src/NotchedMarker.h
   src/Picker.cpp
