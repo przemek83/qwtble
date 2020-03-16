@@ -54,8 +54,6 @@ add_library(${PROJECT_NAME} SHARED
   src/QuantilesPlot.h
   src/StringsScaleDraw.cpp
   src/StringsScaleDraw.h
-  src/Zoomer.cpp
-  src/Zoomer.h
   src/PlotData.cpp
   src/PlotData.h
   src/Quantiles.cpp

@@ -14,7 +14,6 @@
 
 #include "qwtble_global.h"
 
-class Zoomer;
 class QwtPlotPanner;
 class PlotMagnifier;
 

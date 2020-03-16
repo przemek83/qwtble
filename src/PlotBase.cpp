@@ -5,7 +5,6 @@
 
 #include "PlotMagnifier.h"
 #include "QwtBleUtilities.h"
-#include "Zoomer.h"
 
 PlotBase::PlotBase(const QString& title, QWidget* parent) :
     QwtPlot(/*title,*/ parent), panner_(canvas()),
