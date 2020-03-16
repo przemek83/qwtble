@@ -63,8 +63,6 @@ private:
         PLOT_INFO_END
     };
 
-    static const char* plotInfoNames_[];
-
     static QString valueAsHtmlRow(PlotInfo name, float value);
 };
 
