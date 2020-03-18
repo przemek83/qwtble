@@ -75,6 +75,7 @@ set_property(TARGET ${PROJECT_NAME} PROPERTY PUBLIC_HEADER
     src/PlotData.h
     src/Quantiles.h
     src/QwtBleUtilities.h
+    src/NotchedMarker.h
     )
 target_include_directories(${PROJECT_NAME} PUBLIC src)
 include(GNUInstallDirs)

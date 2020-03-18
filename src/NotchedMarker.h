@@ -3,12 +3,14 @@
 
 #include <qwt_plot_item.h>
 
+#include "qwtble_global.h"
+
 struct Quantiles;
 
 /**
  * @brief Notched marker for display of quantiles, min, max and avg in one item.
  */
-class NotchedMarker : public QwtPlotItem
+class QWTBLE_EXPORT NotchedMarker : public QwtPlotItem
 {
 public:
     explicit NotchedMarker(QVector<Quantiles>* quantiles);
