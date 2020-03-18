@@ -14,19 +14,30 @@ find_package(Qt5 COMPONENTS Widgets Core Test REQUIRED)
 add_definitions( ${QT_DEFINITIONS} )
 
 # QWT
-configure_file(CMakeLists.txt.qwt qwt/CMakeLists.txt)
-execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .
-        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/qwt)
-execute_process(COMMAND ${CMAKE_COMMAND} --build .
-        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/qwt)
-file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/qwt/install)
-file(COPY ${CMAKE_BINARY_DIR}/qwt/qwt/src/qwt-build/lib DESTINATION ${CMAKE_BINARY_DIR}/qwt/install)
-file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/qwt/install/include)
-file(GLOB QWT_HEADERS "${CMAKE_BINARY_DIR}/qwt/qwt/src/qwt/src/*.h" )
-file(COPY ${QWT_HEADERS} DESTINATION ${CMAKE_BINARY_DIR}/qwt/install/include)
+if(DEFINED ENV{QWT_ROOT})
+    message(STATUS "QWT_ROOT environment variable defined, using QWT_ROOT paths.")
+    set(QWT_INCLUDE_PATH $ENV{QWT_ROOT}/include)
+    set(QWT_BINARY_PATH $ENV{QWT_ROOT}/lib)
+else()
+    configure_file(CMakeLists.txt.qwt qwt/CMakeLists.txt)
+    execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .
+            WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/qwt)
+    execute_process(COMMAND ${CMAKE_COMMAND} --build .
+            WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/qwt)
+    file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/qwt/install)
+    file(COPY ${CMAKE_BINARY_DIR}/qwt/qwt/src/qwt-build/lib DESTINATION ${CMAKE_BINARY_DIR}/qwt/install)
+    file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/qwt/install/include)
+    file(GLOB QWT_HEADERS "${CMAKE_BINARY_DIR}/qwt/qwt/src/qwt/src/*.h" )
+    file(COPY ${QWT_HEADERS} DESTINATION ${CMAKE_BINARY_DIR}/qwt/install/include)
+    set(QWT_INCLUDE_PATH ${CMAKE_BINARY_DIR}/qwt/install/include)
+    set(QWT_BINARY_PATH ${CMAKE_BINARY_DIR}/qwt/install/lib)
+endif()
 
-include_directories(${CMAKE_BINARY_DIR}/qwt/install/include)
-LINK_DIRECTORIES(${CMAKE_BINARY_DIR}/qwt/install/lib)
+message(STATUS "Using QWT_INCLUDE_PATH ${QWT_INCLUDE_PATH}")
+message(STATUS "Using QWT_BINARY_PATH ${QWT_BINARY_PATH}")
+
+include_directories(${QWT_INCLUDE_PATH})
+LINK_DIRECTORIES(${QWT_BINARY_PATH})
 
 add_library(${PROJECT_NAME} SHARED
   src/qwtble_global.h
@@ -96,22 +107,22 @@ add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
 
 add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
                    COMMAND ${CMAKE_COMMAND} -E copy
-                           ${CMAKE_BINARY_DIR}/qwt/install/lib/qwt.dll
+                           ${QWT_BINARY_PATH}/qwt.dll
                            ${CMAKE_BINARY_DIR}/tests/qwt.dll)
 
 add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
                    COMMAND ${CMAKE_COMMAND} -E copy
-                           ${CMAKE_BINARY_DIR}/qwt/install/lib/qwtd.dll
+                           ${QWT_BINARY_PATH}/qwtd.dll
                            ${CMAKE_BINARY_DIR}/tests/qwtd.dll)
 
 add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
                    COMMAND ${CMAKE_COMMAND} -E copy
-                           ${CMAKE_BINARY_DIR}/qwt/install/lib/qwt.dll
+                           ${QWT_BINARY_PATH}/qwt.dll
                            ${CMAKE_BINARY_DIR}/examples/qwt.dll)
 
 add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
                    COMMAND ${CMAKE_COMMAND} -E copy
-                           ${CMAKE_BINARY_DIR}/qwt/install/lib/qwtd.dll
+                           ${QWT_BINARY_PATH}/qwtd.dll
                            ${CMAKE_BINARY_DIR}/examples/qwtd.dll)
 
 install(TARGETS ${PROJECT_NAME}
