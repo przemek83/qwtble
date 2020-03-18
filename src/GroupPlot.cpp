@@ -83,8 +83,6 @@ bool GroupPlot::event(QEvent* event)
     if (event->type() == QEvent::ToolTip)
     {
         int x =  picker_->getAreaOfMouse();
-
-        // TODO: Bug: wrong position on group plot...
         if (x >= 1 && x <= quantiles_.size() && picker_->getMouseInWidget())
         {
             setToolTip("<B>" + longIntervalNames_.at(x - 1) +

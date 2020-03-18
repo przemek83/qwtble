@@ -25,8 +25,7 @@ Picker::Picker(QWidget* parent)
 
 int Picker::getAreaOfMouse()
 {
-    const double rounding_shift {0.5};
-    const auto x = lround(invTransform(trackerPosition()).x() + rounding_shift);
+    const auto x = lround(invTransform(trackerPosition()).x());
     return static_cast<int>(x);
 }
 
