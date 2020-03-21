@@ -32,9 +32,7 @@ public:
     GroupPlotUI(GroupPlotUI&& other) = delete;
 
 public Q_SLOTS:
-    void setNewData(float minY,
-                    float maxY,
-                    QVector<QString> intervalsNames,
+    void setNewData(QVector<QString> intervalsNames,
                     const QVector<Quantiles>& quantilesForIntervals,
                     const Quantiles& quantiles);
 

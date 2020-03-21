@@ -40,14 +40,14 @@ GroupPlotUI::~GroupPlotUI()
     delete ui;
 }
 
-void GroupPlotUI::setNewData(float minY,
-                             float maxY,
-                             QVector<QString> intervalsNames,
+void GroupPlotUI::setNewData(QVector<QString> intervalsNames,
                              const QVector<Quantiles>& quantilesForIntervals,
                              const Quantiles& quantiles)
 {
-    groupPlot_.setAxisScale(QwtPlot::yLeft, static_cast<double>(minY), static_cast<double>(maxY));
-    groupPlot_.setAxisScale(QwtPlot::yRight, static_cast<double>(minY), static_cast<double>(maxY));
+    const double minY = static_cast<double>(quantiles.min_);
+    const double maxY = static_cast<double>(quantiles.max_);
+    groupPlot_.setAxisScale(QwtPlot::yLeft, minY, maxY);
+    groupPlot_.setAxisScale(QwtPlot::yRight, minY, maxY);
     groupPlot_.setAxisScale(QwtPlot::xBottom, 0, intervalsNames.size() + 1, 1);
 
     groupPlot_.setNewData(quantilesForIntervals,
