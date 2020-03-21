@@ -47,10 +47,10 @@ private:
 
     void initLegend();
 
-    ///Histogram plot.
+    /// Histogram plot.
     QwtPlotHistogram histPlot_;
 
-    ///Actual density plot (blue line).
+    /// Actual density plot (blue line).
     QwtPlotCurve actualDensity_;
 
     std::unique_ptr<XYAxisNumberPicker> picker_;

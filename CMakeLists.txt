@@ -71,6 +71,14 @@ add_library(${PROJECT_NAME} SHARED
   src/Quantiles.h
   src/QwtBleUtilities.cpp
   src/QwtBleUtilities.h
+  src/GroupPlotUI.cpp
+  src/GroupPlotUI.h
+  src/GroupPlotUI.ui
+  src/HistogramPlotUI.cpp
+  src/HistogramPlotUI.h
+  src/HistogramPlotUI.ui
+  src/ScrollArea.cpp
+  src/ScrollArea.h
 )
 
 set_target_properties(${PROJECT_NAME} PROPERTIES VERSION ${PROJECT_VERSION})
@@ -87,6 +95,8 @@ set_property(TARGET ${PROJECT_NAME} PROPERTY PUBLIC_HEADER
     src/Quantiles.h
     src/QwtBleUtilities.h
     src/NotchedMarker.h
+    src/GroupPlotUI.h
+    src/HistogramPlotUI.ui
     )
 target_include_directories(${PROJECT_NAME} PUBLIC src)
 include(GNUInstallDirs)
