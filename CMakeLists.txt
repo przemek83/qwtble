@@ -96,7 +96,7 @@ set_property(TARGET ${PROJECT_NAME} PROPERTY PUBLIC_HEADER
     src/QwtBleUtilities.h
     src/NotchedMarker.h
     src/GroupPlotUI.h
-    src/HistogramPlotUI.ui
+    src/HistogramPlotUI.h
     )
 target_include_directories(${PROJECT_NAME} PUBLIC src)
 include(GNUInstallDirs)
