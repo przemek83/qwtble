@@ -21,8 +21,11 @@ HistogramPlotUI::~HistogramPlotUI()
     delete ui;
 }
 
-void HistogramPlotUI::dataChanged(const PlotData& plotData, const Quantiles& quantiles)
+void HistogramPlotUI::dataChanged(QVector<double> data, Quantiles quantiles)
 {
-    histogramPlot_.setNewData(plotData, quantiles, ui->spinBox->value());
+    const int intervalsCount {ui->spinBox->value()};
+    histogramPlot_.setNewData(std::move(data),
+                              std::move(quantiles),
+                              intervalsCount);
 }
 

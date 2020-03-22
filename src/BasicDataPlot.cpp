@@ -15,8 +15,7 @@
 
 BasicDataPlot::BasicDataPlot(QWidget* parent) :
     PlotBase(QObject::tr("Basic"), parent),
-    picker_(new XDateYAxisNumberPicker(canvas())),
-    plotData_(nullptr, nullptr, 0)
+    picker_(new XDateYAxisNumberPicker(canvas()))
 {
     setAxisScaleDraw(xBottom, new TimeScaleDraw());
 
@@ -124,18 +123,13 @@ void BasicDataPlot::initLegend()
     insertLegend(legend, QwtPlot::BottomLegend);
 }
 
-void BasicDataPlot::setPlotData(const PlotData& plotData)
+void BasicDataPlot::setPlotData(QVector<QPointF> data)
 {
-    plotCurve_.setRawSamples(plotData.getDataX(),
-                             plotData.getDataY(),
-                             plotData.getDataSize());
-
-    plotData_ = plotData;
-
+    plotCurve_.setSamples(data);
     replot();
 }
 
-void BasicDataPlot::setNewData(const PlotData& plotData,
+void BasicDataPlot::setNewData(QVector<QPointF> data,
                                const Quantiles& quantiles,
                                const QVector<QPointF>& linearRegression)
 {
@@ -143,7 +137,7 @@ void BasicDataPlot::setNewData(const PlotData& plotData,
 
     QVector<QPointF> qVector;
 
-    if (plotData.getDataSize() > 0)
+    if (data.size() > 0)
     {
         float min = quantiles.minX_;
         float max = quantiles.maxX_;
@@ -170,7 +164,7 @@ void BasicDataPlot::setNewData(const PlotData& plotData,
         plotLinearRegression_.setSamples(qVector);
     }
 
-    setPlotData(plotData);
+    setPlotData(std::move(data));
 }
 
 

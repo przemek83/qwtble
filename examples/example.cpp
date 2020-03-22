@@ -89,26 +89,16 @@ static GroupPlot* createGroupPlot()
     return groupPlot;
 }
 
-static double* getRawData(QVector<float> data)
-{
-    int numberOfItems {data.size()};
-    double* rawData = new double[static_cast<unsigned long long>(numberOfItems)];
-    for (int i = 0; i < examplePriceSeries.size();  ++i)
-        rawData[i] = static_cast<double>(data[i]);
-    return rawData;
-}
-
 static HistogramPlot* createHistogramPlot()
 {
     Quantiles quantiles;
     QVector<float> dataForQuantiles(examplePriceSeries);
     quantiles.computeQuantiles(dataForQuantiles);
     auto histogramPlot = new HistogramPlot();
-    const int numberOfItems {examplePriceSeries.size()};
-    PlotData plotData(getRawData(exampleDateSeries),
-                      getRawData(examplePriceSeries),
-                      numberOfItems);
-    histogramPlot->setNewData(plotData, quantiles, 10);
+    QVector<double> plotData;
+    for (const auto& item : examplePriceSeries)
+        plotData.append(static_cast<double>(item));
+    histogramPlot->setNewData(std::move(plotData), std::move(quantiles), 10);
     return histogramPlot;
 }
 
@@ -130,11 +120,12 @@ static BasicDataPlot* createBasicDataPlot()
         {static_cast<double>(*min), 38.002},
         {static_cast<double>(*max), 78.4491}
     };
-    const int numberOfItems {examplePriceSeries.size()};
-    PlotData plotData(getRawData(exampleDateSeries),
-                      getRawData(examplePriceSeries),
-                      numberOfItems);
-    basicDataPlot->setNewData(plotData,
+
+    QVector<QPointF> data;
+    for (int i = 0; i < examplePriceSeries.size(); ++i)
+        data.append({static_cast<double>(exampleDateSeries[i]),
+                     static_cast<double>(examplePriceSeries[i])});
+    basicDataPlot->setNewData(std::move(data),
                               quantiles,
                               linearRegressionPoints);
     return basicDataPlot;

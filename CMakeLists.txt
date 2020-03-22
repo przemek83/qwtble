@@ -65,8 +65,6 @@ add_library(${PROJECT_NAME} SHARED
   src/QuantilesPlot.h
   src/StringsScaleDraw.cpp
   src/StringsScaleDraw.h
-  src/PlotData.cpp
-  src/PlotData.h
   src/Quantiles.cpp
   src/Quantiles.h
   src/QwtBleUtilities.cpp
@@ -91,7 +89,6 @@ set_property(TARGET ${PROJECT_NAME} PROPERTY PUBLIC_HEADER
     src/HistogramPlot.h
     src/PlotBase.h
     src/QuantilesPlot.h
-    src/PlotData.h
     src/Quantiles.h
     src/QwtBleUtilities.h
     src/NotchedMarker.h

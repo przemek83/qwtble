@@ -7,7 +7,6 @@
 #include <qwt_plot_curve.h>
 #include <qwt_scale_draw.h>
 
-#include "PlotData.h"
 #include "PlotBase.h"
 #include "Quantiles.h"
 #include "qwtble_global.h"
@@ -33,12 +32,12 @@ public:
     BasicDataPlot(BasicDataPlot&& other) = delete;
 
 public Q_SLOTS:
-    virtual void setNewData(const PlotData& plotData,
+    virtual void setNewData(QVector<QPointF> data,
                             const Quantiles& quantiles,
                             const QVector<QPointF>& linearRegression);
 
 private:
-    void setPlotData(const PlotData& plotData);
+    void setPlotData(QVector<QPointF> data);
 
     void initPlotCurve();
     void initQ25();
@@ -75,8 +74,6 @@ private:
      * @param plot plot related to item on legend.
      */
     void setLegendItemChecked(QwtPlotCurve* plot);
-
-    PlotData plotData_;
 
     QwtPlotCurve plotCurve_;
 

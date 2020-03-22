@@ -14,7 +14,7 @@
 
 HistogramPlot::HistogramPlot(QWidget* parent) :
     PlotBase(QObject::tr("Histogram"), parent),
-    picker_(new XYAxisNumberPicker(canvas())), plotData_(nullptr, nullptr, 0)
+    picker_(new XYAxisNumberPicker(canvas()))
 {
     initHistogramPlot();
 
@@ -94,21 +94,20 @@ void HistogramPlot::setLegendItemChecked(QwtPlotItem* plot)
 void HistogramPlot::recompute(int intervalsCount)
 {
     setToolTip(quantiles_.getValuesAsToolTip());
-    int count = plotData_.getDataSize();
-    const double* data = plotData_.getDataY();
+    const int count = data_.size();
 
     /* To normalize use formula:
        Z = (X - Mean) / stdDev */
 
-    float min = quantiles_.min_;
-    float max = quantiles_.max_;
+    const float min = quantiles_.min_;
+    const float max = quantiles_.max_;
 
     float step = (max - min) / static_cast<float>(intervalsCount);
 
     QVector<int> intervals(std::max(intervalsCount, count));
     for (int i = 0; i < count; ++i)
     {
-        int index = static_cast<int>((static_cast<float>(data[i]) - min) / step);
+        int index = static_cast<int>((static_cast<float>(data_[i]) - min) / step);
         if (index > count - 1)
         {
             index = count - 1;
@@ -136,12 +135,11 @@ void HistogramPlot::recompute(int intervalsCount)
     replot();
 }
 
-void HistogramPlot::setNewData(const PlotData& plotData,
-                               const Quantiles& quantiles,
+void HistogramPlot::setNewData(QVector<double> data,
+                               Quantiles quantiles,
                                int intervalsCount)
 {
-    plotData_ = plotData;
-    quantiles_ = quantiles;
-
+    data_ = std::move(data);
+    quantiles_ = std::move(quantiles);
     recompute(intervalsCount);
 }

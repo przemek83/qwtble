@@ -26,7 +26,7 @@ public:
     HistogramPlotUI(HistogramPlotUI&& other) = delete;
 
 public Q_SLOTS:
-    void dataChanged(const PlotData& plotData, const Quantiles& quantiles);
+    void dataChanged(QVector<double> data, Quantiles quantiles);
 
 private:
     Ui::HistogramPlotUI* ui;

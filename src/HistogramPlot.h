@@ -9,7 +9,6 @@
 #include <qwt_plot_histogram.h>
 
 #include "PlotBase.h"
-#include "PlotData.h"
 #include "Quantiles.h"
 #include "qwtble_global.h"
 
@@ -33,11 +32,11 @@ public:
     HistogramPlot& operator=(HistogramPlot&& other) = delete;
     HistogramPlot(HistogramPlot&& other) = delete;
 
-    void setNewData(const PlotData& plotData,
-                    const Quantiles& quantiles,
+public Q_SLOTS:
+    void setNewData(QVector<double> data,
+                    Quantiles quantiles,
                     int intervalsCount);
 
-public Q_SLOT:
     void recompute(int intervalsCount);
 
 private:
@@ -57,7 +56,7 @@ private:
 
     void setLegendItemChecked(QwtPlotItem* plot);
 
-    PlotData plotData_;
+    QVector<double> data_;
 
     Quantiles quantiles_;
 
