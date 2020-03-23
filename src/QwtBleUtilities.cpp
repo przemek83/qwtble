@@ -34,7 +34,7 @@ bool floatsAreEqual(float left, float right)
            qtFloatPrecision * std::max({ 1.0F, std::abs(left), std::abs(right) });
 }
 
-QString floatToStringUsingLocale(float value, int precison)
+QString doubleToStringUsingLocale(double value, int precison)
 {
     static bool initialized {false};
     static QLocale locale = QLocale::system();
@@ -44,6 +44,6 @@ QString floatToStringUsingLocale(float value, int precison)
         initialized = true;
     }
 
-    return locale.toString(value, 'f', precison);
+    return locale.toString(value, 'g', precison);
 }
 }

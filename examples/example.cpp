@@ -12,45 +12,41 @@
 #include <QuantilesPlot.h>
 #include <QwtBleUtilities.h>
 
-static QVector<QVector<float>> exampleValues {{3.5F, 6.7F, 4.7F, 6.6F, 3.F, 4.9F},
-    {5.5F, 1.2F, 3.2F, 7.6F, 5.F, 4.9F, 0.3F, 7.3F},
-    {2.1F, 1.7F, 4.3F, 6.6F, 1.F, 3.9F, 5.5F},
-    {1.1F, 3.2F, 3.8F, 6.5F, 2.F, 2.9F, 7.5F, 3.2F, 5.5F},
-    {2.1F, 1.7F, 4.3F, 6.1F, 2.F}};
+static QVector<QVector<double>> exampleValues {{3.5, 6.7, 4.7, 6.6, 3., 4.9},
+    {5.5, 1.2, 3.2, 7.6, 5., 4.9, 0.3, 7.3},
+    {2.1, 1.7, 4.3, 6.6, 1., 3.9, 5.5},
+    {1.1, 3.2, 3.8, 6.5, 2., 2.9, 7.5, 3.2, 5.5},
+    {2.1, 1.7, 4.3, 6.1, 2.}};
 static QVector<QString> exampleNames {"first", "second", "third", "fourth", "fifth"};
 
-static const QVector<float> examplePriceSeries
+static const QVector<double> examplePriceSeries
 {
-    84.66F, 40.F, 5.F, 7.02F, 177.01F, 110.23F, 138.12F, 54.94F, 20.F, 80.F,
-    15.85F, 26.77F, 51.61F, 144.44F, 106.F, 8.06F, 92.5F, 19.57F, 91.44F, 90.F,
-    75.F, 39.56F, 0.2F, 25.F, 80.F, 54.86F, 2.13F, 4.84F, 15.F, 2.67F, 95.F,
-    100.F, 5.F, 5.F, 96.38F, 1.99F, 75.08F, 93.37F, 99.82F, 94.81F, 2.35F,
-    140.44F, 150.F, 138.72F, 295.25F, 50.F, 110.97F, 4.87F, 45.F, 60.F, 90.F,
-    66.17F, 78.68F, 75.87F, 8.95F, 65.F, 1.3F, 5.83F, 44.13F, 59.65F, 102.52F,
-    108.45F, 70.F, 70.F, 70.F, 70.F, 68.F, 7.92F, 36.34F, 30.3F, 93.69F,
-    146.81F, 79.F, 100.F, 70.F, 61.79F, 38.42F, 19.41F, 45.45F, 7.39F, 223.55F,
-    45.F, 90.F, 90.F, 75.21F, 45.F, 130.F, 17.44F, 75.F, 69.9F, 112.74F,
-    126.36F, 40.F, 30.F, 1.88F, 46.2F, 2.99F, 48.69F, 21.74F, 98.39F, 65.F,
-    147.98F, 25.F, 45.F, 5.38F
+    84.66, 40., 5., 7.02, 177.01, 110.23, 138.12, 54.94, 20., 80., 15.85, 26.77,
+    51.61, 144.44, 106., 8.06, 92.5, 19.57, 91.44, 90., 75., 39.56, 0.2, 25.,
+    80., 54.86, 2.13, 4.84, 15., 2.67, 95., 100., 5., 5., 96.38, 1.99, 75.08,
+    93.37, 99.82, 94.81, 2.35, 140.44, 150., 138.72, 295.25, 50., 110.97, 4.87,
+    45., 60., 90., 66.17, 78.68, 75.87, 8.95, 65., 1.3, 5.83, 44.13, 59.65,
+    102.52, 108.45, 70., 70., 70., 70., 68., 7.92, 36.34, 30.3, 93.69, 146.81,
+    79., 100., 70., 61.79, 38.42, 19.41, 45.45, 7.39, 223.55, 45., 90., 90.,
+    75.21, 45., 130., 17.44, 75., 69.9, 112.74, 126.36, 40., 30., 1.88, 46.2,
+    2.99, 48.69, 21.74, 98.39, 65., 147.98, 25., 45., 5.38
 };
 
 // As number of days since 1.1.1970.
-static const QVector<float> exampleDateSeries
+static const QVector<double> exampleDateSeries
 {
-    13959.F, 13941.F, 13984.F, 13914.F, 13999.F, 13979.F, 13945.F, 13999.F,
-    14013.F, 13972.F, 13992.F, 13969.F, 13951.F, 13970.F, 13951.F, 13970.F,
-    13986.F, 13993.F, 14011.F, 13969.F, 13977.F, 14026.F, 13990.F, 13916.F,
-    13972.F, 13999.F, 13980.F, 13956.F, 13977.F, 14019.F, 14028.F, 13999.F,
-    13950.F, 13950.F, 14011.F, 14011.F, 14026.F, 13965.F, 14032.F, 14008.F,
-    13951.F, 14012.F, 13991.F, 14007.F, 14019.F, 13980.F, 13997.F, 14042.F,
-    13985.F, 13991.F, 13986.F, 13972.F, 13965.F, 13949.F, 13990.F, 14035.F,
-    14008.F, 14019.F, 13964.F, 13957.F, 14033.F, 14014.F, 13980.F, 13980.F,
-    13980.F, 13980.F, 13980.F, 13992.F, 13999.F, 13943.F, 13997.F, 13920.F,
-    13977.F, 13944.F, 13986.F, 13956.F, 13966.F, 13951.F, 14032.F, 14027.F,
-    13993.F, 13980.F, 13986.F, 13986.F, 13983.F, 13955.F, 13941.F, 14013.F,
-    14042.F, 14039.F, 14042.F, 13937.F, 13914.F, 13915.F, 13930.F, 13845.F,
-    13864.F, 13857.F, 13867.F, 13929.F, 13972.F, 13910.F, 13924.F, 13924.F,
-    13927.F};
+    13959., 13941., 13984., 13914., 13999., 13979., 13945., 13999., 14013.,
+    13972., 13992., 13969., 13951., 13970., 13951., 13970., 13986., 13993.,
+    14011., 13969., 13977., 14026., 13990., 13916., 13972., 13999., 13980.,
+    13956., 13977., 14019., 14028., 13999., 13950., 13950., 14011., 14011.,
+    14026., 13965., 14032., 14008., 13951., 14012., 13991., 14007., 14019.,
+    13980., 13997., 14042., 13985., 13991., 13986., 13972., 13965., 13949.,
+    13990., 14035., 14008., 14019., 13964., 13957., 14033., 14014., 13980.,
+    13980., 13980., 13980., 13980., 13992., 13999., 13943., 13997., 13920.,
+    13977., 13944., 13986., 13956., 13966., 13951., 14032., 14027., 13993.,
+    13980., 13986., 13986., 13983., 13955., 13941., 14013., 14042., 14039.,
+    14042., 13937., 13914., 13915., 13930., 13845., 13864., 13857., 13867.,
+    13929., 13972., 13910., 13924., 13924., 13927.};
 
 static QGroupBox* wrapPlot(const QString& name,
                            PlotBase* plot)
@@ -92,12 +88,12 @@ static GroupPlot* createGroupPlot()
 static HistogramPlot* createHistogramPlot()
 {
     Quantiles quantiles;
-    QVector<float> dataForQuantiles(examplePriceSeries);
+    QVector<double> dataForQuantiles(examplePriceSeries);
     quantiles.computeQuantiles(dataForQuantiles);
     auto histogramPlot = new HistogramPlot();
     QVector<double> plotData;
     for (const auto& item : examplePriceSeries)
-        plotData.append(static_cast<double>(item));
+        plotData.append(item);
     histogramPlot->setNewData(std::move(plotData), std::move(quantiles), 10);
     return histogramPlot;
 }
@@ -105,26 +101,23 @@ static HistogramPlot* createHistogramPlot()
 static BasicDataPlot* createBasicDataPlot()
 {
     Quantiles quantiles;
-    QVector<float> dataForQuantiles(examplePriceSeries);
+    QVector<double> dataForQuantiles(examplePriceSeries);
     quantiles.computeQuantiles(dataForQuantiles);
     auto basicDataPlot = new BasicDataPlot();
     const auto [min, max] =
         std::minmax_element(exampleDateSeries.begin(), exampleDateSeries.end());
     quantiles.minX_ = *min;
     quantiles.maxX_ = *max;
-    basicDataPlot->setAxisScale(QwtPlot::xBottom,
-                                static_cast<double>(*min),
-                                static_cast<double>(*max));
+    basicDataPlot->setAxisScale(QwtPlot::xBottom, *min, *max);
     const QVector<QPointF> linearRegressionPoints
     {
-        {static_cast<double>(*min), 38.002},
-        {static_cast<double>(*max), 78.4491}
+        {*min, 38.002},
+        {*max, 78.4491}
     };
 
     QVector<QPointF> data;
     for (int i = 0; i < examplePriceSeries.size(); ++i)
-        data.append({static_cast<double>(exampleDateSeries[i]),
-                     static_cast<double>(examplePriceSeries[i])});
+        data.append({exampleDateSeries[i], examplePriceSeries[i]});
     basicDataPlot->setNewData(std::move(data),
                               quantiles,
                               linearRegressionPoints);

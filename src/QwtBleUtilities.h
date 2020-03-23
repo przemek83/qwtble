@@ -29,7 +29,7 @@ bool floatsAreEqual(float left, float right);
  * @param precison precision for visualization.
  * @return number as string conveted using locale.
  **/
-QString QWTBLE_EXPORT floatToStringUsingLocale(float value, int precison);
+QString QWTBLE_EXPORT doubleToStringUsingLocale(double value, int precison);
 
 static constexpr int BIG_TRANSPARENCY_FACTOR {50};
 static constexpr int SMALL_TRANSPARENCY_FACTOR {200};

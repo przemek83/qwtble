@@ -44,8 +44,8 @@ void GroupPlotUI::setNewData(QVector<QString> intervalsNames,
                              const QVector<Quantiles>& quantilesForIntervals,
                              const Quantiles& quantiles)
 {
-    const double minY = static_cast<double>(quantiles.min_);
-    const double maxY = static_cast<double>(quantiles.max_);
+    const double minY = quantiles.min_;
+    const double maxY = quantiles.max_;
     groupPlot_.setAxisScale(QwtPlot::yLeft, minY, maxY);
     groupPlot_.setAxisScale(QwtPlot::yRight, minY, maxY);
     groupPlot_.setAxisScale(QwtPlot::xBottom, 0, intervalsNames.size() + 1, 1);

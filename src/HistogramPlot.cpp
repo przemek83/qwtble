@@ -99,15 +99,15 @@ void HistogramPlot::recompute(int intervalsCount)
     /* To normalize use formula:
        Z = (X - Mean) / stdDev */
 
-    const float min = quantiles_.min_;
-    const float max = quantiles_.max_;
+    const double min = quantiles_.min_;
+    const double max = quantiles_.max_;
 
-    float step = (max - min) / static_cast<float>(intervalsCount);
+    double step = (max - min) / static_cast<double>(intervalsCount);
 
     QVector<int> intervals(std::max(intervalsCount, count));
     for (int i = 0; i < count; ++i)
     {
-        int index = static_cast<int>((static_cast<float>(data_[i]) - min) / step);
+        int index = static_cast<int>((data_[i] - min) / step);
         if (index > count - 1)
         {
             index = count - 1;
@@ -121,12 +121,12 @@ void HistogramPlot::recompute(int intervalsCount)
 
     QVector< QwtIntervalSample > samples;
     QVector< QPointF > actualPoints;
-    const float middleOfStep {step / 2.F};
+    const double middleOfStep {step / 2.};
     for (int i = 0; i < intervalsCount; ++i)
     {
-        float x = min + step * static_cast<float>(i);
-        samples.append(QwtIntervalSample(intervals[i], static_cast<double>(x), static_cast<double>(x + step)));
-        actualPoints.append(QPointF(static_cast<double>(x + middleOfStep), intervals[i]));
+        double x = min + step * static_cast<double>(i);
+        samples.append(QwtIntervalSample(intervals[i], x, x + step));
+        actualPoints.append(QPointF(x + middleOfStep, intervals[i]));
     }
 
     histPlot_.setSamples(samples);

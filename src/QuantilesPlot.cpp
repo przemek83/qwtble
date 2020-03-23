@@ -41,7 +41,7 @@ void QuantilesPlot::setNewData(const Quantiles& quantiles)
 {
     quantiles_.clear();
     quantiles_.append(quantiles);
-    setAxisScale(QwtPlot::yLeft, static_cast<double>(quantiles.min_), static_cast<double>(quantiles.max_));
+    setAxisScale(QwtPlot::yLeft, quantiles.min_, quantiles.max_);
 
     setToolTip(quantiles.getValuesAsToolTip());
 

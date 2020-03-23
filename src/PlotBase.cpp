@@ -67,11 +67,9 @@ void PlotBase::setAxisScale(int axisId, double min, double max, double step)
 QwtText PlotBase::IntervalsScaleDraw::label(double v) const
 {
     if (!QwtBleUtilities::doublesAreEqual(fmod(v, 1), 0.))
-    {
-        return QwtText(QwtBleUtilities::floatToStringUsingLocale(static_cast<float>(v), 1));
-    }
+        return QwtText(QwtBleUtilities::doubleToStringUsingLocale(v, 1));
 
-    return QwtText(QwtBleUtilities::floatToStringUsingLocale(static_cast<float>(v), 0));
+    return QwtText(QwtBleUtilities::doubleToStringUsingLocale(v, 0));
 }
 
 void PlotBase::setPlotTitle(const QString& title)

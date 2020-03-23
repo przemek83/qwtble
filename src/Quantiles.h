@@ -1,6 +1,8 @@
 #ifndef QUANTILES_H
 #define QUANTILES_H
 
+#include <array>
+
 #include <QVector>
 #include <QString>
 
@@ -23,27 +25,27 @@ public:
     Quantiles(Quantiles&& other) = default;
 
     //Y axis variables.
-    float min_ {.0};
-    float q10_ {.0};
-    float q25_ {.0};
-    float q50_ {.0};
-    float q75_ {.0};
-    float q90_ {.0};
-    float max_ {.0};
+    double min_ {.0};
+    double q10_ {.0};
+    double q25_ {.0};
+    double q50_ {.0};
+    double q75_ {.0};
+    double q90_ {.0};
+    double max_ {.0};
 
     int number_ {0};
-    float avg_ {.0};
-    float stdDev_ {.0};
+    double avg_ {.0};
+    double stdDev_ {.0};
 
     //X axis variables.
-    float minX_ {.0};
-    float maxX_ {.0};
+    double minX_ {.0};
+    double maxX_ {.0};
 
     void clear();
 
     void print();
 
-    void computeQuantiles(QVector<float>& valuePerUnit);
+    void computeQuantiles(QVector<double>& valuePerUnit);
 
     QString getValuesAsToolTip() const;
 
@@ -63,7 +65,9 @@ private:
         PLOT_INFO_END
     };
 
-    static QString valueAsHtmlRow(PlotInfo name, float value);
+    static std::array<QString, PLOT_INFO_END> getPlotInfoNames();
+
+    static QString valueAsHtmlRow(PlotInfo name, double value);
 };
 
 #endif // QUANTILES_H

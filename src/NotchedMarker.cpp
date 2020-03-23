@@ -95,9 +95,9 @@ void NotchedMarker::drawElement(QPainter* p,
     const double middleOfRightPartX {centerX + width / 2};
 
     //If min = max draw only one line.
-    if (QwtBleUtilities::floatsAreEqual(quantiles.min_, quantiles.max_))
+    if (QwtBleUtilities::doublesAreEqual(quantiles.min_, quantiles.max_))
     {
-        double pointY = yMap.transform(static_cast<double>(quantiles.min_));
+        double pointY = yMap.transform(quantiles.min_);
         p->drawLine(QPointF(middleOfLeftPartX, pointY),
                     QPointF(middleOfRightPartX, pointY));
         return;
@@ -105,23 +105,23 @@ void NotchedMarker::drawElement(QPainter* p,
 
     //Draw horizontal line for max.
     p->setPen(QPen(Qt::DotLine));
-    const double yLevelMax = yMap.transform(static_cast<double>(quantiles.max_));
+    const double yLevelMax = yMap.transform(quantiles.max_);
     p->drawLine(QPointF(middleOfLeftPartX, yLevelMax),
                 QPointF(middleOfRightPartX, yLevelMax));
 
     p->setPen(QPen(Qt::SolidLine));
     //Draw horizontal line for q90.
-    const double yLevelQ90 = yMap.transform(static_cast<double>(quantiles.q90_));
+    const double yLevelQ90 = yMap.transform(quantiles.q90_);
     p->drawLine(QPointF(middleOfLeftPartX, yLevelQ90),
                 QPointF(middleOfRightPartX, yLevelQ90));
 
     //Draw vertical line from q90 to q75.
-    const double yLevelQ75 = yMap.transform(static_cast<double>(quantiles.q75_));
+    const double yLevelQ75 = yMap.transform(quantiles.q75_);
     p->drawLine(QPointF(centerX, yLevelQ90), QPointF(centerX, yLevelQ75));
 
     //Draw center figure.
-    const double yLevelQ50 = yMap.transform(static_cast<double>(quantiles.q50_));
-    const double yLevelQ25 = yMap.transform(static_cast<double>(quantiles.q25_));
+    const double yLevelQ50 = yMap.transform(quantiles.q50_);
+    const double yLevelQ25 = yMap.transform(quantiles.q25_);
     const double notchFactor = 0.85;
     QPainterPath path(QPoint(static_cast<int>(leftEdgeX), static_cast<int>(yLevelQ25)));
     path.lineTo(leftEdgeX,  yLevelQ25 - (yLevelQ25 - yLevelQ50) * notchFactor);
@@ -142,7 +142,7 @@ void NotchedMarker::drawElement(QPainter* p,
                 QPointF(middleOfRightPartX, yLevelQ50));
 
     //Draw vertical line from q25 to q10.
-    const double yLevelQ10 = yMap.transform(static_cast<double>(quantiles.q10_));
+    const double yLevelQ10 = yMap.transform(quantiles.q10_);
     p->drawLine(QPointF(centerX, yLevelQ25), QPointF(centerX, yLevelQ10));
 
     //Draw horizontal line for q10.
@@ -151,13 +151,13 @@ void NotchedMarker::drawElement(QPainter* p,
 
     //Draw horizontal line for min.
     p->setPen(QPen(Qt::DotLine));
-    const double yLevelMin = yMap.transform(static_cast<double>(quantiles.min_));
+    const double yLevelMin = yMap.transform(quantiles.min_);
     p->drawLine(QPointF(middleOfLeftPartX, yLevelMin),
                 QPointF(middleOfRightPartX, yLevelMin));
     p->setPen(QPen(Qt::SolidLine));
 
     //Draw avg cross.
-    const double yLevelAvg = yMap.transform(static_cast<double>(quantiles.avg_));
+    const double yLevelAvg = yMap.transform(quantiles.avg_);
     const double crossWidth {width / 7.};
     p->drawLine(QPointF(centerX - crossWidth, yLevelAvg - crossWidth),
                 QPointF(centerX + crossWidth, yLevelAvg + crossWidth));
