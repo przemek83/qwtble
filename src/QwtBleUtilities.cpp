@@ -44,6 +44,6 @@ QString doubleToStringUsingLocale(double value, int precison)
         initialized = true;
     }
 
-    return locale.toString(value, 'g', precison);
+    return locale.toString(value, 'f', precison);
 }
 }
