@@ -4,10 +4,12 @@
 #include <QWidget>
 #include <QVBoxLayout>
 #include <QSplitter>
+#include <QScrollArea>
 
 #include <BasicDataPlot.h>
 #include <GroupPlot.h>
 #include <HistogramPlot.h>
+#include <HistogramPlotUI.h>
 #include <PlotBase.h>
 #include <QuantilesPlot.h>
 #include <QwtBleUtilities.h>
@@ -49,11 +51,11 @@ static const QVector<double> exampleDateSeries
     13929., 13972., 13910., 13924., 13924., 13927.};
 
 static QGroupBox* wrapPlot(const QString& name,
-                           PlotBase* plot)
+                           QWidget* widget)
 {
     auto groupBox = new QGroupBox(name);
     auto layout = new QVBoxLayout();
-    layout->addWidget(plot);
+    layout->addWidget(widget);
     groupBox->setLayout(layout);
     return groupBox;
 }
@@ -98,6 +100,19 @@ static HistogramPlot* createHistogramPlot()
     return histogramPlot;
 }
 
+static HistogramPlotUI* createHistogramPlotUI()
+{
+    Quantiles quantiles;
+    QVector<double> dataForQuantiles(examplePriceSeries);
+    quantiles.computeQuantiles(dataForQuantiles);
+    auto histogramPlotUI = new HistogramPlotUI();
+    QVector<double> plotData;
+    for (const auto& item : examplePriceSeries)
+        plotData.append(item);
+    histogramPlotUI->dataChanged(std::move(plotData), std::move(quantiles));
+    return histogramPlotUI;
+}
+
 static BasicDataPlot* createBasicDataPlot()
 {
     Quantiles quantiles;
@@ -135,19 +150,21 @@ int main(int argc, char* argv[])
 
     QSplitter* upperSplitter = new QSplitter(&widget);
     upperSplitter->addWidget(wrapPlot("Quantiles plot", createQuantilesPlot()));
-    upperSplitter->addWidget(wrapPlot("Histogram plot", createHistogramPlot()));
-    upperSplitter->setSizes({200, 600});
+    upperSplitter->addWidget(wrapPlot("Grouping plot", createGroupPlot()));
     widgetLayout.addWidget(upperSplitter);
 
     QSplitter* lowerSplitter = new QSplitter(&widget);
-    lowerSplitter->addWidget(wrapPlot("Grouping plot", createGroupPlot()));
+    lowerSplitter->addWidget(wrapPlot("Histogram plot", createHistogramPlot()));
+    lowerSplitter->addWidget(wrapPlot("Histogram plot UI", createHistogramPlotUI()));
     lowerSplitter->addWidget(wrapPlot("Basic data plot", createBasicDataPlot()));
-    lowerSplitter->setSizes({300, 500});
+    lowerSplitter->setStretchFactor(0, 1);
+    lowerSplitter->setStretchFactor(1, 1);
+    lowerSplitter->setStretchFactor(2, 2);
     widgetLayout.addWidget(lowerSplitter);
 
     widget.setLayout(&widgetLayout);
+    widget.resize(1000, 750);
     widget.show();
-    widget.resize(800, 600);
 
     return QApplication::exec();
 }
