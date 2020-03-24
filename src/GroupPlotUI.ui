@@ -46,7 +46,7 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>Column</string>
+        <string>Trait</string>
        </property>
       </widget>
      </item>
