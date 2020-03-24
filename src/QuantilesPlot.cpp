@@ -51,6 +51,7 @@ void QuantilesPlot::resizeEvent(QResizeEvent* event)
         setAxisScale(xBottom, 0, 2, 0);
         marker_->setDrawLegend(false);
     }
+    replot();
 }
 
 void QuantilesPlot::setNewData(Quantiles quantiles)
