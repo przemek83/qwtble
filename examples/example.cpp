@@ -71,7 +71,7 @@ static QuantilesPlot* createQuantilesPlot()
     auto quantilesPlot = new QuantilesPlot();
     Quantiles quantiles;
     quantiles.computeQuantiles(exampleValues.first());
-    quantilesPlot->setNewData(quantiles);
+    quantilesPlot->setNewData(std::move(quantiles));
     return quantilesPlot;
 }
 
@@ -88,7 +88,7 @@ static GroupPlot* createGroupPlot()
     groupPlot->setAxisScale(QwtPlot::yLeft, 0, 8);
     groupPlot->setAxisScale(QwtPlot::yRight, 0, 8);
     groupPlot->setAxisScale(QwtPlot::xBottom, 0.5, exampleValues.size() + 0.5, 1);
-    groupPlot->setNewData(quantilesVector, exampleNames);
+    groupPlot->setNewData(std::move(quantilesVector), exampleNames);
     return groupPlot;
 }
 
@@ -181,8 +181,8 @@ static BasicDataPlot* createBasicDataPlot()
     for (int i = 0; i < examplePriceSeries.size(); ++i)
         data.append({exampleDateSeries[i], examplePriceSeries[i]});
     basicDataPlot->setNewData(std::move(data),
-                              quantiles,
-                              linearRegressionPoints);
+                              std::move(quantiles),
+                              std::move(linearRegressionPoints));
     return basicDataPlot;
 }
 

@@ -130,8 +130,8 @@ void BasicDataPlot::setPlotData(QVector<QPointF> data)
 }
 
 void BasicDataPlot::setNewData(QVector<QPointF> data,
-                               const Quantiles& quantiles,
-                               const QVector<QPointF>& linearRegression)
+                               Quantiles quantiles,
+                               QVector<QPointF> linearRegression)
 {
     setToolTip(quantiles.getValuesAsToolTip());
 

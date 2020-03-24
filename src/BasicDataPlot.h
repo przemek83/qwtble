@@ -33,8 +33,8 @@ public:
 
 public Q_SLOTS:
     virtual void setNewData(QVector<QPointF> data,
-                            const Quantiles& quantiles,
-                            const QVector<QPointF>& linearRegression);
+                            Quantiles quantiles,
+                            QVector<QPointF> linearRegression);
 
 private:
     void setPlotData(QVector<QPointF> data);
