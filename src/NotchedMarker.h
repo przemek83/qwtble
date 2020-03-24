@@ -28,6 +28,9 @@ public:
     void draw(QPainter* p, const QwtScaleMap& xMap, const QwtScaleMap& yMap,
               const QRectF& rect) const override;
 
+    void setDrawLegend(bool drawLegend);
+    bool getDrawLegend() const;
+
 protected:
     void drawLegend(QPainter* p, const QRectF& rect) const;
 
@@ -39,6 +42,8 @@ private:
     QBrush markerBrush_;
 
     QVector<Quantiles>* quantiles_;
+
+    bool drawLegend_ {false};
 };
 
 #endif // NOTCHEDMARKER_H

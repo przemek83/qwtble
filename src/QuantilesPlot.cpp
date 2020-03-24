@@ -24,7 +24,7 @@ QuantilesPlot::QuantilesPlot(QWidget* parent) :
     font.setStyleStrategy(QFont::PreferAntialias);
     setAxisFont(xBottom, font);
 
-    setAxisScale(xBottom, 0, 2, 0);
+    setAxisScale(xBottom, -0.5, 1.5, 0);
 
     setAxisMaxMinor(xBottom, 0);
     setAxisMaxMajor(xBottom, 3);
@@ -37,10 +37,26 @@ void QuantilesPlot::forceResize()
     resizeEvent(new QResizeEvent(size(), size()));
 }
 
-void QuantilesPlot::setNewData(const Quantiles& quantiles)
+void QuantilesPlot::resizeEvent(QResizeEvent* event)
+{
+    PlotBase::resizeEvent(event);
+    const int minWidthForLegend {90};
+    if (event->size().width() >= minWidthForLegend)
+    {
+        setAxisScale(xBottom, -0.5, 1.5, 0);
+        marker_->setDrawLegend(true);
+    }
+    else
+    {
+        setAxisScale(xBottom, 0, 2, 0);
+        marker_->setDrawLegend(false);
+    }
+}
+
+void QuantilesPlot::setNewData(Quantiles quantiles)
 {
     quantiles_.clear();
-    quantiles_.append(quantiles);
+    quantiles_.push_back(std::move(quantiles));
     setAxisScale(QwtPlot::yLeft, quantiles.min_, quantiles.max_);
 
     setToolTip(quantiles.getValuesAsToolTip());
@@ -52,9 +68,16 @@ void QuantilesPlot::setNewData(const Quantiles& quantiles)
 
 QSize QuantilesPlot::minimumSizeHint() const
 {
-    const int minimumWidth {50};
+    const int minimumWidth {30};
     const int minimumHeight {100};
     return QSize(minimumWidth, minimumHeight);
+}
+
+QSize QuantilesPlot::sizeHint() const
+{
+    const int width {50};
+    const int height {100};
+    return QSize(width, height);
 }
 
 QuantilesPlot::IntervalsScaleDraw::IntervalsScaleDraw(int count) :
@@ -66,9 +89,6 @@ QuantilesPlot::IntervalsScaleDraw::IntervalsScaleDraw(int count) :
 QwtText QuantilesPlot::IntervalsScaleDraw::label(double v) const
 {
     if (QwtBleUtilities::doublesAreEqual(v, 1.) && count_ != 0)
-    {
         return QwtText(QString::number(count_));
-    }
-
     return QwtText();
 }

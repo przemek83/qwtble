@@ -8,6 +8,7 @@
 
 #include <BasicDataPlot.h>
 #include <GroupPlot.h>
+#include <GroupPlotUI.h>
 #include <HistogramPlot.h>
 #include <HistogramPlotUI.h>
 #include <PlotBase.h>
@@ -19,7 +20,12 @@ static QVector<QVector<double>> exampleValues {{3.5, 6.7, 4.7, 6.6, 3., 4.9},
     {2.1, 1.7, 4.3, 6.6, 1., 3.9, 5.5},
     {1.1, 3.2, 3.8, 6.5, 2., 2.9, 7.5, 3.2, 5.5},
     {2.1, 1.7, 4.3, 6.1, 2.}};
-static QVector<QString> exampleNames {"first", "second", "third", "fourth", "fifth"};
+static QVector<QString> exampleNames {"circle", "triangle", "square", "rectengle", "cube"};
+
+static QVector<QVector<double>> otherExampleValues {{3.5, 6.7, 4.7, 6.6, 3., 4.9, 5.5, 1.2},
+    {3.2, 7.6, 5., 4.9, 0.3, 7.3, 2.1, 1.7, 4.3, 6.6, 1., 3.9, 5.5},
+    {1.1, 3.2, 3.8, 6.5, 2., 2.9, 7.5, 3.2, 5.5, 2.1, 1.7, 4.3, 6.1, 2.}};
+static QVector<QString>otherExampleNames {"green", "black", "white"};
 
 static const QVector<double> examplePriceSeries
 {
@@ -65,7 +71,6 @@ static QuantilesPlot* createQuantilesPlot()
     auto quantilesPlot = new QuantilesPlot();
     Quantiles quantiles;
     quantiles.computeQuantiles(exampleValues.first());
-    quantilesPlot->setAxisScale(QwtPlot::xBottom, 0, 2);
     quantilesPlot->setNewData(quantiles);
     return quantilesPlot;
 }
@@ -85,6 +90,48 @@ static GroupPlot* createGroupPlot()
     groupPlot->setAxisScale(QwtPlot::xBottom, 0.5, exampleValues.size() + 0.5, 1);
     groupPlot->setNewData(quantilesVector, exampleNames);
     return groupPlot;
+}
+
+static GroupPlotUI* createGroupPlotUI()
+{
+    QVector<Quantiles> quantilesVector;
+    for (auto& values : exampleValues)
+    {
+        Quantiles quantiles;
+        quantiles.computeQuantiles(values);
+        quantilesVector.push_back(quantiles);
+    }
+
+    QVector<Quantiles> otherQuantilesVector;
+    for (auto& values : otherExampleValues)
+    {
+        Quantiles quantiles;
+        quantiles.computeQuantiles(values);
+        otherQuantilesVector.push_back(quantiles);
+    }
+
+    QVector<double> allValues;
+    for (auto& values : exampleValues)
+        allValues.append(values);
+
+    Quantiles generalQuantiles;
+    generalQuantiles.computeQuantiles(allValues);
+
+    QVector<std::pair<QString, int>> stringColumns {{"Shape", 0}, {"Color", 1}};
+    auto groupPlotUI = new GroupPlotUI(stringColumns);
+    QObject::connect(groupPlotUI, &GroupPlotUI::newGroupingColumn, groupPlotUI,
+                     [ = ](int column)
+    {
+        const QVector<QString>& names =
+            (column == 0 ? exampleNames : otherExampleNames);
+        const QVector<Quantiles>& quantiles =
+            (column == 0 ? quantilesVector : otherQuantilesVector);
+        groupPlotUI->setNewData(names,
+                                quantiles,
+                                generalQuantiles);
+    });
+
+    return groupPlotUI;
 }
 
 static HistogramPlot* createHistogramPlot()
@@ -151,6 +198,8 @@ int main(int argc, char* argv[])
     QSplitter* upperSplitter = new QSplitter(&widget);
     upperSplitter->addWidget(wrapPlot("Quantiles plot", createQuantilesPlot()));
     upperSplitter->addWidget(wrapPlot("Grouping plot", createGroupPlot()));
+    auto groupPlotUI = createGroupPlotUI();
+    upperSplitter->addWidget(wrapPlot("Grouping plot UI", groupPlotUI));
     widgetLayout.addWidget(upperSplitter);
 
     QSplitter* lowerSplitter = new QSplitter(&widget);
@@ -165,6 +214,7 @@ int main(int argc, char* argv[])
     widget.setLayout(&widgetLayout);
     widget.resize(1000, 750);
     widget.show();
+    groupPlotUI->newGroupingColumn(0);
 
     return QApplication::exec();
 }

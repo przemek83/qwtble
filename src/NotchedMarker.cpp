@@ -39,10 +39,8 @@ void NotchedMarker::draw(QPainter* p,
 {
     Q_ASSERT(nullptr != quantiles_);
 
-    if (nullptr == quantiles_)
-    {
+    if (quantiles_ == nullptr)
         return;
-    }
 
     auto basePlot = dynamic_cast<PlotBase*>(plot());
     const QwtScaleDiv& scaleLeft = basePlot->axisScaleDiv(QwtPlot::yLeft);
@@ -50,18 +48,13 @@ void NotchedMarker::draw(QPainter* p,
 
     //If max scale = min scale than do not draw.
     if (QwtBleUtilities::doublesAreEqual(scaleLeft.lowerBound(), scaleLeft.upperBound()))
-    {
         return;
-    }
 
     p->save();
     p->setBrush(QBrush(Qt::red, Qt::NoBrush));
 
-    const int minWidthForLegend {100};
-    if (quantiles_->size() == 1 && rect.size().width() > minWidthForLegend)
-    {
+    if (drawLegend_)
         drawLegend(p, rect);
-    }
 
     double width =
         xMap.pDist() / ((scaleBottom.upperBound() - scaleBottom.lowerBound()) * 2);
@@ -78,6 +71,16 @@ void NotchedMarker::draw(QPainter* p,
         drawElement(p, elementNumber, xMap, yMap, width, quantiles);
     }
     p->restore();
+}
+
+void NotchedMarker::setDrawLegend(bool drawLegend)
+{
+    drawLegend_ = drawLegend;
+}
+
+bool NotchedMarker::getDrawLegend() const
+{
+    return drawLegend_;
 }
 
 void NotchedMarker::drawElement(QPainter* p,

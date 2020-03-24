@@ -31,9 +31,7 @@ void PlotBase::mouseDoubleClickEvent(QMouseEvent* event)
 {
     QwtPlot::mouseDoubleClickEvent(event);
     if (Qt::LeftButton == event->button())
-    {
         resetPlot();
-    }
 }
 
 void PlotBase::resetPlot()
@@ -42,13 +40,9 @@ void PlotBase::resetPlot()
     for (int i = 0; i < QwtPlot::axisCnt; ++i)
     {
         if (initialScaleMap_.contains(i))
-        {
             setAxisScale(i, initialScaleMap_[i].rx(), initialScaleMap_[i].ry());
-        }
         else
-        {
             setAxisAutoScale(i);
-        }
     }
     replot();
 }

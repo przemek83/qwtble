@@ -27,11 +27,16 @@ public:
     QuantilesPlot& operator=(QuantilesPlot&& other) = delete;
     QuantilesPlot(QuantilesPlot&& other) = delete;
 
-    void setNewData(const Quantiles& quantiles);
+    void setNewData(Quantiles quantiles);
 
     QSize minimumSizeHint() const override;
 
+    QSize sizeHint() const override;
+
     void forceResize();
+
+protected:
+    void resizeEvent(QResizeEvent* event) override;
 
 private:
     class IntervalsScaleDraw: public QwtScaleDraw

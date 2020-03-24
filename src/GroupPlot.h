@@ -34,15 +34,16 @@ public:
     QSize minimumSizeHint() const override;
 
 public Q_SLOTS:
-    void setNewData(const QVector<Quantiles>& quantiles,
-                    QVector<QString>& intervalStrings);
+    void setNewData(QVector<Quantiles> quantiles,
+                    QVector<QString> intervalStrings);
 
 protected:
     bool event(QEvent* event) override;
 
 private:
-    void shortenIntervalsNamesIfNeeded(QVector<QString>& intervalsNames,
-                                       const QVector<Quantiles>& quantilesForIntervals);
+    QVector<QString>
+    shortenIntervalsNamesIfNeeded(const QVector<QString>& intervalsNames,
+                                  const QVector<Quantiles>& quantilesForIntervals);
 
     ///Maximum number of chars in label.
     static constexpr int maxCharsInLabel_ {20};

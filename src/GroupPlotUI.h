@@ -33,8 +33,8 @@ public:
 
 public Q_SLOTS:
     void setNewData(QVector<QString> intervalsNames,
-                    const QVector<Quantiles>& quantilesForIntervals,
-                    const Quantiles& quantiles);
+                    QVector<Quantiles> quantilesForIntervals,
+                    Quantiles quantiles);
 
 private:
     Ui::GroupPlotUI* ui;

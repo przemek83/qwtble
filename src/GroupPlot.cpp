@@ -30,45 +30,46 @@ GroupPlot::GroupPlot(QWidget* parent)
 
 GroupPlot::~GroupPlot() = default;
 
-void GroupPlot::setNewData(const QVector<Quantiles>& quantiles,
-                           QVector<QString>& intervalStrings)
+void GroupPlot::setNewData(QVector<Quantiles> quantiles,
+                           QVector<QString> intervalStrings)
 {
-    quantiles_.clear();
-    quantiles_ = quantiles;
-    longIntervalNames_ = intervalStrings;
-    shortenIntervalsNamesIfNeeded(intervalStrings, quantiles_);
-    shortIntervalNames_ = intervalStrings;
+    quantiles_ = std::move(quantiles);
+    longIntervalNames_ = std::move(intervalStrings);
+    shortIntervalNames_ = shortenIntervalsNamesIfNeeded(longIntervalNames_, quantiles_);
 
     //No leak here.
     setAxisScaleDraw(xBottom, new StringsScaleDraw(&shortIntervalNames_));
 
     if (QToolTip::isVisible())
-    {
         QToolTip::hideText();
-    }
 
     replot();
 }
 
-void GroupPlot::shortenIntervalsNamesIfNeeded(QVector<QString>& intervalsNames,
-                                              const QVector<Quantiles>& quantilesForIntervals)
+QVector<QString>
+GroupPlot::shortenIntervalsNamesIfNeeded(const QVector<QString>& intervalsNames,
+                                         const QVector<Quantiles>& quantilesForIntervals)
 {
+    QVector<QString> shortenNames;
+    const QString moreChars(QStringLiteral("..."));
     for (int i = 0; i < intervalsNames.size(); ++i)
     {
-        const QString moreChars(QStringLiteral("..."));
-        QString count =
+        QString name = intervalsNames[i];
+        QString countString =
             QString(" (" + QString::number(quantilesForIntervals[i].number_) + ")");
 
-        if (intervalsNames[i].size() - maxCharsInLabel_ + count.count() > 0)
+        if (name.size() - maxCharsInLabel_ + countString.count() > 0)
         {
-            intervalsNames[i].chop(intervalsNames[i].size() -
-                                   maxCharsInLabel_ +
-                                   count.count() +
-                                   moreChars.size());
-            intervalsNames[i].append(moreChars);
+            name.chop(name.size() -
+                      maxCharsInLabel_ +
+                      countString.count() +
+                      moreChars.size());
+            name.append(moreChars);
         }
-        intervalsNames[i].append(count);
+        name.append(countString);
+        shortenNames.append(name);
     }
+    return shortenNames;
 }
 
 QSize GroupPlot::minimumSizeHint() const

@@ -27,6 +27,8 @@ GroupPlotUI::GroupPlotUI(QVector<std::pair<QString, int> > stringColumns, QWidge
     scrollArea_->setWidget(&groupPlot_);
     splitter->addWidget(scrollArea_);
     splitter->addWidget(&quantilesPlot_);
+    splitter->setStretchFactor(0, 2);
+    splitter->setStretchFactor(1, 1);
     ui->verticalLayout->insertWidget(2, splitter, 0);
 
     ui->comboBox->clear();
@@ -41,8 +43,8 @@ GroupPlotUI::~GroupPlotUI()
 }
 
 void GroupPlotUI::setNewData(QVector<QString> intervalsNames,
-                             const QVector<Quantiles>& quantilesForIntervals,
-                             const Quantiles& quantiles)
+                             QVector<Quantiles> quantilesForIntervals,
+                             Quantiles quantiles)
 {
     const double minY = quantiles.min_;
     const double maxY = quantiles.max_;
@@ -50,10 +52,10 @@ void GroupPlotUI::setNewData(QVector<QString> intervalsNames,
     groupPlot_.setAxisScale(QwtPlot::yRight, minY, maxY);
     groupPlot_.setAxisScale(QwtPlot::xBottom, 0, intervalsNames.size() + 1, 1);
 
-    groupPlot_.setNewData(quantilesForIntervals,
-                          intervalsNames);
+    groupPlot_.setNewData(std::move(quantilesForIntervals),
+                          std::move(intervalsNames));
 
-    quantilesPlot_.setNewData(quantiles);
+    quantilesPlot_.setNewData(std::move(quantiles));
 
     scrollArea_->forceResize();
 
@@ -65,8 +67,8 @@ void GroupPlotUI::setNewData(QVector<QString> intervalsNames,
         scrollBarSize = scrollArea_->horizontalScrollBar()->height();
     }
 
-    //Problem when scrollbar was visible and after resize is not.
-    //Quantiles plot not resized.
+    // Fix for problem when scrollbar after resize is not visible.
+    // Quantiles plot not resized.
     double minExtentForQuantiles =
         groupPlot_.axisScaleDraw(QwtPlot::xBottom)->extent(groupPlot_.axisFont(QwtPlot::xBottom));
     groupPlot_.axisScaleDraw(QwtPlot::xBottom)->setMinimumExtent(minExtentForQuantiles);
