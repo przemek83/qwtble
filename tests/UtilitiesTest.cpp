@@ -1,6 +1,5 @@
 #include "UtilitiesTest.h"
 
-#include <QSignalSpy>
 #include <QTest>
 
 #include "QwtBleUtilities.h"

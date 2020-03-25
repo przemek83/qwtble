@@ -4,6 +4,8 @@ set(${PROJECT_NAME}_SOURCES
     Tests.cpp
     UtilitiesTest.cpp
     UtilitiesTest.h
+    GroupPlotUITest.cpp
+    GroupPlotUITest.h
     )
 
 add_executable(tests ${${PROJECT_NAME}_SOURCES})
