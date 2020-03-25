@@ -1,6 +1,7 @@
 #include <QTest>
 
 #include "GroupPlotUITest.h"
+#include "QuantilesTest.h"
 #include "UtilitiesTest.h"
 
 int main(int argc, char* argv[])
@@ -12,6 +13,9 @@ int main(int argc, char* argv[])
 
     GroupPlotUITest groupPlotUITest;
     QTest::qExec(&groupPlotUITest);
+
+    QuantilesTest quantilesTest;
+    QTest::qExec(&quantilesTest);
 
     return 0;
 }

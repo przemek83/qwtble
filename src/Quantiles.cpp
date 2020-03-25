@@ -35,11 +35,13 @@ void Quantiles::print()
 
 void Quantiles::computeQuantiles(QVector<double>& valuePerUnit)
 {
-    double EX = 0;
-    double EX2 = 0;
-
     clear();
 
+    if (valuePerUnit.empty())
+        return;
+
+    double EX = 0;
+    double EX2 = 0;
     number_ = valuePerUnit.count();
 
     for (auto pricePerMeter : valuePerUnit)
