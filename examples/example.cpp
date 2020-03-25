@@ -20,7 +20,7 @@ static QVector<QVector<double>> exampleValues {{3.5, 6.7, 4.7, 6.6, 3., 4.9},
     {2.1, 1.7, 4.3, 6.6, 1., 3.9, 5.5},
     {1.1, 3.2, 3.8, 6.5, 2., 2.9, 7.5, 3.2, 5.5},
     {2.1, 1.7, 4.3, 6.1, 2.}};
-static QVector<QString> exampleNames {"circle", "triangle", "square", "rectengle", "cube"};
+static QVector<QString> exampleNames {"circle", "triangle", "square", "rectangle", "cube"};
 
 static QVector<QVector<double>> otherExampleValues {{3.5, 6.7, 4.7, 6.6, 3., 4.9, 5.5, 1.2},
     {3.2, 7.6, 5., 4.9, 0.3, 7.3, 2.1, 1.7, 4.3, 6.6, 1., 3.9, 5.5},

@@ -12,10 +12,9 @@ XDateYAxisNumberPicker::XDateYAxisNumberPicker(QWidget* parent)
 
 QwtText XDateYAxisNumberPicker::trackerTextF(const QPointF& pos) const
 {
-    QwtText coords(QwtBleUtilities::stringFromDays(lround(pos.x())) + ", " +
-                   QString::number(pos.y(), 'f', 2));
-
-    const QColor bg(Qt::white);
-    coords.setBackgroundBrush(QBrush(bg));
-    return coords;
+    const QString dateOnY {QwtBleUtilities::stringFromDays(lround(pos.x()))};
+    const QString valueOnX {QString::number(pos.y(), 'f', 2)};
+    QwtText positionAsText(dateOnY + ", " + valueOnX);
+    positionAsText.setBackgroundBrush(QBrush(Qt::white));
+    return positionAsText;
 }

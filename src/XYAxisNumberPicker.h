@@ -9,7 +9,7 @@ class XYAxisNumberPicker : public Picker
 public:
     explicit XYAxisNumberPicker(QWidget* parent);
 
-    virtual ~XYAxisNumberPicker() override = default;
+    ~XYAxisNumberPicker() override = default;
 
     XYAxisNumberPicker& operator=(const XYAxisNumberPicker& other) = delete;
     XYAxisNumberPicker(const XYAxisNumberPicker& other) = delete;
@@ -18,7 +18,7 @@ public:
     XYAxisNumberPicker(XYAxisNumberPicker&& other) = delete;
 
 protected:
-    QwtText trackerTextF(const QPointF& pos) const override;
+    [[nodiscard]] QwtText trackerTextF(const QPointF& pos) const override;
 };
 
 #endif // XYAXISNUMBERPICKER_H

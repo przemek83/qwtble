@@ -53,9 +53,6 @@ private:
     //Quantiles.
     QVector<Quantiles> quantiles_;
 
-    //Names used on axis.
-    QVector<QString> shortIntervalNames_;
-
     ///Names used in tooltip.
     QVector<QString> longIntervalNames_;
 

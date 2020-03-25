@@ -9,7 +9,7 @@
 class StringsScaleDraw : public QwtScaleDraw
 {
 public:
-    explicit StringsScaleDraw(QVector<QString>* intervals);
+    explicit StringsScaleDraw(QVector<QString> intervalNames);
 
     ~StringsScaleDraw() override = default;
 
@@ -22,7 +22,7 @@ public:
     QwtText label(double v) const override;
 
 private:
-    QVector<QString>* intervals_;
+    const QVector<QString> intervalNames_;
 };
 
 #endif // STRINGSSCALEDRAW_H

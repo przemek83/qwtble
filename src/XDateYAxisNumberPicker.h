@@ -9,7 +9,7 @@ class XDateYAxisNumberPicker : public Picker
 public:
     explicit XDateYAxisNumberPicker(QWidget* parent);
 
-    virtual ~XDateYAxisNumberPicker() override = default;
+    ~XDateYAxisNumberPicker() override = default;
 
     XDateYAxisNumberPicker& operator=(const XDateYAxisNumberPicker& other) = delete;
     XDateYAxisNumberPicker(const XDateYAxisNumberPicker& other) = delete;

@@ -17,7 +17,7 @@ GroupPlot::GroupPlot(QWidget* parent)
     quantiles_.clear();
 
     setStdScaleDraw(yRight);
-    setAxisScaleDraw(xBottom, new StringsScaleDraw(&shortIntervalNames_));
+    setAxisScaleDraw(xBottom, new StringsScaleDraw({}));
 
     marker_->attach(this);
 
@@ -35,10 +35,12 @@ void GroupPlot::setNewData(QVector<Quantiles> quantiles,
 {
     quantiles_ = std::move(quantiles);
     longIntervalNames_ = std::move(intervalStrings);
-    shortIntervalNames_ = shortenIntervalsNamesIfNeeded(longIntervalNames_, quantiles_);
+    QVector<QString> shortIntervalNames =
+        shortenIntervalsNamesIfNeeded(longIntervalNames_, quantiles_);
 
     //No leak here.
-    setAxisScaleDraw(xBottom, new StringsScaleDraw(&shortIntervalNames_));
+    setAxisScaleDraw(xBottom,
+                     new StringsScaleDraw(std::move(shortIntervalNames)));
 
     if (QToolTip::isVisible())
         QToolTip::hideText();

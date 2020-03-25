@@ -20,15 +20,10 @@ BasicDataPlot::BasicDataPlot(QWidget* parent) :
     setAxisScaleDraw(xBottom, new TimeScaleDraw());
 
     initPlotCurve();
-
     initQ25();
-
     initQ50();
-
     initQ75();
-
     initLinearRegression();
-
     initLegend();
 
     //All items checked as all plots visible on start.
@@ -136,7 +131,6 @@ void BasicDataPlot::setNewData(QVector<QPointF> data,
     setToolTip(quantiles.getValuesAsToolTip());
 
     QVector<QPointF> qVector;
-
     if (data.size() > 0)
     {
         double min = quantiles.minX_;
@@ -197,9 +191,7 @@ void BasicDataPlot::setLegendItemChecked(QwtPlotCurve* plot)
     if (legendWidget != nullptr)
     {
         auto legendLabel = dynamic_cast<QwtLegendLabel*>(legendWidget);
-        if (nullptr != legendLabel)
-        {
+        if (legendLabel != nullptr)
             legendLabel->setChecked(true);
-        }
     }
 }

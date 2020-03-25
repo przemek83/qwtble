@@ -4,8 +4,8 @@
 
 #include "QwtBleUtilities.h"
 
-StringsScaleDraw::StringsScaleDraw(QVector<QString>* intervals) :
-    intervals_(intervals)
+StringsScaleDraw::StringsScaleDraw(QVector<QString> intervalNames) :
+    intervalNames_(std::move(intervalNames))
 {
     setLabelRotation(QwtBleUtilities::DEFAULT_LABEL_ROTATION);
     setLabelAlignment(Qt::AlignLeft | Qt::AlignBottom);
@@ -13,17 +13,13 @@ StringsScaleDraw::StringsScaleDraw(QVector<QString>* intervals) :
 
 QwtText StringsScaleDraw::label(double v) const
 {
-    if (intervals_->isEmpty() || !QwtBleUtilities::doublesAreEqual(fmod(v, 1), 0.) ||
-        QwtBleUtilities::doublesAreEqual(v, 0.) || v < 0 || v > intervals_->count())
-    {
+    if (intervalNames_.isEmpty() || !QwtBleUtilities::doublesAreEqual(fmod(v, 1), 0.) ||
+        QwtBleUtilities::doublesAreEqual(v, 0.) || v < 0 || v > intervalNames_.count())
         return QwtText(QStringLiteral("                     "));
-    }
 
-    int point = static_cast<int>(v);
-    if (intervals_->count() >= point)
-    {
-        return QwtText(intervals_->at(point - 1));
-    }
+    const int point = static_cast<int>(v);
+    if (intervalNames_.count() >= point)
+        return QwtText(intervalNames_.at(point - 1));
 
     return QwtText(QStringLiteral("                     "));
 }
