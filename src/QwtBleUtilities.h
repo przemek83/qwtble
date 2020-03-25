@@ -20,8 +20,8 @@ const QWTBLE_EXPORT QDate& getStartOfTheWorld();
 
 QString QWTBLE_EXPORT getDefaultDateFormat();
 
-bool doublesAreEqual(double left, double right);
-bool floatsAreEqual(float left, float right);
+bool QWTBLE_EXPORT doublesAreEqual(double left, double right);
+bool QWTBLE_EXPORT floatsAreEqual(float left, float right);
 
 /**
  * Visualize given number as string using localization options/format.
