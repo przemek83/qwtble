@@ -19,7 +19,7 @@ public:
     StringsScaleDraw& operator=(StringsScaleDraw&& other) = delete;
     StringsScaleDraw(StringsScaleDraw&& other) = delete;
 
-    QwtText label(double v) const override;
+    QwtText label(double value) const override;
 
 private:
     const QVector<QString> intervalNames_;

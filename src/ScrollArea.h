@@ -9,7 +9,7 @@ class ScrollArea : public QScrollArea
 public:
     explicit ScrollArea(QWidget* parent = nullptr);
 
-    virtual ~ScrollArea() override = default;
+    ~ScrollArea() override = default;
 
     ScrollArea& operator=(const ScrollArea& other) = delete;
     ScrollArea(const ScrollArea& other) = delete;

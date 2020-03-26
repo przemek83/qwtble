@@ -6,13 +6,8 @@ namespace QwtBleUtilities
 {
 QString stringFromDays(int daysToAdd)
 {
-    return getStartOfTheWorld().addDays(daysToAdd).toString(getDefaultDateFormat());
-}
-
-const QDate& getStartOfTheWorld()
-{
-    static const QDate startOfTheWorld{QDate(1970, 1, 1)};
-    return startOfTheWorld;
+    static const QDate startOfTheWorld(1970, 1, 1);
+    return startOfTheWorld.addDays(daysToAdd).toString(getDefaultDateFormat());
 }
 
 QString getDefaultDateFormat()
@@ -34,16 +29,17 @@ bool floatsAreEqual(float left, float right)
            qtFloatPrecision * std::max({ 1.0F, std::abs(left), std::abs(right) });
 }
 
-QString doubleToStringUsingLocale(double value, int precison)
+QString doubleToStringUsingLocale(double value, int precision)
 {
     static bool initialized {false};
     static QLocale locale = QLocale::system();
     if (!initialized)
     {
-        locale.setNumberOptions(locale.numberOptions() & ~QLocale::OmitGroupSeparator);
+        locale.setNumberOptions(locale.numberOptions() &
+                                ~QLocale::OmitGroupSeparator);
         initialized = true;
     }
 
-    return locale.toString(value, 'f', precison);
+    return locale.toString(value, 'f', precision);
 }
 }

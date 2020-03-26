@@ -9,27 +9,41 @@
 namespace QwtBleUtilities
 {
 /**
- * Calculate date 1/1/1970 + given days and return string.
- * @param daysToAdd amount of days to add.
- * @return date in for of string.
+ * @brief Calculate date 1/1/1970 + given days and return string representation.
+ * @param daysToAdd Number of days to add.
+ * @return Date as string.
  **/
 QString QWTBLE_EXPORT stringFromDays(int daysToAdd);
 
-///Date 1/1/1970 used as reference for dates conversion.
-const QWTBLE_EXPORT QDate& getStartOfTheWorld();
-
+/**
+ * @brief Get default formatting which should be used.
+ * @return Default formatting as string.
+ */
 QString QWTBLE_EXPORT getDefaultDateFormat();
 
+/**
+ * @brief Check if 2 given doubles are equal.
+ * @param left Left double.
+ * @param right Right double.
+ * @return True when equal, false otherwise.
+ */
 bool QWTBLE_EXPORT doublesAreEqual(double left, double right);
+
+/**
+ * @brief Check if 2 given floats are equal.
+ * @param left Left float.
+ * @param right Right float.
+ * @return True when equal, false otherwise.
+ */
 bool QWTBLE_EXPORT floatsAreEqual(float left, float right);
 
 /**
- * Visualize given number as string using localization options/format.
- * @param value number to visualize.
- * @param precison precision for visualization.
- * @return number as string conveted using locale.
+ * @brief Visualize given number as string using localization formatting.
+ * @param value Double value to visualize.
+ * @param precision Precision for visualization.
+ * @return Double value as string created using locale.
  **/
-QString QWTBLE_EXPORT doubleToStringUsingLocale(double value, int precison);
+QString QWTBLE_EXPORT doubleToStringUsingLocale(double value, int precision);
 
 static constexpr int BIG_TRANSPARENCY_FACTOR {50};
 static constexpr int SMALL_TRANSPARENCY_FACTOR {200};

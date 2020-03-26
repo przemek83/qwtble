@@ -11,15 +11,14 @@ StringsScaleDraw::StringsScaleDraw(QVector<QString> intervalNames) :
     setLabelAlignment(Qt::AlignLeft | Qt::AlignBottom);
 }
 
-QwtText StringsScaleDraw::label(double v) const
+QwtText StringsScaleDraw::label(double value) const
 {
-    if (intervalNames_.isEmpty() || !QwtBleUtilities::doublesAreEqual(fmod(v, 1), 0.) ||
-        QwtBleUtilities::doublesAreEqual(v, 0.) || v < 0 || v > intervalNames_.count())
-        return QwtText(QStringLiteral("                     "));
-
-    const int point = static_cast<int>(v);
-    if (intervalNames_.count() >= point)
-        return QwtText(intervalNames_.at(point - 1));
+    using namespace QwtBleUtilities;
+    const bool valueIsIntegral {doublesAreEqual(fmod(value, 1), 0.)};
+    const int valueAsIntegral = static_cast<int>(value);
+    if (valueIsIntegral && !intervalNames_.isEmpty() && valueAsIntegral > 0 &&
+        valueAsIntegral <= intervalNames_.count())
+        return QwtText(intervalNames_.at(valueAsIntegral - 1));
 
     return QwtText(QStringLiteral("                     "));
 }
