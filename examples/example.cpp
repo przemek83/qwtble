@@ -119,7 +119,7 @@ static GroupPlotUI* createGroupPlotUI()
 
     QVector<std::pair<QString, int>> stringColumns {{"Shape", 0}, {"Color", 1}};
     auto groupPlotUI = new GroupPlotUI(stringColumns);
-    QObject::connect(groupPlotUI, &GroupPlotUI::newGroupingColumn, groupPlotUI,
+    QObject::connect(groupPlotUI, &GroupPlotUI::traitIndexChanged, groupPlotUI,
                      [ = ](int column)
     {
         const QVector<QString>& names =
@@ -214,7 +214,7 @@ int main(int argc, char* argv[])
     widget.setLayout(&widgetLayout);
     widget.resize(1000, 750);
     widget.show();
-    groupPlotUI->newGroupingColumn(0);
+    groupPlotUI->traitIndexChanged(0);
 
     return QApplication::exec();
 }

@@ -100,5 +100,5 @@ void GroupPlotUI::adjustQuantilesPlotExtent(QScrollBar* groupPlotScrollBar)
 
 void GroupPlotUI::comboBoxCurrentIndexChanged(int index)
 {
-    Q_EMIT newGroupingColumn(ui->comboBox->itemData(index).toInt());
+    Q_EMIT traitIndexChanged(ui->comboBox->itemData(index).toInt());
 }

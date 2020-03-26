@@ -74,7 +74,7 @@ Q_SIGNALS:
      * @brief Signal emitted when user changes trait in combo box.
      * @param Trait index.
      */
-    void newGroupingColumn(int column);
+    void traitIndexChanged(int newIndex);
 };
 
 #endif // GROUPPLOTUI_H
