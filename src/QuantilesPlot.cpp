@@ -11,37 +11,34 @@
 
 QuantilesPlot::QuantilesPlot(QWidget* parent) :
     PlotBase(QObject::tr("Quantiles"), parent),
-    marker_(new NotchedMarker(&quantiles_)),
-    picker_(new YAxisNumberPicker(canvas()))
+    marker_(new NotchedMarker({})), picker_(new YAxisNumberPicker(canvas()))
 {
-    quantiles_.clear();
+    marker_->attach(this);
 
     enableAxis(yLeft, false);
-
-    marker_->attach(this);
 
     QFont font = axisFont(xBottom);
     font.setStyleStrategy(QFont::PreferAntialias);
     setAxisFont(xBottom, font);
-
-    setAxisScale(xBottom, -0.5, 1.5, 0);
-
     setAxisMaxMinor(xBottom, 0);
     setAxisMaxMajor(xBottom, 3);
+
+    setupLegend(width());
 }
 
 QuantilesPlot::~QuantilesPlot() = default;
 
-void QuantilesPlot::forceResize()
-{
-    resizeEvent(new QResizeEvent(size(), size()));
-}
-
 void QuantilesPlot::resizeEvent(QResizeEvent* event)
 {
     PlotBase::resizeEvent(event);
+    setupLegend(event->size().width());
+    replot();
+}
+
+void QuantilesPlot::setupLegend(int plotWidth)
+{
     const int minWidthForLegend {90};
-    if (event->size().width() >= minWidthForLegend)
+    if (plotWidth >= minWidthForLegend)
     {
         setAxisScale(xBottom, -0.5, 1.5, 0);
         marker_->setDrawLegend(true);
@@ -51,19 +48,14 @@ void QuantilesPlot::resizeEvent(QResizeEvent* event)
         setAxisScale(xBottom, 0, 2, 0);
         marker_->setDrawLegend(false);
     }
-    replot();
 }
 
 void QuantilesPlot::setNewData(Quantiles quantiles)
 {
-    quantiles_.clear();
-    quantiles_.push_back(std::move(quantiles));
-    setAxisScale(QwtPlot::yLeft, quantiles.min_, quantiles.max_);
-
     setToolTip(quantiles.getValuesAsToolTip());
-
+    setAxisScale(QwtPlot::yLeft, quantiles.min_, quantiles.max_);
     setAxisScaleDraw(xBottom, new IntervalsScaleDraw(quantiles.number_));
-
+    marker_->setQuantiles({std::move(quantiles)});
     replot();
 }
 
@@ -87,9 +79,9 @@ QuantilesPlot::IntervalsScaleDraw::IntervalsScaleDraw(int count) :
 
 }
 
-QwtText QuantilesPlot::IntervalsScaleDraw::label(double v) const
+QwtText QuantilesPlot::IntervalsScaleDraw::label(double value) const
 {
-    if (QwtBleUtilities::doublesAreEqual(v, 1.) && count_ != 0)
+    if (QwtBleUtilities::doublesAreEqual(value, 1.) && count_ != 0)
         return QwtText(QString::number(count_));
     return QwtText();
 }

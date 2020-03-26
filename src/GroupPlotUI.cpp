@@ -59,22 +59,19 @@ void GroupPlotUI::setNewData(QVector<QString> intervalsNames,
 
     scrollArea_->forceResize();
 
-    int scrollBarSize = 0;
+    int scrollBarSize {0};
 
-    if (scrollArea_->horizontalScrollBar()->minimum() !=
-        scrollArea_->horizontalScrollBar()->maximum())
-    {
-        scrollBarSize = scrollArea_->horizontalScrollBar()->height();
-    }
+    if (auto scrollBar = scrollArea_->horizontalScrollBar();
+        scrollBar->minimum() != scrollBar->maximum())
+        scrollBarSize = scrollBar->height();
 
-    // Fix for problem when scrollbar after resize is not visible.
-    // Quantiles plot not resized.
-    double minExtentForQuantiles =
+    // Fix for not visible scroll bar after resize. Quantiles plot not resized.
+    const double minExtentForQuantiles =
         groupPlot_.axisScaleDraw(QwtPlot::xBottom)->extent(groupPlot_.axisFont(QwtPlot::xBottom));
     groupPlot_.axisScaleDraw(QwtPlot::xBottom)->setMinimumExtent(minExtentForQuantiles);
 
     quantilesPlot_.axisScaleDraw(QwtPlot::xBottom)->setMinimumExtent(minExtentForQuantiles + scrollBarSize);
-    quantilesPlot_.forceResize();
+    QCoreApplication::postEvent(&quantilesPlot_, new QResizeEvent(size(), size()));
 }
 
 void GroupPlotUI::comboBoxCurrentIndexChanged(int index)

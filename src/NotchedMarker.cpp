@@ -10,8 +10,8 @@
 #include "QwtBleUtilities.h"
 #include "Quantiles.h"
 
-NotchedMarker::NotchedMarker(QVector<Quantiles>* quantiles)
-    : quantiles_(quantiles)
+NotchedMarker::NotchedMarker(QVector<Quantiles> quantiles) :
+    quantilesVector_(std::move(quantiles))
 {
     setZ(QwtBleUtilities::HIGH_ORDER);
     setRenderHint(QwtPlotItem::RenderAntialiased, true);
@@ -37,9 +37,7 @@ void NotchedMarker::draw(QPainter* p,
                          const QwtScaleMap& yMap,
                          const QRectF& rect) const
 {
-    Q_ASSERT(nullptr != quantiles_);
-
-    if (quantiles_ == nullptr)
+    if (quantilesVector_.empty())
         return;
 
     auto basePlot = dynamic_cast<PlotBase*>(plot());
@@ -65,7 +63,7 @@ void NotchedMarker::draw(QPainter* p,
 
     //Draw elements.
     int elementNumber = 0;
-    for (Quantiles& quantiles : *quantiles_)
+    for (const Quantiles& quantiles : quantilesVector_)
     {
         elementNumber++;
         drawElement(p, elementNumber, xMap, yMap, width, quantiles);
@@ -81,6 +79,11 @@ void NotchedMarker::setDrawLegend(bool drawLegend)
 bool NotchedMarker::getDrawLegend() const
 {
     return drawLegend_;
+}
+
+void NotchedMarker::setQuantiles(QVector<Quantiles> quantilesVector)
+{
+    quantilesVector_ = std::move(quantilesVector);
 }
 
 void NotchedMarker::drawElement(QPainter* p,

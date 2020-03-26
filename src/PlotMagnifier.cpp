@@ -3,17 +3,17 @@
 PlotMagnifier::PlotMagnifier(QWidget* canvas)
     : QwtPlotMagnifier(canvas)
 {
-    actualFactor_ = 1.0;
+    currentFactor_ = 1.;
 }
 
 void PlotMagnifier::rescale(double factor)
 {
-    actualFactor_ *= factor;
+    currentFactor_ *= factor;
     QwtPlotMagnifier::rescale(factor);
 }
 
 void PlotMagnifier::reset()
 {
-    rescale(1 / actualFactor_);
-    actualFactor_ = 1.0;
+    rescale(1. / currentFactor_);
+    currentFactor_ = 1.;
 }

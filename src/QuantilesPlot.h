@@ -11,7 +11,8 @@ class NotchedMarker;
 class YAxisNumberPicker;
 
 /**
- * @brief plot showing quantiles (q25, q50, q75, min, max, avg).
+ * @class QuantilesPlot
+ * @brief Plot showing quantiles, min, max, avg and std deviation.
  */
 class QWTBLE_EXPORT QuantilesPlot : public PlotBase
 {
@@ -27,13 +28,16 @@ public:
     QuantilesPlot& operator=(QuantilesPlot&& other) = delete;
     QuantilesPlot(QuantilesPlot&& other) = delete;
 
-    void setNewData(Quantiles quantiles);
-
     QSize minimumSizeHint() const override;
 
     QSize sizeHint() const override;
 
-    void forceResize();
+public Q_SLOTS:
+    /**
+     * @brief Set new quantiles for plot.
+     * @param quantiles New quantiles.
+     */
+    void setNewData(Quantiles quantiles);
 
 protected:
     void resizeEvent(QResizeEvent* event) override;
@@ -52,16 +56,15 @@ private:
         IntervalsScaleDraw& operator=(IntervalsScaleDraw&& other) = delete;
         IntervalsScaleDraw(IntervalsScaleDraw&& other) = delete;
 
-        QwtText label(double v) const override;
+        QwtText label(double value) const override;
 
     private:
         int count_;
     };
 
-    std::unique_ptr<NotchedMarker> marker_;
+    void setupLegend(int plotWidth);
 
-    //One, but marker expects vector.
-    QVector<Quantiles> quantiles_;
+    std::unique_ptr<NotchedMarker> marker_;
 
     std::unique_ptr<YAxisNumberPicker> picker_;
 };

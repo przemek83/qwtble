@@ -20,7 +20,7 @@ public:
     Picker& operator=(Picker&& other) = delete;
     Picker(Picker&& other) = delete;
 
-    virtual int getAreaOfMouse();
+    int getAreaOfMouse();
 
     bool getMouseInWidget();
 

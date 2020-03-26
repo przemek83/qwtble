@@ -23,7 +23,7 @@ protected:
     void rescale(double factor) override;
 
 private:
-    double actualFactor_;
+    double currentFactor_;
 };
 
 

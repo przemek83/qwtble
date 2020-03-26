@@ -13,7 +13,7 @@ struct Quantiles;
 class QWTBLE_EXPORT NotchedMarker : public QwtPlotItem
 {
 public:
-    explicit NotchedMarker(QVector<Quantiles>* quantiles);
+    explicit NotchedMarker(QVector<Quantiles> quantiles);
 
     ~NotchedMarker() override = default;
 
@@ -31,6 +31,8 @@ public:
     void setDrawLegend(bool drawLegend);
     bool getDrawLegend() const;
 
+    void setQuantiles(QVector<Quantiles> quantilesVector);
+
 protected:
     void drawLegend(QPainter* p, const QRectF& rect) const;
 
@@ -41,7 +43,7 @@ protected:
 private:
     QBrush markerBrush_;
 
-    QVector<Quantiles>* quantiles_;
+    QVector<Quantiles> quantilesVector_;
 
     bool drawLegend_ {false};
 };

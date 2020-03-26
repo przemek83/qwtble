@@ -11,11 +11,8 @@
 
 GroupPlot::GroupPlot(QWidget* parent)
     : PlotBase(tr("Grouping"), parent),
-      marker_(new NotchedMarker(&quantiles_)),
-      picker_(new YAxisNumberPicker(canvas()))
+      marker_(new NotchedMarker({})), picker_(new YAxisNumberPicker(canvas()))
 {
-    quantiles_.clear();
-
     setStdScaleDraw(yRight);
     setAxisScaleDraw(xBottom, new StringsScaleDraw({}));
 
@@ -34,6 +31,7 @@ void GroupPlot::setNewData(QVector<Quantiles> quantiles,
                            QVector<QString> intervalStrings)
 {
     quantiles_ = std::move(quantiles);
+    marker_->setQuantiles(quantiles_);
     longIntervalNames_ = std::move(intervalStrings);
     QVector<QString> shortIntervalNames =
         shortenIntervalsNamesIfNeeded(longIntervalNames_, quantiles_);
