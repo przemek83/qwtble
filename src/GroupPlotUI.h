@@ -1,8 +1,6 @@
 #ifndef GROUPPLOTUI_H
 #define GROUPPLOTUI_H
 
-#include <QMap>
-#include <QRegExpValidator>
 #include <QWidget>
 
 #include "GroupPlot.h"
@@ -15,8 +13,14 @@ namespace Ui
 class GroupPlotUI;
 }
 
-class ScrollArea;
+class QSplitter;
+class QScrollArea;
+class QScrollBar;
 
+/**
+ * @class GroupPlotUI
+ * @brief Widget pairing quantiles and grouping plots with trait combo box.
+ */
 class QWTBLE_EXPORT GroupPlotUI : public QWidget
 {
     Q_OBJECT
@@ -32,23 +36,44 @@ public:
     GroupPlotUI(GroupPlotUI&& other) = delete;
 
 public Q_SLOTS:
+    /**
+     * @brief Set new data for plots.
+     * @param intervalsNames Names used on bottom axis of group plot.
+     * @param quantilesForIntervals Quantiles for each trait type.
+     * @param quantiles General quantiles.
+     */
     void setNewData(QVector<QString> intervalsNames,
                     QVector<Quantiles> quantilesForIntervals,
                     Quantiles quantiles);
 
+protected:
+    void resizeEvent(QResizeEvent* event) override;
+
 private:
+    /**
+     * @brief Add splitter with group and quantiles plots.
+     * @return Splitter.
+     */
+    QSplitter* setupSplitter();
+
+    void updateQuantilesPlotExtent();
+
+    void adjustQuantilesPlotExtent(QScrollBar* groupPlotScrollBar);
+
     Ui::GroupPlotUI* ui;
 
     GroupPlot groupPlot_;
 
     QuantilesPlot quantilesPlot_;
 
-    ScrollArea* scrollArea_;
-
 private Q_SLOTS:
     void comboBoxCurrentIndexChanged(int index);
 
 Q_SIGNALS:
+    /**
+     * @brief Signal emitted when user changes trait in combo box.
+     * @param Trait index.
+     */
     void newGroupingColumn(int column);
 };
 

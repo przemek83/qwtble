@@ -75,8 +75,6 @@ add_library(${PROJECT_NAME} SHARED
   src/HistogramPlotUI.cpp
   src/HistogramPlotUI.h
   src/HistogramPlotUI.ui
-  src/ScrollArea.cpp
-  src/ScrollArea.h
 )
 
 set_target_properties(${PROJECT_NAME} PROPERTIES VERSION ${PROJECT_VERSION})
