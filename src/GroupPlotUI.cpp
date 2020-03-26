@@ -74,18 +74,13 @@ QSplitter* GroupPlotUI::setupSplitter()
 
 void GroupPlotUI::updateQuantilesPlotExtent()
 {
-    auto scrollArea = qobject_cast<QScrollArea*>(groupPlot_.parent()->parent());
-
-    // Enforce size update.
-    auto resizeEvent {new QResizeEvent(scrollArea->size(), scrollArea->size())};
-    QCoreApplication::postEvent(scrollArea, resizeEvent);
-    QApplication::processEvents();
-
     // Adjust quantiles plot extent size to match group plot one.
+    auto scrollArea = qobject_cast<QScrollArea*>(groupPlot_.parent()->parent());
     adjustQuantilesPlotExtent(scrollArea->horizontalScrollBar());
 
-    // Enforce size update.
-    resizeEvent = new QResizeEvent(quantilesPlot_.size(), quantilesPlot_.size());
+    // Enforce size update of quantiles plot.
+    auto resizeEvent =
+        new QResizeEvent(quantilesPlot_.size(), quantilesPlot_.size());
     QCoreApplication::postEvent(&quantilesPlot_, resizeEvent);
     QApplication::processEvents();
 }
