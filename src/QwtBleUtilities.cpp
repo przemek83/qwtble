@@ -6,8 +6,13 @@ namespace QwtBleUtilities
 {
 QString stringFromDays(int daysToAdd)
 {
-    static const QDate startOfTheWorld(1970, 1, 1);
+    static const QDate startOfTheWorld {getStartOfTheWorld()};
     return startOfTheWorld.addDays(daysToAdd).toString(getDefaultDateFormat());
+}
+
+const QDate getStartOfTheWorld()
+{
+    return QDate(1970, 1, 1);
 }
 
 QString getDefaultDateFormat()
