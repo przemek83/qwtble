@@ -1,21 +1,16 @@
 ﻿#ifndef GROUPPLOT_H
 #define GROUPPLOT_H
 
-#include <QEvent>
-
-#include <qwt_scale_div.h>
-#include <qwt_plot_curve.h>
-
 #include "PlotBase.h"
 #include "Quantiles.h"
 #include "qwtble_global.h"
 
 class NotchedMarker;
-class QwtPlotCurve;
 class YAxisNumberPicker;
 
 /**
- * @brief Plot on which user can group by text columns.
+ * @class GroupPlot
+ * @brief Plot showing data grouped by trait types using notched markers.
  */
 class QWTBLE_EXPORT GroupPlot : public PlotBase
 {
@@ -34,7 +29,12 @@ public:
     QSize minimumSizeHint() const override;
 
 public Q_SLOTS:
-    void setNewData(QVector<Quantiles> quantiles,
+    /**
+     * @brief Set new data for group plot.
+     * @param quantilesVector Quantiles for each trait type.
+     * @param intervalStrings Names of trait types.
+     */
+    void setNewData(QVector<Quantiles> quantilesVector,
                     QVector<QString> intervalStrings);
 
 protected:
@@ -42,19 +42,19 @@ protected:
 
 private:
     QVector<QString>
-    shortenIntervalsNamesIfNeeded(const QVector<QString>& intervalsNames,
-                                  const QVector<Quantiles>& quantilesForIntervals);
+    createAxisIntervalsNames(const QVector<QString>& intervalsNames,
+                             const QVector<Quantiles>& quantilesVector) const;
+
+    QVector<QString>
+    createTooltips(const QVector<QString>& intervalsNames,
+                   const QVector<Quantiles>& quantilesVector) const;
 
     ///Maximum number of chars in label.
     static constexpr int maxCharsInLabel_ {20};
 
     std::unique_ptr<NotchedMarker> marker_;
 
-    //Quantiles.
-    QVector<Quantiles> quantiles_;
-
-    ///Names used in tooltip.
-    QVector<QString> longIntervalNames_;
+    QVector<QString> tooltips_;
 
     std::unique_ptr<YAxisNumberPicker> picker_;
 };

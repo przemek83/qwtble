@@ -1,8 +1,7 @@
 ﻿#include "GroupPlot.h"
 
-#include <QDebug>
+#include <QEvent>
 #include <QToolTip>
-#include <qwt_plot_layout.h>
 
 #include "NotchedMarker.h"
 #include "StringsScaleDraw.h"
@@ -14,12 +13,12 @@ GroupPlot::GroupPlot(QWidget* parent)
       marker_(new NotchedMarker({})), picker_(new YAxisNumberPicker(canvas()))
 {
     setStdScaleDraw(yRight);
-    setAxisScaleDraw(xBottom, new StringsScaleDraw({}));
 
     marker_->attach(this);
 
-    //Font.
     enableAxis(QwtPlot::yRight, true);
+
+    setAxisScaleDraw(xBottom, new StringsScaleDraw({}));
     QFont font = axisFont(QwtPlot::xBottom);
     font.setStyleStrategy(QFont::PreferAntialias);
     setAxisFont(QwtPlot::xBottom, font);
@@ -27,18 +26,15 @@ GroupPlot::GroupPlot(QWidget* parent)
 
 GroupPlot::~GroupPlot() = default;
 
-void GroupPlot::setNewData(QVector<Quantiles> quantiles,
+void GroupPlot::setNewData(QVector<Quantiles> quantilesVector,
                            QVector<QString> intervalStrings)
 {
-    quantiles_ = std::move(quantiles);
-    marker_->setQuantiles(quantiles_);
-    longIntervalNames_ = std::move(intervalStrings);
+    tooltips_ = createTooltips(intervalStrings, quantilesVector);
     QVector<QString> shortIntervalNames =
-        shortenIntervalsNamesIfNeeded(longIntervalNames_, quantiles_);
-
-    //No leak here.
+        createAxisIntervalsNames(intervalStrings, quantilesVector);
     setAxisScaleDraw(xBottom,
                      new StringsScaleDraw(std::move(shortIntervalNames)));
+    marker_->setQuantiles(std::move(quantilesVector));
 
     if (QToolTip::isVisible())
         QToolTip::hideText();
@@ -47,8 +43,8 @@ void GroupPlot::setNewData(QVector<Quantiles> quantiles,
 }
 
 QVector<QString>
-GroupPlot::shortenIntervalsNamesIfNeeded(const QVector<QString>& intervalsNames,
-                                         const QVector<Quantiles>& quantilesForIntervals)
+GroupPlot::createAxisIntervalsNames(const QVector<QString>& intervalsNames,
+                                    const QVector<Quantiles>& quantilesVector) const
 {
     QVector<QString> shortenNames;
     const QString moreChars(QStringLiteral("..."));
@@ -56,13 +52,11 @@ GroupPlot::shortenIntervalsNamesIfNeeded(const QVector<QString>& intervalsNames,
     {
         QString name = intervalsNames[i];
         QString countString =
-            QString(" (" + QString::number(quantilesForIntervals[i].number_) + ")");
+            QString(" (" + QString::number(quantilesVector[i].number_) + ")");
 
-        if (name.size() - maxCharsInLabel_ + countString.count() > 0)
+        if (name.size() + countString.count() > maxCharsInLabel_)
         {
-            name.chop(name.size() -
-                      maxCharsInLabel_ +
-                      countString.count() +
+            name.chop(name.size() - maxCharsInLabel_ + countString.count() +
                       moreChars.size());
             name.append(moreChars);
         }
@@ -70,6 +64,18 @@ GroupPlot::shortenIntervalsNamesIfNeeded(const QVector<QString>& intervalsNames,
         shortenNames.append(name);
     }
     return shortenNames;
+}
+
+QVector<QString>
+GroupPlot::createTooltips(const QVector<QString>& intervalsNames,
+                          const QVector<Quantiles>& quantilesVector) const
+{
+    QVector<QString> tooltips;
+    for (int i = 0; i < intervalsNames.size(); ++i)
+        tooltips.append("<B>" + intervalsNames.at(i) +
+                        "</B></BR>" +
+                        quantilesVector.at(i).getValuesAsToolTip());
+    return tooltips;
 }
 
 QSize GroupPlot::minimumSizeHint() const
@@ -83,20 +89,17 @@ bool GroupPlot::event(QEvent* event)
 {
     if (event->type() == QEvent::ToolTip)
     {
-        int x =  picker_->getAreaOfMouse();
-        if (x >= 1 && x <= quantiles_.size() && picker_->getMouseInWidget())
+        const int x = picker_->getAreaOfMouse();
+        if (x >= 1 && x <= tooltips_.size() && picker_->getMouseInWidget())
         {
-            setToolTip("<B>" + longIntervalNames_.at(x - 1) +
-                       "</B></BR>" + quantiles_.at(x - 1).getValuesAsToolTip());
+            setToolTip(tooltips_[x - 1]);
         }
         else
         {
             setToolTip(QLatin1String(""));
             event->ignore();
             if (QToolTip::isVisible())
-            {
                 QToolTip::hideText();
-            }
             return true;
         }
     }
