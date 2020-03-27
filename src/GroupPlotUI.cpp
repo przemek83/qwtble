@@ -46,6 +46,8 @@ void GroupPlotUI::setNewData(QVector<QString> intervalsNames,
 
     quantilesPlot_.setNewData(std::move(quantiles));
 
+    // Workaround: update twice as after first one extent might be incorrect.
+    updateQuantilesPlotExtent();
     updateQuantilesPlotExtent();
 }
 
