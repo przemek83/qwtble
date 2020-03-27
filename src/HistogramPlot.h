@@ -1,11 +1,6 @@
 #ifndef HISTOGRAMPLOT_H
 #define HISTOGRAMPLOT_H
 
-#include <qwt_plot.h>
-#include <qwt_plot_magnifier.h>
-#include <qwt_plot_picker.h>
-#include <qwt_plot_curve.h>
-#include <qwt_scale_draw.h>
 #include <qwt_plot_histogram.h>
 
 #include "PlotBase.h"
@@ -16,7 +11,8 @@ class XYAxisNumberPicker;
 class QMouseEvent;
 
 /**
- * @brief Histogram plot with actual density/distriburtion.
+ * @class HistogramPlot
+ * @brief Histogram plot with distribution.
  */
 class QWTBLE_EXPORT HistogramPlot : public PlotBase
 {
@@ -33,28 +29,40 @@ public:
     HistogramPlot(HistogramPlot&& other) = delete;
 
 public Q_SLOTS:
+    /**
+     * @brief Set new data for plot.
+     * @param data Series of values.
+     * @param quantiles Quantiles for given data.
+     * @param intervalsCount Number of histogram intervals.
+     */
     void setNewData(QVector<double> data,
                     Quantiles quantiles,
                     int intervalsCount);
 
+    /**
+     * @brief Recompute histogram with given intervals count.
+     * @param intervalsCount Intervals count.
+     */
     void recompute(int intervalsCount);
 
 private:
     void initHistogramPlot();
-
     void initActualDensity();
-
     void initLegend();
 
-    /// Histogram plot.
-    QwtPlotHistogram histPlot_;
+    void setLegendItemChecked(QwtPlotItem* plot);
 
-    /// Actual density plot (blue line).
-    QwtPlotCurve actualDensity_;
+    QVector<int> getFilledIntervals(const QVector<double>& data,
+                                    const Quantiles& quantiles,
+                                    int intervalsCount) const;
+
+    void udpatePlotItems(int intervalsCount);
+
+    QwtPlotHistogram histogram_;
+
+    QwtPlotCurve distributionCurve_;
 
     std::unique_ptr<XYAxisNumberPicker> picker_;
-
-    void setLegendItemChecked(QwtPlotItem* plot);
 
     QVector<double> data_;
 

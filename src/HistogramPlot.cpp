@@ -1,13 +1,7 @@
 #include "HistogramPlot.h"
 
-#include <QDate>
-#include <QMouseEvent>
-#include <QToolTip>
 #include <qwt_legend.h>
 #include <qwt_legend_label.h>
-#include <qwt_plot_panner.h>
-#include <qwt_samples.h>
-#include <qwt_symbol.h>
 
 #include "XYAxisNumberPicker.h"
 #include "QwtBleUtilities.h"
@@ -17,39 +11,33 @@ HistogramPlot::HistogramPlot(QWidget* parent) :
     picker_(new XYAxisNumberPicker(canvas()))
 {
     initHistogramPlot();
-
     initActualDensity();
-
-    //Legend.
     initLegend();
-
-    setLegendItemChecked(&histPlot_);
-    setLegendItemChecked(&actualDensity_);
 }
 
 HistogramPlot::~HistogramPlot() = default;
 
 void HistogramPlot::initHistogramPlot()
 {
-    histPlot_.setStyle(QwtPlotHistogram::Columns);
-    histPlot_.setZ(QwtBleUtilities::LOW_ORDER);
-    histPlot_.setRenderHint(QwtPlotItem::RenderAntialiased, true);
-    histPlot_.attach(this);
-    histPlot_.setTitle(QObject::tr("Histogram"));
+    histogram_.setStyle(QwtPlotHistogram::Columns);
+    histogram_.setZ(QwtBleUtilities::LOW_ORDER);
+    histogram_.setRenderHint(QwtPlotItem::RenderAntialiased, true);
+    histogram_.attach(this);
+    histogram_.setTitle(QObject::tr("Histogram"));
 }
 
 void HistogramPlot::initActualDensity()
 {
-    actualDensity_.setTitle(QObject::tr("Distribution"));
-    actualDensity_.setStyle(QwtPlotCurve::Lines);
-    actualDensity_.setCurveAttribute(QwtPlotCurve::Fitted);
-    QPen pen = actualDensity_.pen();
+    distributionCurve_.setTitle(QObject::tr("Distribution"));
+    distributionCurve_.setStyle(QwtPlotCurve::Lines);
+    distributionCurve_.setCurveAttribute(QwtPlotCurve::Fitted);
+    QPen pen = distributionCurve_.pen();
     pen.setColor(QColor(Qt::blue));
     pen.setWidth(2);
-    actualDensity_.setPen(pen);
-    actualDensity_.setZ(QwtBleUtilities::HIGH_ORDER);
-    actualDensity_.setRenderHint(QwtPlotItem::RenderAntialiased, true);
-    actualDensity_.attach(this);
+    distributionCurve_.setPen(pen);
+    distributionCurve_.setZ(QwtBleUtilities::HIGH_ORDER);
+    distributionCurve_.setRenderHint(QwtPlotItem::RenderAntialiased, true);
+    distributionCurve_.attach(this);
 }
 
 void HistogramPlot::initLegend()
@@ -64,9 +52,14 @@ void HistogramPlot::initLegend()
             this,
             SLOT(legendItemChecked(QVariant, bool, int)));
     insertLegend(legend, QwtPlot::BottomLegend);
+
+    setLegendItemChecked(&histogram_);
+    setLegendItemChecked(&distributionCurve_);
 }
 
-void HistogramPlot::legendItemChecked(const QVariant& itemInfo, bool on, int /*index*/)
+void HistogramPlot::legendItemChecked(const QVariant& itemInfo,
+                                      bool on,
+                                      [[maybe_unused]] int index)
 {
     QwtPlotItem* plotItem = infoToItem(itemInfo);
     if (plotItem != nullptr)
@@ -84,54 +77,58 @@ void HistogramPlot::setLegendItemChecked(QwtPlotItem* plot)
     if (legendWidget != nullptr)
     {
         auto legendLabel = dynamic_cast<QwtLegendLabel*>(legendWidget);
-        if (nullptr != legendLabel)
-        {
+        if (legendLabel != nullptr)
             legendLabel->setChecked(true);
-        }
     }
+}
+
+QVector<int> HistogramPlot::getFilledIntervals(const QVector<double>& data,
+                                               const Quantiles& quantiles,
+                                               int intervalsCount) const
+{
+    const int dataCount = data.size();
+    const double min = quantiles.min_;
+    const double max = quantiles.max_;
+    const double stepSize = (max - min) / intervalsCount;
+
+    QVector<int> intervals(std::max(intervalsCount, dataCount));
+    for (int i = 0; i < dataCount; ++i)
+    {
+        int index = static_cast<int>((data[i] - min) / stepSize);
+        if (index > dataCount - 1)
+            index = dataCount - 1;
+        if (index < 0)
+            index = 0;
+        intervals[index]++;
+    }
+    return intervals;
+}
+
+void HistogramPlot::udpatePlotItems(int intervalsCount)
+{
+    QVector<int> intervals {getFilledIntervals(data_, quantiles_, intervalsCount)};
+    const double min = quantiles_.min_;
+    const double max = quantiles_.max_;
+    const double stepSize = (max - min) / intervalsCount;
+    const double middleOfStep {stepSize / 2.};
+
+    QVector< QwtIntervalSample > samples;
+    QVector< QPointF > actualPoints;
+    for (int i = 0; i < intervalsCount; ++i)
+    {
+        const double from = min + stepSize * i;
+        samples.append(QwtIntervalSample(intervals[i], from, from + stepSize));
+        actualPoints.append(QPointF(from + middleOfStep, intervals[i]));
+    }
+
+    histogram_.setSamples(samples);
+    distributionCurve_.setSamples(actualPoints);
 }
 
 void HistogramPlot::recompute(int intervalsCount)
 {
     setToolTip(quantiles_.getValuesAsToolTip());
-    const int count = data_.size();
-
-    /* To normalize use formula:
-       Z = (X - Mean) / stdDev */
-
-    const double min = quantiles_.min_;
-    const double max = quantiles_.max_;
-
-    double step = (max - min) / static_cast<double>(intervalsCount);
-
-    QVector<int> intervals(std::max(intervalsCount, count));
-    for (int i = 0; i < count; ++i)
-    {
-        int index = static_cast<int>((data_[i] - min) / step);
-        if (index > count - 1)
-        {
-            index = count - 1;
-        }
-        if (index < 0)
-        {
-            index = 0;
-        }
-        intervals[index]++;
-    }
-
-    QVector< QwtIntervalSample > samples;
-    QVector< QPointF > actualPoints;
-    const double middleOfStep {step / 2.};
-    for (int i = 0; i < intervalsCount; ++i)
-    {
-        double x = min + step * static_cast<double>(i);
-        samples.append(QwtIntervalSample(intervals[i], x, x + step));
-        actualPoints.append(QPointF(x + middleOfStep, intervals[i]));
-    }
-
-    histPlot_.setSamples(samples);
-    actualDensity_.setSamples(actualPoints);
-
+    udpatePlotItems(intervalsCount);
     replot();
 }
 
