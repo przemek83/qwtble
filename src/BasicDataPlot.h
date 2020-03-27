@@ -1,21 +1,15 @@
 #ifndef BASICDATAPLOT_H
 #define BASICDATAPLOT_H
 
-#include <qwt_plot.h>
-#include <qwt_plot_magnifier.h>
-#include <qwt_plot_picker.h>
-#include <qwt_plot_curve.h>
-#include <qwt_scale_draw.h>
-
 #include "PlotBase.h"
 #include "Quantiles.h"
 #include "qwtble_global.h"
 
 class XDateYAxisNumberPicker;
-class QMouseEvent;
 
 /**
- * @brief Linear regression plot with data and quantile 25, 50 and 75.
+ * @class BasicDataPlot
+ * @brief Plot showing data plus quantiles and linear regression curves.
  */
 class QWTBLE_EXPORT BasicDataPlot : public PlotBase
 {
@@ -32,25 +26,17 @@ public:
     BasicDataPlot(BasicDataPlot&& other) = delete;
 
 public Q_SLOTS:
-    virtual void setNewData(QVector<QPointF> data,
-                            Quantiles quantiles,
-                            QVector<QPointF> linearRegression);
+    /**
+     * @brief Set new data for plot.
+     * @param data Data points.
+     * @param quantiles Quantiles for data.
+     * @param linearRegression Linear regression points.
+     */
+    void setNewData(QVector<QPointF> data,
+                    Quantiles quantiles,
+                    QVector<QPointF> linearRegression);
 
 private:
-    void setPlotData(QVector<QPointF> data);
-
-    void initPlotCurve();
-    void initQ25();
-    void initQ50();
-    void initQ75();
-    void initLinearRegression();
-    void initLegend();
-
-    QwtPlotCurve plotQ25_;
-    QwtPlotCurve plotQ50_;
-    QwtPlotCurve plotQ75_;
-    QwtPlotCurve plotLinearRegression_;
-
     class TimeScaleDraw: public QwtScaleDraw
     {
     public:
@@ -67,7 +53,16 @@ private:
         [[nodiscard]] QwtText label(double v) const override;
     };
 
-    std::unique_ptr<XDateYAxisNumberPicker> picker_;
+    void setPlotData(QVector<QPointF> data);
+
+    void initPlotCurve();
+    void initQ25();
+    void initQ50();
+    void initQ75();
+    void initLinearRegression();
+    void initLegend();
+
+    void checkLegendItems();
 
     /**
      * @brief set given item checked on legend.
@@ -75,7 +70,13 @@ private:
      */
     void setLegendItemChecked(QwtPlotCurve* plot);
 
-    QwtPlotCurve plotCurve_;
+    QwtPlotCurve plotQ25_;
+    QwtPlotCurve plotQ50_;
+    QwtPlotCurve plotQ75_;
+    QwtPlotCurve plotLinearRegression_;
+    QwtPlotCurve plotData_;
+
+    std::unique_ptr<XDateYAxisNumberPicker> picker_;
 
 private Q_SLOTS:
     void legendItemChecked(const QVariant& itemInfo, bool on, int index);
