@@ -1,6 +1,8 @@
 #ifndef BASICDATAPLOT_H
 #define BASICDATAPLOT_H
 
+#include <qwt_plot_curve.h>
+
 #include "PlotBase.h"
 #include "Quantiles.h"
 #include "qwtble_global.h"

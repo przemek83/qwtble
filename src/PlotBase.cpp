@@ -1,13 +1,14 @@
 #include "PlotBase.h"
 
+#include <math.h>
+
 #include <QMouseEvent>
-#include <qwt_text_label.h>
 
 #include "PlotMagnifier.h"
 #include "QwtBleUtilities.h"
 
 PlotBase::PlotBase(const QString& title, QWidget* parent) :
-    QwtPlot(/*title,*/ parent), panner_(canvas()),
+    QwtPlot(parent), panner_(canvas()),
     magnifier_(new PlotMagnifier(canvas()))
 {
     //Used in export of images.
@@ -21,8 +22,6 @@ PlotBase::PlotBase(const QString& title, QWidget* parent) :
 
     setAxisLabelRotation(QwtPlot::xBottom, QwtBleUtilities::DEFAULT_LABEL_ROTATION);
     setAxisLabelAlignment(QwtPlot::xBottom, Qt::AlignLeft | Qt::AlignBottom);
-
-    initialScaleMap_.clear();
 }
 
 PlotBase::~PlotBase() = default;
@@ -60,19 +59,10 @@ void PlotBase::setAxisScale(int axisId, double min, double max, double step)
 
 QwtText PlotBase::IntervalsScaleDraw::label(double v) const
 {
-    if (!QwtBleUtilities::doublesAreEqual(fmod(v, 1), 0.))
-        return QwtText(QwtBleUtilities::doubleToStringUsingLocale(v, 1));
-
-    return QwtText(QwtBleUtilities::doubleToStringUsingLocale(v, 0));
-}
-
-void PlotBase::setPlotTitle(const QString& title)
-{
-    QwtText titleToSet = QwtText(title);
-    QFont titleFont = titleToSet.font();
-    titleFont.setPointSizeF(titleFont.pointSizeF() / 1);
-    titleToSet.setFont(titleFont);
-    setTitle(titleToSet);
+    using namespace QwtBleUtilities;
+    if (!doublesAreEqual(fmod(v, 1), 0.))
+        return QwtText(doubleToStringUsingLocale(v, 1));
+    return QwtText(doubleToStringUsingLocale(v, 0));
 }
 
 QSize PlotBase::minimumSizeHint() const

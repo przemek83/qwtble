@@ -1,6 +1,7 @@
 #ifndef HISTOGRAMPLOT_H
 #define HISTOGRAMPLOT_H
 
+#include <qwt_plot_curve.h>
 #include <qwt_plot_histogram.h>
 
 #include "PlotBase.h"
