@@ -25,22 +25,29 @@ public:
 
     int rtti() const override;
 
-    void draw(QPainter* p, const QwtScaleMap& xMap, const QwtScaleMap& yMap,
-              const QRectF& rect) const override;
+    void draw(QPainter* painter, const QwtScaleMap& xMap,
+              const QwtScaleMap& yMap, const QRectF& rect) const override;
 
     void setDrawLegend(bool drawLegend);
     bool getDrawLegend() const;
 
     void setQuantiles(QVector<Quantiles> quantilesVector);
 
-protected:
+private:
+    void initMarkerBrush();
+
+    double calculateItemWidth(const QwtScaleMap& xMap) const;
+
+    void drawElements(QPainter* p,
+                      const QwtScaleMap& xMap,
+                      const QwtScaleMap& yMap) const;
+
     void drawLegend(QPainter* p, const QRectF& rect) const;
 
     void drawElement(QPainter* p, int elementNumber,
                      const QwtScaleMap& xMap, const QwtScaleMap& yMap,
                      double width, const Quantiles& quantiles) const;
 
-private:
     QBrush markerBrush_;
 
     QVector<Quantiles> quantilesVector_;

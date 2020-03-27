@@ -16,15 +16,7 @@ NotchedMarker::NotchedMarker(QVector<Quantiles> quantiles) :
     setZ(QwtBleUtilities::HIGH_ORDER);
     setRenderHint(QwtPlotItem::RenderAntialiased, true);
 
-    QLinearGradient gradient;
-    gradient.setCoordinateMode(QGradient::ObjectBoundingMode);
-    QColor whiteAlpha(Qt::white);
-    whiteAlpha.setAlpha(QwtBleUtilities::SMALL_TRANSPARENCY_FACTOR);
-    QColor endAlpha(Qt::black);
-    endAlpha.setAlpha(QwtBleUtilities::BIG_TRANSPARENCY_FACTOR);
-    gradient.setColorAt(0, whiteAlpha);
-    gradient.setColorAt(1, endAlpha);
-    markerBrush_ = QBrush(gradient);
+    initMarkerBrush();
 }
 
 int NotchedMarker::rtti() const
@@ -32,43 +24,21 @@ int NotchedMarker::rtti() const
     return QwtPlotItem::Rtti_PlotUserItem;
 }
 
-void NotchedMarker::draw(QPainter* p,
+void NotchedMarker::draw(QPainter* painter,
                          const QwtScaleMap& xMap,
                          const QwtScaleMap& yMap,
                          const QRectF& rect) const
 {
-    if (quantilesVector_.empty())
+    if (quantilesVector_.empty() ||
+        plot()->axisScaleDiv(QwtPlot::yLeft).isEmpty())
         return;
 
-    auto basePlot = dynamic_cast<PlotBase*>(plot());
-    const QwtScaleDiv& scaleLeft = basePlot->axisScaleDiv(QwtPlot::yLeft);
-    const QwtScaleDiv& scaleBottom = basePlot->axisScaleDiv(QwtPlot::xBottom);
-
-    //If max scale = min scale than do not draw.
-    if (QwtBleUtilities::doublesAreEqual(scaleLeft.lowerBound(), scaleLeft.upperBound()))
-        return;
-
-    p->save();
-    p->setBrush(QBrush(Qt::red, Qt::NoBrush));
-
+    painter->save();
+    painter->setBrush(QBrush(Qt::red, Qt::NoBrush));
     if (drawLegend_)
-        drawLegend(p, rect);
-
-    double width =
-        xMap.pDist() / ((scaleBottom.upperBound() - scaleBottom.lowerBound()) * 2);
-
-    //Item should take 90% of place.
-    const double widthFactor {.9};
-    width *= widthFactor;
-
-    //Draw elements.
-    int elementNumber = 0;
-    for (const Quantiles& quantiles : quantilesVector_)
-    {
-        elementNumber++;
-        drawElement(p, elementNumber, xMap, yMap, width, quantiles);
-    }
-    p->restore();
+        drawLegend(painter, rect);
+    drawElements(painter, xMap, yMap);
+    painter->restore();
 }
 
 void NotchedMarker::setDrawLegend(bool drawLegend)
@@ -84,6 +54,44 @@ bool NotchedMarker::getDrawLegend() const
 void NotchedMarker::setQuantiles(QVector<Quantiles> quantilesVector)
 {
     quantilesVector_ = std::move(quantilesVector);
+}
+
+void NotchedMarker::initMarkerBrush()
+{
+    QLinearGradient gradient;
+    gradient.setCoordinateMode(QGradient::ObjectBoundingMode);
+    QColor whiteAlpha(Qt::white);
+    whiteAlpha.setAlpha(QwtBleUtilities::SMALL_TRANSPARENCY_FACTOR);
+    QColor endAlpha(Qt::black);
+    endAlpha.setAlpha(QwtBleUtilities::BIG_TRANSPARENCY_FACTOR);
+    gradient.setColorAt(0, whiteAlpha);
+    gradient.setColorAt(1, endAlpha);
+    markerBrush_ = QBrush(gradient);
+}
+
+double NotchedMarker::calculateItemWidth(const QwtScaleMap& xMap) const
+{
+    const QwtScaleDiv& scaleBottom = plot()->axisScaleDiv(QwtPlot::xBottom);
+    double width = xMap.pDist() / (scaleBottom.range() * 2);
+
+    //Item should take 90% of place.
+    const double widthFactor {.9};
+    width *= widthFactor;
+
+    return width;
+}
+
+void NotchedMarker::drawElements(QPainter* p,
+                                 const QwtScaleMap& xMap,
+                                 const QwtScaleMap& yMap) const
+{
+    int elementNumber {0};
+    const double width {calculateItemWidth(xMap)};
+    for (const Quantiles& quantiles : quantilesVector_)
+    {
+        elementNumber++;
+        drawElement(p, elementNumber, xMap, yMap, width, quantiles);
+    }
 }
 
 void NotchedMarker::drawElement(QPainter* p,
@@ -191,7 +199,7 @@ void NotchedMarker::drawLegend(QPainter* p, const QRectF& rect) const
     //Place on y axis where legend text starts.
     const double textStartY = topY + 4;
 
-    //Width of legent picture (except text).
+    //Width of legend picture (except text).
     const int width = 14;
 
     //Cross.
