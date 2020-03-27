@@ -11,10 +11,13 @@ namespace Ui
 class HistogramPlotUI;
 }
 
+/**
+ * @class HistogramPlotUI
+ * @brief Widget pairing histogram plot with intervals count spin box.
+ */
 class QWTBLE_EXPORT HistogramPlotUI : public QWidget
 {
     Q_OBJECT
-
 public:
     explicit HistogramPlotUI(QWidget* parent = nullptr);
     ~HistogramPlotUI() override;
@@ -26,7 +29,12 @@ public:
     HistogramPlotUI(HistogramPlotUI&& other) = delete;
 
 public Q_SLOTS:
-    void dataChanged(QVector<double> data, Quantiles quantiles);
+    /**
+     * @brief Set new data for plot.
+     * @param data Series of values.
+     * @param quantiles Quantiles for given data.
+     */
+    void setNewData(QVector<double> data, Quantiles quantiles);
 
 private:
     Ui::HistogramPlotUI* ui;

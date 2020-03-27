@@ -156,7 +156,7 @@ static HistogramPlotUI* createHistogramPlotUI()
     QVector<double> plotData;
     for (const auto& item : examplePriceSeries)
         plotData.append(item);
-    histogramPlotUI->dataChanged(std::move(plotData), std::move(quantiles));
+    histogramPlotUI->setNewData(std::move(plotData), std::move(quantiles));
     return histogramPlotUI;
 }
 
