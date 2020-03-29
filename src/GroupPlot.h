@@ -35,7 +35,7 @@ public Q_SLOTS:
      * @param intervalStrings Names of trait types.
      */
     void setNewData(QVector<Quantiles> quantilesVector,
-                    QVector<QString> intervalStrings);
+                    const QVector<QString>& intervalStrings);
 
 protected:
     bool event(QEvent* event) override;

@@ -4,10 +4,10 @@
 #include <QResizeEvent>
 #include <qwt_scale_div.h>
 
-#include "YAxisNumberPicker.h"
 #include "NotchedMarker.h"
-#include "StringsScaleDraw.h"
 #include "QwtBleUtilities.h"
+#include "StringsScaleDraw.h"
+#include "YAxisNumberPicker.h"
 
 QuantilesPlot::QuantilesPlot(QWidget* parent) :
     PlotBase(QObject::tr("Quantiles"), parent),
@@ -40,7 +40,9 @@ void QuantilesPlot::setupLegend(int plotWidth)
     const int minWidthForLegend {90};
     if (plotWidth >= minWidthForLegend)
     {
-        setAxisScale(xBottom, -0.5, 1.5, 0);
+        const double min {-0.5};
+        const double max {1.5};
+        setAxisScale(xBottom, min, max, 0);
         marker_->setDrawLegend(true);
     }
     else
@@ -50,12 +52,12 @@ void QuantilesPlot::setupLegend(int plotWidth)
     }
 }
 
-void QuantilesPlot::setNewData(Quantiles quantiles)
+void QuantilesPlot::setNewData(const Quantiles& quantiles)
 {
     setToolTip(quantiles.getValuesAsToolTip());
     setAxisScale(QwtPlot::yLeft, quantiles.min_, quantiles.max_);
     setAxisScaleDraw(xBottom, new IntervalsScaleDraw(quantiles.count_));
-    marker_->setQuantiles({std::move(quantiles)});
+    marker_->setQuantiles({quantiles});
     replot();
 }
 

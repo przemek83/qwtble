@@ -37,7 +37,7 @@ public Q_SLOTS:
      * @brief Set new quantiles for plot.
      * @param quantiles New quantiles.
      */
-    void setNewData(Quantiles quantiles);
+    void setNewData(const Quantiles& quantiles);
 
 protected:
     void resizeEvent(QResizeEvent* event) override;

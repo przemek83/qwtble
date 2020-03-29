@@ -1,6 +1,6 @@
 #include "PlotBase.h"
 
-#include <math.h>
+#include <cmath>
 
 #include <QMouseEvent>
 
@@ -59,7 +59,9 @@ void PlotBase::setAxisScale(int axisId, double min, double max, double step)
 
 QwtText PlotBase::IntervalsScaleDraw::label(double v) const
 {
-    using namespace QwtBleUtilities;
+    using QwtBleUtilities::doubleToStringUsingLocale;
+    using QwtBleUtilities::doublesAreEqual;
+
     if (!doublesAreEqual(fmod(v, 1), 0.))
         return QwtText(doubleToStringUsingLocale(v, 1));
     return QwtText(doubleToStringUsingLocale(v, 0));

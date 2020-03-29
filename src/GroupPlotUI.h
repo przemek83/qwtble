@@ -25,7 +25,7 @@ class QWTBLE_EXPORT GroupPlotUI : public QWidget
 {
     Q_OBJECT
 public:
-    explicit GroupPlotUI(QVector<std::pair<QString, int>> stringColumns,
+    explicit GroupPlotUI(const QVector<std::pair<QString, int> >& stringColumns,
                          QWidget* parent = nullptr);
     ~GroupPlotUI() override;
 
@@ -42,9 +42,9 @@ public Q_SLOTS:
      * @param quantilesForIntervals Quantiles for each trait type.
      * @param quantiles General quantiles.
      */
-    void setNewData(QVector<QString> intervalsNames,
+    void setNewData(const QVector<QString>& intervalsNames,
                     QVector<Quantiles> quantilesForIntervals,
-                    Quantiles quantiles);
+                    const Quantiles& quantiles);
 
 protected:
     void resizeEvent(QResizeEvent* event) override;
@@ -72,7 +72,7 @@ private Q_SLOTS:
 Q_SIGNALS:
     /**
      * @brief Signal emitted when user changes trait in combo box.
-     * @param Trait index.
+     * @param newIndex index.
      */
     void traitIndexChanged(int newIndex);
 };

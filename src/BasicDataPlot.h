@@ -34,9 +34,9 @@ public Q_SLOTS:
      * @param quantiles Quantiles for data.
      * @param linearRegression Linear regression points.
      */
-    void setNewData(QVector<QPointF> data,
-                    Quantiles quantiles,
-                    QVector<QPointF> linearRegression);
+    void setNewData(const QVector<QPointF>& data,
+                    const Quantiles& quantiles,
+                    const QVector<QPointF>& linearRegression);
 
 private:
     class TimeScaleDraw: public QwtScaleDraw
@@ -55,7 +55,7 @@ private:
         [[nodiscard]] QwtText label(double v) const override;
     };
 
-    void setPlotData(QVector<QPointF> data);
+    void setPlotData(const QVector<QPointF>& data);
 
     void initPlotCurve();
     void initQ25();

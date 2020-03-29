@@ -7,8 +7,8 @@
 #include <qwt_scale_map.h>
 
 #include "PlotBase.h"
-#include "QwtBleUtilities.h"
 #include "Quantiles.h"
+#include "QwtBleUtilities.h"
 
 NotchedMarker::NotchedMarker(QVector<Quantiles> quantiles) :
     quantilesVector_(std::move(quantiles))
@@ -246,13 +246,14 @@ NotchedMarker::createLegendRecipe(const QRectF& rect,
     ElementRecipe recipe;
     const int width = 4 * LEGEND_SPACING;
     recipe.meanY = startY;
-    recipe.maxY = startY + 1 * sectionHeight;
-    recipe.q90Y = startY + 2 * sectionHeight;
-    recipe.q75Y = startY + 3 * sectionHeight;
-    recipe.q50Y = startY + 4 * sectionHeight;
-    recipe.q25Y = startY + 5 * sectionHeight;
-    recipe.q10Y = startY + 6 * sectionHeight;
-    recipe.minY = startY + 7 * sectionHeight;
+    int elementNumber {0};
+    recipe.maxY = startY + ++elementNumber * sectionHeight;
+    recipe.q90Y = startY + ++elementNumber * sectionHeight;
+    recipe.q75Y = startY + ++elementNumber * sectionHeight;
+    recipe.q50Y = startY + ++elementNumber * sectionHeight;
+    recipe.q25Y = startY + ++elementNumber * sectionHeight;
+    recipe.q10Y = startY + ++elementNumber * sectionHeight;
+    recipe.minY = startY + ++elementNumber * sectionHeight;
     recipe.fromX = rect.x() + LEGEND_SPACING;
     recipe.toX = recipe.fromX + width;
     return recipe;

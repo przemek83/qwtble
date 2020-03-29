@@ -8,23 +8,24 @@ void QuantilesTest::testToolTip()
 {
     Quantiles quantiles;
     quantiles.init(values_);
-    QString expected("<table>" \
-                     "<tr><td>Data count:</td><td ALIGN=RIGHT></td></tr>\n" \
-                     "<tr><td>Average</td><td ALIGN=RIGHT></td></tr>\n" \
-                     "<tr><td>Maximum</td><td ALIGN=RIGHT></td></tr>\n" \
-                     "<tr><td>Q90</td><td ALIGN=RIGHT></td></tr>\n" \
-                     "<tr><td>Q75</td><td ALIGN=RIGHT></td></tr>\n" \
-                     "<tr><td>Q50</td><td ALIGN=RIGHT></td></tr>\n" \
-                     "<tr><td>Q25</td><td ALIGN=RIGHT></td></tr>\n" \
-                     "<tr><td>Q10</td><td ALIGN=RIGHT></td></tr>\n" \
-                     "<tr><td>Minimum</td><td ALIGN=RIGHT></td></tr>\n" \
-                     "<tr><td>Std. deviation</td><td ALIGN=RIGHT></td></tr>\n" \
-                     "</table>");
+    QString expected(QStringLiteral("<table>" \
+                                    "<tr><td>Data count:</td><td ALIGN=RIGHT></td></tr>\n" \
+                                    "<tr><td>Average</td><td ALIGN=RIGHT></td></tr>\n" \
+                                    "<tr><td>Maximum</td><td ALIGN=RIGHT></td></tr>\n" \
+                                    "<tr><td>Q90</td><td ALIGN=RIGHT></td></tr>\n" \
+                                    "<tr><td>Q75</td><td ALIGN=RIGHT></td></tr>\n" \
+                                    "<tr><td>Q50</td><td ALIGN=RIGHT></td></tr>\n" \
+                                    "<tr><td>Q25</td><td ALIGN=RIGHT></td></tr>\n" \
+                                    "<tr><td>Q10</td><td ALIGN=RIGHT></td></tr>\n" \
+                                    "<tr><td>Minimum</td><td ALIGN=RIGHT></td></tr>\n" \
+                                    "<tr><td>Std. deviation</td><td ALIGN=RIGHT></td></tr>\n" \
+                                    "</table>"));
     // Ignore numbers due to localization. Test only structure of tooltip.
     const QLocale& locale = QLocale::system();
-    QRegExp regexp{QRegExp(QString(">[0-9]*\\") +
-                           locale.decimalPoint() + "?[0-9]*<")};
-    QCOMPARE(expected, quantiles.getValuesAsToolTip().replace(regexp, "><"));
+    QRegExp regexp{QRegExp(QStringLiteral(">[0-9]*\\") +
+                           locale.decimalPoint() + QStringLiteral("?[0-9]*<"))};
+    QCOMPARE(expected,
+             quantiles.getValuesAsToolTip().replace(regexp, QStringLiteral("><")));
 }
 
 void QuantilesTest::testComputing()

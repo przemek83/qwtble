@@ -19,7 +19,7 @@ QString QWTBLE_EXPORT stringFromDays(int daysToAdd);
  * @brief Date 1/1/1970 used as reference conversions.
  * @return Date 1/1/1970.
  */
-const QWTBLE_EXPORT QDate getStartOfTheWorld();
+QDate QWTBLE_EXPORT getStartOfTheWorld();
 
 /**
  * @brief Get default formatting which should be used.

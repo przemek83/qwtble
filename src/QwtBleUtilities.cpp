@@ -10,7 +10,7 @@ QString stringFromDays(int daysToAdd)
     return startOfTheWorld.addDays(daysToAdd).toString(getDefaultDateFormat());
 }
 
-const QDate getStartOfTheWorld()
+QDate getStartOfTheWorld()
 {
     return QDate(1970, 1, 1);
 }
@@ -47,4 +47,4 @@ QString doubleToStringUsingLocale(double value, int precision)
 
     return locale.toString(value, 'f', precision);
 }
-}
+}  // namespace QwtBleUtilities

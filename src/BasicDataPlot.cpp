@@ -4,8 +4,8 @@
 #include <qwt_legend_label.h>
 #include <qwt_symbol.h>
 
-#include "XDateYAxisNumberPicker.h"
 #include "QwtBleUtilities.h"
+#include "XDateYAxisNumberPicker.h"
 
 BasicDataPlot::BasicDataPlot(QWidget* parent) :
     PlotBase(QObject::tr("Basic"), parent),
@@ -116,15 +116,15 @@ void BasicDataPlot::checkLegendItems()
     setLegendItemChecked(&plotLinearRegression_);
 }
 
-void BasicDataPlot::setPlotData(QVector<QPointF> data)
+void BasicDataPlot::setPlotData(const QVector<QPointF>& data)
 {
     plotData_.setSamples(data);
     replot();
 }
 
-void BasicDataPlot::setNewData(QVector<QPointF> data,
-                               Quantiles quantiles,
-                               QVector<QPointF> linearRegression)
+void BasicDataPlot::setNewData(const QVector<QPointF>& data,
+                               const Quantiles& quantiles,
+                               const QVector<QPointF>& linearRegression)
 {
     setToolTip(quantiles.getValuesAsToolTip());
 
@@ -144,7 +144,7 @@ void BasicDataPlot::setNewData(QVector<QPointF> data,
         plotQ75_.setSamples({{min, quantiles.q75_}, {max, quantiles.q75_}});
         plotLinearRegression_.setSamples(linearRegression);
     }
-    setPlotData(std::move(data));
+    setPlotData(data);
 }
 
 

@@ -3,8 +3,8 @@
 #include <qwt_legend.h>
 #include <qwt_legend_label.h>
 
-#include "XYAxisNumberPicker.h"
 #include "QwtBleUtilities.h"
+#include "XYAxisNumberPicker.h"
 
 HistogramPlot::HistogramPlot(QWidget* parent) :
     PlotBase(QObject::tr("Histogram"), parent),
@@ -133,10 +133,10 @@ void HistogramPlot::recompute(int intervalsCount)
 }
 
 void HistogramPlot::setNewData(QVector<double> data,
-                               Quantiles quantiles,
+                               const Quantiles& quantiles,
                                int intervalsCount)
 {
     data_ = std::move(data);
-    quantiles_ = std::move(quantiles);
+    quantiles_ = quantiles;
     recompute(intervalsCount);
 }

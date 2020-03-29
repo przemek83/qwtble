@@ -13,7 +13,7 @@ StringsScaleDraw::StringsScaleDraw(QVector<QString> intervalNames) :
 
 QwtText StringsScaleDraw::label(double value) const
 {
-    using namespace QwtBleUtilities;
+    using QwtBleUtilities::doublesAreEqual;
     const bool valueIsIntegral {doublesAreEqual(fmod(value, 1), 0.)};
     const int valueAsIntegral = static_cast<int>(value);
     if (valueIsIntegral && !intervalNames_.isEmpty() && valueAsIntegral > 0 &&

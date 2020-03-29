@@ -26,8 +26,7 @@ double Quantiles::calculateStdDev(int count, double EX, double EX2) const
 {
     if (count > 1)
         return sqrt(EX2 - EX * EX);
-    else
-        return .0;
+    return .0;
 }
 
 double Quantiles::computeQuantile(const QVector<double>& values,
@@ -109,7 +108,7 @@ void Quantiles::init(QVector<double> values)
     if (stdDev_ <= 0)
         return;
 
-    setQuantiles(std::move(values));
+    setQuantiles(values);
 }
 
 QString Quantiles::getValuesAsToolTip() const

@@ -1,10 +1,10 @@
 #include <QApplication>
 #include <QGroupBox>
-#include <QStyleFactory>
-#include <QWidget>
-#include <QVBoxLayout>
-#include <QSplitter>
 #include <QScrollArea>
+#include <QSplitter>
+#include <QStyleFactory>
+#include <QVBoxLayout>
+#include <QWidget>
 
 #include <BasicDataPlot.h>
 #include <GroupPlot.h>
@@ -20,12 +20,17 @@ static QVector<QVector<double>> exampleValues {{3.5, 6.7, 4.7, 6.6, 3., 4.9},
     {2.1, 1.7, 4.3, 6.6, 1., 3.9, 5.5},
     {1.1, 3.2, 3.8, 6.5, 2., 2.9, 7.5, 3.2, 5.5},
     {2.1, 1.7, 4.3, 6.1, 2.}};
-static QVector<QString> exampleNames {"circle", "triangle", "square", "rectangle", "cube"};
+static QVector<QString> exampleNames {QStringLiteral("circle"),
+           QStringLiteral("triangle"), QStringLiteral("square"),
+           QStringLiteral("rectangle"), QStringLiteral("cube")};
 
-static QVector<QVector<double>> otherExampleValues {{3.5, 6.7, 4.7, 6.6, 3., 4.9, 5.5, 1.2},
+static QVector<QVector<double>>
+otherExampleValues {{3.5, 6.7, 4.7, 6.6, 3., 4.9, 5.5, 1.2},
     {3.2, 7.6, 5., 4.9, 0.3, 7.3, 2.1, 1.7, 4.3, 6.6, 1., 3.9, 5.5},
     {1.1, 3.2, 3.8, 6.5, 2., 2.9, 7.5, 3.2, 5.5, 2.1, 1.7, 4.3, 6.1, 2.}};
-static QVector<QString>otherExampleNames {"green", "black", "white"};
+static QVector<QString> otherExampleNames {QStringLiteral("green"),
+           QStringLiteral("black"),
+           QStringLiteral("white")};
 
 static const QVector<double> examplePriceSeries
 {
@@ -71,13 +76,14 @@ static QuantilesPlot* createQuantilesPlot()
     auto quantilesPlot = new QuantilesPlot();
     Quantiles quantiles;
     quantiles.init(exampleValues.first());
-    quantilesPlot->setNewData(std::move(quantiles));
+    quantilesPlot->setNewData(quantiles);
     return quantilesPlot;
 }
 
 static GroupPlot* createGroupPlot()
 {
     QVector<Quantiles> quantilesVector;
+    quantilesVector.reserve(exampleValues.size());
     for (auto& values : exampleValues)
     {
         Quantiles quantiles;
@@ -95,6 +101,7 @@ static GroupPlot* createGroupPlot()
 static GroupPlotUI* createGroupPlotUI()
 {
     QVector<Quantiles> quantilesVector;
+    quantilesVector.reserve(exampleValues.size());
     for (auto& values : exampleValues)
     {
         Quantiles quantiles;
@@ -103,6 +110,7 @@ static GroupPlotUI* createGroupPlotUI()
     }
 
     QVector<Quantiles> otherQuantilesVector;
+    otherQuantilesVector.reserve(otherExampleValues.size());
     for (auto& values : otherExampleValues)
     {
         Quantiles quantiles;
@@ -111,6 +119,7 @@ static GroupPlotUI* createGroupPlotUI()
     }
 
     QVector<double> allValues;
+    allValues.reserve(exampleValues.size());
     for (auto& values : exampleValues)
         allValues.append(values);
 
@@ -141,9 +150,10 @@ static HistogramPlot* createHistogramPlot()
     quantiles.init(dataForQuantiles);
     auto histogramPlot = new HistogramPlot();
     QVector<double> plotData;
+    plotData.reserve(examplePriceSeries.size());
     for (const auto& item : examplePriceSeries)
         plotData.append(item);
-    histogramPlot->setNewData(std::move(plotData), std::move(quantiles), 10);
+    histogramPlot->setNewData(std::move(plotData), quantiles, 10);
     return histogramPlot;
 }
 
@@ -154,9 +164,10 @@ static HistogramPlotUI* createHistogramPlotUI()
     quantiles.init(dataForQuantiles);
     auto histogramPlotUI = new HistogramPlotUI();
     QVector<double> plotData;
+    plotData.reserve(examplePriceSeries.size());
     for (const auto& item : examplePriceSeries)
         plotData.append(item);
-    histogramPlotUI->setNewData(std::move(plotData), std::move(quantiles));
+    histogramPlotUI->setNewData(std::move(plotData), quantiles);
     return histogramPlotUI;
 }
 
@@ -178,11 +189,12 @@ static BasicDataPlot* createBasicDataPlot()
     };
 
     QVector<QPointF> data;
+    data.reserve(examplePriceSeries.size());
     for (int i = 0; i < examplePriceSeries.size(); ++i)
         data.append({exampleDateSeries[i], examplePriceSeries[i]});
-    basicDataPlot->setNewData(std::move(data),
-                              std::move(quantiles),
-                              std::move(linearRegressionPoints));
+    basicDataPlot->setNewData(data,
+                              quantiles,
+                              linearRegressionPoints);
     return basicDataPlot;
 }
 
@@ -195,17 +207,23 @@ int main(int argc, char* argv[])
     QWidget widget;
     QVBoxLayout widgetLayout(&widget);
 
-    QSplitter* upperSplitter = new QSplitter(&widget);
-    upperSplitter->addWidget(wrapPlot("Quantiles plot", createQuantilesPlot()));
-    upperSplitter->addWidget(wrapPlot("Grouping plot", createGroupPlot()));
+    auto upperSplitter = new QSplitter(&widget);
+    upperSplitter->addWidget(wrapPlot(QStringLiteral("Quantiles plot"),
+                                      createQuantilesPlot()));
+    upperSplitter->addWidget(wrapPlot(QStringLiteral("Grouping plot"),
+                                      createGroupPlot()));
     auto groupPlotUI = createGroupPlotUI();
-    upperSplitter->addWidget(wrapPlot("Grouping plot UI", groupPlotUI));
+    upperSplitter->addWidget(wrapPlot(QStringLiteral("Grouping plot UI"),
+                                      groupPlotUI));
     widgetLayout.addWidget(upperSplitter);
 
-    QSplitter* lowerSplitter = new QSplitter(&widget);
-    lowerSplitter->addWidget(wrapPlot("Histogram plot", createHistogramPlot()));
-    lowerSplitter->addWidget(wrapPlot("Histogram plot UI", createHistogramPlotUI()));
-    lowerSplitter->addWidget(wrapPlot("Basic data plot", createBasicDataPlot()));
+    auto lowerSplitter = new QSplitter(&widget);
+    lowerSplitter->addWidget(wrapPlot(QStringLiteral("Histogram plot"),
+                                      createHistogramPlot()));
+    lowerSplitter->addWidget(wrapPlot(QStringLiteral("Histogram plot UI"),
+                                      createHistogramPlotUI()));
+    lowerSplitter->addWidget(wrapPlot(QStringLiteral("Basic data plot"),
+                                      createBasicDataPlot()));
     lowerSplitter->setStretchFactor(0, 1);
     lowerSplitter->setStretchFactor(1, 1);
     lowerSplitter->setStretchFactor(2, 2);
@@ -214,7 +232,7 @@ int main(int argc, char* argv[])
     widget.setLayout(&widgetLayout);
     widget.resize(1000, 750);
     widget.show();
-    groupPlotUI->traitIndexChanged(0);
+    Q_EMIT groupPlotUI->traitIndexChanged(0);
 
     return QApplication::exec();
 }

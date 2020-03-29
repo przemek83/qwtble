@@ -37,7 +37,7 @@ public Q_SLOTS:
      * @param intervalsCount Number of histogram intervals.
      */
     void setNewData(QVector<double> data,
-                    Quantiles quantiles,
+                    const Quantiles& quantiles,
                     int intervalsCount);
 
     /**

@@ -34,7 +34,7 @@ public Q_SLOTS:
      * @param data Series of values.
      * @param quantiles Quantiles for given data.
      */
-    void setNewData(QVector<double> data, Quantiles quantiles);
+    void setNewData(QVector<double> data, const Quantiles& quantiles);
 
 private:
     Ui::HistogramPlotUI* ui;

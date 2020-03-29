@@ -1,9 +1,9 @@
 #include "GroupPlotUITest.h"
 
+#include <GroupPlotUI.h>
 #include <QComboBox>
 #include <QSignalSpy>
 #include <QTest>
-#include <GroupPlotUI.h>
 
 void GroupPlotUITest::testTraitChange()
 {

@@ -9,7 +9,7 @@
 
 #include "ui_GroupPlotUI.h"
 
-GroupPlotUI::GroupPlotUI(QVector<std::pair<QString, int> > stringColumns,
+GroupPlotUI::GroupPlotUI(const QVector<std::pair<QString, int> >& stringColumns,
                          QWidget* parent) :
     QWidget(parent),
     ui(new Ui::GroupPlotUI)
@@ -31,9 +31,9 @@ GroupPlotUI::~GroupPlotUI()
     delete ui;
 }
 
-void GroupPlotUI::setNewData(QVector<QString> intervalsNames,
+void GroupPlotUI::setNewData(const QVector<QString>& intervalsNames,
                              QVector<Quantiles> quantilesForIntervals,
-                             Quantiles quantiles)
+                             const Quantiles& quantiles)
 {
     const double minY = quantiles.min_;
     const double maxY = quantiles.max_;
@@ -42,9 +42,9 @@ void GroupPlotUI::setNewData(QVector<QString> intervalsNames,
     groupPlot_.setAxisScale(QwtPlot::xBottom, 0, intervalsNames.size() + 1, 1);
 
     groupPlot_.setNewData(std::move(quantilesForIntervals),
-                          std::move(intervalsNames));
+                          intervalsNames);
 
-    quantilesPlot_.setNewData(std::move(quantiles));
+    quantilesPlot_.setNewData(quantiles);
 
     // Workaround: update twice as after first one extent might be incorrect.
     updateQuantilesPlotExtent();
@@ -60,7 +60,10 @@ void GroupPlotUI::resizeEvent(QResizeEvent* event)
 QSplitter* GroupPlotUI::setupSplitter()
 {
     auto splitter = new QSplitter(Qt::Horizontal, this);
-    connect(splitter, &QSplitter::splitterMoved, this, [ = ](int, int)
+    connect(splitter,
+            &QSplitter::splitterMoved,
+            this,
+            [ = ]([[maybe_unused]] int pos, [[maybe_unused]] int index)
     {
         updateQuantilesPlotExtent();
     });

@@ -4,8 +4,8 @@
 #include <QToolTip>
 
 #include "NotchedMarker.h"
-#include "StringsScaleDraw.h"
 #include "QwtBleUtilities.h"
+#include "StringsScaleDraw.h"
 #include "YAxisNumberPicker.h"
 
 GroupPlot::GroupPlot(QWidget* parent)
@@ -27,7 +27,7 @@ GroupPlot::GroupPlot(QWidget* parent)
 GroupPlot::~GroupPlot() = default;
 
 void GroupPlot::setNewData(QVector<Quantiles> quantilesVector,
-                           QVector<QString> intervalStrings)
+                           const QVector<QString>& intervalStrings)
 {
     tooltips_ = createTooltips(intervalStrings, quantilesVector);
     QVector<QString> shortIntervalNames =
@@ -47,6 +47,7 @@ GroupPlot::createAxisIntervalsNames(const QVector<QString>& intervalsNames,
                                     const QVector<Quantiles>& quantilesVector) const
 {
     QVector<QString> shortenNames;
+    shortenNames.reserve(intervalsNames.size());
     const QString moreChars(QStringLiteral("..."));
     for (int i = 0; i < intervalsNames.size(); ++i)
     {
@@ -71,6 +72,7 @@ GroupPlot::createTooltips(const QVector<QString>& intervalsNames,
                           const QVector<Quantiles>& quantilesVector) const
 {
     QVector<QString> tooltips;
+    tooltips.reserve(intervalsNames.size());
     for (int i = 0; i < intervalsNames.size(); ++i)
         tooltips.append("<B>" + intervalsNames.at(i) +
                         "</B></BR>" +
