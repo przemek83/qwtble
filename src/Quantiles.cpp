@@ -2,7 +2,7 @@
 
 #include <cmath>
 
-#include <QDebug>
+#include <QObject>
 
 #include "QwtBleUtilities.h"
 
@@ -15,109 +15,112 @@ void Quantiles::clear()
     q75_ = .0;
     q90_ = .0;
     max_ = .0;
-
-    number_ = 0;
+    count_ = 0;
     mean_ = .0;
     stdDev_ = .0;
-
     minX_ = .0;
     maxX_ = .0;
 }
 
-void Quantiles::print()
+double Quantiles::calculateStdDev(int count, double EX, double EX2) const
 {
-    qDebug() << "min " << min_ << " q10 = " << q10_ << " q25_ = " << q25_ << \
-             " q50 = " << q50_ << " q75 = " << q75_ << " q90 = " << q90_ << \
-             " max = " << max_ << " number = " << number_ << " mean = " << \
-             mean_ << " std dev = " << stdDev_ <<  " minX = " << minX_ << \
-             " maxX = " << maxX_;
+    if (count > 1)
+        return sqrt(EX2 - EX * EX);
+    else
+        return .0;
 }
 
-void Quantiles::computeQuantiles(QVector<double>& valuePerUnit)
+double Quantiles::computeQuantile(const QVector<double>& values,
+                                  double interval) const
 {
-    clear();
+    return values.at(static_cast<int>(floor(interval))) +
+           (interval - floor(interval)) *
+           (values.at(static_cast<int>(ceil(interval))) -
+            values.at(static_cast<int>(floor(interval))));
+}
 
-    if (valuePerUnit.empty())
-        return;
-
-    double EX = 0;
-    double EX2 = 0;
-    number_ = valuePerUnit.count();
-
-    for (auto pricePerMeter : valuePerUnit)
+void Quantiles::setQuantiles(const QVector<double>& values)
+{
+    int count {values.count()};
+    if (count <= 1)
     {
-        if (min_ > pricePerMeter || QwtBleUtilities::doublesAreEqual(min_, 0.))
-            min_ = pricePerMeter;
-
-        if (max_ < pricePerMeter || QwtBleUtilities::doublesAreEqual(max_, 0.))
-            max_ = pricePerMeter;
-
-        EX += pricePerMeter;
-        EX2 += pricePerMeter * pricePerMeter;
-    }
-
-    EX /= number_;
-    EX2 /= number_;
-
-    if (number_ > 1)
-        stdDev_ = sqrt(EX2 - EX * EX);
-    else
-        stdDev_ = .0;
-
-    mean_ = EX;
-
-    if (stdDev_ <= 0)
-        return;
-
-    qSort(valuePerUnit);
-
-    if (number_ < 2)
-    {
-        double tmp = (number_ != 0 ? valuePerUnit.at(0) : 0);
-        q10_ = tmp;
-        q25_ = tmp;
-        q50_ = tmp;
-        q75_ = tmp;
-        q90_ = tmp;
+        const double value = values.front();
+        q10_ = value;
+        q25_ = value;
+        q50_ = value;
+        q75_ = value;
+        q90_ = value;
     }
     else
     {
         const double q10Level {0.1};
-        double tmp = (number_ - 1) * q10Level;
-        q10_ = valuePerUnit.at(static_cast<int>(floor(tmp))) + (tmp - floor(tmp)) *
-               (valuePerUnit.at(static_cast<int>(ceil(tmp))) - valuePerUnit.at(static_cast<int>(floor(tmp))));
+        double currentInterval = (count - 1) * q10Level;
+        q10_ = computeQuantile(values, currentInterval);
 
         const double q25Level {0.25};
-        tmp = (number_ - 1) * q25Level;
-        q25_ = valuePerUnit.at(static_cast<int>(floor(tmp))) + (tmp - floor(tmp)) *
-               (valuePerUnit.at(static_cast<int>(ceil(tmp))) - valuePerUnit.at(static_cast<int>(floor(tmp))));
+        currentInterval = (count - 1) * q25Level;
+        q25_ = computeQuantile(values, currentInterval);
 
         const double q50Level {0.5};
-        tmp = (number_ - 1) * q50Level;
-        q50_ = valuePerUnit.at(static_cast<int>(floor(tmp))) + (tmp - floor(tmp)) *
-               (valuePerUnit.at(static_cast<int>(ceil(tmp))) - valuePerUnit.at(static_cast<int>(floor(tmp))));
+        currentInterval = (count - 1) * q50Level;
+        q50_ = computeQuantile(values, currentInterval);
 
         const double q75Level {0.75};
-        tmp = (number_ - 1) * q75Level;
-        q75_ = valuePerUnit.at(static_cast<int>(floor(tmp))) + (tmp - floor(tmp)) *
-               (valuePerUnit.at(static_cast<int>(ceil(tmp))) - valuePerUnit.at(static_cast<int>(floor(tmp))));
+        currentInterval = (count - 1) * q75Level;
+        q75_ = computeQuantile(values, currentInterval);
 
         const double q90Level {0.9};
-        tmp = (number_ - 1) * q90Level;
-        q90_ = valuePerUnit.at(static_cast<int>(floor(tmp))) + (tmp - floor(tmp)) *
-               (valuePerUnit.at(static_cast<int>(ceil(tmp))) - valuePerUnit.at(static_cast<int>(floor(tmp))));
+        currentInterval = (count - 1) * q90Level;
+        q90_ = computeQuantile(values, currentInterval);
     }
+}
+
+std::tuple<double, double>
+Quantiles::calculateEXAndEX2(const QVector<double>& values)
+{
+    double EX = 0;
+    double EX2 = 0;
+    for (auto value : values)
+    {
+        EX += value;
+        EX2 += value * value;
+    }
+    EX /= count_;
+    EX2 /= count_;
+    return {EX, EX2};
+}
+
+void Quantiles::init(QVector<double> values)
+{
+    clear();
+
+    if (values.empty())
+        return;
+
+    count_ = values.count();
+
+    qSort(values);
+    min_ = values.front();
+    max_ = values.back();
+
+    auto [EX, EX2] = calculateEXAndEX2(values);
+    mean_ = EX;
+    stdDev_ = calculateStdDev(values.count(), EX, EX2);
+    if (stdDev_ <= 0)
+        return;
+
+    setQuantiles(std::move(values));
 }
 
 QString Quantiles::getValuesAsToolTip() const
 {
     QString toolTipText;
     toolTipText.append(QLatin1String("<table>"));
-    toolTipText += valueAsHtmlRow(PLOT_INFO_COUNT, number_);
+    toolTipText += valueAsHtmlRow(PLOT_INFO_COUNT, count_);
     toolTipText += valueAsHtmlRow(PLOT_INFO_MEAN, mean_);
     toolTipText += valueAsHtmlRow(PLOT_INFO_MAX, max_);
 
-    if (number_ > 1)
+    if (count_ > 1)
     {
         toolTipText += valueAsHtmlRow(PLOT_INFO_Q90, q90_);
         toolTipText += valueAsHtmlRow(PLOT_INFO_Q75, q75_);
@@ -128,7 +131,7 @@ QString Quantiles::getValuesAsToolTip() const
 
     toolTipText += valueAsHtmlRow(PLOT_INFO_MIN, min_);
 
-    if (number_ > 1)
+    if (count_ > 1)
         toolTipText += valueAsHtmlRow(PLOT_INFO_STD_DEV, stdDev_);
 
     toolTipText.append(QLatin1String("</table>"));

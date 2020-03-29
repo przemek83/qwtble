@@ -9,7 +9,8 @@
 #include "qwtble_global.h"
 
 /**
- * @brief Quantiles struct. Computes, creates tooltip display, stores values.
+ * @class Quantiles
+ * @brief Struct for min, max, mean, quantiles and std dev.
  */
 struct QWTBLE_EXPORT Quantiles
 {
@@ -33,7 +34,7 @@ public:
     double q90_ {.0};
     double max_ {.0};
 
-    int number_ {0};
+    int count_ {0};
     double mean_ {.0};
     double stdDev_ {.0};
 
@@ -41,15 +42,29 @@ public:
     double minX_ {.0};
     double maxX_ {.0};
 
+    /**
+     * @brief Clear struct.
+     */
     void clear();
 
-    void print();
+    /**
+     * @brief Initialize structure using given values.
+     * @param values Values using which struct is filled.
+     */
+    void init(QVector<double> values);
 
-    void computeQuantiles(QVector<double>& valuePerUnit);
-
+    /**
+     * @brief Generate HTML like tooltip from current values.
+     * @return HTML like tool tip.
+     */
     QString getValuesAsToolTip() const;
 
 private:
+    double computeQuantile(const QVector<double>& values, double interval) const;
+    double calculateStdDev(int count, double EX, double EX2) const;
+    void setQuantiles(const QVector<double>& values);
+    std::tuple<double, double> calculateEXAndEX2(const QVector<double>& values);
+
     enum PlotInfo : int
     {
         PLOT_INFO_COUNT = 0,

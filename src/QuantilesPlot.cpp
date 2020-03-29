@@ -54,7 +54,7 @@ void QuantilesPlot::setNewData(Quantiles quantiles)
 {
     setToolTip(quantiles.getValuesAsToolTip());
     setAxisScale(QwtPlot::yLeft, quantiles.min_, quantiles.max_);
-    setAxisScaleDraw(xBottom, new IntervalsScaleDraw(quantiles.number_));
+    setAxisScaleDraw(xBottom, new IntervalsScaleDraw(quantiles.count_));
     marker_->setQuantiles({std::move(quantiles)});
     replot();
 }

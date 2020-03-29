@@ -70,7 +70,7 @@ static QuantilesPlot* createQuantilesPlot()
 {
     auto quantilesPlot = new QuantilesPlot();
     Quantiles quantiles;
-    quantiles.computeQuantiles(exampleValues.first());
+    quantiles.init(exampleValues.first());
     quantilesPlot->setNewData(std::move(quantiles));
     return quantilesPlot;
 }
@@ -81,7 +81,7 @@ static GroupPlot* createGroupPlot()
     for (auto& values : exampleValues)
     {
         Quantiles quantiles;
-        quantiles.computeQuantiles(values);
+        quantiles.init(values);
         quantilesVector.push_back(quantiles);
     }
     auto groupPlot = new GroupPlot();
@@ -98,7 +98,7 @@ static GroupPlotUI* createGroupPlotUI()
     for (auto& values : exampleValues)
     {
         Quantiles quantiles;
-        quantiles.computeQuantiles(values);
+        quantiles.init(values);
         quantilesVector.push_back(quantiles);
     }
 
@@ -106,7 +106,7 @@ static GroupPlotUI* createGroupPlotUI()
     for (auto& values : otherExampleValues)
     {
         Quantiles quantiles;
-        quantiles.computeQuantiles(values);
+        quantiles.init(values);
         otherQuantilesVector.push_back(quantiles);
     }
 
@@ -115,7 +115,7 @@ static GroupPlotUI* createGroupPlotUI()
         allValues.append(values);
 
     Quantiles generalQuantiles;
-    generalQuantiles.computeQuantiles(allValues);
+    generalQuantiles.init(allValues);
 
     QVector<std::pair<QString, int>> stringColumns {{"Shape", 0}, {"Color", 1}};
     auto groupPlotUI = new GroupPlotUI(stringColumns);
@@ -138,7 +138,7 @@ static HistogramPlot* createHistogramPlot()
 {
     Quantiles quantiles;
     QVector<double> dataForQuantiles(examplePriceSeries);
-    quantiles.computeQuantiles(dataForQuantiles);
+    quantiles.init(dataForQuantiles);
     auto histogramPlot = new HistogramPlot();
     QVector<double> plotData;
     for (const auto& item : examplePriceSeries)
@@ -151,7 +151,7 @@ static HistogramPlotUI* createHistogramPlotUI()
 {
     Quantiles quantiles;
     QVector<double> dataForQuantiles(examplePriceSeries);
-    quantiles.computeQuantiles(dataForQuantiles);
+    quantiles.init(dataForQuantiles);
     auto histogramPlotUI = new HistogramPlotUI();
     QVector<double> plotData;
     for (const auto& item : examplePriceSeries)
@@ -164,7 +164,7 @@ static BasicDataPlot* createBasicDataPlot()
 {
     Quantiles quantiles;
     QVector<double> dataForQuantiles(examplePriceSeries);
-    quantiles.computeQuantiles(dataForQuantiles);
+    quantiles.init(dataForQuantiles);
     auto basicDataPlot = new BasicDataPlot();
     const auto [min, max] =
         std::minmax_element(exampleDateSeries.begin(), exampleDateSeries.end());

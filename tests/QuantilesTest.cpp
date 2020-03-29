@@ -7,7 +7,7 @@
 void QuantilesTest::testToolTip()
 {
     Quantiles quantiles;
-    quantiles.computeQuantiles(values_);
+    quantiles.init(values_);
     QString expected("<table>" \
                      "<tr><td>Data count:</td><td ALIGN=RIGHT></td></tr>\n" \
                      "<tr><td>Average</td><td ALIGN=RIGHT></td></tr>\n" \
@@ -30,8 +30,8 @@ void QuantilesTest::testToolTip()
 void QuantilesTest::testComputing()
 {
     Quantiles quantiles;
-    quantiles.computeQuantiles(values_);
-    QCOMPARE(quantiles.number_, 11);
+    quantiles.init(values_);
+    QCOMPARE(quantiles.count_, 11);
     QCOMPARE(quantiles.mean_, 66.6209090909);
     QCOMPARE(quantiles.max_, 177.01);
     QCOMPARE(quantiles.q90_, 138.12);
@@ -49,8 +49,8 @@ void QuantilesTest::testComputingEmptyData()
 {
     Quantiles quantiles;
     QVector<double> emptyData {};
-    quantiles.computeQuantiles(emptyData);
-    QCOMPARE(quantiles.number_, 0);
+    quantiles.init(emptyData);
+    QCOMPARE(quantiles.count_, 0);
     QCOMPARE(quantiles.mean_, 0);
     QCOMPARE(quantiles.max_, 0);
     QCOMPARE(quantiles.q90_, 0);
@@ -68,8 +68,8 @@ void QuantilesTest::testComputingSinleItemData()
 {
     Quantiles quantiles;
     QVector<double> singleItemData {3};
-    quantiles.computeQuantiles(singleItemData);
-    QCOMPARE(quantiles.number_, 1);
+    quantiles.init(singleItemData);
+    QCOMPARE(quantiles.count_, 1);
     QCOMPARE(quantiles.mean_, 3);
     QCOMPARE(quantiles.max_, 3);
     QCOMPARE(quantiles.q90_, 0);
