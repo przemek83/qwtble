@@ -32,7 +32,7 @@ void QuantilesTest::testComputing()
     Quantiles quantiles;
     quantiles.computeQuantiles(values_);
     QCOMPARE(quantiles.number_, 11);
-    QCOMPARE(quantiles.avg_, 66.6209090909);
+    QCOMPARE(quantiles.mean_, 66.6209090909);
     QCOMPARE(quantiles.max_, 177.01);
     QCOMPARE(quantiles.q90_, 138.12);
     QCOMPARE(quantiles.q75_, 97.445);
@@ -51,7 +51,7 @@ void QuantilesTest::testComputingEmptyData()
     QVector<double> emptyData {};
     quantiles.computeQuantiles(emptyData);
     QCOMPARE(quantiles.number_, 0);
-    QCOMPARE(quantiles.avg_, 0);
+    QCOMPARE(quantiles.mean_, 0);
     QCOMPARE(quantiles.max_, 0);
     QCOMPARE(quantiles.q90_, 0);
     QCOMPARE(quantiles.q75_, 0);
@@ -70,7 +70,7 @@ void QuantilesTest::testComputingSinleItemData()
     QVector<double> singleItemData {3};
     quantiles.computeQuantiles(singleItemData);
     QCOMPARE(quantiles.number_, 1);
-    QCOMPARE(quantiles.avg_, 3);
+    QCOMPARE(quantiles.mean_, 3);
     QCOMPARE(quantiles.max_, 3);
     QCOMPARE(quantiles.q90_, 0);
     QCOMPARE(quantiles.q75_, 0);

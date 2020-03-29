@@ -17,7 +17,7 @@ void Quantiles::clear()
     max_ = .0;
 
     number_ = 0;
-    avg_ = .0;
+    mean_ = .0;
     stdDev_ = .0;
 
     minX_ = .0;
@@ -28,8 +28,8 @@ void Quantiles::print()
 {
     qDebug() << "min " << min_ << " q10 = " << q10_ << " q25_ = " << q25_ << \
              " q50 = " << q50_ << " q75 = " << q75_ << " q90 = " << q90_ << \
-             " max = " << max_ << " number = " << number_ << " avg = " << \
-             avg_ << " std dev = " << stdDev_ <<  " minX = " << minX_ << \
+             " max = " << max_ << " number = " << number_ << " mean = " << \
+             mean_ << " std dev = " << stdDev_ <<  " minX = " << minX_ << \
              " maxX = " << maxX_;
 }
 
@@ -64,7 +64,7 @@ void Quantiles::computeQuantiles(QVector<double>& valuePerUnit)
     else
         stdDev_ = .0;
 
-    avg_ = EX;
+    mean_ = EX;
 
     if (stdDev_ <= 0)
         return;
@@ -114,7 +114,7 @@ QString Quantiles::getValuesAsToolTip() const
     QString toolTipText;
     toolTipText.append(QLatin1String("<table>"));
     toolTipText += valueAsHtmlRow(PLOT_INFO_COUNT, number_);
-    toolTipText += valueAsHtmlRow(PLOT_INFO_AVG, avg_);
+    toolTipText += valueAsHtmlRow(PLOT_INFO_MEAN, mean_);
     toolTipText += valueAsHtmlRow(PLOT_INFO_MAX, max_);
 
     if (number_ > 1)
@@ -148,7 +148,7 @@ std::array<QString, Quantiles::PLOT_INFO_END> Quantiles::getPlotInfoNames()
     plotInfoNames[PLOT_INFO_Q75] = QStringLiteral("Q75");
     plotInfoNames[PLOT_INFO_Q90] = QStringLiteral("Q90");
     plotInfoNames[PLOT_INFO_MAX] = QStringLiteral("Maximum");
-    plotInfoNames[PLOT_INFO_AVG] = QObject::tr("Average");
+    plotInfoNames[PLOT_INFO_MEAN] = QObject::tr("Average");
     plotInfoNames[PLOT_INFO_STD_DEV] = QObject::tr("Std. deviation");
     return plotInfoNames;
 }

@@ -34,7 +34,7 @@ public:
     double max_ {.0};
 
     int number_ {0};
-    double avg_ {.0};
+    double mean_ {.0};
     double stdDev_ {.0};
 
     //X axis variables.
@@ -60,7 +60,7 @@ private:
         PLOT_INFO_Q75,
         PLOT_INFO_Q90,
         PLOT_INFO_MAX,
-        PLOT_INFO_AVG,
+        PLOT_INFO_MEAN,
         PLOT_INFO_STD_DEV,
         PLOT_INFO_END
     };

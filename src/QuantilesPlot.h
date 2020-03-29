@@ -12,7 +12,7 @@ class YAxisNumberPicker;
 
 /**
  * @class QuantilesPlot
- * @brief Plot showing quantiles, min, max, avg and std deviation.
+ * @brief Plot showing quantiles, min, max, mean and std deviation.
  */
 class QWTBLE_EXPORT QuantilesPlot : public PlotBase
 {
