@@ -96,39 +96,46 @@ set_property(TARGET ${PROJECT_NAME} PROPERTY PUBLIC_HEADER
 target_include_directories(${PROJECT_NAME} PUBLIC src)
 include(GNUInstallDirs)
 
-target_link_libraries(${PROJECT_NAME} PRIVATE Qt5::Core Qt5::Widgets optimized qwt debug qwtd)
+target_link_libraries(${PROJECT_NAME} PRIVATE Qt5::Core Qt5::Widgets)
+if (WIN32)
+    target_link_libraries(${PROJECT_NAME} PRIVATE optimized qwt debug qwtd)
+else()
+    target_link_libraries(${PROJECT_NAME} PRIVATE qwt)
+endif()
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE QWTBLE_LIBRARY)
 
-add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
-                   COMMAND ${CMAKE_COMMAND} -E copy
-                           ${CMAKE_BINARY_DIR}/libqwtble.dll
-                           ${CMAKE_BINARY_DIR}/examples/libqwtble.dll)
+if (WIN32)
+    add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+                       COMMAND ${CMAKE_COMMAND} -E copy
+                               ${CMAKE_BINARY_DIR}/${CMAKE_SHARED_LIBRARY_PREFIX}${PROJECT_NAME}${CMAKE_SHARED_LIBRARY_SUFFIX}
+                               ${CMAKE_BINARY_DIR}/examples/)
 
-add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
-                   COMMAND ${CMAKE_COMMAND} -E copy
-                           ${CMAKE_BINARY_DIR}/libqwtble.dll
-                           ${CMAKE_BINARY_DIR}/tests/libqwtble.dll)
+    add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+                       COMMAND ${CMAKE_COMMAND} -E copy
+                               ${CMAKE_BINARY_DIR}/${CMAKE_SHARED_LIBRARY_PREFIX}${PROJECT_NAME}${CMAKE_SHARED_LIBRARY_SUFFIX}
+                               ${CMAKE_BINARY_DIR}/tests/)
 
-add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
-                   COMMAND ${CMAKE_COMMAND} -E copy
-                           ${QWT_BINARY_PATH}/qwt.dll
-                           ${CMAKE_BINARY_DIR}/tests/qwt.dll)
+    add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+                       COMMAND ${CMAKE_COMMAND} -E copy
+                               ${QWT_BINARY_PATH}/qwt.dll
+                               ${CMAKE_BINARY_DIR}/tests/)
 
-add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
-                   COMMAND ${CMAKE_COMMAND} -E copy
-                           ${QWT_BINARY_PATH}/qwtd.dll
-                           ${CMAKE_BINARY_DIR}/tests/qwtd.dll)
+    add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+                       COMMAND ${CMAKE_COMMAND} -E copy
+                               ${QWT_BINARY_PATH}/qwtd.dll
+                               ${CMAKE_BINARY_DIR}/tests/)
 
-add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
-                   COMMAND ${CMAKE_COMMAND} -E copy
-                           ${QWT_BINARY_PATH}/qwt.dll
-                           ${CMAKE_BINARY_DIR}/examples/qwt.dll)
+    add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+                       COMMAND ${CMAKE_COMMAND} -E copy
+                               ${QWT_BINARY_PATH}/qwt.dll
+                               ${CMAKE_BINARY_DIR}/examples/)
 
-add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
-                   COMMAND ${CMAKE_COMMAND} -E copy
-                           ${QWT_BINARY_PATH}/qwtd.dll
-                           ${CMAKE_BINARY_DIR}/examples/qwtd.dll)
+    add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+                       COMMAND ${CMAKE_COMMAND} -E copy
+                               ${QWT_BINARY_PATH}/qwtd.dll
+                               ${CMAKE_BINARY_DIR}/examples/)
+endif()
 
 install(TARGETS ${PROJECT_NAME}
         LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
@@ -138,5 +145,3 @@ add_subdirectory(examples)
 
 enable_testing()
 add_subdirectory(tests)
-
-
