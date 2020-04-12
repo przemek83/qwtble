@@ -3,11 +3,11 @@
 
 #include <QObject>
 
-class GroupPlotUITest: public QObject
+class GroupPlotUITest : public QObject
 {
     Q_OBJECT
 private Q_SLOTS:
     void testTraitChange();
 };
 
-#endif // GROUPPLOTUITEST_H
+#endif  // GROUPPLOTUITEST_H

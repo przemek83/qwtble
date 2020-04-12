@@ -3,7 +3,7 @@
 
 #include <QObject>
 
-class UtilitiesTest: public QObject
+class UtilitiesTest : public QObject
 {
     Q_OBJECT
 private Q_SLOTS:
@@ -12,4 +12,4 @@ private Q_SLOTS:
     void testDoublesAreEqual();
 };
 
-#endif // CHECKTEST
+#endif  // CHECKTEST

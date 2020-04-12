@@ -4,8 +4,8 @@
 
 #include "QwtBleUtilities.h"
 
-StringsScaleDraw::StringsScaleDraw(QVector<QString> intervalNames) :
-    intervalNames_(std::move(intervalNames))
+StringsScaleDraw::StringsScaleDraw(QVector<QString> intervalNames)
+    : intervalNames_(std::move(intervalNames))
 {
     setLabelRotation(QwtBleUtilities::DEFAULT_LABEL_ROTATION);
     setLabelAlignment(Qt::AlignLeft | Qt::AlignBottom);
@@ -14,7 +14,7 @@ StringsScaleDraw::StringsScaleDraw(QVector<QString> intervalNames) :
 QwtText StringsScaleDraw::label(double value) const
 {
     using QwtBleUtilities::doublesAreEqual;
-    const bool valueIsIntegral {doublesAreEqual(fmod(value, 1), 0.)};
+    const bool valueIsIntegral{doublesAreEqual(fmod(value, 1), 0.)};
     const int valueAsIntegral = static_cast<int>(value);
     if (valueIsIntegral && !intervalNames_.isEmpty() && valueAsIntegral > 0 &&
         valueAsIntegral <= intervalNames_.count())

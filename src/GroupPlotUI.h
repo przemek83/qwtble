@@ -77,4 +77,4 @@ Q_SIGNALS:
     void traitIndexChanged(int newIndex);
 };
 
-#endif // GROUPPLOTUI_H
+#endif  // GROUPPLOTUI_H

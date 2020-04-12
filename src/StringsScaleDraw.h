@@ -25,4 +25,4 @@ private:
     const QVector<QString> intervalNames_;
 };
 
-#endif // STRINGSSCALEDRAW_H
+#endif  // STRINGSSCALEDRAW_H

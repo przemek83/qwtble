@@ -26,5 +26,4 @@ private:
     double currentFactor_;
 };
 
-
-#endif // PLOTMAGNIFIER_H
+#endif  // PLOTMAGNIFIER_H

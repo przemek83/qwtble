@@ -41,16 +41,16 @@ protected:
     bool event(QEvent* event) override;
 
 private:
-    QVector<QString>
-    createAxisIntervalsNames(const QVector<QString>& intervalsNames,
-                             const QVector<Quantiles>& quantilesVector) const;
+    QVector<QString> createAxisIntervalsNames(
+        const QVector<QString>& intervalsNames,
+        const QVector<Quantiles>& quantilesVector) const;
 
-    QVector<QString>
-    createTooltips(const QVector<QString>& intervalsNames,
-                   const QVector<Quantiles>& quantilesVector) const;
+    QVector<QString> createTooltips(
+        const QVector<QString>& intervalsNames,
+        const QVector<Quantiles>& quantilesVector) const;
 
-    ///Maximum number of chars in label.
-    static constexpr int maxCharsInLabel_ {20};
+    /// Maximum number of chars in label.
+    static constexpr int maxCharsInLabel_{20};
 
     std::unique_ptr<NotchedMarker> marker_;
 
@@ -58,4 +58,4 @@ private:
 
     std::unique_ptr<YAxisNumberPicker> picker_;
 };
-#endif // GROUPPLOT_H
+#endif  // GROUPPLOT_H

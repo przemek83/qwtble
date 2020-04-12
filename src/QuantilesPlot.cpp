@@ -1,17 +1,18 @@
 #include "QuantilesPlot.h"
 
+#include <qwt_scale_div.h>
 #include <QDebug>
 #include <QResizeEvent>
-#include <qwt_scale_div.h>
 
 #include "NotchedMarker.h"
 #include "QwtBleUtilities.h"
 #include "StringsScaleDraw.h"
 #include "YAxisNumberPicker.h"
 
-QuantilesPlot::QuantilesPlot(QWidget* parent) :
-    PlotBase(QObject::tr("Quantiles"), parent),
-    marker_(new NotchedMarker({})), picker_(new YAxisNumberPicker(canvas()))
+QuantilesPlot::QuantilesPlot(QWidget* parent)
+    : PlotBase(QObject::tr("Quantiles"), parent),
+      marker_(new NotchedMarker({})),
+      picker_(new YAxisNumberPicker(canvas()))
 {
     marker_->attach(this);
 
@@ -37,11 +38,11 @@ void QuantilesPlot::resizeEvent(QResizeEvent* event)
 
 void QuantilesPlot::setupLegend(int plotWidth)
 {
-    const int minWidthForLegend {90};
+    const int minWidthForLegend{90};
     if (plotWidth >= minWidthForLegend)
     {
-        const double min {-0.5};
-        const double max {1.5};
+        const double min{-0.5};
+        const double max{1.5};
         setAxisScale(xBottom, min, max, 0);
         marker_->setDrawLegend(true);
     }
@@ -63,22 +64,20 @@ void QuantilesPlot::setNewData(const Quantiles& quantiles)
 
 QSize QuantilesPlot::minimumSizeHint() const
 {
-    const int minimumWidth {30};
-    const int minimumHeight {100};
+    const int minimumWidth{30};
+    const int minimumHeight{100};
     return QSize(minimumWidth, minimumHeight);
 }
 
 QSize QuantilesPlot::sizeHint() const
 {
-    const int width {50};
-    const int height {100};
+    const int width{50};
+    const int height{100};
     return QSize(width, height);
 }
 
-QuantilesPlot::IntervalsScaleDraw::IntervalsScaleDraw(int count) :
-    count_(count)
+QuantilesPlot::IntervalsScaleDraw::IntervalsScaleDraw(int count) : count_(count)
 {
-
 }
 
 QwtText QuantilesPlot::IntervalsScaleDraw::label(double value) const

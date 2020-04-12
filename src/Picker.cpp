@@ -2,13 +2,12 @@
 
 #include <cmath>
 
-#include <QDebug>
 #include <qwt_plot_canvas.h>
+#include <QDebug>
 
 #include "QwtBleUtilities.h"
 
-Picker::Picker(QWidget* parent)
-    : QwtPlotPicker(parent)
+Picker::Picker(QWidget* parent) : QwtPlotPicker(parent)
 {
     setTrackerMode(AlwaysOn);
 
@@ -41,7 +40,4 @@ void Picker::widgetLeaveEvent(QEvent* event)
     mouseInWidget_ = false;
 }
 
-bool Picker::getMouseInWidget()
-{
-    return mouseInWidget_;
-}
+bool Picker::getMouseInWidget() { return mouseInWidget_; }

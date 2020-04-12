@@ -56,24 +56,23 @@ private:
 
     double calculateItemWidth(const QwtScaleMap& xMap) const;
 
-    void drawElements(QPainter* p,
-                      const QwtScaleMap& xMap,
+    void drawElements(QPainter* p, const QwtScaleMap& xMap,
                       const QwtScaleMap& yMap) const;
 
     void drawLegend(QPainter* p, const QRectF& rect) const;
 
     struct ElementRecipe
     {
-        double minY {0.};
-        double q10Y {0.};
-        double q25Y {0.};
-        double q50Y {0.};
-        double q75Y {0.};
-        double q90Y {0.};
-        double maxY {0.};
-        double meanY {0.};
-        double fromX {0.};
-        double toX {0.};
+        double minY{0.};
+        double q10Y{0.};
+        double q25Y{0.};
+        double q50Y{0.};
+        double q75Y{0.};
+        double q90Y{0.};
+        double maxY{0.};
+        double meanY{0.};
+        double fromX{0.};
+        double toX{0.};
     };
 
     void drawElement(QPainter* p, const ElementRecipe& recipe) const;
@@ -82,27 +81,25 @@ private:
     void drawElementLowerPart(QPainter* p, const ElementRecipe& recipe) const;
     void drawMeanCross(QPainter* p, const ElementRecipe& recipe) const;
 
-    ElementRecipe createElementRecipe(const QwtScaleMap& yMap,
-                                      double centerX,
+    ElementRecipe createElementRecipe(const QwtScaleMap& yMap, double centerX,
                                       double width,
                                       const Quantiles& quantiles) const;
 
     void drawLegendTexts(QPainter* p, const ElementRecipe& recipe) const;
 
-    ElementRecipe createLegendRecipe(const QRectF& rect,
-                                     int sectionHeight,
+    ElementRecipe createLegendRecipe(const QRectF& rect, int sectionHeight,
                                      double startY) const;
 
     double calculateIndent(const ElementRecipe& recipe) const;
 
-    static constexpr int LEGEND_SPACING {4};
-    static constexpr double INDENT_FACTOR {0.25};
+    static constexpr int LEGEND_SPACING{4};
+    static constexpr double INDENT_FACTOR{0.25};
 
     QBrush markerBrush_;
 
     QVector<Quantiles> quantilesVector_;
 
-    bool drawLegend_ {false};
+    bool drawLegend_{false};
 };
 
-#endif // NOTCHEDMARKER_H
+#endif  // NOTCHEDMARKER_H

@@ -10,7 +10,8 @@
 
 GroupPlot::GroupPlot(QWidget* parent)
     : PlotBase(tr("Grouping"), parent),
-      marker_(new NotchedMarker({})), picker_(new YAxisNumberPicker(canvas()))
+      marker_(new NotchedMarker({})),
+      picker_(new YAxisNumberPicker(canvas()))
 {
     setStdScaleDraw(yRight);
 
@@ -42,9 +43,9 @@ void GroupPlot::setNewData(QVector<Quantiles> quantilesVector,
     replot();
 }
 
-QVector<QString>
-GroupPlot::createAxisIntervalsNames(const QVector<QString>& intervalsNames,
-                                    const QVector<Quantiles>& quantilesVector) const
+QVector<QString> GroupPlot::createAxisIntervalsNames(
+    const QVector<QString>& intervalsNames,
+    const QVector<Quantiles>& quantilesVector) const
 {
     QVector<QString> shortenNames;
     shortenNames.reserve(intervalsNames.size());
@@ -67,23 +68,22 @@ GroupPlot::createAxisIntervalsNames(const QVector<QString>& intervalsNames,
     return shortenNames;
 }
 
-QVector<QString>
-GroupPlot::createTooltips(const QVector<QString>& intervalsNames,
-                          const QVector<Quantiles>& quantilesVector) const
+QVector<QString> GroupPlot::createTooltips(
+    const QVector<QString>& intervalsNames,
+    const QVector<Quantiles>& quantilesVector) const
 {
     QVector<QString> tooltips;
     tooltips.reserve(intervalsNames.size());
     for (int i = 0; i < intervalsNames.size(); ++i)
-        tooltips.append("<B>" + intervalsNames.at(i) +
-                        "</B></BR>" +
+        tooltips.append("<B>" + intervalsNames.at(i) + "</B></BR>" +
                         quantilesVector.at(i).getValuesAsToolTip());
     return tooltips;
 }
 
 QSize GroupPlot::minimumSizeHint() const
 {
-    const int minimumWidth {150};
-    const int minimumHeight {100};
+    const int minimumWidth{150};
+    const int minimumHeight{100};
     return QSize(minimumWidth, minimumHeight);
 }
 

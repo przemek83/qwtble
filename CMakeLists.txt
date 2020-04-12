@@ -37,7 +37,7 @@ message(STATUS "Using QWT_INCLUDE_PATH ${QWT_INCLUDE_PATH}")
 message(STATUS "Using QWT_BINARY_PATH ${QWT_BINARY_PATH}")
 
 include_directories(${QWT_INCLUDE_PATH})
-LINK_DIRECTORIES(${QWT_BINARY_PATH})
+link_directories(${QWT_BINARY_PATH})
 
 add_library(${PROJECT_NAME} SHARED
   src/qwtble_global.h

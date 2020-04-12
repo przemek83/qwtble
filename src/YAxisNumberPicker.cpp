@@ -1,10 +1,6 @@
 #include "YAxisNumberPicker.h"
 
-YAxisNumberPicker::YAxisNumberPicker(QWidget* parent)
-    : Picker(parent)
-{
-
-}
+YAxisNumberPicker::YAxisNumberPicker(QWidget* parent) : Picker(parent) {}
 
 QwtText YAxisNumberPicker::trackerTextF(const QPointF& pos) const
 {

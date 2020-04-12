@@ -7,9 +7,9 @@
 #include "QwtBleUtilities.h"
 #include "XDateYAxisNumberPicker.h"
 
-BasicDataPlot::BasicDataPlot(QWidget* parent) :
-    PlotBase(QObject::tr("Basic"), parent),
-    picker_(new XDateYAxisNumberPicker(canvas()))
+BasicDataPlot::BasicDataPlot(QWidget* parent)
+    : PlotBase(QObject::tr("Basic"), parent),
+      picker_(new XDateYAxisNumberPicker(canvas()))
 {
     setAxisScaleDraw(xBottom, new TimeScaleDraw());
 
@@ -100,9 +100,7 @@ void BasicDataPlot::initLegend()
     legend->setFrameStyle(QFrame::Box | QFrame::Sunken);
 
     // New connect mechanism not working as QwtLegend::checked is not detected.
-    connect(legend,
-            SIGNAL(checked(QVariant, bool, int)),
-            this,
+    connect(legend, SIGNAL(checked(QVariant, bool, int)), this,
             SLOT(legendItemChecked(QVariant, bool, int)));
     insertLegend(legend, QwtPlot::BottomLegend);
 }
@@ -147,7 +145,6 @@ void BasicDataPlot::setNewData(const QVector<QPointF>& data,
     setPlotData(data);
 }
 
-
 BasicDataPlot::TimeScaleDraw::TimeScaleDraw()
 {
     setLabelRotation(QwtBleUtilities::DEFAULT_LABEL_ROTATION);
@@ -159,8 +156,7 @@ QwtText BasicDataPlot::TimeScaleDraw::label(double v) const
     return QwtText(QwtBleUtilities::stringFromDays(lround(v)));
 }
 
-void BasicDataPlot::legendItemChecked(const QVariant& itemInfo,
-                                      bool on,
+void BasicDataPlot::legendItemChecked(const QVariant& itemInfo, bool on,
                                       [[maybe_unused]] int index)
 {
     QwtPlotItem* plotItem = infoToItem(itemInfo);

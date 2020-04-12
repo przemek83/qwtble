@@ -42,4 +42,4 @@ private:
     HistogramPlot histogramPlot_;
 };
 
-#endif // HISTOGRAMPLOTUI_H
+#endif  // HISTOGRAMPLOTUI_H

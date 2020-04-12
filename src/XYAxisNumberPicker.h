@@ -21,4 +21,4 @@ protected:
     [[nodiscard]] QwtText trackerTextF(const QPointF& pos) const override;
 };
 
-#endif // XYAXISNUMBERPICKER_H
+#endif  // XYAXISNUMBERPICKER_H

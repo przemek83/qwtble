@@ -21,4 +21,4 @@ protected:
     [[nodiscard]] QwtText trackerTextF(const QPointF& pos) const override;
 };
 
-#endif // YAXISNUMBERPICKER_H
+#endif  // YAXISNUMBERPICKER_H

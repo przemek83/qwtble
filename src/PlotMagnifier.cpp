@@ -1,7 +1,6 @@
 #include "PlotMagnifier.h"
 
-PlotMagnifier::PlotMagnifier(QWidget* canvas)
-    : QwtPlotMagnifier(canvas)
+PlotMagnifier::PlotMagnifier(QWidget* canvas) : QwtPlotMagnifier(canvas)
 {
     currentFactor_ = 1.;
 }

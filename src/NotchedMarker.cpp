@@ -1,17 +1,17 @@
 #include "NotchedMarker.h"
 
-#include <QVector>
 #include <qpainter.h>
 #include <qwt_plot_curve.h>
 #include <qwt_scale_div.h>
 #include <qwt_scale_map.h>
+#include <QVector>
 
 #include "PlotBase.h"
 #include "Quantiles.h"
 #include "QwtBleUtilities.h"
 
-NotchedMarker::NotchedMarker(QVector<Quantiles> quantiles) :
-    quantilesVector_(std::move(quantiles))
+NotchedMarker::NotchedMarker(QVector<Quantiles> quantiles)
+    : quantilesVector_(std::move(quantiles))
 {
     setZ(QwtBleUtilities::HIGH_ORDER);
     setRenderHint(QwtPlotItem::RenderAntialiased, true);
@@ -19,15 +19,10 @@ NotchedMarker::NotchedMarker(QVector<Quantiles> quantiles) :
     initMarkerBrush();
 }
 
-int NotchedMarker::rtti() const
-{
-    return QwtPlotItem::Rtti_PlotUserItem;
-}
+int NotchedMarker::rtti() const { return QwtPlotItem::Rtti_PlotUserItem; }
 
-void NotchedMarker::draw(QPainter* painter,
-                         const QwtScaleMap& xMap,
-                         const QwtScaleMap& yMap,
-                         const QRectF& rect) const
+void NotchedMarker::draw(QPainter* painter, const QwtScaleMap& xMap,
+                         const QwtScaleMap& yMap, const QRectF& rect) const
 {
     if (quantilesVector_.empty() ||
         plot()->axisScaleDiv(QwtPlot::yLeft).isEmpty())
@@ -41,15 +36,9 @@ void NotchedMarker::draw(QPainter* painter,
     painter->restore();
 }
 
-void NotchedMarker::setDrawLegend(bool drawLegend)
-{
-    drawLegend_ = drawLegend;
-}
+void NotchedMarker::setDrawLegend(bool drawLegend) { drawLegend_ = drawLegend; }
 
-bool NotchedMarker::getDrawLegend() const
-{
-    return drawLegend_;
-}
+bool NotchedMarker::getDrawLegend() const { return drawLegend_; }
 
 void NotchedMarker::setQuantiles(QVector<Quantiles> quantilesVector)
 {
@@ -74,31 +63,28 @@ double NotchedMarker::calculateItemWidth(const QwtScaleMap& xMap) const
     const QwtScaleDiv& scaleBottom = plot()->axisScaleDiv(QwtPlot::xBottom);
     double width = xMap.pDist() / (scaleBottom.range() * 2);
 
-    //Item should take 90% of place.
-    const double widthFactor {.9};
+    // Item should take 90% of place.
+    const double widthFactor{.9};
     width *= widthFactor;
 
     return width;
 }
 
-void NotchedMarker::drawElements(QPainter* p,
-                                 const QwtScaleMap& xMap,
+void NotchedMarker::drawElements(QPainter* p, const QwtScaleMap& xMap,
                                  const QwtScaleMap& yMap) const
 {
-    const double width {calculateItemWidth(xMap)};
-    for (int i = 0 ; i < quantilesVector_.size(); ++i)
+    const double width{calculateItemWidth(xMap)};
+    for (int i = 0; i < quantilesVector_.size(); ++i)
     {
         const Quantiles& quantiles = quantilesVector_[i];
         const double centerX = xMap.transform(i + 1);
-        const ElementRecipe recipe {createElementRecipe(yMap,
-                                                        centerX,
-                                                        width,
-                                                        quantiles)};
+        const ElementRecipe recipe{
+            createElementRecipe(yMap, centerX, width, quantiles)};
 
-        //If min = max draw only one line.
+        // If min = max draw only one line.
         if (QwtBleUtilities::doublesAreEqual(quantiles.min_, quantiles.max_))
         {
-            const double indent {calculateIndent(recipe)};
+            const double indent{calculateIndent(recipe)};
             p->drawLine(QPointF(recipe.fromX + indent, recipe.minY),
                         QPointF(recipe.toX - indent, recipe.minY));
             continue;
@@ -110,38 +96,42 @@ void NotchedMarker::drawElements(QPainter* p,
 void NotchedMarker::drawElementUpperPart(QPainter* p,
                                          const ElementRecipe& recipe) const
 {
-    const double indent {calculateIndent(recipe)};
+    const double indent{calculateIndent(recipe)};
     const double centerX = (recipe.fromX + recipe.toX) / 2;
 
-    //Draw horizontal line for max.
+    // Draw horizontal line for max.
     p->setPen(QPen(Qt::DotLine));
     p->drawLine(QPointF(recipe.fromX + indent, recipe.maxY),
                 QPointF(recipe.toX - indent, recipe.maxY));
 
-    //Draw horizontal line for q90.
+    // Draw horizontal line for q90.
     p->setPen(QPen(Qt::SolidLine));
     p->drawLine(QPointF(recipe.fromX + indent, recipe.q90Y),
                 QPointF(recipe.toX - indent, recipe.q90Y));
 
-    //Draw vertical line from q90 to q75.
+    // Draw vertical line from q90 to q75.
     p->drawLine(QPointF(centerX, recipe.q90Y), QPointF(centerX, recipe.q75Y));
 }
 
 void NotchedMarker::drawElementCenterPart(QPainter* p,
                                           const ElementRecipe& recipe) const
 {
-    const double indent {calculateIndent(recipe)};
+    const double indent{calculateIndent(recipe)};
     const double notchFactor = 0.85;
-    QPainterPath path(QPoint(static_cast<int>(recipe.fromX),
-                             static_cast<int>(recipe.q25Y)));
-    path.lineTo(recipe.fromX, recipe.q25Y - (recipe.q25Y - recipe.q50Y) * notchFactor);
+    QPainterPath path(
+        QPoint(static_cast<int>(recipe.fromX), static_cast<int>(recipe.q25Y)));
+    path.lineTo(recipe.fromX,
+                recipe.q25Y - (recipe.q25Y - recipe.q50Y) * notchFactor);
     path.lineTo(recipe.fromX + indent, recipe.q50Y);
-    path.lineTo(recipe.fromX, recipe.q75Y + (recipe.q50Y - recipe.q75Y) * notchFactor);
+    path.lineTo(recipe.fromX,
+                recipe.q75Y + (recipe.q50Y - recipe.q75Y) * notchFactor);
     path.lineTo(recipe.fromX, recipe.q75Y);
     path.lineTo(recipe.toX, recipe.q75Y);
-    path.lineTo(recipe.toX, recipe.q75Y + (recipe.q50Y - recipe.q75Y) * notchFactor);
+    path.lineTo(recipe.toX,
+                recipe.q75Y + (recipe.q50Y - recipe.q75Y) * notchFactor);
     path.lineTo(recipe.toX - indent, recipe.q50Y);
-    path.lineTo(recipe.toX, recipe.q25Y - (recipe.q25Y - recipe.q50Y) * notchFactor);
+    path.lineTo(recipe.toX,
+                recipe.q25Y - (recipe.q25Y - recipe.q50Y) * notchFactor);
     path.lineTo(recipe.toX, recipe.q25Y);
     path.closeSubpath();
     p->fillPath(path, markerBrush_);
@@ -151,21 +141,21 @@ void NotchedMarker::drawElementCenterPart(QPainter* p,
 void NotchedMarker::drawElementLowerPart(QPainter* p,
                                          const ElementRecipe& recipe) const
 {
-    const double indent {calculateIndent(recipe)};
+    const double indent{calculateIndent(recipe)};
     const double centerX = (recipe.fromX + recipe.toX) / 2;
 
-    //Draw q50.
+    // Draw q50.
     p->drawLine(QPointF(recipe.fromX + indent, recipe.q50Y),
                 QPointF(recipe.toX - indent, recipe.q50Y));
 
-    //Draw vertical line from q25 to q10.
+    // Draw vertical line from q25 to q10.
     p->drawLine(QPointF(centerX, recipe.q25Y), QPointF(centerX, recipe.q10Y));
 
-    //Draw horizontal line for q10.
+    // Draw horizontal line for q10.
     p->drawLine(QPointF(recipe.fromX + indent, recipe.q10Y),
                 QPointF(recipe.toX - indent, recipe.q10Y));
 
-    //Draw horizontal line for min.
+    // Draw horizontal line for min.
     p->setPen(QPen(Qt::DotLine));
     p->drawLine(QPointF(recipe.fromX + indent, recipe.minY),
                 QPointF(recipe.toX - indent, recipe.minY));
@@ -175,17 +165,16 @@ void NotchedMarker::drawElementLowerPart(QPainter* p,
 void NotchedMarker::drawMeanCross(QPainter* p,
                                   const ElementRecipe& recipe) const
 {
-    const double indent {calculateIndent(recipe)};
+    const double indent{calculateIndent(recipe)};
     const double centerX = (recipe.fromX + recipe.toX) / 2;
-    const double crossWidth {indent / 4};
+    const double crossWidth{indent / 4};
     p->drawLine(QPointF(centerX - crossWidth, recipe.meanY - crossWidth),
                 QPointF(centerX + crossWidth, recipe.meanY + crossWidth));
     p->drawLine(QPointF(centerX + crossWidth, recipe.meanY - crossWidth),
                 QPointF(centerX - crossWidth, recipe.meanY + crossWidth));
 }
 
-void NotchedMarker::drawElement(QPainter* p,
-                                const ElementRecipe& recipe) const
+void NotchedMarker::drawElement(QPainter* p, const ElementRecipe& recipe) const
 {
     drawElementUpperPart(p, recipe);
     drawElementCenterPart(p, recipe);
@@ -193,11 +182,9 @@ void NotchedMarker::drawElement(QPainter* p,
     drawMeanCross(p, recipe);
 }
 
-NotchedMarker::ElementRecipe
-NotchedMarker::createElementRecipe(const QwtScaleMap& yMap,
-                                   double centerX,
-                                   double width,
-                                   const Quantiles& quantiles) const
+NotchedMarker::ElementRecipe NotchedMarker::createElementRecipe(
+    const QwtScaleMap& yMap, double centerX, double width,
+    const Quantiles& quantiles) const
 {
     ElementRecipe recipe;
     recipe.minY = yMap.transform(quantiles.min_);
@@ -216,10 +203,10 @@ NotchedMarker::createElementRecipe(const QwtScaleMap& yMap,
 void NotchedMarker::drawLegendTexts(QPainter* p,
                                     const ElementRecipe& recipe) const
 {
-    //Place on x axis where legend text starts.
+    // Place on x axis where legend text starts.
     const double textStartX = recipe.toX + LEGEND_SPACING;
 
-    //Place on y axis where legend text starts.
+    // Place on y axis where legend text starts.
     const double textStartY = recipe.meanY + LEGEND_SPACING;
     p->drawText(QPointF(textStartX, textStartY), QObject::tr("mean"));
     p->drawText(QPointF(textStartX, recipe.maxY + LEGEND_SPACING),
@@ -238,15 +225,13 @@ void NotchedMarker::drawLegendTexts(QPainter* p,
                 QStringLiteral("min"));
 }
 
-NotchedMarker::ElementRecipe
-NotchedMarker::createLegendRecipe(const QRectF& rect,
-                                  int sectionHeight,
-                                  double startY) const
+NotchedMarker::ElementRecipe NotchedMarker::createLegendRecipe(
+    const QRectF& rect, int sectionHeight, double startY) const
 {
     ElementRecipe recipe;
     const int width = 4 * LEGEND_SPACING;
     recipe.meanY = startY;
-    int elementNumber {0};
+    int elementNumber{0};
     recipe.maxY = startY + ++elementNumber * sectionHeight;
     recipe.q90Y = startY + ++elementNumber * sectionHeight;
     recipe.q75Y = startY + ++elementNumber * sectionHeight;
@@ -271,9 +256,7 @@ void NotchedMarker::drawLegend(QPainter* p, const QRectF& rect) const
 
     // Top y axis point from where legend starts.
     const double startY = rect.y() + 2 * LEGEND_SPACING;
-    const ElementRecipe recipe {createLegendRecipe(rect,
-                                                   sectionHeight,
-                                                   startY)};
+    const ElementRecipe recipe{createLegendRecipe(rect, sectionHeight, startY)};
     drawElement(p, recipe);
     drawLegendTexts(p, recipe);
 }

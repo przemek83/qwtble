@@ -43,7 +43,7 @@ protected:
     void resizeEvent(QResizeEvent* event) override;
 
 private:
-    class IntervalsScaleDraw: public QwtScaleDraw
+    class IntervalsScaleDraw : public QwtScaleDraw
     {
     public:
         explicit IntervalsScaleDraw(int count);
@@ -69,4 +69,4 @@ private:
     std::unique_ptr<YAxisNumberPicker> picker_;
 };
 
-#endif // QUANTILESPLOT_H
+#endif  // QUANTILESPLOT_H

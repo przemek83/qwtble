@@ -52,7 +52,7 @@ protected:
     void mouseDoubleClickEvent(QMouseEvent* event) override;
 
 private:
-    class IntervalsScaleDraw: public QwtScaleDraw
+    class IntervalsScaleDraw : public QwtScaleDraw
     {
     public:
         IntervalsScaleDraw() = default;
@@ -75,4 +75,4 @@ private:
     QMap<int, QPointF> initialScaleMap_;
 };
 
-#endif // PLOTBASE_H
+#endif  // PLOTBASE_H

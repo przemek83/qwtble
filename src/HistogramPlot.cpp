@@ -6,9 +6,9 @@
 #include "QwtBleUtilities.h"
 #include "XYAxisNumberPicker.h"
 
-HistogramPlot::HistogramPlot(QWidget* parent) :
-    PlotBase(QObject::tr("Histogram"), parent),
-    picker_(new XYAxisNumberPicker(canvas()))
+HistogramPlot::HistogramPlot(QWidget* parent)
+    : PlotBase(QObject::tr("Histogram"), parent),
+      picker_(new XYAxisNumberPicker(canvas()))
 {
     initHistogramPlot();
     initActualDensity();
@@ -47,9 +47,7 @@ void HistogramPlot::initLegend()
     legend->setFrameStyle(QFrame::Box | QFrame::Sunken);
 
     // New connect mechanism not working as QwtLegend::checked is not detected.
-    connect(legend,
-            SIGNAL(checked(QVariant, bool, int)),
-            this,
+    connect(legend, SIGNAL(checked(QVariant, bool, int)), this,
             SLOT(legendItemChecked(QVariant, bool, int)));
     insertLegend(legend, QwtPlot::BottomLegend);
 
@@ -57,8 +55,7 @@ void HistogramPlot::initLegend()
     setLegendItemChecked(&distributionCurve_);
 }
 
-void HistogramPlot::legendItemChecked(const QVariant& itemInfo,
-                                      bool on,
+void HistogramPlot::legendItemChecked(const QVariant& itemInfo, bool on,
                                       [[maybe_unused]] int index)
 {
     QwtPlotItem* plotItem = infoToItem(itemInfo);
@@ -106,14 +103,15 @@ QVector<int> HistogramPlot::getFilledIntervals(const QVector<double>& data,
 
 void HistogramPlot::udpatePlotItems(int intervalsCount)
 {
-    QVector<int> intervals {getFilledIntervals(data_, quantiles_, intervalsCount)};
+    QVector<int> intervals{
+        getFilledIntervals(data_, quantiles_, intervalsCount)};
     const double min = quantiles_.min_;
     const double max = quantiles_.max_;
     const double stepSize = (max - min) / intervalsCount;
-    const double middleOfStep {stepSize / 2.};
+    const double middleOfStep{stepSize / 2.};
 
-    QVector< QwtIntervalSample > samples;
-    QVector< QPointF > actualPoints;
+    QVector<QwtIntervalSample> samples;
+    QVector<QPointF> actualPoints;
     for (int i = 0; i < intervalsCount; ++i)
     {
         const double from = min + stepSize * i;
@@ -132,8 +130,7 @@ void HistogramPlot::recompute(int intervalsCount)
     replot();
 }
 
-void HistogramPlot::setNewData(QVector<double> data,
-                               const Quantiles& quantiles,
+void HistogramPlot::setNewData(QVector<double> data, const Quantiles& quantiles,
                                int intervalsCount)
 {
     data_ = std::move(data);

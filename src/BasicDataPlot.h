@@ -34,12 +34,11 @@ public Q_SLOTS:
      * @param quantiles Quantiles for data.
      * @param linearRegression Linear regression points.
      */
-    void setNewData(const QVector<QPointF>& data,
-                    const Quantiles& quantiles,
+    void setNewData(const QVector<QPointF>& data, const Quantiles& quantiles,
                     const QVector<QPointF>& linearRegression);
 
 private:
-    class TimeScaleDraw: public QwtScaleDraw
+    class TimeScaleDraw : public QwtScaleDraw
     {
     public:
         TimeScaleDraw();
@@ -84,4 +83,4 @@ private Q_SLOTS:
     void legendItemChecked(const QVariant& itemInfo, bool on, int index);
 };
 
-#endif // BASICDATAPLOT_H
+#endif  // BASICDATAPLOT_H

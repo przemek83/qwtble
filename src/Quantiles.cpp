@@ -34,13 +34,13 @@ double Quantiles::computeQuantile(const QVector<double>& values,
 {
     return values.at(static_cast<int>(floor(interval))) +
            (interval - floor(interval)) *
-           (values.at(static_cast<int>(ceil(interval))) -
-            values.at(static_cast<int>(floor(interval))));
+               (values.at(static_cast<int>(ceil(interval))) -
+                values.at(static_cast<int>(floor(interval))));
 }
 
 void Quantiles::setQuantiles(const QVector<double>& values)
 {
-    int count {values.count()};
+    int count{values.count()};
     if (count <= 1)
     {
         const double value = values.front();
@@ -52,30 +52,30 @@ void Quantiles::setQuantiles(const QVector<double>& values)
     }
     else
     {
-        const double q10Level {0.1};
+        const double q10Level{0.1};
         double currentInterval = (count - 1) * q10Level;
         q10_ = computeQuantile(values, currentInterval);
 
-        const double q25Level {0.25};
+        const double q25Level{0.25};
         currentInterval = (count - 1) * q25Level;
         q25_ = computeQuantile(values, currentInterval);
 
-        const double q50Level {0.5};
+        const double q50Level{0.5};
         currentInterval = (count - 1) * q50Level;
         q50_ = computeQuantile(values, currentInterval);
 
-        const double q75Level {0.75};
+        const double q75Level{0.75};
         currentInterval = (count - 1) * q75Level;
         q75_ = computeQuantile(values, currentInterval);
 
-        const double q90Level {0.9};
+        const double q90Level{0.9};
         currentInterval = (count - 1) * q90Level;
         q90_ = computeQuantile(values, currentInterval);
     }
 }
 
-std::tuple<double, double>
-Quantiles::calculateEXAndEX2(const QVector<double>& values)
+std::tuple<double, double> Quantiles::calculateEXAndEX2(
+    const QVector<double>& values)
 {
     double EX = 0;
     double EX2 = 0;
@@ -157,7 +157,8 @@ std::array<QString, Quantiles::PLOT_INFO_END> Quantiles::getPlotInfoNames()
 
 QString Quantiles::valueAsHtmlRow(PlotInfo name, double value)
 {
-    static std::array<QString, PLOT_INFO_END> plotInfoNames = getPlotInfoNames();
+    static std::array<QString, PLOT_INFO_END> plotInfoNames =
+        getPlotInfoNames();
     QString html(QStringLiteral("<tr><td>"));
     html.append(plotInfoNames.at(static_cast<size_t>(name)));
     html.append(QLatin1String("</td><td ALIGN=RIGHT>"));

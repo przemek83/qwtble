@@ -36,8 +36,7 @@ public Q_SLOTS:
      * @param quantiles Quantiles for given data.
      * @param intervalsCount Number of histogram intervals.
      */
-    void setNewData(QVector<double> data,
-                    const Quantiles& quantiles,
+    void setNewData(QVector<double> data, const Quantiles& quantiles,
                     int intervalsCount);
 
     /**
@@ -73,4 +72,4 @@ private Q_SLOTS:
     void legendItemChecked(const QVariant& itemInfo, bool on, int index);
 };
 
-#endif // HISTOGRAMPLOT_H
+#endif  // HISTOGRAMPLOT_H

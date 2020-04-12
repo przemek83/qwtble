@@ -3,8 +3,8 @@
 
 #include <array>
 
-#include <QVector>
 #include <QString>
+#include <QVector>
 
 #include "qwtble_global.h"
 
@@ -25,22 +25,22 @@ public:
     Quantiles& operator=(Quantiles&& other) = default;
     Quantiles(Quantiles&& other) = default;
 
-    //Y axis variables.
-    double min_ {.0};
-    double q10_ {.0};
-    double q25_ {.0};
-    double q50_ {.0};
-    double q75_ {.0};
-    double q90_ {.0};
-    double max_ {.0};
+    // Y axis variables.
+    double min_{.0};
+    double q10_{.0};
+    double q25_{.0};
+    double q50_{.0};
+    double q75_{.0};
+    double q90_{.0};
+    double max_{.0};
 
-    int count_ {0};
-    double mean_ {.0};
-    double stdDev_ {.0};
+    int count_{0};
+    double mean_{.0};
+    double stdDev_{.0};
 
-    //X axis variables.
-    double minX_ {.0};
-    double maxX_ {.0};
+    // X axis variables.
+    double minX_{.0};
+    double maxX_{.0};
 
     /**
      * @brief Clear struct.
@@ -60,7 +60,8 @@ public:
     QString getValuesAsToolTip() const;
 
 private:
-    double computeQuantile(const QVector<double>& values, double interval) const;
+    double computeQuantile(const QVector<double>& values,
+                           double interval) const;
     double calculateStdDev(int count, double EX, double EX2) const;
     void setQuantiles(const QVector<double>& values);
     std::tuple<double, double> calculateEXAndEX2(const QVector<double>& values);
@@ -85,4 +86,4 @@ private:
     static QString valueAsHtmlRow(PlotInfo name, double value);
 };
 
-#endif // QUANTILES_H
+#endif  // QUANTILES_H

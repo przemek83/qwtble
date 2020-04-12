@@ -7,11 +7,12 @@
 #include "PlotMagnifier.h"
 #include "QwtBleUtilities.h"
 
-PlotBase::PlotBase(const QString& title, QWidget* parent) :
-    QwtPlot(parent), panner_(canvas()),
-    magnifier_(new PlotMagnifier(canvas()))
+PlotBase::PlotBase(const QString& title, QWidget* parent)
+    : QwtPlot(parent),
+      panner_(canvas()),
+      magnifier_(new PlotMagnifier(canvas()))
 {
-    //Used in export of images.
+    // Used in export of images.
     setWindowTitle(title);
 
     panner_.setAxisEnabled(QwtPlot::yLeft, true);
@@ -20,7 +21,8 @@ PlotBase::PlotBase(const QString& title, QWidget* parent) :
     setStdScaleDraw(xBottom);
     setStdScaleDraw(yLeft);
 
-    setAxisLabelRotation(QwtPlot::xBottom, QwtBleUtilities::DEFAULT_LABEL_ROTATION);
+    setAxisLabelRotation(QwtPlot::xBottom,
+                         QwtBleUtilities::DEFAULT_LABEL_ROTATION);
     setAxisLabelAlignment(QwtPlot::xBottom, Qt::AlignLeft | Qt::AlignBottom);
 }
 
@@ -59,8 +61,8 @@ void PlotBase::setAxisScale(int axisId, double min, double max, double step)
 
 QwtText PlotBase::IntervalsScaleDraw::label(double v) const
 {
-    using QwtBleUtilities::doubleToStringUsingLocale;
     using QwtBleUtilities::doublesAreEqual;
+    using QwtBleUtilities::doubleToStringUsingLocale;
 
     if (!doublesAreEqual(fmod(v, 1), 0.))
         return QwtText(doubleToStringUsingLocale(v, 1));
@@ -69,7 +71,7 @@ QwtText PlotBase::IntervalsScaleDraw::label(double v) const
 
 QSize PlotBase::minimumSizeHint() const
 {
-    const int minimumWidth {100};
-    const int minimumHeight {100};
+    const int minimumWidth{100};
+    const int minimumHeight{100};
     return QSize(minimumWidth, minimumHeight);
 }
