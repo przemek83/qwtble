@@ -24,12 +24,6 @@ public:
 
     ~PlotBase() override;
 
-    PlotBase& operator=(const PlotBase& other) = delete;
-    PlotBase(const PlotBase& other) = delete;
-
-    PlotBase& operator=(PlotBase&& other) = delete;
-    PlotBase(PlotBase&& other) = delete;
-
     /**
      * @brief Reset state of plot.
      */
@@ -38,7 +32,7 @@ public:
     QSize minimumSizeHint() const override;
 
     /**
-     * @brief Set axis stale remembering before passed passed params.
+     * @brief Set axis stale remembering before passed passed parameters.
      * @param axisId Id of axis.
      * @param min Minimum on axis.
      * @param max Maximum on axis.

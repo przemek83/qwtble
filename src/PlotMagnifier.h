@@ -11,12 +11,6 @@ public:
 
     virtual ~PlotMagnifier() override = default;
 
-    PlotMagnifier& operator=(const PlotMagnifier& other) = delete;
-    PlotMagnifier(const PlotMagnifier& other) = delete;
-
-    PlotMagnifier& operator=(PlotMagnifier&& other) = delete;
-    PlotMagnifier(PlotMagnifier&& other) = delete;
-
     void reset();
 
 protected:

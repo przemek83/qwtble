@@ -14,12 +14,6 @@ public:
 
     virtual ~Picker() override = default;
 
-    Picker& operator=(const Picker& other) = delete;
-    Picker(const Picker& other) = delete;
-
-    Picker& operator=(Picker&& other) = delete;
-    Picker(Picker&& other) = delete;
-
     int getAreaOfMouse();
 
     bool getMouseInWidget();

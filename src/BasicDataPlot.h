@@ -21,12 +21,6 @@ public:
 
     ~BasicDataPlot() override;
 
-    BasicDataPlot& operator=(const BasicDataPlot& other) = delete;
-    BasicDataPlot(const BasicDataPlot& other) = delete;
-
-    BasicDataPlot& operator=(BasicDataPlot&& other) = delete;
-    BasicDataPlot(BasicDataPlot&& other) = delete;
-
 public Q_SLOTS:
     /**
      * @brief Set new data for plot.

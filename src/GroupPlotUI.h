@@ -29,12 +29,6 @@ public:
                          QWidget* parent = nullptr);
     ~GroupPlotUI() override;
 
-    GroupPlotUI& operator=(const GroupPlotUI& other) = delete;
-    GroupPlotUI(const GroupPlotUI& other) = delete;
-
-    GroupPlotUI& operator=(GroupPlotUI&& other) = delete;
-    GroupPlotUI(GroupPlotUI&& other) = delete;
-
 public Q_SLOTS:
     /**
      * @brief Set new data for plots.

@@ -20,12 +20,6 @@ public:
 
     ~GroupPlot() override;
 
-    GroupPlot& operator=(const GroupPlot& other) = delete;
-    GroupPlot(const GroupPlot& other) = delete;
-
-    GroupPlot& operator=(GroupPlot&& other) = delete;
-    GroupPlot(GroupPlot&& other) = delete;
-
     QSize minimumSizeHint() const override;
 
 public Q_SLOTS:

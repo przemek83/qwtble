@@ -22,12 +22,6 @@ public:
 
     ~QuantilesPlot() override;
 
-    QuantilesPlot& operator=(const QuantilesPlot& other) = delete;
-    QuantilesPlot(const QuantilesPlot& other) = delete;
-
-    QuantilesPlot& operator=(QuantilesPlot&& other) = delete;
-    QuantilesPlot(QuantilesPlot&& other) = delete;
-
     QSize minimumSizeHint() const override;
 
     QSize sizeHint() const override;

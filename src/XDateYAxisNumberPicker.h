@@ -11,13 +11,6 @@ public:
 
     ~XDateYAxisNumberPicker() override = default;
 
-    XDateYAxisNumberPicker& operator=(const XDateYAxisNumberPicker& other) =
-        delete;
-    XDateYAxisNumberPicker(const XDateYAxisNumberPicker& other) = delete;
-
-    XDateYAxisNumberPicker& operator=(XDateYAxisNumberPicker&& other) = delete;
-    XDateYAxisNumberPicker(XDateYAxisNumberPicker&& other) = delete;
-
 protected:
     [[nodiscard]] QwtText trackerTextF(const QPointF& pos) const override;
 };

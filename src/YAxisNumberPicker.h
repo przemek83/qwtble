@@ -11,12 +11,6 @@ public:
 
     ~YAxisNumberPicker() override = default;
 
-    YAxisNumberPicker& operator=(const YAxisNumberPicker& other) = delete;
-    YAxisNumberPicker(const YAxisNumberPicker& other) = delete;
-
-    YAxisNumberPicker& operator=(YAxisNumberPicker&& other) = delete;
-    YAxisNumberPicker(YAxisNumberPicker&& other) = delete;
-
 protected:
     [[nodiscard]] QwtText trackerTextF(const QPointF& pos) const override;
 };

@@ -23,12 +23,6 @@ public:
 
     ~HistogramPlot() override;
 
-    HistogramPlot& operator=(const HistogramPlot& other) = delete;
-    HistogramPlot(const HistogramPlot& other) = delete;
-
-    HistogramPlot& operator=(HistogramPlot&& other) = delete;
-    HistogramPlot(HistogramPlot&& other) = delete;
-
 public Q_SLOTS:
     /**
      * @brief Set new data for plot.
