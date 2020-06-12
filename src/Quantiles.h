@@ -3,7 +3,6 @@
 
 #include <array>
 
-#include <QMetaType>
 #include <QString>
 #include <QVector>
 
@@ -86,7 +85,5 @@ private:
 
     static QString valueAsHtmlRow(PlotInfo name, double value);
 };
-
-Q_DECLARE_METATYPE(Quantiles);
 
 #endif  // QUANTILES_H
