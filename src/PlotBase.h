@@ -1,5 +1,4 @@
-#ifndef PLOTBASE_H
-#define PLOTBASE_H
+#pragma once
 
 #include <memory>
 
@@ -68,5 +67,3 @@ private:
 
     QMap<int, QPointF> initialScaleMap_;
 };
-
-#endif  // PLOTBASE_H

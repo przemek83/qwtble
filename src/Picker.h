@@ -1,5 +1,4 @@
-#ifndef PICKER_H
-#define PICKER_H
+#pragma once
 
 #include <qwt_plot_picker.h>
 
@@ -30,5 +29,3 @@ private:
 
     static constexpr double FONT_FACTOR{1.4};
 };
-
-#endif  // PICKER_H

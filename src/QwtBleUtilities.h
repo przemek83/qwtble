@@ -1,5 +1,4 @@
-#ifndef UTILITIES_H
-#define UTILITIES_H
+#pragma once
 
 #include <QDate>
 #include <QString>
@@ -61,5 +60,3 @@ static constexpr int HIGH_ORDER{3};
 
 static constexpr double DEFAULT_LABEL_ROTATION{-50.0};
 }  // namespace QwtBleUtilities
-
-#endif  // UTILITIES_H

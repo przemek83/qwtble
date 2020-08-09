@@ -1,5 +1,4 @@
-#ifndef CHECKTEST
-#define CHECKTEST
+#pragma once
 
 #include <QObject>
 
@@ -11,5 +10,3 @@ private Q_SLOTS:
     void testFloatsAreEqual();
     void testDoublesAreEqual();
 };
-
-#endif  // CHECKTEST

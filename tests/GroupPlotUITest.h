@@ -1,5 +1,4 @@
-#ifndef GROUPPLOTUITEST_H
-#define GROUPPLOTUITEST_H
+#pragma once
 
 #include <QObject>
 
@@ -9,5 +8,3 @@ class GroupPlotUITest : public QObject
 private Q_SLOTS:
     void testTraitChange();
 };
-
-#endif  // GROUPPLOTUITEST_H

@@ -1,5 +1,4 @@
-#ifndef GROUPPLOTUI_H
-#define GROUPPLOTUI_H
+#pragma once
 
 #include <QWidget>
 
@@ -70,5 +69,3 @@ Q_SIGNALS:
      */
     void traitIndexChanged(int newIndex);
 };
-
-#endif  // GROUPPLOTUI_H

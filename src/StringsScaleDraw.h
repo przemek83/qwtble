@@ -1,5 +1,4 @@
-#ifndef STRINGSSCALEDRAW_H
-#define STRINGSSCALEDRAW_H
+#pragma once
 
 #include <qwt_scale_draw.h>
 
@@ -24,5 +23,3 @@ public:
 private:
     const QVector<QString> intervalNames_;
 };
-
-#endif  // STRINGSSCALEDRAW_H

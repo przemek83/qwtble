@@ -1,5 +1,4 @@
-#ifndef BASICDATAPLOT_H
-#define BASICDATAPLOT_H
+#pragma once
 
 #include <qwt_plot_curve.h>
 
@@ -76,5 +75,3 @@ private:
 private Q_SLOTS:
     void legendItemChecked(const QVariant& itemInfo, bool on, int index);
 };
-
-#endif  // BASICDATAPLOT_H

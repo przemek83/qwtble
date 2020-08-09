@@ -1,5 +1,4 @@
-#ifndef QUANTILESPLOT_H
-#define QUANTILESPLOT_H
+#pragma once
 
 #include <qwt_scale_draw.h>
 
@@ -62,5 +61,3 @@ private:
 
     std::unique_ptr<YAxisNumberPicker> picker_;
 };
-
-#endif  // QUANTILESPLOT_H

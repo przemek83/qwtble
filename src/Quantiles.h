@@ -1,5 +1,4 @@
-#ifndef QUANTILES_H
-#define QUANTILES_H
+#pragma once
 
 #include <array>
 
@@ -88,5 +87,3 @@ private:
 };
 
 Q_DECLARE_METATYPE(Quantiles);
-
-#endif  // QUANTILES_H

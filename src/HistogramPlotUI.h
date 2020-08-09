@@ -1,5 +1,4 @@
-#ifndef HISTOGRAMPLOTUI_H
-#define HISTOGRAMPLOTUI_H
+#pragma once
 
 #include <QWidget>
 
@@ -35,5 +34,3 @@ private:
 
     HistogramPlot histogramPlot_;
 };
-
-#endif  // HISTOGRAMPLOTUI_H

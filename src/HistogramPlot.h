@@ -1,5 +1,4 @@
-#ifndef HISTOGRAMPLOT_H
-#define HISTOGRAMPLOT_H
+#pragma once
 
 #include <qwt_plot_curve.h>
 #include <qwt_plot_histogram.h>
@@ -65,5 +64,3 @@ private:
 private Q_SLOTS:
     void legendItemChecked(const QVariant& itemInfo, bool on, int index);
 };
-
-#endif  // HISTOGRAMPLOT_H

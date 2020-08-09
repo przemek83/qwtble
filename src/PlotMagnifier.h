@@ -1,5 +1,4 @@
-#ifndef PLOTMAGNIFIER_H
-#define PLOTMAGNIFIER_H
+#pragma once
 
 #include <qwt_plot_magnifier.h>
 
@@ -19,5 +18,3 @@ protected:
 private:
     double currentFactor_;
 };
-
-#endif  // PLOTMAGNIFIER_H

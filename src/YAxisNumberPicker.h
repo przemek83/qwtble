@@ -1,5 +1,4 @@
-#ifndef YAXISNUMBERPICKER_H
-#define YAXISNUMBERPICKER_H
+#pragma once
 
 #include "Picker.h"
 
@@ -14,5 +13,3 @@ public:
 protected:
     [[nodiscard]] QwtText trackerTextF(const QPointF& pos) const override;
 };
-
-#endif  // YAXISNUMBERPICKER_H

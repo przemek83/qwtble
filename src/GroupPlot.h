@@ -1,5 +1,4 @@
-﻿#ifndef GROUPPLOT_H
-#define GROUPPLOT_H
+﻿#pragma once
 
 #include "PlotBase.h"
 #include "Quantiles.h"
@@ -52,4 +51,3 @@ private:
 
     std::unique_ptr<YAxisNumberPicker> picker_;
 };
-#endif  // GROUPPLOT_H

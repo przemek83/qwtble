@@ -1,5 +1,4 @@
-#ifndef NOTCHEDMARKER_H
-#define NOTCHEDMARKER_H
+#pragma once
 
 #include <qwt_plot_item.h>
 
@@ -101,5 +100,3 @@ private:
 
     bool drawLegend_{false};
 };
-
-#endif  // NOTCHEDMARKER_H

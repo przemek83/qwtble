@@ -1,5 +1,4 @@
-#ifndef QUANTILESTEST_H
-#define QUANTILESTEST_H
+#pragma once
 
 #include <QObject>
 #include <QVector>
@@ -19,5 +18,3 @@ private Q_SLOTS:
 
     void testComputingSinleItemData();
 };
-
-#endif  // QUANTILESTEST_H

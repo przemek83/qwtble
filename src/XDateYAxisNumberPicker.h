@@ -1,5 +1,4 @@
-#ifndef XDATEYAXISNUMBERPICKER_H
-#define XDATEYAXISNUMBERPICKER_H
+#pragma once
 
 #include "Picker.h"
 
@@ -14,5 +13,3 @@ public:
 protected:
     [[nodiscard]] QwtText trackerTextF(const QPointF& pos) const override;
 };
-
-#endif  // XDATEYAXISNUMBERPICKER_H
