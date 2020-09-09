@@ -87,3 +87,5 @@ private:
 };
 
 Q_DECLARE_METATYPE(Quantiles);
+
+Q_DECLARE_TYPEINFO(Quantiles, Q_MOVABLE_TYPE);
