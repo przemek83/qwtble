@@ -18,7 +18,7 @@ GroupPlotUI::GroupPlotUI(const QVector<std::pair<QString, int> >& stringColumns,
     connect(ui->comboBox, qOverload<int>(&QComboBox::currentIndexChanged), this,
             &GroupPlotUI::comboBoxCurrentIndexChanged);
 
-    QSplitter* splitter = setupSplitter();
+    QSplitter* splitter{setupSplitter()};
     ui->verticalLayout->insertWidget(2, splitter, 0);
 
     for (const auto& [columnName, index] : stringColumns)
@@ -31,8 +31,8 @@ void GroupPlotUI::setNewData(const QVector<QString>& intervalsNames,
                              QVector<Quantiles> quantilesForIntervals,
                              const Quantiles& quantiles)
 {
-    const double minY = quantiles.min_;
-    const double maxY = quantiles.max_;
+    const double minY{quantiles.min_};
+    const double maxY{quantiles.max_};
     groupPlot_.setAxisScale(QwtPlot::yLeft, minY, maxY);
     groupPlot_.setAxisScale(QwtPlot::yRight, minY, maxY);
     groupPlot_.setAxisScale(QwtPlot::xBottom, 0, intervalsNames.size() + 1, 1);
@@ -49,17 +49,20 @@ void GroupPlotUI::setNewData(const QVector<QString>& intervalsNames,
 void GroupPlotUI::resizeEvent(QResizeEvent* event)
 {
     QWidget::resizeEvent(event);
+    QApplication::processEvents();
     updateQuantilesPlotExtent();
+    repaint();
 }
 
 QSplitter* GroupPlotUI::setupSplitter()
 {
-    auto splitter = new QSplitter(Qt::Horizontal, this);
+    auto splitter{new QSplitter(Qt::Horizontal, this)};
     connect(splitter, &QSplitter::splitterMoved, this,
             [=]([[maybe_unused]] int pos, [[maybe_unused]] int index) {
+                QApplication::processEvents();
                 updateQuantilesPlotExtent();
             });
-    auto scrollArea = new QScrollArea(this);
+    auto scrollArea{new QScrollArea(this)};
     scrollArea->setWidgetResizable(true);
     scrollArea->setWidget(&groupPlot_);
     splitter->addWidget(scrollArea);
@@ -72,12 +75,12 @@ QSplitter* GroupPlotUI::setupSplitter()
 void GroupPlotUI::updateQuantilesPlotExtent()
 {
     // Adjust quantiles plot extent size to match group plot one.
-    auto scrollArea = qobject_cast<QScrollArea*>(groupPlot_.parent()->parent());
+    auto scrollArea{qobject_cast<QScrollArea*>(groupPlot_.parent()->parent())};
     adjustQuantilesPlotExtent(scrollArea->horizontalScrollBar());
 
     // Enforce size update of quantiles plot.
-    auto resizeEvent =
-        new QResizeEvent(quantilesPlot_.size(), quantilesPlot_.size());
+    auto resizeEvent{
+        new QResizeEvent(quantilesPlot_.size(), quantilesPlot_.size())};
     QCoreApplication::postEvent(&quantilesPlot_, resizeEvent);
     QApplication::processEvents();
 }
@@ -88,9 +91,9 @@ void GroupPlotUI::adjustQuantilesPlotExtent(QScrollBar* groupPlotScrollBar)
     if (groupPlotScrollBar->isVisible())
         scrollBarSize = groupPlotScrollBar->height();
 
-    const auto groupPlotScaleDraw = groupPlot_.axisScaleDraw(QwtPlot::xBottom);
-    const double plotExtent =
-        groupPlotScaleDraw->extent(groupPlot_.axisFont(QwtPlot::xBottom));
+    const auto groupPlotScaleDraw{groupPlot_.axisScaleDraw(QwtPlot::xBottom)};
+    const double plotExtent{
+        groupPlotScaleDraw->extent(groupPlot_.axisFont(QwtPlot::xBottom))};
     const double newExtent{plotExtent + scrollBarSize};
     quantilesPlot_.axisScaleDraw(QwtPlot::xBottom)->setMinimumExtent(newExtent);
 }
