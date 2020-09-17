@@ -13,7 +13,6 @@ class GroupPlotUI;
 }
 
 class QSplitter;
-class QScrollArea;
 class QScrollBar;
 
 /**
@@ -49,9 +48,9 @@ private:
      */
     QSplitter* setupSplitter();
 
-    void updateQuantilesPlotExtent();
+    double calculateExpectedQuantilesPlotExtent() const;
 
-    void adjustQuantilesPlotExtent(QScrollBar* groupPlotScrollBar);
+    double getPlotBottomExtent(const QwtPlot& plot) const;
 
     Ui::GroupPlotUI* ui;
 
@@ -60,9 +59,13 @@ private:
     QuantilesPlot quantilesPlot_;
 
 private Q_SLOTS:
+    void updateQuantilesPlotExtent();
+
     void comboBoxCurrentIndexChanged(int index);
 
 Q_SIGNALS:
+    void syncPlotSizes();
+
     /**
      * @brief Signal emitted when user changes trait in combo box.
      * @param newIndex index.
