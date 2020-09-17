@@ -44,6 +44,7 @@ void GroupPlotUI::setNewData(const QVector<QString>& intervalsNames,
 
     quantilesPlot_.setNewData(quantiles);
 
+    QApplication::processEvents();
     updateQuantilesPlotExtent();
 }
 
@@ -60,6 +61,7 @@ QSplitter* GroupPlotUI::setupSplitter()
     auto splitter{new QSplitter(Qt::Horizontal, this)};
     connect(splitter, &QSplitter::splitterMoved, this,
             [=]([[maybe_unused]] int pos, [[maybe_unused]] int index) {
+                QApplication::processEvents();
                 updateQuantilesPlotExtent();
             });
     auto scrollArea{new QScrollArea(this)};
@@ -74,8 +76,6 @@ QSplitter* GroupPlotUI::setupSplitter()
 
 void GroupPlotUI::updateQuantilesPlotExtent()
 {
-    QApplication::processEvents();
-
     const double expectedExtent{calculateExpectedQuantilesPlotExtent()};
     if (expectedExtent == getPlotBottomExtent(quantilesPlot_))
         return;
@@ -87,7 +87,6 @@ void GroupPlotUI::updateQuantilesPlotExtent()
     auto resizeEvent{
         new QResizeEvent(quantilesPlot_.size(), quantilesPlot_.size())};
     QCoreApplication::postEvent(&quantilesPlot_, resizeEvent);
-    QApplication::processEvents();
 }
 
 double GroupPlotUI::calculateExpectedQuantilesPlotExtent() const
