@@ -4,6 +4,7 @@
 #include <qwt_plot_curve.h>
 #include <qwt_scale_div.h>
 #include <qwt_scale_map.h>
+#include <QPainterPath>
 #include <QVector>
 
 #include "PlotBase.h"
