@@ -1,13 +1,13 @@
 #include "NotchedMarker.h"
 
-#include <qpainter.h>
+#include <qwt_plot.h>
 #include <qwt_plot_curve.h>
 #include <qwt_scale_div.h>
 #include <qwt_scale_map.h>
+#include <QPainter>
 #include <QPainterPath>
 #include <QVector>
 
-#include "PlotBase.h"
 #include "Quantiles.h"
 #include "QwtBleUtilities.h"
 
