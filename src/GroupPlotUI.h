@@ -10,7 +10,7 @@
 namespace Ui
 {
 class GroupPlotUI;
-}
+}  // namespace Ui
 
 class QSplitter;
 class QScrollBar;
@@ -48,9 +48,9 @@ private:
      */
     QSplitter* setupSplitter();
 
-    double calculateExpectedQuantilesPlotExtent() const;
+    [[nodiscard]] double calculateExpectedQuantilesPlotExtent() const;
 
-    double getPlotBottomExtent(const QwtPlot& plot) const;
+    [[nodiscard]] double getPlotBottomExtent(const QwtPlot& plot) const;
 
     Ui::GroupPlotUI* ui;
 
