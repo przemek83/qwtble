@@ -98,7 +98,7 @@ void Quantiles::init(QVector<double> values)
 
     count_ = values.count();
 
-    qSort(values);
+    std::sort(values.begin(), values.end());
     min_ = values.front();
     max_ = values.back();
 
