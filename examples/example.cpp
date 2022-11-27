@@ -120,7 +120,7 @@ static GroupPlotUI* createGroupPlotUI()
 
     QVector<double> allValues;
     allValues.reserve(exampleValues.size());
-    for (auto& values : exampleValues)
+    for (const auto& values : exampleValues)
         allValues.append(values);
 
     Quantiles generalQuantiles;
