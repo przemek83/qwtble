@@ -53,7 +53,7 @@ void GroupPlotUI::resizeEvent(QResizeEvent* event)
     QWidget::resizeEvent(event);
 
     // Match sizes using async call. Prevent recursive resize call.
-    emit syncPlotSizes();
+    Q_EMIT syncPlotSizes();
 }
 
 QSplitter* GroupPlotUI::setupSplitter()
