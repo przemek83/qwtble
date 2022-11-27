@@ -28,7 +28,7 @@ BasicDataPlot::~BasicDataPlot() = default;
 void BasicDataPlot::initPlotCurve()
 {
     plotData_.setStyle(QwtPlotCurve::Dots);
-    auto symbol = new QwtSymbol(QwtSymbol::Ellipse);
+    auto* symbol = new QwtSymbol(QwtSymbol::Ellipse);
     symbol->setSize(3, 3);
     plotData_.setSymbol(symbol);
     QPen pen = plotData_.pen();
@@ -95,7 +95,7 @@ void BasicDataPlot::initLinearRegression()
 
 void BasicDataPlot::initLegend()
 {
-    auto legend = new QwtLegend();
+    auto* legend = new QwtLegend();
     legend->setDefaultItemMode(QwtLegendData::Checkable);
     legend->setFrameStyle(QFrame::Box | QFrame::Sunken);
 
@@ -174,7 +174,7 @@ void BasicDataPlot::setLegendItemChecked(QwtPlotCurve* plot)
 
     if (legendWidget != nullptr)
     {
-        auto legendLabel = dynamic_cast<QwtLegendLabel*>(legendWidget);
+        auto* legendLabel = dynamic_cast<QwtLegendLabel*>(legendWidget);
         if (legendLabel != nullptr)
             legendLabel->setChecked(true);
     }

@@ -8,7 +8,7 @@
 void GroupPlotUITest::testTraitChange()
 {
     GroupPlotUI groupPlotUI({{"a", 0}, {"b", 1}, {"c", 2}});
-    auto comboBox = groupPlotUI.findChild<QComboBox*>();
+    auto* comboBox = groupPlotUI.findChild<QComboBox*>();
     QSignalSpy newColumnSpy(&groupPlotUI, &GroupPlotUI::traitIndexChanged);
     const int newIndex{2};
     comboBox->setCurrentIndex(newIndex);
