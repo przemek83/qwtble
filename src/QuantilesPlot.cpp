@@ -66,14 +66,14 @@ QSize QuantilesPlot::minimumSizeHint() const
 {
     const int minimumWidth{30};
     const int minimumHeight{100};
-    return QSize(minimumWidth, minimumHeight);
+    return {minimumWidth, minimumHeight};
 }
 
 QSize QuantilesPlot::sizeHint() const
 {
     const int width{50};
     const int height{100};
-    return QSize(width, height);
+    return {width, height};
 }
 
 QuantilesPlot::IntervalsScaleDraw::IntervalsScaleDraw(int count) : count_(count)
@@ -83,6 +83,6 @@ QuantilesPlot::IntervalsScaleDraw::IntervalsScaleDraw(int count) : count_(count)
 QwtText QuantilesPlot::IntervalsScaleDraw::label(double value) const
 {
     if (QwtBleUtilities::doublesAreEqual(value, 1.) && count_ != 0)
-        return QwtText(QString::number(count_));
-    return QwtText();
+        return {QString::number(count_)};
+    return {};
 }

@@ -153,7 +153,7 @@ BasicDataPlot::TimeScaleDraw::TimeScaleDraw()
 
 QwtText BasicDataPlot::TimeScaleDraw::label(double v) const
 {
-    return QwtText(QwtBleUtilities::stringFromDays(lround(v)));
+    return {QwtBleUtilities::stringFromDays(lround(v))};
 }
 
 void BasicDataPlot::legendItemChecked(const QVariant& itemInfo, bool on,

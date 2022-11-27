@@ -18,7 +18,7 @@ QwtText StringsScaleDraw::label(double value) const
     const int valueAsIntegral = static_cast<int>(value);
     if (valueIsIntegral && !intervalNames_.isEmpty() && valueAsIntegral > 0 &&
         valueAsIntegral <= intervalNames_.count())
-        return QwtText(intervalNames_.at(valueAsIntegral - 1));
+        return {intervalNames_.at(valueAsIntegral - 1)};
 
-    return QwtText(QStringLiteral("                     "));
+    return {QStringLiteral("                     ")};
 }

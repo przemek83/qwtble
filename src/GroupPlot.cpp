@@ -53,7 +53,7 @@ QVector<QString> GroupPlot::createAxisIntervalsNames(
     for (int i = 0; i < intervalsNames.size(); ++i)
     {
         QString name = intervalsNames[i];
-        QString countString =
+        const QString countString =
             QString(" (" + QString::number(quantilesVector[i].count_) + ")");
 
         if (name.size() + countString.count() > maxCharsInLabel_)
@@ -84,7 +84,7 @@ QSize GroupPlot::minimumSizeHint() const
 {
     const int minimumWidth{150};
     const int minimumHeight{100};
-    return QSize(minimumWidth, minimumHeight);
+    return {minimumWidth, minimumHeight};
 }
 
 bool GroupPlot::event(QEvent* event)

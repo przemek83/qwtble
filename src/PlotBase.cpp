@@ -65,13 +65,13 @@ QwtText PlotBase::IntervalsScaleDraw::label(double v) const
     using QwtBleUtilities::doubleToStringUsingLocale;
 
     if (!doublesAreEqual(fmod(v, 1), 0.))
-        return QwtText(doubleToStringUsingLocale(v, 1));
-    return QwtText(doubleToStringUsingLocale(v, 0));
+        return {doubleToStringUsingLocale(v, 1)};
+    return {doubleToStringUsingLocale(v, 0)};
 }
 
 QSize PlotBase::minimumSizeHint() const
 {
     const int minimumWidth{100};
     const int minimumHeight{100};
-    return QSize(minimumWidth, minimumHeight);
+    return {minimumWidth, minimumHeight};
 }
