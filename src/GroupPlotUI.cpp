@@ -84,9 +84,9 @@ void GroupPlotUI::updateQuantilesPlotExtent()
         ->setMinimumExtent(expectedExtent);
 
     // Enforce size update of quantiles plot.
-    auto* resizeEvent{
+    auto* forceResizeEvent{
         new QResizeEvent(quantilesPlot_.size(), quantilesPlot_.size())};
-    QCoreApplication::postEvent(&quantilesPlot_, resizeEvent);
+    QCoreApplication::postEvent(&quantilesPlot_, forceResizeEvent);
 }
 
 double GroupPlotUI::calculateExpectedQuantilesPlotExtent() const
