@@ -9,16 +9,29 @@
  + notched marker.
   
 # Building
-Clone and use Cmake directly or via IDE like QtCreator. Cmake **should**:
+Clone and use CMake directly or via IDE like QtCreator. CMake **should**:
 + configure everything automatically,
 + detect installation of Qwt (using environment variable QWT_ROOT) or download it and build,
 + compile library and create binaries.
 
-**TIP**: remember to set properly `CMAKE_PREFIX_PATH` env variable to let Cmake `find_package` command work. It should have Qt installation path.  
+**TIP**: remember to set properly `CMAKE_PREFIX_PATH` env variable to let CMake `find_package` command work. It should have Qt installation path.  
 
 As a result of compilation dynamic lib should be created along with headers dir.
 
-To use it as external project via Cmake you may check how it is done in my other project called Volbx.
+To familiarize yourself how to use it as external project via CMake, you may check how it is done in my other project called Volbx.
+
+## Used tools and libs
+| Tool |  Windows | Lubuntu |
+| --- | --- | --- |
+| OS version | 10 22H2 | 22.04 |
+| GCC | 8.1.0 | 8.1.0 |
+| CMake | 3.25.0 | 3.25.0 |
+| Git | 2.38.1 | 2.34.1 |
+| Svn | 1.14.2 | 1.14.1 |
+| Qt | 5.15.2 | 5.15.2 |
+| QtCreator | 9.0.0 |9.0.0 |
+| Qwt | 6.1.6 | 6.1.6 |
+
 
 # Usage
 Easiest way is to check examples subproject where you can find how to create and interact with each plot and notched marker.  
