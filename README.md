@@ -1,3 +1,11 @@
+## Table of content
+- [About project](#about-project)
+- [Building](#building)
+- [Usage](#usage)
+- [Plots](#plots)
+- [Markers](#markers)
+
+
 # About project
  Library of useful plots and one marker based on Qwt library. Created as a result of division of code of my other project named Volbx and moving parts of it to independent library. Library contains:  
  + quantiles plot,
