@@ -8,7 +8,7 @@ void QuantilesTest::testToolTip()
 {
     Quantiles quantiles;
     quantiles.init(values_);
-    QString expected(
+    const QString expected(
         QStringLiteral("<table>"
                        "<tr><td>Data count:</td><td ALIGN=RIGHT></td></tr>\n"
                        "<tr><td>Average</td><td ALIGN=RIGHT></td></tr>\n"
@@ -23,8 +23,9 @@ void QuantilesTest::testToolTip()
                        "</table>"));
     // Ignore numbers due to localization. Test only structure of tooltip.
     const QLocale& locale = QLocale::system();
-    QRegExp regexp{QRegExp(QStringLiteral(">[0-9]*\\") + locale.decimalPoint() +
-                           QStringLiteral("?[0-9]*<"))};
+    const QRegExp regexp{QRegExp(QStringLiteral(">[0-9]*\\") +
+                                 locale.decimalPoint() +
+                                 QStringLiteral("?[0-9]*<"))};
     QCOMPARE(expected, quantiles.getValuesAsToolTip().replace(
                            regexp, QStringLiteral("><")));
 }
@@ -50,7 +51,7 @@ void QuantilesTest::testComputing()
 void QuantilesTest::testComputingEmptyData()
 {
     Quantiles quantiles;
-    QVector<double> emptyData{};
+    const QVector<double> emptyData{};
     quantiles.init(emptyData);
     QCOMPARE(quantiles.count_, 0);
     QCOMPARE(quantiles.mean_, 0);
@@ -69,7 +70,7 @@ void QuantilesTest::testComputingEmptyData()
 void QuantilesTest::testComputingSinleItemData()
 {
     Quantiles quantiles;
-    QVector<double> singleItemData{3};
+    const QVector<double> singleItemData{3};
     quantiles.init(singleItemData);
     QCOMPARE(quantiles.count_, 1);
     QCOMPARE(quantiles.mean_, 3);

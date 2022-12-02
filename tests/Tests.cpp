@@ -6,7 +6,7 @@
 
 int main(int argc, char* argv[])
 {
-    QApplication a(argc, argv);
+    const QApplication a(argc, argv);
 
     UtilitiesTest utilitiesTest;
     QTest::qExec(&utilitiesTest);

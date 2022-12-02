@@ -14,7 +14,7 @@ private Q_SLOTS:
 
     void testComputing();
 
-    void testComputingEmptyData();
+    static void testComputingEmptyData();
 
-    void testComputingSinleItemData();
+    static void testComputingSinleItemData();
 };
