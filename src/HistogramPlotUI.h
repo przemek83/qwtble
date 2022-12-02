@@ -8,7 +8,7 @@
 namespace Ui
 {
 class HistogramPlotUI;
-}
+}  // namespace Ui
 
 /**
  * @class HistogramPlotUI
