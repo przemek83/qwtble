@@ -22,7 +22,7 @@ void Quantiles::clear()
     maxX_ = .0;
 }
 
-double Quantiles::calculateStdDev(int count, double EX, double EX2) const
+double Quantiles::calculateStdDev(int count, double EX, double EX2)
 {
     if (count > 1)
         return sqrt(EX2 - EX * EX);
@@ -30,7 +30,7 @@ double Quantiles::calculateStdDev(int count, double EX, double EX2) const
 }
 
 double Quantiles::computeQuantile(const QVector<double>& values,
-                                  double interval) const
+                                  double interval)
 {
     return values.at(static_cast<int>(floor(interval))) +
            (interval - floor(interval)) *

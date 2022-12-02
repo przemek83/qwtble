@@ -34,13 +34,13 @@ protected:
     bool event(QEvent* event) override;
 
 private:
-    QVector<QString> createAxisIntervalsNames(
+    static QVector<QString> createAxisIntervalsNames(
         const QVector<QString>& intervalsNames,
-        const QVector<Quantiles>& quantilesVector) const;
+        const QVector<Quantiles>& quantilesVector) ;
 
-    QVector<QString> createTooltips(
+    static QVector<QString> createTooltips(
         const QVector<QString>& intervalsNames,
-        const QVector<Quantiles>& quantilesVector) const;
+        const QVector<Quantiles>& quantilesVector);
 
     /// Maximum number of chars in label.
     static constexpr int maxCharsInLabel_{20};

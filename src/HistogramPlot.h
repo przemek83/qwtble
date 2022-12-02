@@ -45,9 +45,9 @@ private:
 
     void setLegendItemChecked(QwtPlotItem* plot);
 
-    QVector<int> getFilledIntervals(const QVector<double>& data,
-                                    const Quantiles& quantiles,
-                                    int intervalsCount) const;
+    static QVector<int> getFilledIntervals(const QVector<double>& data,
+                                           const Quantiles& quantiles,
+                                           int intervalsCount);
 
     void udpatePlotItems(int intervalsCount);
 

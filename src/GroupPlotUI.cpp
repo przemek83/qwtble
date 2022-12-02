@@ -101,7 +101,7 @@ double GroupPlotUI::calculateExpectedQuantilesPlotExtent() const
     return groupPlotExtent + scrollBarSize;
 }
 
-double GroupPlotUI::getPlotBottomExtent(const QwtPlot& plot) const
+double GroupPlotUI::getPlotBottomExtent(const QwtPlot& plot)
 {
     const auto* groupPlotScaleDraw{plot.axisScaleDraw(QwtPlot::xBottom)};
     const double plotExtent{

@@ -80,16 +80,16 @@ private:
     void drawElementLowerPart(QPainter* p, const ElementRecipe& recipe) const;
     void drawMeanCross(QPainter* p, const ElementRecipe& recipe) const;
 
-    ElementRecipe createElementRecipe(const QwtScaleMap& yMap, double centerX,
-                                      double width,
-                                      const Quantiles& quantiles) const;
+    static ElementRecipe createElementRecipe(const QwtScaleMap& yMap,
+                                             double centerX, double width,
+                                             const Quantiles& quantiles);
 
-    void drawLegendTexts(QPainter* p, const ElementRecipe& recipe) const;
+    static void drawLegendTexts(QPainter* p, const ElementRecipe& recipe);
 
-    ElementRecipe createLegendRecipe(const QRectF& rect, int sectionHeight,
-                                     double startY) const;
+    static ElementRecipe createLegendRecipe(const QRectF& rect,
+                                            int sectionHeight, double startY);
 
-    double calculateIndent(const ElementRecipe& recipe) const;
+    static double calculateIndent(const ElementRecipe& recipe);
 
     static constexpr int LEGEND_SPACING{4};
     static constexpr double INDENT_FACTOR{0.25};

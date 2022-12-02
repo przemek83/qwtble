@@ -45,7 +45,7 @@ void GroupPlot::setNewData(QVector<Quantiles> quantilesVector,
 
 QVector<QString> GroupPlot::createAxisIntervalsNames(
     const QVector<QString>& intervalsNames,
-    const QVector<Quantiles>& quantilesVector) const
+    const QVector<Quantiles>& quantilesVector)
 {
     QVector<QString> shortenNames;
     shortenNames.reserve(intervalsNames.size());
@@ -70,7 +70,7 @@ QVector<QString> GroupPlot::createAxisIntervalsNames(
 
 QVector<QString> GroupPlot::createTooltips(
     const QVector<QString>& intervalsNames,
-    const QVector<Quantiles>& quantilesVector) const
+    const QVector<Quantiles>& quantilesVector)
 {
     QVector<QString> tooltips;
     tooltips.reserve(intervalsNames.size());

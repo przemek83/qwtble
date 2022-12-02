@@ -185,7 +185,7 @@ void NotchedMarker::drawElement(QPainter* p, const ElementRecipe& recipe) const
 
 NotchedMarker::ElementRecipe NotchedMarker::createElementRecipe(
     const QwtScaleMap& yMap, double centerX, double width,
-    const Quantiles& quantiles) const
+    const Quantiles& quantiles)
 {
     ElementRecipe recipe;
     recipe.minY = yMap.transform(quantiles.min_);
@@ -201,8 +201,7 @@ NotchedMarker::ElementRecipe NotchedMarker::createElementRecipe(
     return recipe;
 }
 
-void NotchedMarker::drawLegendTexts(QPainter* p,
-                                    const ElementRecipe& recipe) const
+void NotchedMarker::drawLegendTexts(QPainter* p, const ElementRecipe& recipe)
 {
     // Place on x axis where legend text starts.
     const double textStartX = recipe.toX + LEGEND_SPACING;
@@ -227,7 +226,7 @@ void NotchedMarker::drawLegendTexts(QPainter* p,
 }
 
 NotchedMarker::ElementRecipe NotchedMarker::createLegendRecipe(
-    const QRectF& rect, int sectionHeight, double startY) const
+    const QRectF& rect, int sectionHeight, double startY)
 {
     ElementRecipe recipe;
     const int width = 4 * LEGEND_SPACING;
@@ -245,7 +244,7 @@ NotchedMarker::ElementRecipe NotchedMarker::createLegendRecipe(
     return recipe;
 }
 
-double NotchedMarker::calculateIndent(const ElementRecipe& recipe) const
+double NotchedMarker::calculateIndent(const ElementRecipe& recipe)
 {
     return (recipe.toX - recipe.fromX) * INDENT_FACTOR;
 }

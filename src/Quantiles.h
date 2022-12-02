@@ -60,9 +60,9 @@ public:
     QString getValuesAsToolTip() const;
 
 private:
-    double computeQuantile(const QVector<double>& values,
-                           double interval) const;
-    double calculateStdDev(int count, double EX, double EX2) const;
+    static double computeQuantile(const QVector<double>& values,
+                                  double interval);
+    static double calculateStdDev(int count, double EX, double EX2);
     void setQuantiles(const QVector<double>& values);
     std::tuple<double, double> calculateEXAndEX2(const QVector<double>& values);
 

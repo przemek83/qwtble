@@ -81,7 +81,7 @@ void HistogramPlot::setLegendItemChecked(QwtPlotItem* plot)
 
 QVector<int> HistogramPlot::getFilledIntervals(const QVector<double>& data,
                                                const Quantiles& quantiles,
-                                               int intervalsCount) const
+                                               int intervalsCount)
 {
     const int dataCount = data.size();
     const double min = quantiles.min_;
