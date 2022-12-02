@@ -95,7 +95,7 @@ void NotchedMarker::drawElements(QPainter* p, const QwtScaleMap& xMap,
 }
 
 void NotchedMarker::drawElementUpperPart(QPainter* p,
-                                         const ElementRecipe& recipe) const
+                                         const ElementRecipe& recipe)
 {
     const double indent{calculateIndent(recipe)};
     const double centerX = (recipe.fromX + recipe.toX) / 2;
@@ -140,7 +140,7 @@ void NotchedMarker::drawElementCenterPart(QPainter* p,
 }
 
 void NotchedMarker::drawElementLowerPart(QPainter* p,
-                                         const ElementRecipe& recipe) const
+                                         const ElementRecipe& recipe)
 {
     const double indent{calculateIndent(recipe)};
     const double centerX = (recipe.fromX + recipe.toX) / 2;
@@ -163,8 +163,7 @@ void NotchedMarker::drawElementLowerPart(QPainter* p,
     p->setPen(QPen(Qt::SolidLine));
 }
 
-void NotchedMarker::drawMeanCross(QPainter* p,
-                                  const ElementRecipe& recipe) const
+void NotchedMarker::drawMeanCross(QPainter* p, const ElementRecipe& recipe)
 {
     const double indent{calculateIndent(recipe)};
     const double centerX = (recipe.fromX + recipe.toX) / 2;

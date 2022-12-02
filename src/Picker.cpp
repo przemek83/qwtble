@@ -40,4 +40,4 @@ void Picker::widgetLeaveEvent(QEvent* event)
     mouseInWidget_ = false;
 }
 
-bool Picker::getMouseInWidget() { return mouseInWidget_; }
+bool Picker::getMouseInWidget() const { return mouseInWidget_; }

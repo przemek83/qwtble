@@ -40,7 +40,7 @@ double Quantiles::computeQuantile(const QVector<double>& values,
 
 void Quantiles::setQuantiles(const QVector<double>& values)
 {
-    int count{values.count()};
+    const int count{values.count()};
     if (count <= 1)
     {
         const double value = values.front();
@@ -162,7 +162,7 @@ QString Quantiles::valueAsHtmlRow(PlotInfo name, double value)
     QString html(QStringLiteral("<tr><td>"));
     html.append(plotInfoNames.at(static_cast<size_t>(name)));
     html.append(QLatin1String("</td><td ALIGN=RIGHT>"));
-    int precision = (PLOT_INFO_COUNT == name ? 0 : 2);
+    const int precision = (PLOT_INFO_COUNT == name ? 0 : 2);
     html.append(QwtBleUtilities::doubleToStringUsingLocale(value, precision));
     html.append(QLatin1String("</td></tr>\n"));
 

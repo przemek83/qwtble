@@ -11,11 +11,11 @@ class Picker : public QwtPlotPicker
 public:
     explicit Picker(QWidget* parent);
 
-    virtual ~Picker() override = default;
+    ~Picker() override = default;
 
     int getAreaOfMouse();
 
-    bool getMouseInWidget();
+    bool getMouseInWidget() const;
 
 protected:
     QwtText trackerTextF(const QPointF& pos) const override = 0;

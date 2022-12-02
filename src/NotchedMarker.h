@@ -75,10 +75,10 @@ private:
     };
 
     void drawElement(QPainter* p, const ElementRecipe& recipe) const;
-    void drawElementUpperPart(QPainter* p, const ElementRecipe& recipe) const;
+    static void drawElementUpperPart(QPainter* p, const ElementRecipe& recipe);
     void drawElementCenterPart(QPainter* p, const ElementRecipe& recipe) const;
-    void drawElementLowerPart(QPainter* p, const ElementRecipe& recipe) const;
-    void drawMeanCross(QPainter* p, const ElementRecipe& recipe) const;
+    static void drawElementLowerPart(QPainter* p, const ElementRecipe& recipe);
+    static void drawMeanCross(QPainter* p, const ElementRecipe& recipe);
 
     static ElementRecipe createElementRecipe(const QwtScaleMap& yMap,
                                              double centerX, double width,
