@@ -48,9 +48,9 @@ private:
      */
     QSplitter* setupSplitter();
 
-    [[nodiscard]] double calculateExpectedQuantilesPlotExtent() const;
+    double calculateExpectedQuantilesPlotExtent() const;
 
-    [[nodiscard]] double getPlotBottomExtent(const QwtPlot& plot) const;
+    static double getPlotBottomExtent(const QwtPlot& plot);
 
     Ui::GroupPlotUI* ui;
 
