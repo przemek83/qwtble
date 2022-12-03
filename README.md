@@ -26,7 +26,7 @@ Clone and use CMake directly or via IDE like QtCreator. CMake **should**:
 
 As a result of compilation dynamic lib should be created along with headers dir.
 
-To familiarize yourself how to use it as external project via CMake, you may check how it is done in my other project called Volbx.
+Check my other project called Volbx to familiarize yourself how to use it via CMake.
 
 ## Used tools and libs
 | Tool |  Windows | Lubuntu |
