@@ -32,7 +32,7 @@ To familiarize yourself how to use it as external project via CMake, you may che
 | Tool |  Windows | Lubuntu |
 | --- | --- | --- |
 | OS version | 10 22H2 | 22.04 |
-| GCC | 8.1.0 | 8.1.0 |
+| GCC | 8.1.0 | 9.5.0 |
 | CMake | 3.25.0 | 3.25.0 |
 | Git | 2.38.1 | 2.34.1 |
 | Svn | 1.14.2 | 1.14.1 |
