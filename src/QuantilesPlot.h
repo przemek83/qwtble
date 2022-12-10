@@ -2,12 +2,12 @@
 
 #include <qwt_scale_draw.h>
 
-#include "NotchedMarker.h"
 #include "PlotBase.h"
 #include "Quantiles.h"
 #include "qwtble_global.h"
 
 class YAxisNumberPicker;
+class NotchedMarker;
 
 /**
  * @class QuantilesPlot
@@ -18,6 +18,8 @@ class QWTBLE_EXPORT QuantilesPlot : public PlotBase
     Q_OBJECT
 public:
     explicit QuantilesPlot(QWidget* parent = nullptr);
+
+    ~QuantilesPlot() override;
 
     QSize minimumSizeHint() const override;
 

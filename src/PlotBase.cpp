@@ -26,6 +26,7 @@ PlotBase::PlotBase(const QString& title, QWidget* parent)
     setAxisLabelAlignment(QwtPlot::xBottom, Qt::AlignLeft | Qt::AlignBottom);
 }
 
+// Uncommon construction to allow forward declaration of PlotMagnifier class.
 PlotBase::~PlotBase() = default;
 
 void PlotBase::mouseDoubleClickEvent(QMouseEvent* event)
