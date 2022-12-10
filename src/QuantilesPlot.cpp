@@ -27,8 +27,6 @@ QuantilesPlot::QuantilesPlot(QWidget* parent)
     setupLegend(width());
 }
 
-QuantilesPlot::~QuantilesPlot() = default;
-
 void QuantilesPlot::resizeEvent(QResizeEvent* event)
 {
     PlotBase::resizeEvent(event);

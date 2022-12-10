@@ -11,8 +11,6 @@ class Picker : public QwtPlotPicker
 public:
     explicit Picker(QWidget* parent);
 
-    ~Picker() override = default;
-
     int getAreaOfMouse();
 
     bool getMouseInWidget() const;

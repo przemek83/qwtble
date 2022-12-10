@@ -2,10 +2,10 @@
 
 #include "PlotBase.h"
 #include "Quantiles.h"
+#include "YAxisNumberPicker.h"
 #include "qwtble_global.h"
 
 class NotchedMarker;
-class YAxisNumberPicker;
 
 /**
  * @class GroupPlot
@@ -16,8 +16,6 @@ class QWTBLE_EXPORT GroupPlot : public PlotBase
     Q_OBJECT
 public:
     explicit GroupPlot(QWidget* parent = nullptr);
-
-    ~GroupPlot() override;
 
     QSize minimumSizeHint() const override;
 

@@ -23,8 +23,6 @@ BasicDataPlot::BasicDataPlot(QWidget* parent)
     checkLegendItems();
 }
 
-BasicDataPlot::~BasicDataPlot() = default;
-
 void BasicDataPlot::initPlotCurve()
 {
     plotData_.setStyle(QwtPlotCurve::Dots);

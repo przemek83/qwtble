@@ -8,8 +8,6 @@ class XYAxisNumberPicker : public Picker
 public:
     explicit XYAxisNumberPicker(QWidget* parent);
 
-    ~XYAxisNumberPicker() override = default;
-
 protected:
     [[nodiscard]] QwtText trackerTextF(const QPointF& pos) const override;
 };

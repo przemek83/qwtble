@@ -15,8 +15,6 @@ HistogramPlot::HistogramPlot(QWidget* parent)
     initLegend();
 }
 
-HistogramPlot::~HistogramPlot() = default;
-
 void HistogramPlot::initHistogramPlot()
 {
     histogram_.setStyle(QwtPlotHistogram::Columns);

@@ -6,10 +6,10 @@
 #include <qwt_plot_panner.h>
 #include <qwt_scale_draw.h>
 
+#include "PlotMagnifier.h"
 #include "qwtble_global.h"
 
 class QwtPlotPanner;
-class PlotMagnifier;
 
 /**
  * @class PlotBase
@@ -20,8 +20,6 @@ class QWTBLE_EXPORT PlotBase : public QwtPlot
     Q_OBJECT
 public:
     explicit PlotBase(const QString& title, QWidget* parent = nullptr);
-
-    ~PlotBase() override;
 
     /**
      * @brief Reset state of plot.

@@ -25,8 +25,6 @@ GroupPlot::GroupPlot(QWidget* parent)
     setAxisFont(QwtPlot::xBottom, font);
 }
 
-GroupPlot::~GroupPlot() = default;
-
 void GroupPlot::setNewData(QVector<Quantiles> quantilesVector,
                            const QVector<QString>& intervalStrings)
 {

@@ -5,9 +5,9 @@
 
 #include "PlotBase.h"
 #include "Quantiles.h"
+#include "XYAxisNumberPicker.h"
 #include "qwtble_global.h"
 
-class XYAxisNumberPicker;
 class QMouseEvent;
 
 /**
@@ -19,8 +19,6 @@ class QWTBLE_EXPORT HistogramPlot : public PlotBase
     Q_OBJECT
 public:
     explicit HistogramPlot(QWidget* parent = nullptr);
-
-    ~HistogramPlot() override;
 
 public Q_SLOTS:
     /**

@@ -8,8 +8,6 @@ class PlotMagnifier : public QwtPlotMagnifier
 public:
     explicit PlotMagnifier(QWidget* canvas);
 
-    ~PlotMagnifier() override = default;
-
     void reset();
 
 protected:

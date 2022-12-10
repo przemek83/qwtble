@@ -19,6 +19,7 @@ class QWTBLE_EXPORT HistogramPlotUI : public QWidget
     Q_OBJECT
 public:
     explicit HistogramPlotUI(QWidget* parent = nullptr);
+
     ~HistogramPlotUI() override;
 
 public Q_SLOTS:

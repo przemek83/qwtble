@@ -18,8 +18,6 @@ class QWTBLE_EXPORT BasicDataPlot : public PlotBase
 public:
     explicit BasicDataPlot(QWidget* parent = nullptr);
 
-    ~BasicDataPlot() override;
-
 public Q_SLOTS:
     /**
      * @brief Set new data for plot.

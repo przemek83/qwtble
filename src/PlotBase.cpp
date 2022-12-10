@@ -26,8 +26,6 @@ PlotBase::PlotBase(const QString& title, QWidget* parent)
     setAxisLabelAlignment(QwtPlot::xBottom, Qt::AlignLeft | Qt::AlignBottom);
 }
 
-PlotBase::~PlotBase() = default;
-
 void PlotBase::mouseDoubleClickEvent(QMouseEvent* event)
 {
     QwtPlot::mouseDoubleClickEvent(event);
