@@ -4,6 +4,7 @@
 
 #include <qwt_plot_canvas.h>
 #include <QDebug>
+#include <QPen>
 
 #include "QwtBleUtilities.h"
 

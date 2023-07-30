@@ -2,6 +2,7 @@
 
 #include <cmath>
 
+#include <qwt_text.h>
 #include <QMouseEvent>
 
 #include "PlotMagnifier.h"

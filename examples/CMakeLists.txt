@@ -1,12 +1,12 @@
 project(examples)
 
-set(${PROJECT_NAME}_SOURCES
+set(SOURCES
     example.cpp
-    )
+)
 
-add_executable(examples ${${PROJECT_NAME}_SOURCES})
+add_executable(examples ${SOURCES})
 
-target_link_libraries(examples PRIVATE Qt5::Core Qt5::Widgets qwtble)
+target_link_libraries(examples PRIVATE Qt6::Core Qt6::Widgets qwtble)
 
 if (WIN32)
     target_link_libraries(${PROJECT_NAME} PRIVATE optimized qwt debug qwtd)

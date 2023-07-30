@@ -1,5 +1,8 @@
 #pragma once
 
+#include <QBrush>
+#include <QVector>
+
 #include <qwt_plot_item.h>
 
 #include "qwtble_global.h"

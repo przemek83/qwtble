@@ -2,6 +2,9 @@
 
 #include <cmath>
 
+#include <qwt_text.h>
+#include <QBrush>
+
 #include "QwtBleUtilities.h"
 
 XDateYAxisNumberPicker::XDateYAxisNumberPicker(QWidget* parent) : Picker(parent)

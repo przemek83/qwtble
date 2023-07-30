@@ -2,6 +2,7 @@
 
 #include <qwt_legend.h>
 #include <qwt_legend_label.h>
+#include <QPen>
 
 #include "QwtBleUtilities.h"
 #include "XYAxisNumberPicker.h"

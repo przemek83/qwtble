@@ -2,18 +2,19 @@
 
 #include <QWidget>
 
-#include "GroupPlot.h"
 #include "Quantiles.h"
-#include "QuantilesPlot.h"
 #include "qwtble_global.h"
+
+class QSplitter;
+class QScrollBar;
+class QuantilesPlot;
+class GroupPlot;
+class QwtPlot;
 
 namespace Ui
 {
 class GroupPlotUI;
 }  // namespace Ui
-
-class QSplitter;
-class QScrollBar;
 
 /**
  * @class GroupPlotUI
@@ -55,9 +56,9 @@ private:
 
     Ui::GroupPlotUI* ui;
 
-    GroupPlot groupPlot_;
+    GroupPlot* groupPlot_;
 
-    QuantilesPlot quantilesPlot_;
+    QuantilesPlot* quantilesPlot_;
 
 private Q_SLOTS:
     void updateQuantilesPlotExtent();

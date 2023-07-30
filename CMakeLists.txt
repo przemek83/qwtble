@@ -1,17 +1,17 @@
-cmake_minimum_required(VERSION 3.8)
+cmake_minimum_required(VERSION 3.16)
 
-project(qwtble LANGUAGES CXX VERSION 0.0.1 DESCRIPTION "Library with widgets built on top of Qwt.")
+project(qwtble
+        LANGUAGES CXX
+        VERSION 1.1.0
+        DESCRIPTION "Library with widgets built on top of Qwt."
+        HOMEPAGE_URL "https://github.com/przemek83/qwtble")
 
-set(CMAKE_INCLUDE_CURRENT_DIR ON)
-set(CMAKE_AUTOUIC ON)
-set(CMAKE_AUTOMOC ON)
-set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-find_package(Qt5 COMPONENTS Widgets Core Test REQUIRED)
-add_definitions( ${QT_DEFINITIONS} )
+find_package(Qt6 REQUIRED COMPONENTS Widgets Core Test)
+qt_standard_project_setup()
 
 # QWT
 if(DEFINED ENV{QWT_ROOT})
@@ -39,66 +39,75 @@ message(STATUS "Using QWT_BINARY_PATH ${QWT_BINARY_PATH}")
 include_directories(${QWT_INCLUDE_PATH})
 link_directories(${QWT_BINARY_PATH})
 
-add_library(${PROJECT_NAME} SHARED
-  src/qwtble_global.h
-  src/BasicDataPlot.cpp
-  src/BasicDataPlot.h
-  src/YAxisNumberPicker.cpp
-  src/YAxisNumberPicker.h
-  src/GroupPlot.cpp
-  src/GroupPlot.h
-  src/HistogramPlot.cpp
-  src/HistogramPlot.h
-  src/XYAxisNumberPicker.cpp
-  src/XYAxisNumberPicker.h
-  src/XDateYAxisNumberPicker.cpp
-  src/XDateYAxisNumberPicker.h
-  src/NotchedMarker.cpp
-  src/NotchedMarker.h
-  src/Picker.cpp
-  src/Picker.h
-  src/PlotBase.cpp
-  src/PlotBase.h
-  src/PlotMagnifier.cpp
-  src/PlotMagnifier.h
-  src/QuantilesPlot.cpp
-  src/QuantilesPlot.h
-  src/StringsScaleDraw.cpp
-  src/StringsScaleDraw.h
-  src/Quantiles.cpp
-  src/Quantiles.h
-  src/QwtBleUtilities.cpp
-  src/QwtBleUtilities.h
-  src/GroupPlotUI.cpp
-  src/GroupPlotUI.h
-  src/GroupPlotUI.ui
-  src/HistogramPlotUI.cpp
-  src/HistogramPlotUI.h
-  src/HistogramPlotUI.ui
-  src/Utilities.cpp
-  src/Utilities.h
+set(SOURCES
+    src/BasicDataPlot.cpp
+    src/YAxisNumberPicker.cpp
+    src/GroupPlot.cpp
+    src/HistogramPlot.cpp
+    src/XYAxisNumberPicker.cpp
+    src/XDateYAxisNumberPicker.cpp
+    src/NotchedMarker.cpp
+    src/Picker.cpp
+    src/PlotBase.cpp
+    src/PlotMagnifier.cpp
+    src/QuantilesPlot.cpp
+    src/StringsScaleDraw.cpp
+    src/Quantiles.cpp
+    src/QwtBleUtilities.cpp
+    src/GroupPlotUI.cpp
+    src/HistogramPlotUI.cpp
+    src/Utilities.cpp
 )
 
-set_target_properties(${PROJECT_NAME} PROPERTIES VERSION ${PROJECT_VERSION})
-set_target_properties(${PROJECT_NAME} PROPERTIES SOVERSION 1)
-
-set_property(TARGET ${PROJECT_NAME} PROPERTY PUBLIC_HEADER
+set(HEADERS
     src/qwtble_global.h
     src/BasicDataPlot.h
+    src/YAxisNumberPicker.h
     src/GroupPlot.h
     src/HistogramPlot.h
+    src/XYAxisNumberPicker.h
+    src/XDateYAxisNumberPicker.h
+    src/NotchedMarker.h
+    src/Picker.h
     src/PlotBase.h
+    src/PlotMagnifier.h
     src/QuantilesPlot.h
+    src/StringsScaleDraw.h
     src/Quantiles.h
     src/QwtBleUtilities.h
-    src/NotchedMarker.h
     src/GroupPlotUI.h
     src/HistogramPlotUI.h
-    )
-target_include_directories(${PROJECT_NAME} PUBLIC src)
-include(GNUInstallDirs)
+    src/Utilities.h
+)
 
-target_link_libraries(${PROJECT_NAME} PRIVATE Qt5::Core Qt5::Widgets)
+set(UI
+    src/GroupPlotUI.ui
+    src/HistogramPlotUI.ui
+)
+source_group("UI Files" FILES ${UI})
+
+add_library(${PROJECT_NAME} SHARED ${SOURCES} ${HEADERS} ${UI})
+
+set_target_properties(${PROJECT_NAME} PROPERTIES
+    VERSION ${PROJECT_VERSION}
+    SOVERSION 1
+    PUBLIC_HEADER
+        src/qwtble_global.h
+        src/BasicDataPlot.h
+        src/GroupPlot.h
+        src/HistogramPlot.h
+        src/PlotBase.h
+        src/QuantilesPlot.h
+        src/Quantiles.h
+        src/QwtBleUtilities.h
+        src/NotchedMarker.h
+        src/GroupPlotUI.h
+        src/HistogramPlotUI.h
+)
+
+target_include_directories(${PROJECT_NAME} PUBLIC src)
+
+target_link_libraries(${PROJECT_NAME} PRIVATE Qt6::Core Qt6::Widgets)
 if (WIN32)
     target_link_libraries(${PROJECT_NAME} PRIVATE optimized qwt debug qwtd)
 else()
@@ -107,38 +116,7 @@ endif()
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE QWTBLE_LIBRARY)
 
-if (WIN32)
-    add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
-                       COMMAND ${CMAKE_COMMAND} -E copy
-                               ${CMAKE_BINARY_DIR}/${CMAKE_SHARED_LIBRARY_PREFIX}${PROJECT_NAME}${CMAKE_SHARED_LIBRARY_SUFFIX}
-                               ${CMAKE_BINARY_DIR}/examples/)
-
-    add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
-                       COMMAND ${CMAKE_COMMAND} -E copy
-                               ${CMAKE_BINARY_DIR}/${CMAKE_SHARED_LIBRARY_PREFIX}${PROJECT_NAME}${CMAKE_SHARED_LIBRARY_SUFFIX}
-                               ${CMAKE_BINARY_DIR}/tests/)
-
-    add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
-                       COMMAND ${CMAKE_COMMAND} -E copy
-                               ${QWT_BINARY_PATH}/qwt.dll
-                               ${CMAKE_BINARY_DIR}/tests/)
-
-    add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
-                       COMMAND ${CMAKE_COMMAND} -E copy
-                               ${QWT_BINARY_PATH}/qwtd.dll
-                               ${CMAKE_BINARY_DIR}/tests/)
-
-    add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
-                       COMMAND ${CMAKE_COMMAND} -E copy
-                               ${QWT_BINARY_PATH}/qwt.dll
-                               ${CMAKE_BINARY_DIR}/examples/)
-
-    add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
-                       COMMAND ${CMAKE_COMMAND} -E copy
-                               ${QWT_BINARY_PATH}/qwtd.dll
-                               ${CMAKE_BINARY_DIR}/examples/)
-endif()
-
+include(GNUInstallDirs)
 install(TARGETS ${PROJECT_NAME}
         LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
         PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})

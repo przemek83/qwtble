@@ -1,7 +1,7 @@
 #include "QuantilesTest.h"
 
 #include <Quantiles.h>
-#include <QRegExp>
+#include <QRegularExpression>
 #include <QTest>
 
 void QuantilesTest::testToolTip()
@@ -23,9 +23,9 @@ void QuantilesTest::testToolTip()
                        "</table>"));
     // Ignore numbers due to localization. Test only structure of tooltip.
     const QLocale& locale = QLocale::system();
-    const QRegExp regexp{QRegExp(QStringLiteral(">[0-9]*\\") +
-                                 locale.decimalPoint() +
-                                 QStringLiteral("?[0-9]*<"))};
+    const QRegularExpression regexp{
+        QRegularExpression(QStringLiteral(">[0-9]*\\") + locale.decimalPoint() +
+                           QStringLiteral("?[0-9]*<"))};
     QCOMPARE(expected, quantiles.getValuesAsToolTip().replace(
                            regexp, QStringLiteral("><")));
 }

@@ -2,6 +2,8 @@
 
 #include <cmath>
 
+#include <qwt_text.h>
+
 #include "QwtBleUtilities.h"
 
 StringsScaleDraw::StringsScaleDraw(QVector<QString> intervalNames)

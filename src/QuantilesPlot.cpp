@@ -1,6 +1,7 @@
 #include "QuantilesPlot.h"
 
 #include <qwt_scale_div.h>
+#include <qwt_text.h>
 #include <QDebug>
 #include <QResizeEvent>
 

@@ -57,9 +57,9 @@ QVector<QString> GroupPlot::createAxisIntervalsNames(
         const QString countString =
             QString(" (" + QString::number(quantilesVector[i].count_) + ")");
 
-        if (name.size() + countString.count() > maxCharsInLabel_)
+        if (name.size() + countString.size() > maxCharsInLabel_)
         {
-            name.chop(name.size() - maxCharsInLabel_ + countString.count() +
+            name.chop(name.size() - maxCharsInLabel_ + countString.size() +
                       moreChars.size());
             name.append(moreChars);
         }

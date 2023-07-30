@@ -40,7 +40,7 @@ double Quantiles::computeQuantile(const QVector<double>& values,
 
 void Quantiles::setQuantiles(const QVector<double>& values)
 {
-    const int count{values.count()};
+    const int count{static_cast<int>(values.size())};
     if (count <= 1)
     {
         const double value = values.front();

@@ -1,5 +1,6 @@
 #include "HistogramPlotUI.h"
 
+#include "HistogramPlot.h"
 #include "ui_HistogramPlotUI.h"
 
 HistogramPlotUI::HistogramPlotUI(QWidget* parent)
@@ -9,10 +10,11 @@ HistogramPlotUI::HistogramPlotUI(QWidget* parent)
 
     setWindowTitle(tr("Histogram"));
 
-    ui->verticalLayout->addWidget(&histogramPlot_);
+    histogramPlot_ = new HistogramPlot();
+    ui->verticalLayout->addWidget(histogramPlot_);
 
     connect(ui->spinBox, qOverload<int>(&QSpinBox::valueChanged),
-            &histogramPlot_, &HistogramPlot::recompute);
+            histogramPlot_, &HistogramPlot::recompute);
 }
 
 HistogramPlotUI::~HistogramPlotUI() { delete ui; }
@@ -21,5 +23,5 @@ void HistogramPlotUI::setNewData(QVector<double> data,
                                  const Quantiles& quantiles)
 {
     const int intervalsCount{ui->spinBox->value()};
-    histogramPlot_.setNewData(std::move(data), quantiles, intervalsCount);
+    histogramPlot_->setNewData(std::move(data), quantiles, intervalsCount);
 }

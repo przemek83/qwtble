@@ -2,13 +2,15 @@
 
 #include <QWidget>
 
-#include "HistogramPlot.h"
 #include "qwtble_global.h"
 
 namespace Ui
 {
 class HistogramPlotUI;
 }  // namespace Ui
+
+class HistogramPlot;
+struct Quantiles;
 
 /**
  * @class HistogramPlotUI
@@ -33,5 +35,5 @@ public Q_SLOTS:
 private:
     Ui::HistogramPlotUI* ui;
 
-    HistogramPlot histogramPlot_;
+    HistogramPlot* histogramPlot_;
 };

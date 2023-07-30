@@ -1,19 +1,21 @@
 project(tests)
 
-set(${PROJECT_NAME}_SOURCES
+set(SOURCES
     Tests.cpp
     UtilitiesTest.cpp
-    UtilitiesTest.h
     GroupPlotUITest.cpp
-    GroupPlotUITest.h
     QuantilesTest.cpp
+)
+
+set(HEADERS
+    UtilitiesTest.h
+    GroupPlotUITest.h
     QuantilesTest.h
-    )
+)
 
-add_executable(tests ${${PROJECT_NAME}_SOURCES})
+add_executable(tests ${SOURCES} ${HEADERS})
 
-target_include_directories(tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
-target_link_libraries(tests PRIVATE Qt5::Test Qt5::Core Qt5::Widgets qwtble)
+target_link_libraries(tests PRIVATE Qt6::Test Qt6::Core Qt6::Widgets qwtble)
 
 if (WIN32)
     target_link_libraries(${PROJECT_NAME} PRIVATE optimized qwt debug qwtd)
