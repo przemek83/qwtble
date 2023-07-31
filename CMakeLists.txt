@@ -88,21 +88,24 @@ source_group("UI Files" FILES ${UI})
 
 add_library(${PROJECT_NAME} SHARED ${SOURCES} ${HEADERS} ${UI})
 
+set(PUBLIC_HEADERS
+    src/qwtble_global.h
+    src/BasicDataPlot.h
+    src/GroupPlot.h
+    src/HistogramPlot.h
+    src/PlotBase.h
+    src/QuantilesPlot.h
+    src/Quantiles.h
+    src/QwtBleUtilities.h
+    src/NotchedMarker.h
+    src/GroupPlotUI.h
+    src/HistogramPlotUI.h
+)
+
 set_target_properties(${PROJECT_NAME} PROPERTIES
     VERSION ${PROJECT_VERSION}
     SOVERSION 1
-    PUBLIC_HEADER
-        src/qwtble_global.h
-        src/BasicDataPlot.h
-        src/GroupPlot.h
-        src/HistogramPlot.h
-        src/PlotBase.h
-        src/QuantilesPlot.h
-        src/Quantiles.h
-        src/QwtBleUtilities.h
-        src/NotchedMarker.h
-        src/GroupPlotUI.h
-        src/HistogramPlotUI.h
+    PUBLIC_HEADER "${PUBLIC_HEADERS}"
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC src)
