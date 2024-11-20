@@ -33,7 +33,9 @@ jobs:
       - name: Run tests
         working-directory: ${{ github.workspace }}/build
         continue-on-error: true
-        run: ctest -C ${{ env.BUILD_TYPE }} -E 'Benchmark'
+        run: |
+          export QT_QPA_PLATFORM=offscreen
+          ctest -C ${{ env.BUILD_TYPE }} -E 'Benchmark'
 
       - name: Debug
         working-directory: ${{ github.workspace }}/build
