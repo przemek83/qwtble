@@ -1,5 +1,7 @@
 #pragma once
 
+#include <memory>
+
 #include <qwt_plot_curve.h>
 
 #include "PlotBase.h"
@@ -17,6 +19,8 @@ class QWTBLE_EXPORT BasicDataPlot : public PlotBase
     Q_OBJECT
 public:
     explicit BasicDataPlot(QWidget* parent = nullptr);
+
+    ~BasicDataPlot() override;
 
 public Q_SLOTS:
     /**
