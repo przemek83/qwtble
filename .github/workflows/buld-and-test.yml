@@ -11,5 +11,4 @@ jobs:
     uses: przemek83/workflows/.github/workflows/build-and-test-qt.yml@main
     with:
       platform: ${{ matrix.platform }}
-      use-qt: true
       qt-version: ${{ matrix.qt-version }}
