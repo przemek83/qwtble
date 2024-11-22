@@ -1,3 +1,5 @@
+[![Build & test](https://github.com/przemek83/qwtble/actions/workflows/buld-and-test.yml/badge.svg)](https://github.com/przemek83/qwtble/actions/workflows/buld-and-test.yml)
+
 ## Table of content
 - [About project](#about-project)
 - [Building](#building)
