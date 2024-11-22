@@ -103,4 +103,4 @@ install(TARGETS ${PROJECT_NAME}
 add_subdirectory(examples)
 
 enable_testing()
-add_subdirectory(tests)
+add_subdirectory(test)
