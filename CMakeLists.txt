@@ -13,7 +13,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 find_package(Qt6 REQUIRED COMPONENTS Widgets Core Test)
 qt_standard_project_setup()
 
-include(qwt_install.cmake)
+include(qwt_setup.cmake)
 
 set(SOURCES
     src/BasicDataPlot.cpp
