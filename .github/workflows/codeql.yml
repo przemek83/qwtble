@@ -13,4 +13,4 @@ jobs:
     uses: przemek83/workflows/.github/workflows/codeql-qt.yml@main
     with:
       qt-version: 6.5.*
-      dependencies-linux: "build-essential"
+      dependencies-linux: "g++"
