@@ -1,5 +1,12 @@
 [![Build & test](https://github.com/przemek83/qwtble/actions/workflows/buld-and-test.yml/badge.svg)](https://github.com/przemek83/qwtble/actions/workflows/buld-and-test.yml)
 [![CodeQL](https://github.com/przemek83/qwtble/actions/workflows/codeql.yml/badge.svg)](https://github.com/przemek83/qwtble/actions/workflows/codeql.yml)
+[![codecov](https://codecov.io/gh/przemek83/qwtble/graph/badge.svg?token=UJY24KQANL)](https://codecov.io/gh/przemek83/qwtble)
+
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=przemek83_qwtble&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=przemek83_qwtble)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=przemek83_qwtble&metric=bugs)](https://sonarcloud.io/summary/new_code?id=przemek83_qwtble)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=przemek83_qwtble&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=przemek83_qwtble)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=przemek83_qwtble&metric=coverage)](https://sonarcloud.io/summary/new_code?id=przemek83_qwtble)
+[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=przemek83_qwtble&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=przemek83_qwtble)
 
 ## Table of content
 - [About project](#about-project)
