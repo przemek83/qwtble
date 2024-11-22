@@ -1,8 +1,9 @@
 
 cmake_minimum_required(VERSION 3.16)
 
-# Rewrite qwtconfig.pri inplace dropping commented lines and  commenting all 
-# lines having one of given keywords. Compile only neded by project files.
+# Rewrite qwtconfig.pri inplace dropping commented lines and compile only 
+# neded by project files by commenting all lines having one of given keywords. 
+# Set building mode to static library.
 function(CONFIGURE_QWT)
     file(STRINGS "${CMAKE_BINARY_DIR}/qwtconfig.pri" inputLines)
 
