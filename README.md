@@ -1,4 +1,5 @@
 [![Build & test](https://github.com/przemek83/qwtble/actions/workflows/buld-and-test.yml/badge.svg)](https://github.com/przemek83/qwtble/actions/workflows/buld-and-test.yml)
+[![CodeQL](https://github.com/przemek83/qwtble/actions/workflows/codeql.yml/badge.svg)](https://github.com/przemek83/qwtble/actions/workflows/codeql.yml)
 
 ## Table of content
 - [About project](#about-project)
