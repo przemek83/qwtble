@@ -22,54 +22,46 @@ qt_standard_project_setup()
 
 include(qwt_setup.cmake)
 
-set(SOURCES
-    src/BasicDataPlot.cpp
-    src/YAxisNumberPicker.cpp
-    src/GroupPlot.cpp
-    src/HistogramPlot.cpp
-    src/XYAxisNumberPicker.cpp
-    src/XDateYAxisNumberPicker.cpp
-    src/NotchedMarker.cpp
-    src/Picker.cpp
-    src/PlotBase.cpp
-    src/PlotMagnifier.cpp
-    src/QuantilesPlot.cpp
-    src/StringsScaleDraw.cpp
-    src/Quantiles.cpp
-    src/QwtBleUtilities.cpp
-    src/GroupPlotUI.cpp
-    src/HistogramPlotUI.cpp
-    src/Utilities.cpp
-)
+include(GNUInstallDirs)
+include(CMakePackageConfigHelpers)
 
-set(HEADERS
+set(${PROJECT_NAME}_SOURCES
     src/qwtble_global.h
     src/BasicDataPlot.h
+    src/BasicDataPlot.cpp
     src/YAxisNumberPicker.h
+    src/YAxisNumberPicker.cpp
     src/GroupPlot.h
+    src/GroupPlot.cpp
     src/HistogramPlot.h
+    src/HistogramPlot.cpp
     src/XYAxisNumberPicker.h
+    src/XYAxisNumberPicker.cpp
     src/XDateYAxisNumberPicker.h
+    src/XDateYAxisNumberPicker.cpp
     src/NotchedMarker.h
+    src/NotchedMarker.cpp
     src/Picker.h
+    src/Picker.cpp
     src/PlotBase.h
+    src/PlotBase.cpp
     src/PlotMagnifier.h
+    src/PlotMagnifier.cpp
     src/QuantilesPlot.h
+    src/QuantilesPlot.cpp
     src/StringsScaleDraw.h
+    src/StringsScaleDraw.cpp
     src/Quantiles.h
+    src/Quantiles.cpp
     src/QwtBleUtilities.h
+    src/QwtBleUtilities.cpp
     src/GroupPlotUI.h
+    src/GroupPlotUI.cpp
     src/HistogramPlotUI.h
+    src/HistogramPlotUI.cpp
     src/Utilities.h
+    src/Utilities.cpp
 )
-
-set(UI
-    src/GroupPlotUI.ui
-    src/HistogramPlotUI.ui
-)
-source_group("UI Files" FILES ${UI})
-
-add_library(${PROJECT_NAME} SHARED ${SOURCES} ${HEADERS} ${UI})
 
 set(PUBLIC_HEADERS
     src/qwtble_global.h
@@ -85,13 +77,38 @@ set(PUBLIC_HEADERS
     src/HistogramPlotUI.h
 )
 
+set(UI
+    src/GroupPlotUI.ui
+    src/HistogramPlotUI.ui
+)
+source_group("UI Files" FILES ${UI})
+
+add_library(${PROJECT_NAME} SHARED ${${PROJECT_NAME}_SOURCES} ${UI})
+
+target_include_directories(${PROJECT_NAME}
+  PUBLIC
+    $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
+    $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
+  PRIVATE
+    $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/src>)
+
 set_target_properties(${PROJECT_NAME} PROPERTIES
     VERSION ${PROJECT_VERSION}
-    SOVERSION 1
-    PUBLIC_HEADER "${PUBLIC_HEADERS}"
-)
+    SOVERSION ${PROJECT_VERSION_MAJOR}
+    PUBLIC_HEADER "${PUBLIC_HEADERS}")
 
-target_include_directories(${PROJECT_NAME} PUBLIC src)
+configure_file(${PROJECT_NAME}.pc.in ${PROJECT_NAME}.pc @ONLY)
+
+target_compile_definitions(${PROJECT_NAME} PRIVATE QWTBLE_LIBRARY)
+
+install(TARGETS ${PROJECT_NAME} 
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+    PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME})
+
+install(FILES ${CMAKE_BINARY_DIR}/${PROJECT_NAME}.pc
+    DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/pkgconfig)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE Qt6::Core Qt6::Widgets)
 if (WIN32)
@@ -99,13 +116,6 @@ if (WIN32)
 else()
     target_link_libraries(${PROJECT_NAME} PRIVATE qwt)
 endif()
-
-target_compile_definitions(${PROJECT_NAME} PRIVATE QWTBLE_LIBRARY)
-
-include(GNUInstallDirs)
-install(TARGETS ${PROJECT_NAME}
-        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-        PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 
 add_subdirectory(examples)
 

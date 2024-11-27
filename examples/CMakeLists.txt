@@ -1,17 +1,12 @@
-project(examples)
+SET(PROJECT_TEST ${PROJECT_NAME}-example)
 
-set(SOURCES
+include_directories(${CMAKE_SOURCE_DIR})
+
+set(${PROJECT_TEST}_SOURCES
     example.cpp
 )
 
-add_executable(examples ${SOURCES})
+add_executable(${PROJECT_TEST} ${${PROJECT_TEST}_SOURCES})
+target_link_libraries(${PROJECT_TEST} PRIVATE qwtble Qt6::Test Qt6::Widgets)
 
-target_link_libraries(examples PRIVATE Qt6::Core Qt6::Widgets qwtble)
-
-if (WIN32)
-    target_link_libraries(${PROJECT_NAME} PRIVATE optimized qwt debug qwtd)
-else()
-    target_link_libraries(${PROJECT_NAME} PRIVATE qwt)
-endif()
-
-
+add_test(NAME ${PROJECT_TEST} COMMAND ${PROJECT_TEST})

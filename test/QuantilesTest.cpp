@@ -1,8 +1,9 @@
 #include "QuantilesTest.h"
 
-#include <Quantiles.h>
 #include <QRegularExpression>
 #include <QTest>
+
+#include <src/Quantiles.h>
 
 void QuantilesTest::testToolTip()
 {

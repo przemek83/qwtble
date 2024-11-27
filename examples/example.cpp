@@ -6,14 +6,15 @@
 #include <QVBoxLayout>
 #include <QWidget>
 
-#include <BasicDataPlot.h>
-#include <GroupPlot.h>
-#include <GroupPlotUI.h>
-#include <HistogramPlot.h>
-#include <HistogramPlotUI.h>
-#include <PlotBase.h>
-#include <QuantilesPlot.h>
-#include <QwtBleUtilities.h>
+#include <src/BasicDataPlot.h>
+#include <src/GroupPlot.h>
+#include <src/GroupPlotUI.h>
+#include <src/HistogramPlot.h>
+#include <src/HistogramPlotUI.h>
+#include <src/PlotBase.h>
+#include <src/QuantilesPlot.h>
+#include <src/QwtBleUtilities.h>
+#include <src/Quantiles.h>
 
 static QVector<QVector<double>> exampleValues{
     {3.5, 6.7, 4.7, 6.6, 3., 4.9},

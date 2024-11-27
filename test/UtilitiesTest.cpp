@@ -2,7 +2,7 @@
 
 #include <QTest>
 
-#include "QwtBleUtilities.h"
+#include <src/QwtBleUtilities.h>
 
 void UtilitiesTest::testStringFromDays()
 {
