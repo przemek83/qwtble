@@ -112,9 +112,9 @@ install(FILES ${CMAKE_BINARY_DIR}/${PROJECT_NAME}.pc
 
 target_link_libraries(${PROJECT_NAME} PRIVATE Qt6::Core Qt6::Widgets)
 if (WIN32)
-    target_link_libraries(${PROJECT_NAME} PRIVATE optimized qwt debug qwtd)
+    target_link_libraries(${PROJECT_NAME} PUBLIC optimized qwt debug qwtd)
 else()
-    target_link_libraries(${PROJECT_NAME} PRIVATE qwt)
+    target_link_libraries(${PROJECT_NAME} PUBLIC qwt)
 endif()
 
 add_subdirectory(examples)
