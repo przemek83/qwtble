@@ -5,7 +5,7 @@ cmake_minimum_required(VERSION 3.16)
 # neded by project files by commenting all lines having one of given keywords. 
 # Set building mode to static library.
 function(CONFIGURE_QWT)
-    file(STRINGS "${CMAKE_BINARY_DIR}/qwtconfig.pri" inputLines)
+    file(STRINGS "${CMAKE_CURRENT_BINARY_DIR}/qwtconfig.pri" inputLines)
 
     set(keywords "QwtExamples" "QwtPlayground" "QwtTests" "QwtDesignerSelfContained" "QwtDesigner" "QwtPolar" "QwtSvg" "QwtDll")
     set(modifiedLines)
@@ -25,7 +25,7 @@ function(CONFIGURE_QWT)
     endforeach()
 
     string(REPLACE ";" "\n" outputContent "${modifiedLines}")
-    file(WRITE "${CMAKE_BINARY_DIR}/qwtconfig.pri" "${outputContent}")
+    file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/qwtconfig.pri" "${outputContent}")
 endfunction()
 
 configure_qwt()
