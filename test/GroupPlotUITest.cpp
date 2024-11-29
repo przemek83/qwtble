@@ -4,7 +4,7 @@
 #include <QSignalSpy>
 #include <QTest>
 
-#include <src/GroupPlotUI.h>
+#include "GroupPlotUI.h"
 
 void GroupPlotUITest::testTraitChange()
 {

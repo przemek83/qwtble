@@ -1,6 +1,6 @@
 SET(PROJECT_TEST ${PROJECT_NAME}-example)
 
-include_directories(${CMAKE_SOURCE_DIR})
+include_directories($<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/src>)
 
 set(${PROJECT_TEST}_SOURCES
     example.cpp

@@ -3,7 +3,7 @@
 #include <QRegularExpression>
 #include <QTest>
 
-#include <src/Quantiles.h>
+#include "Quantiles.h"
 
 void QuantilesTest::testToolTip()
 {
