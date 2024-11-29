@@ -1,4 +1,4 @@
-#include "NotchedMarker.h"
+#include <qwtble/NotchedMarker.h>
 
 #include <qwt_plot.h>
 #include <qwt_plot_curve.h>
@@ -8,8 +8,8 @@
 #include <QPainterPath>
 #include <QVector>
 
-#include "Quantiles.h"
-#include "QwtBleUtilities.h"
+#include <qwtble/Quantiles.h>
+#include <qwtble/QwtBleUtilities.h>
 
 NotchedMarker::NotchedMarker(QVector<Quantiles> quantiles)
     : quantilesVector_(std::move(quantiles))

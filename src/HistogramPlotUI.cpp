@@ -1,6 +1,7 @@
-#include "HistogramPlotUI.h"
+#include <qwtble/HistogramPlotUI.h>
 
-#include "HistogramPlot.h"
+#include <qwtble/HistogramPlot.h>
+
 #include "ui_HistogramPlotUI.h"
 
 HistogramPlotUI::HistogramPlotUI(QWidget* parent)

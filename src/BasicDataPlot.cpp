@@ -1,10 +1,11 @@
-#include "BasicDataPlot.h"
+#include <qwtble/BasicDataPlot.h>
 
 #include <qwt_legend.h>
 #include <qwt_legend_label.h>
 #include <qwt_symbol.h>
 
-#include "QwtBleUtilities.h"
+#include <qwtble/QwtBleUtilities.h>
+
 #include "XDateYAxisNumberPicker.h"
 
 BasicDataPlot::BasicDataPlot(QWidget* parent)

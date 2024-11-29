@@ -4,7 +4,7 @@
 
 #include <qwt_text.h>
 
-#include "QwtBleUtilities.h"
+#include <qwtble/QwtBleUtilities.h>
 
 StringsScaleDraw::StringsScaleDraw(QVector<QString> intervalNames)
     : intervalNames_(std::move(intervalNames))

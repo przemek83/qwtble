@@ -6,7 +6,7 @@
 #include <QDebug>
 #include <QPen>
 
-#include "QwtBleUtilities.h"
+#include <qwtble/QwtBleUtilities.h>
 
 Picker::Picker(QWidget* parent) : QwtPlotPicker(parent)
 {

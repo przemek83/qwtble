@@ -1,10 +1,11 @@
-﻿#include "GroupPlot.h"
+﻿#include <qwtble/GroupPlot.h>
 
 #include <QEvent>
 #include <QToolTip>
 
-#include "NotchedMarker.h"
-#include "QwtBleUtilities.h"
+#include <qwtble/NotchedMarker.h>
+#include <qwtble/QwtBleUtilities.h>
+
 #include "StringsScaleDraw.h"
 #include "YAxisNumberPicker.h"
 

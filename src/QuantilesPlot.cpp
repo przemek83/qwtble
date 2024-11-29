@@ -1,12 +1,12 @@
-#include "QuantilesPlot.h"
+#include <qwtble/QuantilesPlot.h>
 
 #include <qwt_scale_div.h>
 #include <qwt_text.h>
 #include <QDebug>
 #include <QResizeEvent>
 
-#include "NotchedMarker.h"
-#include "QwtBleUtilities.h"
+#include <qwtble/NotchedMarker.h>
+#include <qwtble/QwtBleUtilities.h>
 #include "StringsScaleDraw.h"
 #include "YAxisNumberPicker.h"
 

@@ -1,7 +1,5 @@
 SET(PROJECT_TEST ${PROJECT_NAME}-test )
 
-include_directories($<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/src>)
-
 set(${PROJECT_TEST}_SOURCES
     Tests.cpp
     UtilitiesTest.h

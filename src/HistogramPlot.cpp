@@ -1,10 +1,11 @@
-#include "HistogramPlot.h"
+#include <qwtble/HistogramPlot.h>
 
 #include <qwt_legend.h>
 #include <qwt_legend_label.h>
 #include <QPen>
 
-#include "QwtBleUtilities.h"
+#include <qwtble/QwtBleUtilities.h>
+
 #include "XYAxisNumberPicker.h"
 
 HistogramPlot::HistogramPlot(QWidget* parent)

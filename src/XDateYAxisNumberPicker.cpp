@@ -5,7 +5,7 @@
 #include <qwt_text.h>
 #include <QBrush>
 
-#include "QwtBleUtilities.h"
+#include <qwtble/QwtBleUtilities.h>
 
 XDateYAxisNumberPicker::XDateYAxisNumberPicker(QWidget* parent) : Picker(parent)
 {

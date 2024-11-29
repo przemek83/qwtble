@@ -1,4 +1,4 @@
-#include "GroupPlotUI.h"
+#include <qwtble/GroupPlotUI.h>
 
 #include <QComboBox>
 #include <QHBoxLayout>
@@ -7,10 +7,10 @@
 #include <QScrollBar>
 #include <QSplitter>
 
-#include "GroupPlot.h"
-#include "QuantilesPlot.h"
-#include "Utilities.h"
+#include <qwtble/GroupPlot.h>
+#include <qwtble/QuantilesPlot.h>
 
+#include "Utilities.h"
 #include "ui_GroupPlotUI.h"
 
 GroupPlotUI::GroupPlotUI(const QVector<std::pair<QString, int> >& stringColumns,
@@ -64,7 +64,8 @@ QSplitter* GroupPlotUI::setupSplitter()
 {
     auto* splitter{new QSplitter(Qt::Horizontal, this)};
     connect(splitter, &QSplitter::splitterMoved, this,
-            [=]([[maybe_unused]] int pos, [[maybe_unused]] int index) {
+            [=]([[maybe_unused]] int pos, [[maybe_unused]] int index)
+            {
                 QApplication::processEvents();
                 updateQuantilesPlotExtent();
             });

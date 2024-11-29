@@ -1,4 +1,4 @@
-#include "QwtBleUtilities.h"
+#include <qwtble/QwtBleUtilities.h>
 
 #include <QLocale>
 

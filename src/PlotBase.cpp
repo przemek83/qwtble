@@ -1,12 +1,13 @@
-#include "PlotBase.h"
+#include <qwtble/PlotBase.h>
 
 #include <cmath>
 
 #include <qwt_text.h>
 #include <QMouseEvent>
 
+#include <qwtble/QwtBleUtilities.h>
+
 #include "PlotMagnifier.h"
-#include "QwtBleUtilities.h"
 
 PlotBase::PlotBase(const QString& title, QWidget* parent)
     : QwtPlot(parent),

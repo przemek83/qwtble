@@ -1,10 +1,10 @@
-#include "Quantiles.h"
+#include <qwtble/Quantiles.h>
 
 #include <cmath>
 
 #include <QObject>
 
-#include "QwtBleUtilities.h"
+#include <qwtble/QwtBleUtilities.h>
 
 void Quantiles::clear()
 {

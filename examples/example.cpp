@@ -6,13 +6,13 @@
 #include <QVBoxLayout>
 #include <QWidget>
 
-#include "BasicDataPlot.h"
-#include "GroupPlot.h"
-#include "GroupPlotUI.h"
-#include "HistogramPlot.h"
-#include "HistogramPlotUI.h"
-#include "Quantiles.h"
-#include "QuantilesPlot.h"
+#include <qwtble/BasicDataPlot.h>
+#include <qwtble/GroupPlot.h>
+#include <qwtble/GroupPlotUI.h>
+#include <qwtble/HistogramPlot.h>
+#include <qwtble/HistogramPlotUI.h>
+#include <qwtble/Quantiles.h>
+#include <qwtble/QuantilesPlot.h>
 
 static QVector<QVector<double>> exampleValues{
     {3.5, 6.7, 4.7, 6.6, 3., 4.9},

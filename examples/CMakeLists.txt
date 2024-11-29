@@ -1,10 +1,8 @@
-SET(PROJECT_TEST ${PROJECT_NAME}-example)
+SET(PROJECT_EXAMPLES ${PROJECT_NAME}-examples)
 
-include_directories($<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/src>)
-
-set(${PROJECT_TEST}_SOURCES
+set(${PROJECT_EXAMPLES}_SOURCES
     example.cpp
 )
 
-add_executable(${PROJECT_TEST} ${${PROJECT_TEST}_SOURCES})
-target_link_libraries(${PROJECT_TEST} PRIVATE qwtble Qt6::Test Qt6::Widgets)
+add_executable(${PROJECT_EXAMPLES} ${${PROJECT_EXAMPLES}_SOURCES})
+target_link_libraries(${PROJECT_EXAMPLES} PRIVATE qwtble Qt6::Test Qt6::Widgets)

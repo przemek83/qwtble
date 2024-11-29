@@ -26,55 +26,45 @@ include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)
 
 set(${PROJECT_NAME}_SOURCES
-    src/qwtble_global.h
-    src/BasicDataPlot.h
     src/BasicDataPlot.cpp
     src/YAxisNumberPicker.h
     src/YAxisNumberPicker.cpp
-    src/GroupPlot.h
     src/GroupPlot.cpp
-    src/HistogramPlot.h
     src/HistogramPlot.cpp
     src/XYAxisNumberPicker.h
     src/XYAxisNumberPicker.cpp
     src/XDateYAxisNumberPicker.h
     src/XDateYAxisNumberPicker.cpp
-    src/NotchedMarker.h
     src/NotchedMarker.cpp
     src/Picker.h
     src/Picker.cpp
-    src/PlotBase.h
     src/PlotBase.cpp
     src/PlotMagnifier.h
     src/PlotMagnifier.cpp
-    src/QuantilesPlot.h
     src/QuantilesPlot.cpp
     src/StringsScaleDraw.h
     src/StringsScaleDraw.cpp
-    src/Quantiles.h
     src/Quantiles.cpp
-    src/QwtBleUtilities.h
     src/QwtBleUtilities.cpp
-    src/GroupPlotUI.h
     src/GroupPlotUI.cpp
-    src/HistogramPlotUI.h
     src/HistogramPlotUI.cpp
     src/Utilities.h
     src/Utilities.cpp
 )
 
+
 set(PUBLIC_HEADERS
-    src/qwtble_global.h
-    src/BasicDataPlot.h
-    src/GroupPlot.h
-    src/HistogramPlot.h
-    src/PlotBase.h
-    src/QuantilesPlot.h
-    src/Quantiles.h
-    src/QwtBleUtilities.h
-    src/NotchedMarker.h
-    src/GroupPlotUI.h
-    src/HistogramPlotUI.h
+    include/${PROJECT_NAME}/qwtble_global.h
+    include/${PROJECT_NAME}/BasicDataPlot.h
+    include/${PROJECT_NAME}/GroupPlot.h
+    include/${PROJECT_NAME}/HistogramPlot.h
+    include/${PROJECT_NAME}/PlotBase.h
+    include/${PROJECT_NAME}/QuantilesPlot.h
+    include/${PROJECT_NAME}/Quantiles.h
+    include/${PROJECT_NAME}/QwtBleUtilities.h
+    include/${PROJECT_NAME}/NotchedMarker.h
+    include/${PROJECT_NAME}/GroupPlotUI.h
+    include/${PROJECT_NAME}/HistogramPlotUI.h
 )
 
 set(UI
@@ -83,7 +73,7 @@ set(UI
 )
 source_group("UI Files" FILES ${UI})
 
-add_library(${PROJECT_NAME} SHARED ${${PROJECT_NAME}_SOURCES} ${UI})
+add_library(${PROJECT_NAME} SHARED ${${PROJECT_NAME}_SOURCES} ${PUBLIC_HEADERS} ${UI})
 
 target_include_directories(${PROJECT_NAME}
   PUBLIC
