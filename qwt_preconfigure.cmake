@@ -7,7 +7,7 @@ cmake_minimum_required(VERSION 3.16)
 function(CONFIGURE_QWT)
     file(STRINGS "${CMAKE_CURRENT_BINARY_DIR}/qwtconfig.pri" inputLines)
 
-    set(keywords "QwtExamples" "QwtPlayground" "QwtTests" "QwtDesignerSelfContained" "QwtDesigner" "QwtPolar" "QwtSvg" "QwtDll")
+    set(keywords "QwtExamples" "QwtPlayground" "QwtTests" "QwtDesignerSelfContained" "QwtDesigner" "QwtPolar" "QwtSvg")
     set(modifiedLines)
     foreach(line IN LISTS inputLines)
         if("${line}" MATCHES "^[ \t]*#")
