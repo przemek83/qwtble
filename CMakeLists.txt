@@ -20,7 +20,7 @@ endif()
 find_package(Qt6 REQUIRED COMPONENTS Widgets Core Test)
 qt_standard_project_setup()
 
-include(qwt_setup.cmake)
+include(QwtConfig.cmake)
 
 include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)
