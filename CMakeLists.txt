@@ -48,8 +48,6 @@ set(${PROJECT_NAME}_SOURCES
     src/QwtBleUtilities.cpp
     src/GroupPlotUI.cpp
     src/HistogramPlotUI.cpp
-    src/Utilities.h
-    src/Utilities.cpp
 )
 
 

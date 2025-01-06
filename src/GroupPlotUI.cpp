@@ -9,8 +9,8 @@
 
 #include <qwtble/GroupPlot.h>
 #include <qwtble/QuantilesPlot.h>
+#include <qwtble/QwtBleUtilities.h>
 
-#include "Utilities.h"
 #include "ui_GroupPlotUI.h"
 
 GroupPlotUI::GroupPlotUI(const QVector<std::pair<QString, int> >& stringColumns,
@@ -84,8 +84,8 @@ QSplitter* GroupPlotUI::setupSplitter()
 void GroupPlotUI::updateQuantilesPlotExtent()
 {
     const double expectedExtent{calculateExpectedQuantilesPlotExtent()};
-    if (Utilities::doublesAreEqual(expectedExtent,
-                                   getPlotBottomExtent(*quantilesPlot_)))
+    if (QwtBleUtilities::doublesAreEqual(expectedExtent,
+                                         getPlotBottomExtent(*quantilesPlot_)))
         return;
 
     quantilesPlot_->axisScaleDraw(QwtPlot::xBottom)
