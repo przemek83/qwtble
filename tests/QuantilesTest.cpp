@@ -9,26 +9,35 @@ void QuantilesTest::testToolTip()
 {
     Quantiles quantiles;
     quantiles.init(values_);
+    const QString expected(QStringLiteral(
+        "<table>"
+        "<tr><td>Data count:</td><td ALIGN=RIGHT>11</td></tr>\n"
+        "<tr><td>Average</td><td ALIGN=RIGHT>66.62</td></tr>\n"
+        "<tr><td>Maximum</td><td ALIGN=RIGHT>177.01</td></tr>\n"
+        "<tr><td>Q90</td><td ALIGN=RIGHT>138.12</td></tr>\n"
+        "<tr><td>Q75</td><td ALIGN=RIGHT>97.44</td></tr>\n"
+        "<tr><td>Q50</td><td ALIGN=RIGHT>54.94</td></tr>\n"
+        "<tr><td>Q25</td><td ALIGN=RIGHT>17.93</td></tr>\n"
+        "<tr><td>Q10</td><td ALIGN=RIGHT>7.02</td></tr>\n"
+        "<tr><td>Minimum</td><td ALIGN=RIGHT>5.00</td></tr>\n"
+        "<tr><td>Std. deviation</td><td ALIGN=RIGHT>54.48</td></tr>\n"
+        "</table>"));
+    QCOMPARE(quantiles.getValuesAsToolTip(), expected);
+}
+
+void QuantilesTest::testToolTipForOneValue()
+{
+    Quantiles quantiles;
+    const QVector<double> singleItemData{3};
+    quantiles.init(singleItemData);
     const QString expected(
         QStringLiteral("<table>"
-                       "<tr><td>Data count:</td><td ALIGN=RIGHT></td></tr>\n"
-                       "<tr><td>Average</td><td ALIGN=RIGHT></td></tr>\n"
-                       "<tr><td>Maximum</td><td ALIGN=RIGHT></td></tr>\n"
-                       "<tr><td>Q90</td><td ALIGN=RIGHT></td></tr>\n"
-                       "<tr><td>Q75</td><td ALIGN=RIGHT></td></tr>\n"
-                       "<tr><td>Q50</td><td ALIGN=RIGHT></td></tr>\n"
-                       "<tr><td>Q25</td><td ALIGN=RIGHT></td></tr>\n"
-                       "<tr><td>Q10</td><td ALIGN=RIGHT></td></tr>\n"
-                       "<tr><td>Minimum</td><td ALIGN=RIGHT></td></tr>\n"
-                       "<tr><td>Std. deviation</td><td ALIGN=RIGHT></td></tr>\n"
+                       "<tr><td>Data count:</td><td ALIGN=RIGHT>1</td></tr>\n"
+                       "<tr><td>Average</td><td ALIGN=RIGHT>3.00</td></tr>\n"
+                       "<tr><td>Maximum</td><td ALIGN=RIGHT>3.00</td></tr>\n"
+                       "<tr><td>Minimum</td><td ALIGN=RIGHT>3.00</td></tr>\n"
                        "</table>"));
-    // Ignore numbers due to localization. Test only structure of tooltip.
-    const QLocale& locale = QLocale::system();
-    const QRegularExpression regexp{
-        QRegularExpression(QStringLiteral(">[0-9]*\\") + locale.decimalPoint() +
-                           QStringLiteral("?[0-9]*<"))};
-    QCOMPARE(expected, quantiles.getValuesAsToolTip().replace(
-                           regexp, QStringLiteral("><")));
+    QCOMPARE(quantiles.getValuesAsToolTip(), expected);
 }
 
 void QuantilesTest::testComputing()

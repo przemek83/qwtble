@@ -8,6 +8,9 @@ int main(int argc, char* argv[])
 {
     const QApplication a(argc, argv);
 
+    QLocale locale(QLocale::English, QLocale::UnitedStates);
+    QLocale::setDefault(locale);
+
     UtilitiesTest utilitiesTest;
     QTest::qExec(&utilitiesTest);
 

@@ -12,6 +12,8 @@ private:
 private Q_SLOTS:
     void testToolTip();
 
+    void testToolTipForOneValue();
+
     void testComputing();
 
     static void testComputingEmptyData();
