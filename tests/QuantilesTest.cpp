@@ -68,7 +68,7 @@ void QuantilesTest::testComputingEmptyData()
     QCOMPARE(quantiles.maxX_, 0);
 }
 
-void QuantilesTest::testComputingSinleItemData()
+void QuantilesTest::testComputingSingleItemData()
 {
     Quantiles quantiles;
     const QVector<double> singleItemData{3};
