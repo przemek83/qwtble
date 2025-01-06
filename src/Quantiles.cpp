@@ -147,7 +147,7 @@ std::array<QString, Quantiles::PLOT_INFO_END> Quantiles::getPlotInfoNames()
 QString Quantiles::valueAsHtmlRow(PlotInfo name, double value)
 {
     const std::array<QString, PLOT_INFO_END> plotInfoNames{getPlotInfoNames()};
-    QString html(QStringLiteral("<tr><td>"));
+    QString html{QStringLiteral("<tr><td>")};
     html.append(plotInfoNames.at(static_cast<size_t>(name)));
     html.append(QLatin1String("</td><td ALIGN=RIGHT>"));
     int precision{2};
