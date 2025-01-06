@@ -41,37 +41,26 @@ double Quantiles::computeQuantile(const QVector<double>& values,
 void Quantiles::setQuantiles(const QVector<double>& values)
 {
     const int count{static_cast<int>(values.size())};
-    if (count <= 1)
-    {
-        const double value = values.front();
-        q10_ = value;
-        q25_ = value;
-        q50_ = value;
-        q75_ = value;
-        q90_ = value;
-    }
-    else
-    {
-        const double q10Level{0.1};
-        double currentInterval = (count - 1) * q10Level;
-        q10_ = computeQuantile(values, currentInterval);
 
-        const double q25Level{0.25};
-        currentInterval = (count - 1) * q25Level;
-        q25_ = computeQuantile(values, currentInterval);
+    const double q10Level{0.1};
+    double currentInterval = (count - 1) * q10Level;
+    q10_ = computeQuantile(values, currentInterval);
 
-        const double q50Level{0.5};
-        currentInterval = (count - 1) * q50Level;
-        q50_ = computeQuantile(values, currentInterval);
+    const double q25Level{0.25};
+    currentInterval = (count - 1) * q25Level;
+    q25_ = computeQuantile(values, currentInterval);
 
-        const double q75Level{0.75};
-        currentInterval = (count - 1) * q75Level;
-        q75_ = computeQuantile(values, currentInterval);
+    const double q50Level{0.5};
+    currentInterval = (count - 1) * q50Level;
+    q50_ = computeQuantile(values, currentInterval);
 
-        const double q90Level{0.9};
-        currentInterval = (count - 1) * q90Level;
-        q90_ = computeQuantile(values, currentInterval);
-    }
+    const double q75Level{0.75};
+    currentInterval = (count - 1) * q75Level;
+    q75_ = computeQuantile(values, currentInterval);
+
+    const double q90Level{0.9};
+    currentInterval = (count - 1) * q90Level;
+    q90_ = computeQuantile(values, currentInterval);
 }
 
 std::tuple<double, double> Quantiles::calculateEXAndEX2(
