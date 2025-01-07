@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>res/BasicDataPlotDefault.png</file>
+        <file>res/FiraMono-Regular.ttf</file>
     </qresource>
 </RCC>
