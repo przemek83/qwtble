@@ -58,5 +58,8 @@ int main(int argc, char* argv[])
     QuantilesTest quantilesTest;
     QTest::qExec(&quantilesTest);
 
+    BasicDataPlotTest basicDataPlotTest;
+    QTest::qExec(&basicDataPlotTest);
+
     return 0;
 }

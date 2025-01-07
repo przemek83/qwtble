@@ -8,7 +8,11 @@ set(${PROJECT_TESTS}_SOURCES
     GroupPlotUITest.cpp
     QuantilesTest.h
     QuantilesTest.cpp
+    BasicDataPlotTest.h
+    BasicDataPlotTest.cpp
 )
+
+qt_add_resources(${PROJECT_TESTS}_SOURCES testResources.qrc)
     
 add_executable(${PROJECT_TESTS} ${${PROJECT_TESTS}_SOURCES})
 target_link_libraries(${PROJECT_TESTS} PRIVATE qwtble Qt6::Test Qt6::Widgets)
