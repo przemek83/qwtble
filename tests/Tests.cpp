@@ -1,6 +1,6 @@
+#include <QFontDatabase>
 #include <QStyleFactory>
 #include <QTest>
-#include <QFontDatabase>
 
 #include "BasicDataPlotTest.h"
 #include "GroupPlotUITest.h"
@@ -50,9 +50,10 @@ int main(int argc, char* argv[])
     QLocale locale(QLocale::English, QLocale::UnitedStates);
     QLocale::setDefault(locale);
 
-    int id = QFontDatabase::addApplicationFont(":/res/FiraMono-Regular.ttf"); 
-    QString family = QFontDatabase::applicationFontFamilies(id).at(0); 
+    int id = QFontDatabase::addApplicationFont(":/res/FiraMono-Regular.ttf");
+    QString family = QFontDatabase::applicationFontFamilies(id).at(0);
     QFont font(family);
+    font.setPointSize(12);
     a.setFont(font);
 
     UtilitiesTest utilitiesTest;
