@@ -170,13 +170,13 @@ void BasicDataPlot::legendItemChecked(const QVariant& itemInfo, bool on,
 
 void BasicDataPlot::setLegendItemChecked(QwtPlotCurve* plot)
 {
-    QWidget* legendWidget =
-        qobject_cast<QwtLegend*>(legend())->legendWidget(itemToInfo(plot));
+    const auto* legend{::qobject_cast<QwtLegend*>(this->legend())};
+    QWidget* legendWidget{legend->legendWidget(itemToInfo(plot))};
 
-    if (legendWidget != nullptr)
-    {
-        auto* legendLabel = dynamic_cast<QwtLegendLabel*>(legendWidget);
-        if (legendLabel != nullptr)
-            legendLabel->setChecked(true);
-    }
+    if (legendWidget == nullptr)
+        return;
+
+    auto* legendLabel{dynamic_cast<QwtLegendLabel*>(legendWidget)};
+    if (legendLabel != nullptr)
+        legendLabel->setChecked(true);
 }
