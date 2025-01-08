@@ -172,6 +172,9 @@ void BasicDataPlot::setLegendLabelChecked(const QVariant& itemInfo)
 {
     const auto* currentLegend{::qobject_cast<QwtLegend*>(legend())};
     QWidget* legendWidget{currentLegend->legendWidget(itemInfo)};
+    if (legendWidget == nullptr)
+        return;
+
     auto* legendLabel{dynamic_cast<QwtLegendLabel*>(legendWidget)};
     if (legendLabel != nullptr)
         legendLabel->setChecked(true);

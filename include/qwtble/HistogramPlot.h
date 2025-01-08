@@ -43,7 +43,7 @@ private:
     void initActualDensity();
     void initLegend();
 
-    void setLegendItemChecked(QwtPlotItem* plot);
+    void setLegendItemChecked(const QVariant& itemInfo);
 
     static QVector<int> getFilledIntervals(const QVector<double>& data,
                                            const Quantiles& quantiles,

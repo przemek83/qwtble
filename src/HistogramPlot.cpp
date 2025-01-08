@@ -54,8 +54,8 @@ void HistogramPlot::initLegend()
             SLOT(legendItemChecked(QVariant, bool, int)));
     insertLegend(legend, QwtPlot::BottomLegend);
 
-    setLegendItemChecked(&histogram_);
-    setLegendItemChecked(&distributionCurve_);
+    setLegendItemChecked(itemToInfo(&histogram_));
+    setLegendItemChecked(itemToInfo(&distributionCurve_));
 }
 
 void HistogramPlot::legendItemChecked(const QVariant& itemInfo, bool on,
@@ -69,17 +69,16 @@ void HistogramPlot::legendItemChecked(const QVariant& itemInfo, bool on,
     }
 }
 
-void HistogramPlot::setLegendItemChecked(QwtPlotItem* plot)
+void HistogramPlot::setLegendItemChecked(const QVariant& itemInfo)
 {
-    QWidget* legendWidget =
-        qobject_cast<QwtLegend*>(legend())->legendWidget(itemToInfo(plot));
+    const auto* currentLegend{::qobject_cast<QwtLegend*>(legend())};
+    QWidget* legendWidget{currentLegend->legendWidget(itemInfo)};
+    if (legendWidget == nullptr)
+        return;
 
-    if (legendWidget != nullptr)
-    {
-        auto* legendLabel = dynamic_cast<QwtLegendLabel*>(legendWidget);
-        if (legendLabel != nullptr)
-            legendLabel->setChecked(true);
-    }
+    auto* legendLabel{dynamic_cast<QwtLegendLabel*>(legendWidget)};
+    if (legendLabel != nullptr)
+        legendLabel->setChecked(true);
 }
 
 QVector<int> HistogramPlot::getFilledIntervals(const QVector<double>& data,
