@@ -71,7 +71,7 @@ std::pair<double, double> getMinMaxDates()
 }
 }  // namespace
 
-void BasicDataPlotTest::testInitialization()
+void BasicDataPlotTest::testPlotWithData()
 {
     const auto [min, max]{getMinMaxDates()};
     BasicDataPlot basicDataPlot;
@@ -85,6 +85,20 @@ void BasicDataPlotTest::testInitialization()
 
     QImage actual{basicDataPlot.grab().toImage()};
     QImage expected(QString::fromLatin1(":/res/BasicDataPlotDefault.png"));
+    expected = expected.convertToFormat(actual.format());
+    QCOMPARE(actual, expected);
+}
+
+void BasicDataPlotTest::testPlotWithoutData()
+{
+    const QVector<QPointF> regressionPoints{{0, 0}, {0, 0}};
+    Quantiles quantiles;
+    BasicDataPlot basicDataPlot;
+    basicDataPlot.setNewData({}, quantiles, regressionPoints);
+    basicDataPlot.resize(800, 600);
+
+    QImage actual{basicDataPlot.grab().toImage()};
+    QImage expected(QString::fromLatin1(":/res/BasicDataPlotEmpty.png"));
     expected = expected.convertToFormat(actual.format());
     QCOMPARE(actual, expected);
 }
