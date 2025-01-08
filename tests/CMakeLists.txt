@@ -14,6 +14,8 @@ set(${PROJECT_TESTS}_SOURCES
     HistogramPlotTest.cpp
     Common.h
     Common.cpp
+    GroupPlotTest.h
+    GroupPlotTest.cpp
 )
 
 qt_add_resources(${PROJECT_TESTS}_SOURCES testResources.qrc)

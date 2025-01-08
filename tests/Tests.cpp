@@ -3,6 +3,7 @@
 #include <QTest>
 
 #include "BasicDataPlotTest.h"
+#include "GroupPlotTest.h"
 #include "GroupPlotUITest.h"
 #include "HistogramPlotTest.h"
 #include "QuantilesTest.h"
@@ -71,6 +72,9 @@ int main(int argc, char* argv[])
 
     HistogramPlotTest histogramPlotTest;
     QTest::qExec(&histogramPlotTest);
+
+    GroupPlotTest groupPlotTest;
+    QTest::qExec(&groupPlotTest);
 
     return 0;
 }
