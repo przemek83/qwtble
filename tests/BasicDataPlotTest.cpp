@@ -1,6 +1,9 @@
 #include "BasicDataPlotTest.h"
 
 #include <QTest>
+#include "qwt_legend.h"
+#include "qwt_legend_label.h"
+#include "qwt_plot_item.h"
 
 #include <qwtble/BasicDataPlot.h>
 
@@ -69,24 +72,35 @@ std::pair<double, double> getMinMaxDates()
     const auto [min, max]{std::minmax_element(dates.cbegin(), dates.cend())};
     return {*min, *max};
 }
-}  // namespace
 
-void BasicDataPlotTest::testPlotWithData()
+void preparePlot(BasicDataPlot& plot)
 {
     const auto [min, max]{getMinMaxDates()};
-    BasicDataPlot basicDataPlot;
-    basicDataPlot.setAxisScale(QwtPlot::xBottom, min, max);
+    plot.setAxisScale(QwtPlot::xBottom, min, max);
 
     const QVector<QPointF> regressionPoints{{min, 38.002}, {max, 78.4491}};
     const QVector<QPointF> data{getData()};
     Quantiles quantiles{getQuantiles()};
-    basicDataPlot.setNewData(data, quantiles, regressionPoints);
-    basicDataPlot.resize(800, 600);
+    plot.setNewData(data, quantiles, regressionPoints);
+    plot.resize(800, 600);
+}
 
-    QImage actual{basicDataPlot.grab().toImage()};
-    QImage expected(QString::fromLatin1(":/res/BasicDataPlotDefault.png"));
+void checkPlot(BasicDataPlot& plot, QString expectedPath)
+{
+    QImage actual{plot.grab().toImage()};
+    QImage expected(expectedPath);
     expected = expected.convertToFormat(actual.format());
     QCOMPARE(actual, expected);
+}
+}  // namespace
+
+void BasicDataPlotTest::testPlotWithData()
+{
+    BasicDataPlot basicDataPlot;
+    preparePlot(basicDataPlot);
+    const QString expectedPath{
+        QString::fromLatin1(":/res/BasicDataPlotDefault.png")};
+    checkPlot(basicDataPlot, expectedPath);
 }
 
 void BasicDataPlotTest::testPlotWithoutData()
@@ -97,8 +111,30 @@ void BasicDataPlotTest::testPlotWithoutData()
     basicDataPlot.setNewData({}, quantiles, regressionPoints);
     basicDataPlot.resize(800, 600);
 
-    QImage actual{basicDataPlot.grab().toImage()};
-    QImage expected(QString::fromLatin1(":/res/BasicDataPlotEmpty.png"));
-    expected = expected.convertToFormat(actual.format());
-    QCOMPARE(actual, expected);
+    const QString expectedPath{
+        QString::fromLatin1(":/res/BasicDataPlotEmpty.png")};
+    checkPlot(basicDataPlot, expectedPath);
+}
+
+void BasicDataPlotTest::testLegendItemsChecking()
+{
+    BasicDataPlot basicDataPlot;
+    preparePlot(basicDataPlot);
+    auto* legend{::qobject_cast<QwtLegend*>(basicDataPlot.legend())};
+    auto children = legend->findChildren<QwtLegendLabel*>();
+    QwtLegendLabel* q25Label{nullptr};
+    for (auto* child : children)
+    {
+        if (child->text().text() == "Q25")
+        {
+            q25Label = child;
+            break;
+        }
+    }
+
+    legend->checked(QVariant::fromValue(legend->itemInfo(q25Label)), false, 0);
+
+    const QString expectedPath{
+        QString::fromLatin1(":/res/BasicDataPlotItemChecked.png")};
+    checkPlot(basicDataPlot, expectedPath);
 }
