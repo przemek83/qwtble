@@ -168,7 +168,7 @@ void BasicDataPlot::legendItemChecked(const QVariant& itemInfo, bool on,
     }
 }
 
-void BasicDataPlot::setLegendItemChecked(QVariant itemInfo)
+void BasicDataPlot::setLegendItemChecked(const QVariant& itemInfo)
 {
     const auto* currentLegend{::qobject_cast<QwtLegend*>(legend())};
     QWidget* legendWidget{currentLegend->legendWidget(itemInfo)};
