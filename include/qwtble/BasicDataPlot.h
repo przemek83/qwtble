@@ -60,11 +60,7 @@ private:
 
     void checkLegendItems();
 
-    /**
-     * @brief set given item checked on legend.
-     * @param plot plot related to item on legend.
-     */
-    void setLegendItemChecked(QwtPlotCurve* plot);
+    void setLegendItemChecked(QVariant itemInfo);
 
     QwtPlotCurve plotQ25_;
     QwtPlotCurve plotQ50_;

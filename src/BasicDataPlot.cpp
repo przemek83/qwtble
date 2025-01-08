@@ -108,11 +108,11 @@ void BasicDataPlot::initLegend()
 
 void BasicDataPlot::checkLegendItems()
 {
-    setLegendItemChecked(&plotData_);
-    setLegendItemChecked(&plotQ25_);
-    setLegendItemChecked(&plotQ50_);
-    setLegendItemChecked(&plotQ75_);
-    setLegendItemChecked(&plotLinearRegression_);
+    setLegendItemChecked(itemToInfo(&plotData_));
+    setLegendItemChecked(itemToInfo(&plotQ25_));
+    setLegendItemChecked(itemToInfo(&plotQ50_));
+    setLegendItemChecked(itemToInfo(&plotQ75_));
+    setLegendItemChecked(itemToInfo(&plotLinearRegression_));
 }
 
 void BasicDataPlot::setPlotData(const QVector<QPointF>& data)
@@ -168,15 +168,10 @@ void BasicDataPlot::legendItemChecked(const QVariant& itemInfo, bool on,
     }
 }
 
-void BasicDataPlot::setLegendItemChecked(QwtPlotCurve* plot)
+void BasicDataPlot::setLegendItemChecked(QVariant itemInfo)
 {
-    const auto* legend{::qobject_cast<QwtLegend*>(this->legend())};
-    QWidget* legendWidget{legend->legendWidget(itemToInfo(plot))};
-
-    if (legendWidget == nullptr)
-        return;
-
+    const auto* currentLegend{::qobject_cast<QwtLegend*>(legend())};
+    QWidget* legendWidget{currentLegend->legendWidget(itemInfo)};
     auto* legendLabel{dynamic_cast<QwtLegendLabel*>(legendWidget)};
-    if (legendLabel != nullptr)
-        legendLabel->setChecked(true);
+    legendLabel->setChecked(true);
 }
