@@ -160,7 +160,7 @@ QwtText BasicDataPlot::TimeScaleDraw::label(double v) const
 void BasicDataPlot::legendItemChecked(const QVariant& itemInfo, bool on,
                                       [[maybe_unused]] int index)
 {
-    QwtPlotItem* plotItem = infoToItem(itemInfo);
+    QwtPlotItem* plotItem{infoToItem(itemInfo)};
     if (plotItem != nullptr)
     {
         plotItem->setVisible(on);
@@ -173,5 +173,6 @@ void BasicDataPlot::setLegendLabelChecked(const QVariant& itemInfo)
     const auto* currentLegend{::qobject_cast<QwtLegend*>(legend())};
     QWidget* legendWidget{currentLegend->legendWidget(itemInfo)};
     auto* legendLabel{dynamic_cast<QwtLegendLabel*>(legendWidget)};
-    legendLabel->setChecked(true);
+    if (legendLabel != nullptr)
+        legendLabel->setChecked(true);
 }
