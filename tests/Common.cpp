@@ -1,4 +1,10 @@
 #include "Common.h"
+#include <qvariant.h>
+
+#include "qwt_legend.h"
+#include "qwt_legend_label.h"
+#include "qwt_plot.h"
+#include "qwt_plot_item.h"
 
 namespace common
 {
@@ -34,5 +40,19 @@ QVector<double> getDates()
         13980., 13986., 13986., 13983., 13955., 13941., 14013., 14042., 14039.,
         14042., 13937., 13914., 13915., 13930., 13845., 13864., 13857., 13867.,
         13929., 13972., 13910., 13924., 13924., 13927.};
+}
+
+QVariant getItemInfo(QwtPlot& plot, const QString& text)
+{
+    const auto* legend{::qobject_cast<QwtLegend*>(plot.legend())};
+    auto children = legend->findChildren<QwtLegendLabel*>();
+    const QwtLegendLabel* label{nullptr};
+    for (const auto* child : children)
+    {
+        if (child->text().text() == text)
+            return QVariant::fromValue(legend->itemInfo(child));
+    }
+
+    return {};
 }
 }  // namespace common

@@ -88,19 +88,9 @@ void BasicDataPlotTest::testLegendItemsChecking()
 {
     BasicDataPlot plot;
     preparePlot(plot);
-    auto* legend{::qobject_cast<QwtLegend*>(plot.legend())};
-    auto children = legend->findChildren<QwtLegendLabel*>();
-    const QwtLegendLabel* q25Label{nullptr};
-    for (const auto* child : children)
-    {
-        if (child->text().text() == "Q25")
-        {
-            q25Label = child;
-            break;
-        }
-    }
 
-    legend->checked(QVariant::fromValue(legend->itemInfo(q25Label)), false, 0);
+    auto* legend{::qobject_cast<QwtLegend*>(plot.legend())};
+    legend->checked(common::getItemInfo(plot, "Q25"), false, 0);
 
     const QString expectedPath{
         QString::fromLatin1(":/res/BasicDataPlotItemChecked.png")};

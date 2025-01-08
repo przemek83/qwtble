@@ -61,19 +61,9 @@ void HistogramPlotTest::testLegendItemsChecking()
 {
     HistogramPlot plot;
     preparePlot(plot);
-    auto* legend{::qobject_cast<QwtLegend*>(plot.legend())};
-    auto children = legend->findChildren<QwtLegendLabel*>();
-    const QwtLegendLabel* label{nullptr};
-    for (const auto* child : children)
-    {
-        if (child->text().text() == "Histogram")
-        {
-            label = child;
-            break;
-        }
-    }
 
-    legend->checked(QVariant::fromValue(legend->itemInfo(label)), false, 0);
+    auto* legend{::qobject_cast<QwtLegend*>(plot.legend())};
+    legend->checked(common::getItemInfo(plot, "Histogram"), false, 0);
 
     const QString expectedPath{
         QString::fromLatin1(":/res/HistogramPlotItemChecked.png")};
