@@ -64,31 +64,31 @@ void checkPlot(BasicDataPlot& plot, QString expectedPath)
 
 void BasicDataPlotTest::testPlotWithData()
 {
-    BasicDataPlot basicDataPlot;
-    preparePlot(basicDataPlot);
+    BasicDataPlot plot;
+    preparePlot(plot);
     const QString expectedPath{
         QString::fromLatin1(":/res/BasicDataPlotDefault.png")};
-    checkPlot(basicDataPlot, expectedPath);
+    checkPlot(plot, expectedPath);
 }
 
 void BasicDataPlotTest::testPlotWithoutData()
 {
     const QVector<QPointF> regressionPoints{{0, 0}, {0, 0}};
     Quantiles quantiles;
-    BasicDataPlot basicDataPlot;
-    basicDataPlot.setNewData({}, quantiles, regressionPoints);
-    basicDataPlot.resize(800, 600);
+    BasicDataPlot plot;
+    plot.setNewData({}, quantiles, regressionPoints);
+    plot.resize(800, 600);
 
     const QString expectedPath{
         QString::fromLatin1(":/res/BasicDataPlotEmpty.png")};
-    checkPlot(basicDataPlot, expectedPath);
+    checkPlot(plot, expectedPath);
 }
 
 void BasicDataPlotTest::testLegendItemsChecking()
 {
-    BasicDataPlot basicDataPlot;
-    preparePlot(basicDataPlot);
-    auto* legend{::qobject_cast<QwtLegend*>(basicDataPlot.legend())};
+    BasicDataPlot plot;
+    preparePlot(plot);
+    auto* legend{::qobject_cast<QwtLegend*>(plot.legend())};
     auto children = legend->findChildren<QwtLegendLabel*>();
     const QwtLegendLabel* q25Label{nullptr};
     for (const auto* child : children)
@@ -104,5 +104,5 @@ void BasicDataPlotTest::testLegendItemsChecking()
 
     const QString expectedPath{
         QString::fromLatin1(":/res/BasicDataPlotItemChecked.png")};
-    checkPlot(basicDataPlot, expectedPath);
+    checkPlot(plot, expectedPath);
 }
