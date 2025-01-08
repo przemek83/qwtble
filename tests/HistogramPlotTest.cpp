@@ -41,3 +41,15 @@ void HistogramPlotTest::testPlotWithData()
         QString::fromLatin1(":/res/HistogramPlotDefault.png")};
     checkPlot(plot, expectedPath);
 }
+
+void HistogramPlotTest::testPlotWithoutData()
+{
+    HistogramPlot plot;
+    plot.setNewData({}, {}, 10);
+    plot.resize(800, 600);
+
+    QImage actual{plot.grab().toImage()};
+    const QString expectedPath{
+        QString::fromLatin1(":/res/HistogramPlotWithoutData.png")};
+    checkPlot(plot, expectedPath);
+}

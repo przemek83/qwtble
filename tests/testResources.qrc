@@ -4,6 +4,7 @@
         <file>res/BasicDataPlotEmpty.png</file>
         <file>res/BasicDataPlotItemChecked.png</file>
         <file>res/HistogramPlotDefault.png</file>
+        <file>res/HistogramPlotWithoutData.png</file>
         <file>res/FiraMono-Regular.ttf</file>
     </qresource>
 </RCC>
