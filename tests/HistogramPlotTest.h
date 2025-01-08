@@ -8,4 +8,5 @@ class HistogramPlotTest : public QObject
 private Q_SLOTS:
     void testPlotWithData();
     void testPlotWithoutData();
+    void testLegendItemsChecking();
 };

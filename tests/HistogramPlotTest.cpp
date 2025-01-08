@@ -1,6 +1,9 @@
 #include "HistogramPlotTest.h"
 
 #include <QTest>
+#include "qwt_legend.h"
+#include "qwt_legend_label.h"
+#include "qwt_plot_item.h"
 
 #include <qwtble/HistogramPlot.h>
 
@@ -51,5 +54,28 @@ void HistogramPlotTest::testPlotWithoutData()
     QImage actual{plot.grab().toImage()};
     const QString expectedPath{
         QString::fromLatin1(":/res/HistogramPlotWithoutData.png")};
+    checkPlot(plot, expectedPath);
+}
+
+void HistogramPlotTest::testLegendItemsChecking()
+{
+    HistogramPlot plot;
+    preparePlot(plot);
+    auto* legend{::qobject_cast<QwtLegend*>(plot.legend())};
+    auto children = legend->findChildren<QwtLegendLabel*>();
+    const QwtLegendLabel* label{nullptr};
+    for (const auto* child : children)
+    {
+        if (child->text().text() == "Histogram")
+        {
+            label = child;
+            break;
+        }
+    }
+
+    legend->checked(QVariant::fromValue(legend->itemInfo(label)), false, 0);
+
+    const QString expectedPath{
+        QString::fromLatin1(":/res/HistogramPlotItemChecked.png")};
     checkPlot(plot, expectedPath);
 }
