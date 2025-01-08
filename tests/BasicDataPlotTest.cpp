@@ -122,7 +122,7 @@ void BasicDataPlotTest::testLegendItemsChecking()
     preparePlot(basicDataPlot);
     auto* legend{::qobject_cast<QwtLegend*>(basicDataPlot.legend())};
     auto children = legend->findChildren<QwtLegendLabel*>();
-    QwtLegendLabel* q25Label{nullptr};
+    const QwtLegendLabel* q25Label{nullptr};
     for (auto* child : children)
     {
         if (child->text().text() == "Q25")
