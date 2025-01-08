@@ -108,11 +108,11 @@ void BasicDataPlot::initLegend()
 
 void BasicDataPlot::checkLegendItems()
 {
-    setLegendItemChecked(itemToInfo(&plotData_));
-    setLegendItemChecked(itemToInfo(&plotQ25_));
-    setLegendItemChecked(itemToInfo(&plotQ50_));
-    setLegendItemChecked(itemToInfo(&plotQ75_));
-    setLegendItemChecked(itemToInfo(&plotLinearRegression_));
+    setLegendLabelChecked(itemToInfo(&plotData_));
+    setLegendLabelChecked(itemToInfo(&plotQ25_));
+    setLegendLabelChecked(itemToInfo(&plotQ50_));
+    setLegendLabelChecked(itemToInfo(&plotQ75_));
+    setLegendLabelChecked(itemToInfo(&plotLinearRegression_));
 }
 
 void BasicDataPlot::setPlotData(const QVector<QPointF>& data)
@@ -168,7 +168,7 @@ void BasicDataPlot::legendItemChecked(const QVariant& itemInfo, bool on,
     }
 }
 
-void BasicDataPlot::setLegendItemChecked(const QVariant& itemInfo)
+void BasicDataPlot::setLegendLabelChecked(const QVariant& itemInfo)
 {
     const auto* currentLegend{::qobject_cast<QwtLegend*>(legend())};
     QWidget* legendWidget{currentLegend->legendWidget(itemInfo)};
