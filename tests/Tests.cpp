@@ -4,6 +4,7 @@
 
 #include "BasicDataPlotTest.h"
 #include "GroupPlotUITest.h"
+#include "HistogramPlotTest.h"
 #include "QuantilesTest.h"
 #include "UtilitiesTest.h"
 
@@ -67,6 +68,9 @@ int main(int argc, char* argv[])
 
     BasicDataPlotTest basicDataPlotTest;
     QTest::qExec(&basicDataPlotTest);
+
+    HistogramPlotTest histogramPlotTest;
+    QTest::qExec(&histogramPlotTest);
 
     return 0;
 }

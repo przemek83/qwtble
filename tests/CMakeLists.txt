@@ -10,6 +10,10 @@ set(${PROJECT_TESTS}_SOURCES
     QuantilesTest.cpp
     BasicDataPlotTest.h
     BasicDataPlotTest.cpp
+    HistogramPlotTest.h
+    HistogramPlotTest.cpp
+    Common.h
+    Common.cpp
 )
 
 qt_add_resources(${PROJECT_TESTS}_SOURCES testResources.qrc)
