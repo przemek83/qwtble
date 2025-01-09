@@ -2,7 +2,6 @@
 
 #include <QTest>
 #include "qwt_legend.h"
-#include "qwt_legend_label.h"
 #include "qwt_plot_item.h"
 
 #include <qwtble/BasicDataPlot.h>
