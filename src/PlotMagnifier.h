@@ -6,7 +6,7 @@ class PlotMagnifier : public QwtPlotMagnifier
 {
     Q_OBJECT
 public:
-    explicit PlotMagnifier(QWidget* canvas);
+    using QwtPlotMagnifier::QwtPlotMagnifier;
 
     void reset();
 
@@ -14,5 +14,5 @@ protected:
     void rescale(double factor) override;
 
 private:
-    double currentFactor_;
+    double currentFactor_{1.};
 };
