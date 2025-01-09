@@ -15,12 +15,15 @@ StringsScaleDraw::StringsScaleDraw(QVector<QString> intervalNames)
 
 QwtText StringsScaleDraw::label(double value) const
 {
-    using QwtBleUtilities::doublesAreEqual;
-    const bool valueIsIntegral{doublesAreEqual(fmod(value, 1), 0.)};
-    const int valueAsIntegral = static_cast<int>(value);
-    if (valueIsIntegral && !intervalNames_.isEmpty() && valueAsIntegral > 0 &&
-        valueAsIntegral <= intervalNames_.count())
+    const QwtText emptyLabel{QStringLiteral("                     ")};
+    if (const bool valueIsIntegral{
+            QwtBleUtilities::doublesAreEqual(fmod(value, 1), 0.)};
+        (!valueIsIntegral) || intervalNames_.isEmpty())
+        return emptyLabel;
+
+    if (const int valueAsIntegral{static_cast<int>(value)};
+        (valueAsIntegral > 0) && (valueAsIntegral <= intervalNames_.count()))
         return {intervalNames_.at(valueAsIntegral - 1)};
 
-    return {QStringLiteral("                     ")};
+    return emptyLabel;
 }
