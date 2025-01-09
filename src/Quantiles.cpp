@@ -153,7 +153,7 @@ QString Quantiles::valueAsHtmlRow(PlotInfo name, double value)
     int precision{2};
     if (name == PLOT_INFO_COUNT)
         precision = 0;
-    html.append(QwtBleUtilities::doubleToStringUsingLocale(value, precision));
+    html.append(qwt_ble_utilities::doubleToStringUsingLocale(value, precision));
     html.append(QLatin1String("</td></tr>\n"));
 
     return html;

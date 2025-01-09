@@ -5,7 +5,7 @@
 
 #include "qwtble_global.h"
 
-namespace QwtBleUtilities
+namespace qwt_ble_utilities
 {
 /**
  * @brief Calculate date 1/1/1970 + given days and return string representation.
@@ -59,4 +59,4 @@ static constexpr int MEDIUM_ORDER{2};
 static constexpr int HIGH_ORDER{3};
 
 static constexpr double DEFAULT_LABEL_ROTATION{-50.0};
-}  // namespace QwtBleUtilities
+}  // namespace qwt_ble_utilities

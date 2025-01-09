@@ -24,7 +24,7 @@ PlotBase::PlotBase(const QString& title, QWidget* parent)
     setStdScaleDraw(yLeft);
 
     setAxisLabelRotation(QwtPlot::xBottom,
-                         QwtBleUtilities::DEFAULT_LABEL_ROTATION);
+                         qwt_ble_utilities::DEFAULT_LABEL_ROTATION);
     setAxisLabelAlignment(QwtPlot::xBottom, Qt::AlignLeft | Qt::AlignBottom);
 }
 
@@ -64,8 +64,8 @@ void PlotBase::setAxisScale(int axisId, double min, double max, double step)
 
 QwtText PlotBase::IntervalsScaleDraw::label(double v) const
 {
-    using QwtBleUtilities::doublesAreEqual;
-    using QwtBleUtilities::doubleToStringUsingLocale;
+    using qwt_ble_utilities::doublesAreEqual;
+    using qwt_ble_utilities::doubleToStringUsingLocale;
 
     if (!doublesAreEqual(fmod(v, 1), 0.))
         return {doubleToStringUsingLocale(v, 1)};

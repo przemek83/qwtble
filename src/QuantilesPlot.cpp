@@ -83,7 +83,7 @@ QuantilesPlot::IntervalsScaleDraw::IntervalsScaleDraw(int count) : count_(count)
 
 QwtText QuantilesPlot::IntervalsScaleDraw::label(double value) const
 {
-    if (QwtBleUtilities::doublesAreEqual(value, 1.) && (count_ != 0))
+    if (qwt_ble_utilities::doublesAreEqual(value, 1.) && (count_ != 0))
         return {QString::number(count_)};
     return {};
 }

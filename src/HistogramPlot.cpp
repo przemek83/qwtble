@@ -23,7 +23,7 @@ HistogramPlot::~HistogramPlot() = default;
 void HistogramPlot::initHistogramPlot()
 {
     histogram_.setStyle(QwtPlotHistogram::Columns);
-    histogram_.setZ(QwtBleUtilities::LOW_ORDER);
+    histogram_.setZ(qwt_ble_utilities::LOW_ORDER);
     histogram_.setRenderHint(QwtPlotItem::RenderAntialiased, true);
     histogram_.attach(this);
     histogram_.setTitle(QObject::tr("Histogram"));
@@ -38,7 +38,7 @@ void HistogramPlot::initActualDensity()
     pen.setColor(QColor(Qt::blue));
     pen.setWidth(2);
     distributionCurve_.setPen(pen);
-    distributionCurve_.setZ(QwtBleUtilities::HIGH_ORDER);
+    distributionCurve_.setZ(qwt_ble_utilities::HIGH_ORDER);
     distributionCurve_.setRenderHint(QwtPlotItem::RenderAntialiased, true);
     distributionCurve_.attach(this);
 }

@@ -36,7 +36,7 @@ void BasicDataPlot::initPlotCurve()
     pen.setColor(QColor(Qt::blue));
     pen.setWidth(3);
     plotData_.setPen(pen);
-    plotData_.setZ(QwtBleUtilities::LOW_ORDER);
+    plotData_.setZ(qwt_ble_utilities::LOW_ORDER);
     plotData_.setRenderHint(QwtPlotItem::RenderAntialiased, true);
     plotData_.attach(this);
     plotData_.setTitle(QObject::tr("Data"));
@@ -49,7 +49,7 @@ void BasicDataPlot::initQ25()
     pen.setColor(QColor(Qt::yellow));
     pen.setWidth(3);
     plotQ25_.setPen(pen);
-    plotQ25_.setZ(QwtBleUtilities::MEDIUM_ORDER);
+    plotQ25_.setZ(qwt_ble_utilities::MEDIUM_ORDER);
     plotQ25_.setRenderHint(QwtPlotItem::RenderAntialiased, true);
     plotQ25_.attach(this);
     plotQ25_.setTitle(QStringLiteral("Q25"));
@@ -62,7 +62,7 @@ void BasicDataPlot::initQ50()
     pen.setColor(QColor(Qt::magenta));
     pen.setWidth(4);
     plotQ50_.setPen(pen);
-    plotQ50_.setZ(QwtBleUtilities::MEDIUM_ORDER);
+    plotQ50_.setZ(qwt_ble_utilities::MEDIUM_ORDER);
     plotQ50_.setRenderHint(QwtPlotItem::RenderAntialiased, true);
     plotQ50_.attach(this);
     plotQ50_.setTitle(QStringLiteral("Q50"));
@@ -75,7 +75,7 @@ void BasicDataPlot::initQ75()
     pen.setColor(QColor(Qt::green));
     pen.setWidth(3);
     plotQ75_.setPen(pen);
-    plotQ75_.setZ(QwtBleUtilities::MEDIUM_ORDER);
+    plotQ75_.setZ(qwt_ble_utilities::MEDIUM_ORDER);
     plotQ75_.setRenderHint(QwtPlotItem::RenderAntialiased, true);
     plotQ75_.attach(this);
     plotQ75_.setTitle(QStringLiteral("Q75"));
@@ -88,7 +88,7 @@ void BasicDataPlot::initLinearRegression()
     pen.setColor(QColor(Qt::cyan));
     pen.setWidth(4);
     plotLinearRegression_.setPen(pen);
-    plotLinearRegression_.setZ(QwtBleUtilities::HIGH_ORDER);
+    plotLinearRegression_.setZ(qwt_ble_utilities::HIGH_ORDER);
     plotLinearRegression_.setRenderHint(QwtPlotItem::RenderAntialiased, true);
     plotLinearRegression_.attach(this);
     plotLinearRegression_.setTitle(tr("Linear regression"));
@@ -148,13 +148,13 @@ void BasicDataPlot::setNewData(const QVector<QPointF>& data,
 
 BasicDataPlot::TimeScaleDraw::TimeScaleDraw()
 {
-    setLabelRotation(QwtBleUtilities::DEFAULT_LABEL_ROTATION);
+    setLabelRotation(qwt_ble_utilities::DEFAULT_LABEL_ROTATION);
     setLabelAlignment(Qt::AlignLeft | Qt::AlignBottom);
 }
 
 QwtText BasicDataPlot::TimeScaleDraw::label(double v) const
 {
-    return {QwtBleUtilities::stringFromDays(lround(v))};
+    return {qwt_ble_utilities::stringFromDays(lround(v))};
 }
 
 void BasicDataPlot::legendItemChecked(const QVariant& itemInfo, bool on,

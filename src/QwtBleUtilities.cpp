@@ -2,7 +2,7 @@
 
 #include <QLocale>
 
-namespace QwtBleUtilities
+namespace qwt_ble_utilities
 {
 QString stringFromDays(int daysToAdd)
 {
@@ -41,4 +41,4 @@ QString doubleToStringUsingLocale(double value, int precision)
 
     return locale.toString(value, 'f', precision);
 }
-}  // namespace QwtBleUtilities
+}  // namespace qwt_ble_utilities

@@ -14,7 +14,7 @@
 NotchedMarker::NotchedMarker(QVector<Quantiles> quantiles)
     : quantilesVector_(std::move(quantiles))
 {
-    setZ(QwtBleUtilities::HIGH_ORDER);
+    setZ(qwt_ble_utilities::HIGH_ORDER);
     setRenderHint(QwtPlotItem::RenderAntialiased, true);
 
     initMarkerBrush();
@@ -51,9 +51,9 @@ void NotchedMarker::initMarkerBrush()
     QLinearGradient gradient;
     gradient.setCoordinateMode(QGradient::ObjectBoundingMode);
     QColor whiteAlpha(Qt::white);
-    whiteAlpha.setAlpha(QwtBleUtilities::SMALL_TRANSPARENCY_FACTOR);
+    whiteAlpha.setAlpha(qwt_ble_utilities::SMALL_TRANSPARENCY_FACTOR);
     QColor endAlpha(Qt::black);
-    endAlpha.setAlpha(QwtBleUtilities::BIG_TRANSPARENCY_FACTOR);
+    endAlpha.setAlpha(qwt_ble_utilities::BIG_TRANSPARENCY_FACTOR);
     gradient.setColorAt(0, whiteAlpha);
     gradient.setColorAt(1, endAlpha);
     markerBrush_ = QBrush(gradient);
@@ -83,7 +83,7 @@ void NotchedMarker::drawElements(QPainter* p, const QwtScaleMap& xMap,
             createElementRecipe(yMap, centerX, width, quantiles)};
 
         // If min = max draw only one line.
-        if (QwtBleUtilities::doublesAreEqual(quantiles.min_, quantiles.max_))
+        if (qwt_ble_utilities::doublesAreEqual(quantiles.min_, quantiles.max_))
         {
             const double indent{calculateIndent(recipe)};
             p->drawLine(QPointF(recipe.fromX + indent, recipe.minY),

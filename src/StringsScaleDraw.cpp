@@ -9,7 +9,7 @@
 StringsScaleDraw::StringsScaleDraw(QVector<QString> intervalNames)
     : intervalNames_(std::move(intervalNames))
 {
-    setLabelRotation(QwtBleUtilities::DEFAULT_LABEL_ROTATION);
+    setLabelRotation(qwt_ble_utilities::DEFAULT_LABEL_ROTATION);
     setLabelAlignment(Qt::AlignLeft | Qt::AlignBottom);
 }
 
@@ -17,7 +17,7 @@ QwtText StringsScaleDraw::label(double value) const
 {
     const QwtText emptyLabel{QStringLiteral("                     ")};
     if (const bool valueIsIntegral{
-            QwtBleUtilities::doublesAreEqual(fmod(value, 1), 0.)};
+            qwt_ble_utilities::doublesAreEqual(fmod(value, 1), 0.)};
         (!valueIsIntegral) || intervalNames_.isEmpty())
         return emptyLabel;
 

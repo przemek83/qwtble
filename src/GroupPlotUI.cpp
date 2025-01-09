@@ -84,8 +84,8 @@ QSplitter* GroupPlotUI::setupSplitter()
 void GroupPlotUI::updateQuantilesPlotExtent()
 {
     const double expectedExtent{calculateExpectedExtent()};
-    if (QwtBleUtilities::doublesAreEqual(expectedExtent,
-                                         getPlotBottomExtent(*quantilesPlot_)))
+    if (qwt_ble_utilities::doublesAreEqual(
+            expectedExtent, getPlotBottomExtent(*quantilesPlot_)))
         return;
 
     quantilesPlot_->axisScaleDraw(QwtPlot::xBottom)
