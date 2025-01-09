@@ -61,7 +61,7 @@ void NotchedMarker::initMarkerBrush()
 
 double NotchedMarker::calculateItemWidth(const QwtScaleMap& xMap) const
 {
-    const QwtScaleDiv& scaleBottom = plot()->axisScaleDiv(QwtPlot::xBottom);
+    const QwtScaleDiv& scaleBottom{plot()->axisScaleDiv(QwtPlot::xBottom)};
     double width{xMap.pDist() / (scaleBottom.range() * 2)};
 
     // Item should take 90% of place.
@@ -204,10 +204,10 @@ NotchedMarker::ElementRecipe NotchedMarker::createElementRecipe(
 void NotchedMarker::drawLegendTexts(QPainter* p, const ElementRecipe& recipe)
 {
     // Place on x axis where legend text starts.
-    const double textStartX = recipe.toX + LEGEND_SPACING;
+    const double textStartX{recipe.toX + LEGEND_SPACING};
 
     // Place on y axis where legend text starts.
-    const double textStartY = recipe.meanY + LEGEND_SPACING;
+    const double textStartY{recipe.meanY + LEGEND_SPACING};
     p->drawText(QPointF(textStartX, textStartY), QObject::tr("mean"));
     p->drawText(QPointF(textStartX, recipe.maxY + LEGEND_SPACING),
                 QStringLiteral("max"));
@@ -259,10 +259,10 @@ double NotchedMarker::calculateIndent(const ElementRecipe& recipe)
 void NotchedMarker::drawLegend(QPainter* p, const QRectF& rect) const
 {
     // Size of single part of legend.
-    const int sectionHeight = 5 * LEGEND_SPACING;
+    const int sectionHeight{5 * LEGEND_SPACING};
 
     // Top y axis point from where legend starts.
-    const double startY = rect.y() + 2 * LEGEND_SPACING;
+    const double startY{rect.y() + (2 * LEGEND_SPACING)};
     const ElementRecipe recipe{createLegendRecipe(rect, sectionHeight, startY)};
     drawElement(p, recipe);
     drawLegendTexts(p, recipe);
