@@ -12,7 +12,7 @@
 PlotBase::PlotBase(const QString& title, QWidget* parent)
     : QwtPlot(parent),
       panner_(canvas()),
-      magnifier_(new PlotMagnifier(canvas()))
+      magnifier_{std::make_unique<PlotMagnifier>(canvas())}
 {
     // Used in export of images.
     setWindowTitle(title);

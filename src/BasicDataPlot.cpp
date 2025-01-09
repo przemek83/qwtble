@@ -10,7 +10,7 @@
 
 BasicDataPlot::BasicDataPlot(QWidget* parent)
     : PlotBase(QObject::tr("Basic"), parent),
-      picker_(new XDateYAxisNumberPicker(canvas()))
+      picker_{std::make_unique<XDateYAxisNumberPicker>(canvas())}
 {
     setAxisScaleDraw(xBottom, new TimeScaleDraw());
 
@@ -108,11 +108,11 @@ void BasicDataPlot::initLegend()
 
 void BasicDataPlot::checkLegendItems()
 {
-    setLegendLabelChecked(itemToInfo(&plotData_));
-    setLegendLabelChecked(itemToInfo(&plotQ25_));
-    setLegendLabelChecked(itemToInfo(&plotQ50_));
-    setLegendLabelChecked(itemToInfo(&plotQ75_));
-    setLegendLabelChecked(itemToInfo(&plotLinearRegression_));
+    setLegendLabelChecked(QwtPlot::itemToInfo(&plotData_));
+    setLegendLabelChecked(QwtPlot::itemToInfo(&plotQ25_));
+    setLegendLabelChecked(QwtPlot::itemToInfo(&plotQ50_));
+    setLegendLabelChecked(QwtPlot::itemToInfo(&plotQ75_));
+    setLegendLabelChecked(QwtPlot::itemToInfo(&plotLinearRegression_));
 }
 
 void BasicDataPlot::setPlotData(const QVector<QPointF>& data)
