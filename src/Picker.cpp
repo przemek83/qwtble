@@ -23,7 +23,7 @@ Picker::Picker(QWidget* parent) : QwtPlotPicker(parent)
     setTrackerFont(actualFont);
 }
 
-int Picker::getAreaOfMouse()
+int Picker::getAreaOfMouse() const
 {
     const auto x = lround(invTransform(trackerPosition()).x());
     return static_cast<int>(x);

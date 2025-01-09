@@ -64,7 +64,7 @@ void Quantiles::setQuantiles(const QVector<double>& values)
 }
 
 std::tuple<double, double> Quantiles::calculateEXAndEX2(
-    const QVector<double>& values)
+    const QVector<double>& values) const
 {
     double EX = 0;
     double EX2 = 0;

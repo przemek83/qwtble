@@ -9,7 +9,7 @@ class Picker : public QwtPlotPicker
 public:
     explicit Picker(QWidget* parent);
 
-    int getAreaOfMouse();
+    int getAreaOfMouse() const;
 
     bool getMouseInWidget() const;
 

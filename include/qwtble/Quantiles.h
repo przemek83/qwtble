@@ -64,7 +64,8 @@ private:
                                   double interval);
     static double calculateStdDev(int count, double EX, double EX2);
     void setQuantiles(const QVector<double>& values);
-    std::tuple<double, double> calculateEXAndEX2(const QVector<double>& values);
+    std::tuple<double, double> calculateEXAndEX2(
+        const QVector<double>& values) const;
 
     enum PlotInfo : int
     {
