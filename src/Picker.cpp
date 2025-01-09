@@ -12,20 +12,20 @@ Picker::Picker(QWidget* parent) : QwtPlotPicker(parent)
 {
     setTrackerMode(AlwaysOn);
 
-    QPen pen = trackerPen();
+    QPen pen{trackerPen()};
     pen.setColor(Qt::blue);
     pen.setWidth(2);
     setTrackerPen(pen);
 
-    QFont actualFont = trackerFont();
-    actualFont.setPointSize(lround(actualFont.pointSize() * FONT_FACTOR));
+    QFont actualFont{trackerFont()};
+    actualFont.setPointSize(::lround(actualFont.pointSize() * FONT_FACTOR));
     actualFont.setWeight(QFont::Bold);
     setTrackerFont(actualFont);
 }
 
 int Picker::getAreaOfMouse() const
 {
-    const auto x = lround(invTransform(trackerPosition()).x());
+    const auto x{::lround(invTransform(trackerPosition()).x())};
     return static_cast<int>(x);
 }
 

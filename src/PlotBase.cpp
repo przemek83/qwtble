@@ -67,7 +67,7 @@ QwtText PlotBase::IntervalsScaleDraw::label(double v) const
     using qwt_ble_utilities::doublesAreEqual;
     using qwt_ble_utilities::doubleToStringUsingLocale;
 
-    if (!doublesAreEqual(fmod(v, 1), 0.))
+    if (!doublesAreEqual(::fmod(v, 1), 0.))
         return {doubleToStringUsingLocale(v, 1)};
     return {doubleToStringUsingLocale(v, 0)};
 }

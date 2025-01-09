@@ -14,7 +14,7 @@ HistogramPlotUI::HistogramPlotUI(QWidget* parent)
     histogramPlot_ = new HistogramPlot();
     ui->verticalLayout->addWidget(histogramPlot_);
 
-    connect(ui->spinBox, qOverload<int>(&QSpinBox::valueChanged),
+    connect(ui->spinBox, ::qOverload<int>(&QSpinBox::valueChanged),
             histogramPlot_, &HistogramPlot::recompute);
 }
 
