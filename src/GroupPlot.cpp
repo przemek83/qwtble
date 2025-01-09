@@ -11,8 +11,8 @@
 
 GroupPlot::GroupPlot(QWidget* parent)
     : PlotBase(tr("Grouping"), parent),
-      marker_(new NotchedMarker({})),
-      picker_(new YAxisNumberPicker(canvas()))
+      marker_{std::make_unique<NotchedMarker>(QVector<Quantiles>{})},
+      picker_{std::make_unique<YAxisNumberPicker>(canvas())}
 {
     setStdScaleDraw(yRight);
 
@@ -21,7 +21,7 @@ GroupPlot::GroupPlot(QWidget* parent)
     enableAxis(QwtPlot::yRight, true);
 
     setAxisScaleDraw(xBottom, new StringsScaleDraw({}));
-    QFont font = axisFont(QwtPlot::xBottom);
+    QFont font{axisFont(QwtPlot::xBottom)};
     font.setStyleStrategy(QFont::PreferAntialias);
     setAxisFont(QwtPlot::xBottom, font);
 }
@@ -33,8 +33,8 @@ void GroupPlot::setNewData(QVector<Quantiles> quantilesVector,
                            const QVector<QString>& intervalStrings)
 {
     tooltips_ = createTooltips(intervalStrings, quantilesVector);
-    QVector<QString> shortIntervalNames =
-        createAxisIntervalsNames(intervalStrings, quantilesVector);
+    QVector<QString> shortIntervalNames{
+        createAxisIntervalsNames(intervalStrings, quantilesVector)};
     setAxisScaleDraw(xBottom,
                      new StringsScaleDraw(std::move(shortIntervalNames)));
     marker_->setQuantiles(std::move(quantilesVector));
@@ -51,17 +51,18 @@ QVector<QString> GroupPlot::createAxisIntervalsNames(
 {
     QVector<QString> shortenNames;
     shortenNames.reserve(intervalsNames.size());
-    const QString moreChars(QStringLiteral("..."));
-    for (int i = 0; i < intervalsNames.size(); ++i)
+    const QString moreChars{QStringLiteral("...")};
+    const qsizetype size{intervalsNames.size()};
+    for (qsizetype i{0}; i < size; ++i)
     {
-        QString name = intervalsNames[i];
-        const QString countString =
-            QString(" (" + QString::number(quantilesVector[i].count_) + ")");
+        QString name{intervalsNames[i]};
+        const QString countString{
+            " (" + QString::number(quantilesVector[i].count_) + ")"};
 
-        if (name.size() + countString.size() > maxCharsInLabel_)
+        if ((name.size() + countString.size()) > maxCharsInLabel_)
         {
-            name.chop(name.size() - maxCharsInLabel_ + countString.size() +
-                      moreChars.size());
+            name.chop(name.size() - (maxCharsInLabel_ + countString.size() +
+                                     moreChars.size()));
             name.append(moreChars);
         }
         name.append(countString);
@@ -75,8 +76,9 @@ QVector<QString> GroupPlot::createTooltips(
     const QVector<Quantiles>& quantilesVector)
 {
     QVector<QString> tooltips;
-    tooltips.reserve(intervalsNames.size());
-    for (int i = 0; i < intervalsNames.size(); ++i)
+    const qsizetype size{intervalsNames.size()};
+    tooltips.reserve(size);
+    for (qsizetype i{0}; i < size; ++i)
         tooltips.append("<B>" + intervalsNames.at(i) + "</B></BR>" +
                         quantilesVector.at(i).getValuesAsToolTip());
     return tooltips;
@@ -93,8 +95,9 @@ bool GroupPlot::event(QEvent* event)
 {
     if (event->type() == QEvent::ToolTip)
     {
-        const int x = picker_->getAreaOfMouse();
-        if (x >= 1 && x <= tooltips_.size() && picker_->getMouseInWidget())
+        const int x{picker_->getAreaOfMouse()};
+        if ((x >= 1) && (x <= tooltips_.size()) &&
+            (picker_->getMouseInWidget()))
         {
             setToolTip(tooltips_[x - 1]);
         }
