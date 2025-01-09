@@ -14,8 +14,6 @@ public:
     bool getMouseInWidget() const;
 
 protected:
-    QwtText trackerTextF(const QPointF& pos) const override = 0;
-
     void widgetEnterEvent(QEvent* event) override;
 
     void widgetLeaveEvent(QEvent* event) override;
