@@ -66,16 +66,16 @@ void Quantiles::setQuantiles(const QVector<double>& values)
 std::tuple<double, double> Quantiles::calculateEXAndEX2(
     const QVector<double>& values) const
 {
-    double EX = 0;
-    double EX2 = 0;
+    double ex{0};
+    double ex2{0};
     for (auto value : values)
     {
-        EX += value;
-        EX2 += value * value;
+        ex += value;
+        ex2 += value * value;
     }
-    EX /= count_;
-    EX2 /= count_;
-    return {EX, EX2};
+    ex /= count_;
+    ex2 /= count_;
+    return {ex, ex2};
 }
 
 void Quantiles::init(QVector<double> values)
@@ -91,9 +91,9 @@ void Quantiles::init(QVector<double> values)
     min_ = values.front();
     max_ = values.back();
 
-    auto [EX, EX2] = calculateEXAndEX2(values);
-    mean_ = EX;
-    stdDev_ = calculateStdDev(values.count(), EX, EX2);
+    auto [ex, ex2]{calculateEXAndEX2(values)};
+    mean_ = ex;
+    stdDev_ = calculateStdDev(values.count(), ex, ex2);
     if (stdDev_ <= 0)
         return;
 
