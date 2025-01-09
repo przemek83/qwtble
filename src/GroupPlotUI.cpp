@@ -19,8 +19,8 @@ GroupPlotUI::GroupPlotUI(const QVector<std::pair<QString, int> >& stringColumns,
 {
     ui->setupUi(this);
 
-    connect(ui->comboBox, qOverload<int>(&QComboBox::currentIndexChanged), this,
-            &GroupPlotUI::comboBoxCurrentIndexChanged);
+    connect(ui->comboBox, ::qOverload<int>(&QComboBox::currentIndexChanged),
+            this, &GroupPlotUI::comboBoxCurrentIndexChanged);
 
     QSplitter* splitter{setupSplitter()};
     ui->verticalLayout->addWidget(splitter);
@@ -83,7 +83,7 @@ QSplitter* GroupPlotUI::setupSplitter()
 
 void GroupPlotUI::updateQuantilesPlotExtent()
 {
-    const double expectedExtent{calculateExpectedQuantilesPlotExtent()};
+    const double expectedExtent{calculateExpectedExtent()};
     if (QwtBleUtilities::doublesAreEqual(expectedExtent,
                                          getPlotBottomExtent(*quantilesPlot_)))
         return;
@@ -97,11 +97,11 @@ void GroupPlotUI::updateQuantilesPlotExtent()
     QCoreApplication::postEvent(quantilesPlot_, forceResizeEvent);
 }
 
-double GroupPlotUI::calculateExpectedQuantilesPlotExtent() const
+double GroupPlotUI::calculateExpectedExtent() const
 {
-    auto* scrollArea{
-        qobject_cast<QScrollArea*>(groupPlot_->parent()->parent())};
-    QScrollBar* groupPlotScrollBar{scrollArea->horizontalScrollBar()};
+    const auto* scrollArea{
+        ::qobject_cast<QScrollArea*>(groupPlot_->parent()->parent())};
+    const QScrollBar* groupPlotScrollBar{scrollArea->horizontalScrollBar()};
     int scrollBarSize{0};
     if (groupPlotScrollBar->isVisible())
         scrollBarSize = groupPlotScrollBar->height();

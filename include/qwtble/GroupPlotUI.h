@@ -50,7 +50,7 @@ private:
      */
     QSplitter* setupSplitter();
 
-    double calculateExpectedQuantilesPlotExtent() const;
+    double calculateExpectedExtent() const;
 
     static double getPlotBottomExtent(const QwtPlot& plot);
 
