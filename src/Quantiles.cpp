@@ -25,17 +25,19 @@ void Quantiles::clear()
 double Quantiles::calculateStdDev(int count, double ex, double ex2)
 {
     if (count > 1)
-        return ::sqrt(ex2 - ex * ex);
+        return ::sqrt(ex2 - (ex * ex));
     return .0;
 }
 
 double Quantiles::computeQuantile(const QVector<double>& values,
                                   double interval)
 {
-    return values.at(static_cast<int>(::floor(interval))) +
-           (interval - ::floor(interval)) *
-               (values.at(static_cast<int>(::ceil(interval))) -
-                values.at(static_cast<int>(::floor(interval))));
+    int lowerIndex{static_cast<int>(::floor(interval))};
+    int upperIndex{static_cast<int>(::ceil(interval))};
+    double lowerValue{values.at(lowerIndex)};
+    double upperValue{values.at(upperIndex)};
+    double fraction{interval - ::floor(interval)};
+    return lowerValue + (fraction * (upperValue - lowerValue));
 }
 
 void Quantiles::setQuantiles(const QVector<double>& values)
