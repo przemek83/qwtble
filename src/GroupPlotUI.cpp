@@ -64,7 +64,7 @@ QSplitter* GroupPlotUI::setupSplitter()
 {
     auto* splitter{new QSplitter(Qt::Horizontal, this)};
     connect(splitter, &QSplitter::splitterMoved, this,
-            [=]([[maybe_unused]] int pos, [[maybe_unused]] int index)
+            [this]([[maybe_unused]] int pos, [[maybe_unused]] int index)
             {
                 QApplication::processEvents();
                 updateQuantilesPlotExtent();
