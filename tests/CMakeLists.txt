@@ -16,6 +16,8 @@ set(${PROJECT_TESTS}_SOURCES
     Common.cpp
     GroupPlotTest.h
     GroupPlotTest.cpp
+    QuantilesPlotTest.h
+    QuantilesPlotTest.cpp
 )
 
 qt_add_resources(${PROJECT_TESTS}_SOURCES testResources.qrc)

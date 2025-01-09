@@ -8,23 +8,11 @@
 
 namespace
 {
-const QVector<QVector<double>> exampleValues{
-    {3.5, 6.7, 4.7, 6.6, 3., 4.9},
-    {5.5, 1.2, 3.2, 7.6, 5., 4.9, 0.3, 7.3},
-    {2.1, 1.7, 4.3, 6.6, 1., 3.9, 5.5},
-    {1.1, 3.2, 3.8, 6.5, 2., 2.9, 7.5, 3.2, 5.5},
-    {2.1, 1.7, 4.3, 6.1, 2.}};
-
-const QVector<QString> exampleNames{
-    QStringLiteral("circle"), QStringLiteral("triangle"),
-    QStringLiteral("square"), QStringLiteral("rectangle"),
-    QStringLiteral("cube")};
-
 void preparePlot(GroupPlot& plot)
 {
     QVector<Quantiles> quantilesVector;
-    quantilesVector.reserve(exampleValues.size());
-    for (auto& values : exampleValues)
+    quantilesVector.reserve(common::getValues().size());
+    for (const auto& values : common::getValues())
     {
         Quantiles quantiles;
         quantiles.init(values);
@@ -33,8 +21,9 @@ void preparePlot(GroupPlot& plot)
 
     plot.setAxisScale(QwtPlot::yLeft, 0, 8);
     plot.setAxisScale(QwtPlot::yRight, 0, 8);
-    plot.setAxisScale(QwtPlot::xBottom, 0.5, exampleValues.size() + 0.5, 1);
-    plot.setNewData(std::move(quantilesVector), exampleNames);
+    plot.setAxisScale(QwtPlot::xBottom, 0.5, common::getValues().size() + 0.5,
+                      1);
+    plot.setNewData(std::move(quantilesVector), common::getNames());
     plot.resize(common::getPlotSize());
 }
 

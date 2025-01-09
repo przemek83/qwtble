@@ -6,6 +6,7 @@
 #include "GroupPlotTest.h"
 #include "GroupPlotUITest.h"
 #include "HistogramPlotTest.h"
+#include "QuantilesPlotTest.h"
 #include "QuantilesTest.h"
 #include "UtilitiesTest.h"
 
@@ -75,6 +76,9 @@ int main(int argc, char* argv[])
 
     GroupPlotTest groupPlotTest;
     QTest::qExec(&groupPlotTest);
+
+    QuantilesPlotTest quantilesPlotTest;
+    QTest::qExec(&quantilesPlotTest);
 
     return 0;
 }

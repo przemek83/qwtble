@@ -42,6 +42,22 @@ QVector<double> getDates()
         13929., 13972., 13910., 13924., 13924., 13927.};
 }
 
+QVector<QVector<double>> getValues()
+{
+    return {{3.5, 6.7, 4.7, 6.6, 3., 4.9},
+            {5.5, 1.2, 3.2, 7.6, 5., 4.9, 0.3, 7.3},
+            {2.1, 1.7, 4.3, 6.6, 1., 3.9, 5.5},
+            {1.1, 3.2, 3.8, 6.5, 2., 2.9, 7.5, 3.2, 5.5},
+            {2.1, 1.7, 4.3, 6.1, 2.}};
+}
+
+QVector<QString> getNames()
+{
+    return {QStringLiteral("circle"), QStringLiteral("triangle"),
+            QStringLiteral("square"), QStringLiteral("rectangle"),
+            QStringLiteral("cube")};
+}
+
 QVariant getItemInfo(QwtPlot& plot, const QString& text)
 {
     const auto* legend{::qobject_cast<QwtLegend*>(plot.legend())};
