@@ -2,9 +2,7 @@
 
 #include <qwt_plot_picker.h>
 
-/**
- * @brief Base class for pickers - display of coordinates on mouse action.
- */
+/// @brief Base class for pickers - display of coordinates on mouse action.
 class Picker : public QwtPlotPicker
 {
     Q_OBJECT

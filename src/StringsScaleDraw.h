@@ -2,9 +2,7 @@
 
 #include <qwt_scale_draw.h>
 
-/**
- * @brief Scale drawing used in grouping plot. Rotates labels.
- */
+/// @brief Scale drawing used in grouping plot. Rotates labels.
 class StringsScaleDraw : public QwtScaleDraw
 {
 public:
