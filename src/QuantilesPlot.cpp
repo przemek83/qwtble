@@ -7,13 +7,12 @@
 
 #include <qwtble/NotchedMarker.h>
 #include <qwtble/QwtBleUtilities.h>
-#include "StringsScaleDraw.h"
 #include "YAxisNumberPicker.h"
 
 QuantilesPlot::QuantilesPlot(QWidget* parent)
     : PlotBase(QObject::tr("Quantiles"), parent),
-      marker_(new NotchedMarker({})),
-      picker_(new YAxisNumberPicker(canvas()))
+      marker_{std::make_unique<NotchedMarker>(QVector<Quantiles>{})},
+      picker_{std::make_unique<YAxisNumberPicker>(canvas())}
 {
     marker_->attach(this);
 
@@ -84,7 +83,7 @@ QuantilesPlot::IntervalsScaleDraw::IntervalsScaleDraw(int count) : count_(count)
 
 QwtText QuantilesPlot::IntervalsScaleDraw::label(double value) const
 {
-    if (QwtBleUtilities::doublesAreEqual(value, 1.) && count_ != 0)
+    if (QwtBleUtilities::doublesAreEqual(value, 1.) && (count_ != 0))
         return {QString::number(count_)};
     return {};
 }
