@@ -50,7 +50,7 @@ void preparePlot(BasicDataPlot& plot)
     const QVector<QPointF> data{getData()};
     Quantiles quantiles{getQuantiles()};
     plot.setNewData(data, quantiles, regressionPoints);
-    plot.resize(800, 600);
+    plot.resize(common::getPlotSize());
 }
 
 void checkPlot(BasicDataPlot& plot, QString expectedPath)
@@ -77,7 +77,7 @@ void BasicDataPlotTest::testPlotWithoutData()
     Quantiles quantiles;
     BasicDataPlot plot;
     plot.setNewData({}, quantiles, regressionPoints);
-    plot.resize(800, 600);
+    plot.resize(common::getPlotSize());
 
     const QString expectedPath{
         QString::fromLatin1(":/res/BasicDataPlotEmpty.png")};

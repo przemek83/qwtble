@@ -35,7 +35,7 @@ void preparePlot(GroupPlot& plot)
     plot.setAxisScale(QwtPlot::yRight, 0, 8);
     plot.setAxisScale(QwtPlot::xBottom, 0.5, exampleValues.size() + 0.5, 1);
     plot.setNewData(std::move(quantilesVector), exampleNames);
-    plot.resize(800, 600);
+    plot.resize(common::getPlotSize());
 }
 
 void checkPlot(GroupPlot& plot, QString expectedPath)
@@ -61,7 +61,7 @@ void GroupPlotTest::testPlotWithoutData()
 {
     GroupPlot plot;
     plot.setNewData({}, {});
-    plot.resize(800, 600);
+    plot.resize(common::getPlotSize());
 
     const QString expectedPath{
         QString::fromLatin1(":/res/GroupPlotPlotWithoutData.png")};

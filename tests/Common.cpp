@@ -55,4 +55,6 @@ QVariant getItemInfo(QwtPlot& plot, const QString& text)
 
     return {};
 }
+
+QSize getPlotSize() { return {800, 600}; }
 }  // namespace common

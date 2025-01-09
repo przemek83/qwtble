@@ -23,7 +23,7 @@ void preparePlot(HistogramPlot& plot)
     for (const auto& item : prices)
         plotData.append(item);
     plot.setNewData(std::move(plotData), quantiles, 10);
-    plot.resize(800, 600);
+    plot.resize(common::getPlotSize());
 }
 
 void checkPlot(HistogramPlot& plot, QString expectedPath)
@@ -49,7 +49,7 @@ void HistogramPlotTest::testPlotWithoutData()
 {
     HistogramPlot plot;
     plot.setNewData({}, {}, 10);
-    plot.resize(800, 600);
+    plot.resize(common::getPlotSize());
 
     QImage actual{plot.grab().toImage()};
     const QString expectedPath{
