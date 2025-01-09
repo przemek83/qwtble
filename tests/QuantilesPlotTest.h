@@ -8,4 +8,5 @@ class QuantilesPlotTest : public QObject
 private Q_SLOTS:
     void testPlotWithData();
     void testPlotWithoutData();
+    void testReset();
 };
