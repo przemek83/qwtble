@@ -62,7 +62,7 @@ void NotchedMarker::initMarkerBrush()
 double NotchedMarker::calculateItemWidth(const QwtScaleMap& xMap) const
 {
     const QwtScaleDiv& scaleBottom = plot()->axisScaleDiv(QwtPlot::xBottom);
-    double width = xMap.pDist() / (scaleBottom.range() * 2);
+    double width{xMap.pDist() / (scaleBottom.range() * 2)};
 
     // Item should take 90% of place.
     const double widthFactor{.9};
@@ -75,10 +75,11 @@ void NotchedMarker::drawElements(QPainter* p, const QwtScaleMap& xMap,
                                  const QwtScaleMap& yMap) const
 {
     const double width{calculateItemWidth(xMap)};
-    for (int i = 0; i < quantilesVector_.size(); ++i)
+    int quantilesSize{static_cast<int>(quantilesVector_.size())};
+    for (int i{0}; i < quantilesSize; ++i)
     {
-        const Quantiles& quantiles = quantilesVector_[i];
-        const double centerX = xMap.transform(i + 1);
+        const Quantiles& quantiles{quantilesVector_[i]};
+        const double centerX{xMap.transform(i + 1)};
         const ElementRecipe recipe{
             createElementRecipe(yMap, centerX, width, quantiles)};
 
@@ -98,7 +99,7 @@ void NotchedMarker::drawElementUpperPart(QPainter* p,
                                          const ElementRecipe& recipe)
 {
     const double indent{calculateIndent(recipe)};
-    const double centerX = (recipe.fromX + recipe.toX) / 2;
+    const double centerX{(recipe.fromX + recipe.toX) / 2};
 
     // Draw horizontal line for max.
     p->setPen(QPen(Qt::DotLine));
@@ -118,21 +119,21 @@ void NotchedMarker::drawElementCenterPart(QPainter* p,
                                           const ElementRecipe& recipe) const
 {
     const double indent{calculateIndent(recipe)};
-    const double notchFactor = 0.85;
+    const double notchFactor{0.85};
     QPainterPath path(
         QPoint(static_cast<int>(recipe.fromX), static_cast<int>(recipe.q25Y)));
     path.lineTo(recipe.fromX,
-                recipe.q25Y - (recipe.q25Y - recipe.q50Y) * notchFactor);
+                recipe.q25Y - ((recipe.q25Y - recipe.q50Y) * notchFactor));
     path.lineTo(recipe.fromX + indent, recipe.q50Y);
     path.lineTo(recipe.fromX,
-                recipe.q75Y + (recipe.q50Y - recipe.q75Y) * notchFactor);
+                recipe.q75Y + ((recipe.q50Y - recipe.q75Y) * notchFactor));
     path.lineTo(recipe.fromX, recipe.q75Y);
     path.lineTo(recipe.toX, recipe.q75Y);
     path.lineTo(recipe.toX,
-                recipe.q75Y + (recipe.q50Y - recipe.q75Y) * notchFactor);
+                recipe.q75Y + ((recipe.q50Y - recipe.q75Y) * notchFactor));
     path.lineTo(recipe.toX - indent, recipe.q50Y);
     path.lineTo(recipe.toX,
-                recipe.q25Y - (recipe.q25Y - recipe.q50Y) * notchFactor);
+                recipe.q25Y - ((recipe.q25Y - recipe.q50Y) * notchFactor));
     path.lineTo(recipe.toX, recipe.q25Y);
     path.closeSubpath();
     p->fillPath(path, markerBrush_);
@@ -143,7 +144,7 @@ void NotchedMarker::drawElementLowerPart(QPainter* p,
                                          const ElementRecipe& recipe)
 {
     const double indent{calculateIndent(recipe)};
-    const double centerX = (recipe.fromX + recipe.toX) / 2;
+    const double centerX{(recipe.fromX + recipe.toX) / 2};
 
     // Draw q50.
     p->drawLine(QPointF(recipe.fromX + indent, recipe.q50Y),
@@ -166,7 +167,7 @@ void NotchedMarker::drawElementLowerPart(QPainter* p,
 void NotchedMarker::drawMeanCross(QPainter* p, const ElementRecipe& recipe)
 {
     const double indent{calculateIndent(recipe)};
-    const double centerX = (recipe.fromX + recipe.toX) / 2;
+    const double centerX{(recipe.fromX + recipe.toX) / 2};
     const double crossWidth{indent / 4};
     p->drawLine(QPointF(centerX - crossWidth, recipe.meanY - crossWidth),
                 QPointF(centerX + crossWidth, recipe.meanY + crossWidth));
@@ -228,16 +229,23 @@ NotchedMarker::ElementRecipe NotchedMarker::createLegendRecipe(
     const QRectF& rect, int sectionHeight, double startY)
 {
     ElementRecipe recipe;
-    const int width = 4 * LEGEND_SPACING;
+    const int width{4 * LEGEND_SPACING};
     recipe.meanY = startY;
     int elementNumber{0};
-    recipe.maxY = startY + ++elementNumber * sectionHeight;
-    recipe.q90Y = startY + ++elementNumber * sectionHeight;
-    recipe.q75Y = startY + ++elementNumber * sectionHeight;
-    recipe.q50Y = startY + ++elementNumber * sectionHeight;
-    recipe.q25Y = startY + ++elementNumber * sectionHeight;
-    recipe.q10Y = startY + ++elementNumber * sectionHeight;
-    recipe.minY = startY + ++elementNumber * sectionHeight;
+    ++elementNumber;
+    recipe.maxY = startY + (elementNumber * sectionHeight);
+    ++elementNumber;
+    recipe.q90Y = startY + (elementNumber * sectionHeight);
+    ++elementNumber;
+    recipe.q75Y = startY + (elementNumber * sectionHeight);
+    ++elementNumber;
+    recipe.q50Y = startY + (elementNumber * sectionHeight);
+    ++elementNumber;
+    recipe.q25Y = startY + (elementNumber * sectionHeight);
+    ++elementNumber;
+    recipe.q10Y = startY + (elementNumber * sectionHeight);
+    ++elementNumber;
+    recipe.minY = startY + (elementNumber * sectionHeight);
     recipe.fromX = rect.x() + LEGEND_SPACING;
     recipe.toX = recipe.fromX + width;
     return recipe;
