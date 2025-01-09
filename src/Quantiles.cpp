@@ -22,20 +22,20 @@ void Quantiles::clear()
     maxX_ = .0;
 }
 
-double Quantiles::calculateStdDev(int count, double EX, double EX2)
+double Quantiles::calculateStdDev(int count, double ex, double ex2)
 {
     if (count > 1)
-        return sqrt(EX2 - EX * EX);
+        return ::sqrt(ex2 - ex * ex);
     return .0;
 }
 
 double Quantiles::computeQuantile(const QVector<double>& values,
                                   double interval)
 {
-    return values.at(static_cast<int>(floor(interval))) +
-           (interval - floor(interval)) *
-               (values.at(static_cast<int>(ceil(interval))) -
-                values.at(static_cast<int>(floor(interval))));
+    return values.at(static_cast<int>(::floor(interval))) +
+           (interval - ::floor(interval)) *
+               (values.at(static_cast<int>(::ceil(interval))) -
+                values.at(static_cast<int>(::floor(interval))));
 }
 
 void Quantiles::setQuantiles(const QVector<double>& values)
@@ -85,7 +85,7 @@ void Quantiles::init(QVector<double> values)
     if (values.empty())
         return;
 
-    count_ = values.count();
+    count_ = static_cast<int>(values.count());
 
     std::sort(values.begin(), values.end());
     min_ = values.front();
@@ -93,7 +93,7 @@ void Quantiles::init(QVector<double> values)
 
     auto [ex, ex2]{calculateEXAndEX2(values)};
     mean_ = ex;
-    stdDev_ = calculateStdDev(values.count(), ex, ex2);
+    stdDev_ = calculateStdDev(count_, ex, ex2);
     if (stdDev_ <= 0)
         return;
 

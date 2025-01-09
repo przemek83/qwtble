@@ -15,16 +15,6 @@
 struct QWTBLE_EXPORT Quantiles
 {
 public:
-    Quantiles() = default;
-
-    ~Quantiles() = default;
-
-    Quantiles& operator=(const Quantiles& other) = default;
-    Quantiles(const Quantiles& other) = default;
-
-    Quantiles& operator=(Quantiles&& other) = default;
-    Quantiles(Quantiles&& other) = default;
-
     // Y axis variables.
     double min_{.0};
     double q10_{.0};
@@ -62,7 +52,7 @@ public:
 private:
     static double computeQuantile(const QVector<double>& values,
                                   double interval);
-    static double calculateStdDev(int count, double EX, double EX2);
+    static double calculateStdDev(int count, double ex, double ex2);
     void setQuantiles(const QVector<double>& values);
     std::tuple<double, double> calculateEXAndEX2(
         const QVector<double>& values) const;
