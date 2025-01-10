@@ -25,7 +25,7 @@ void QuantilesTest::testToolTip() const
     QCOMPARE(quantiles.getValuesAsToolTip(), expected);
 }
 
-void QuantilesTest::testToolTipForOneValue() const
+void QuantilesTest::testToolTipForOneValue()
 {
     Quantiles quantiles;
     const QVector<double> singleItemData{3};

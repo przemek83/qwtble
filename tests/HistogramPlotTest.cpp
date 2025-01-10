@@ -26,7 +26,7 @@ void preparePlot(HistogramPlot& plot)
 }
 }  // namespace
 
-void HistogramPlotTest::testPlotWithData() const
+void HistogramPlotTest::testPlotWithData()
 {
     HistogramPlot plot;
     preparePlot(plot);
@@ -36,7 +36,7 @@ void HistogramPlotTest::testPlotWithData() const
     common::checkPlot(plot, expectedPath);
 }
 
-void HistogramPlotTest::testPlotWithoutData() const
+void HistogramPlotTest::testPlotWithoutData()
 {
     HistogramPlot plot;
     plot.setNewData({}, {}, 10);
@@ -47,7 +47,7 @@ void HistogramPlotTest::testPlotWithoutData() const
     common::checkPlot(plot, expectedPath);
 }
 
-void HistogramPlotTest::testLegendItemsChecking() const
+void HistogramPlotTest::testLegendItemsChecking()
 {
     HistogramPlot plot;
     preparePlot(plot);

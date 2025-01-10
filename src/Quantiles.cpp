@@ -32,11 +32,11 @@ double Quantiles::calculateStdDev(int count, double ex, double ex2)
 double Quantiles::computeQuantile(const QVector<double>& values,
                                   double interval)
 {
-    int lowerIndex{static_cast<int>(::floor(interval))};
-    int upperIndex{static_cast<int>(::ceil(interval))};
-    double lowerValue{values.at(lowerIndex)};
-    double upperValue{values.at(upperIndex)};
-    double fraction{interval - ::floor(interval)};
+    const int lowerIndex{static_cast<int>(::floor(interval))};
+    const int upperIndex{static_cast<int>(::ceil(interval))};
+    const double lowerValue{values.at(lowerIndex)};
+    const double upperValue{values.at(upperIndex)};
+    const double fraction{interval - ::floor(interval)};
     return lowerValue + (fraction * (upperValue - lowerValue));
 }
 

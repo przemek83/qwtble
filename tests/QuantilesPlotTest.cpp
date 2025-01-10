@@ -17,7 +17,7 @@ void preparePlot(QuantilesPlot& plot)
 }
 }  // namespace
 
-void QuantilesPlotTest::testPlotWithData() const
+void QuantilesPlotTest::testPlotWithData()
 {
     QuantilesPlot plot;
     preparePlot(plot);
@@ -27,7 +27,7 @@ void QuantilesPlotTest::testPlotWithData() const
     common::checkPlot(plot, expectedPath);
 }
 
-void QuantilesPlotTest::testPlotWithoutData() const
+void QuantilesPlotTest::testPlotWithoutData()
 {
     QuantilesPlot plot;
     plot.setNewData({});
@@ -38,7 +38,7 @@ void QuantilesPlotTest::testPlotWithoutData() const
     common::checkPlot(plot, expectedPath);
 }
 
-void QuantilesPlotTest::testReset() const
+void QuantilesPlotTest::testReset()
 {
     QuantilesPlot plot;
     preparePlot(plot);
@@ -47,8 +47,8 @@ void QuantilesPlotTest::testReset() const
     panner.setMouseButton(Qt::LeftButton);
 
     plot.show();
-    QPoint endPos(50, 50);
-    QPoint startPos(100, 100);
+    const QPoint endPos(50, 50);
+    const QPoint startPos(100, 100);
 
     // Force showing label.
     QTest::mousePress(plot.canvas(), Qt::LeftButton, Qt::NoModifier, endPos);
@@ -68,6 +68,6 @@ void QuantilesPlotTest::testReset() const
                             Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
     QCoreApplication::sendEvent(plot.canvas(), &customEvent);
 
-    QImage afterReset{plot.grab().toImage()};
+    const QImage afterReset{plot.grab().toImage()};
     QCOMPARE(beforeMove, afterReset);
 }

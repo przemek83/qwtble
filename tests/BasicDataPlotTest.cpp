@@ -57,7 +57,7 @@ void preparePlot(BasicDataPlot& plot)
 
 }  // namespace
 
-void BasicDataPlotTest::testPlotWithData() const
+void BasicDataPlotTest::testPlotWithData()
 {
     BasicDataPlot plot;
     preparePlot(plot);
@@ -66,10 +66,10 @@ void BasicDataPlotTest::testPlotWithData() const
     common::checkPlot(plot, expectedPath);
 }
 
-void BasicDataPlotTest::testPlotWithoutData() const
+void BasicDataPlotTest::testPlotWithoutData()
 {
     const QVector<QPointF> regressionPoints{{0, 0}, {0, 0}};
-    Quantiles quantiles;
+    const Quantiles quantiles;
     BasicDataPlot plot;
     plot.setNewData({}, quantiles, regressionPoints);
     plot.resize(common::getPlotSize());
@@ -79,7 +79,7 @@ void BasicDataPlotTest::testPlotWithoutData() const
     common::checkPlot(plot, expectedPath);
 }
 
-void BasicDataPlotTest::testLegendItemsChecking() const
+void BasicDataPlotTest::testLegendItemsChecking()
 {
     BasicDataPlot plot;
     preparePlot(plot);

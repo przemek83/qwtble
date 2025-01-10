@@ -12,7 +12,7 @@ private:
 private Q_SLOTS:
     void testToolTip() const;
 
-    void testToolTipForOneValue() const;
+    static void testToolTipForOneValue();
 
     void testComputing();
 

@@ -75,7 +75,7 @@ void NotchedMarker::drawElements(QPainter* p, const QwtScaleMap& xMap,
                                  const QwtScaleMap& yMap) const
 {
     const double width{calculateItemWidth(xMap)};
-    int quantilesSize{static_cast<int>(quantilesVector_.size())};
+    const int quantilesSize{static_cast<int>(quantilesVector_.size())};
     for (int i{0}; i < quantilesSize; ++i)
     {
         const Quantiles& quantiles{quantilesVector_[i]};

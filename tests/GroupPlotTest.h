@@ -6,6 +6,6 @@ class GroupPlotTest : public QObject
 {
     Q_OBJECT
 private Q_SLOTS:
-    void testPlotWithData() const;
-    void testPlotWithoutData() const;
+    static void testPlotWithData();
+    static void testPlotWithoutData();
 };

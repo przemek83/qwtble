@@ -79,7 +79,7 @@ QSize getPlotSize() { return {800, 600}; }
 
 void checkPlot(QwtPlot& plot, const QString& expectedPath)
 {
-    QImage actual{plot.grab().toImage()};
+    const QImage actual{plot.grab().toImage()};
     QImage expected(expectedPath);
     expected = expected.convertToFormat(actual.format());
     QCOMPARE(actual, expected);

@@ -161,7 +161,7 @@ GroupPlotUI* createGroupPlotUI()
                                                          {"Color", 1}};
 
     GroupPlotUI* groupPlotUI{new GroupPlotUI(stringColumns)};
-    GroupPlotData groupPlotData{prepareDataForGroupPlot()};
+    const GroupPlotData groupPlotData{prepareDataForGroupPlot()};
     auto reaction{[&plot = *groupPlotUI, data = groupPlotData](int column)
                   {
                       if (column == 0)
@@ -242,9 +242,7 @@ void initUpperSplitter(QSplitter& splitter)
 void initLowerSplitter(QSplitter& splitter)
 {
     Quantiles quantiles;
-    const QVector<double> priceSeries{getPriceSeries()};
-    const QVector<double> dataForQuantiles(priceSeries);
-    quantiles.init(dataForQuantiles);
+    quantiles.init(getPriceSeries());
 
     splitter.addWidget(wrapPlot(QStringLiteral("Histogram plot"),
                                 createHistogramPlot(quantiles)));

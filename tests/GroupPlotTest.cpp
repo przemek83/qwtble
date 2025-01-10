@@ -31,7 +31,7 @@ void preparePlot(GroupPlot& plot)
 }
 }  // namespace
 
-void GroupPlotTest::testPlotWithData() const
+void GroupPlotTest::testPlotWithData()
 {
     GroupPlot plot;
     preparePlot(plot);
@@ -41,7 +41,7 @@ void GroupPlotTest::testPlotWithData() const
     common::checkPlot(plot, expectedPath);
 }
 
-void GroupPlotTest::testPlotWithoutData() const
+void GroupPlotTest::testPlotWithoutData()
 {
     GroupPlot plot;
     plot.setNewData({}, {});

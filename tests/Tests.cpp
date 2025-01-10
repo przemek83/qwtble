@@ -59,7 +59,7 @@ int main(int argc, char* argv[])
     QApplication::setStyle(style);
     setLightPalette();
 
-    QLocale locale(QLocale::English, QLocale::UnitedStates);
+    const QLocale locale(QLocale::English, QLocale::UnitedStates);
     QLocale::setDefault(locale);
 
     setupFont();
