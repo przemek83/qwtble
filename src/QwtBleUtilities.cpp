@@ -32,14 +32,9 @@ bool floatsAreEqual(float left, float right)
 
 QString doubleToStringUsingLocale(double value, int precision)
 {
-    static bool initialized{false};
-    static QLocale locale{QLocale::system()};
-    if (!initialized)
-    {
-        locale.setNumberOptions(locale.numberOptions() &
-                                ~QLocale::OmitGroupSeparator);
-        initialized = true;
-    }
+    QLocale locale{QLocale::system()};
+    locale.setNumberOptions(locale.numberOptions() &
+                            ~QLocale::OmitGroupSeparator);
 
     return locale.toString(value, 'f', precision);
 }
