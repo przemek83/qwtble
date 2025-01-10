@@ -29,14 +29,6 @@ void preparePlot(GroupPlot& plot)
     plot.setNewData(std::move(quantilesVector), common::getNames());
     plot.resize(common::getPlotSize());
 }
-
-void checkPlot(GroupPlot& plot, const QString& expectedPath)
-{
-    QImage actual{plot.grab().toImage()};
-    QImage expected(expectedPath);
-    expected = expected.convertToFormat(actual.format());
-    QCOMPARE(actual, expected);
-}
 }  // namespace
 
 void GroupPlotTest::testPlotWithData() const
@@ -46,7 +38,7 @@ void GroupPlotTest::testPlotWithData() const
 
     const QString expectedPath{
         QString::fromLatin1(":/res/GroupPlotDefault.png")};
-    checkPlot(plot, expectedPath);
+    common::checkPlot(plot, expectedPath);
 }
 
 void GroupPlotTest::testPlotWithoutData() const
@@ -57,5 +49,5 @@ void GroupPlotTest::testPlotWithoutData() const
 
     const QString expectedPath{
         QString::fromLatin1(":/res/GroupPlotPlotWithoutData.png")};
-    checkPlot(plot, expectedPath);
+    common::checkPlot(plot, expectedPath);
 }

@@ -24,14 +24,6 @@ void preparePlot(HistogramPlot& plot)
     plot.setNewData(std::move(plotData), quantiles, 10);
     plot.resize(common::getPlotSize());
 }
-
-void checkPlot(HistogramPlot& plot, const QString& expectedPath)
-{
-    QImage actual{plot.grab().toImage()};
-    QImage expected(expectedPath);
-    expected = expected.convertToFormat(actual.format());
-    QCOMPARE(actual, expected);
-}
 }  // namespace
 
 void HistogramPlotTest::testPlotWithData() const
@@ -41,7 +33,7 @@ void HistogramPlotTest::testPlotWithData() const
 
     const QString expectedPath{
         QString::fromLatin1(":/res/HistogramPlotDefault.png")};
-    checkPlot(plot, expectedPath);
+    common::checkPlot(plot, expectedPath);
 }
 
 void HistogramPlotTest::testPlotWithoutData() const
@@ -52,7 +44,7 @@ void HistogramPlotTest::testPlotWithoutData() const
 
     const QString expectedPath{
         QString::fromLatin1(":/res/HistogramPlotWithoutData.png")};
-    checkPlot(plot, expectedPath);
+    common::checkPlot(plot, expectedPath);
 }
 
 void HistogramPlotTest::testLegendItemsChecking() const
@@ -61,9 +53,10 @@ void HistogramPlotTest::testLegendItemsChecking() const
     preparePlot(plot);
 
     auto* legend{::qobject_cast<QwtLegend*>(plot.legend())};
-    emit legend->checked(common::getItemInfo(plot, QStringLiteral("Histogram")), false, 0);
+    emit legend->checked(common::getItemInfo(plot, QStringLiteral("Histogram")),
+                         false, 0);
 
     const QString expectedPath{
         QString::fromLatin1(":/res/HistogramPlotItemChecked.png")};
-    checkPlot(plot, expectedPath);
+    common::checkPlot(plot, expectedPath);
 }

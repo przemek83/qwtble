@@ -15,14 +15,6 @@ void preparePlot(QuantilesPlot& plot)
     plot.setNewData(quantiles);
     plot.resize(common::getPlotSize());
 }
-
-void checkPlot(QuantilesPlot& plot, const QString& expectedPath)
-{
-    QImage actual{plot.grab().toImage()};
-    QImage expected(expectedPath);
-    expected = expected.convertToFormat(actual.format());
-    QCOMPARE(actual, expected);
-}
 }  // namespace
 
 void QuantilesPlotTest::testPlotWithData() const
@@ -32,7 +24,7 @@ void QuantilesPlotTest::testPlotWithData() const
 
     const QString expectedPath{
         QString::fromLatin1(":/res/QuantilesPlotDefault.png")};
-    checkPlot(plot, expectedPath);
+    common::checkPlot(plot, expectedPath);
 }
 
 void QuantilesPlotTest::testPlotWithoutData() const
@@ -43,7 +35,7 @@ void QuantilesPlotTest::testPlotWithoutData() const
 
     const QString expectedPath{
         QString::fromLatin1(":/res/QuantilesPlotWithoutData.png")};
-    checkPlot(plot, expectedPath);
+    common::checkPlot(plot, expectedPath);
 }
 
 void QuantilesPlotTest::testReset() const

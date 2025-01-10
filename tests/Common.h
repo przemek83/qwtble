@@ -18,4 +18,6 @@ QVector<QString> getNames();
 QVariant getItemInfo(QwtPlot& plot, const QString& text);
 
 QSize getPlotSize();
+
+void checkPlot(QwtPlot& plot, const QString& expectedPath);
 }  // namespace common

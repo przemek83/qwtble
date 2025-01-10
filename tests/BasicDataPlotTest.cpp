@@ -55,13 +55,6 @@ void preparePlot(BasicDataPlot& plot)
     plot.resize(common::getPlotSize());
 }
 
-void checkPlot(BasicDataPlot& plot, const QString& expectedPath)
-{
-    QImage actual{plot.grab().toImage()};
-    QImage expected(expectedPath);
-    expected = expected.convertToFormat(actual.format());
-    QCOMPARE(actual, expected);
-}
 }  // namespace
 
 void BasicDataPlotTest::testPlotWithData() const
@@ -70,7 +63,7 @@ void BasicDataPlotTest::testPlotWithData() const
     preparePlot(plot);
     const QString expectedPath{
         QString::fromLatin1(":/res/BasicDataPlotDefault.png")};
-    checkPlot(plot, expectedPath);
+    common::checkPlot(plot, expectedPath);
 }
 
 void BasicDataPlotTest::testPlotWithoutData() const
@@ -83,7 +76,7 @@ void BasicDataPlotTest::testPlotWithoutData() const
 
     const QString expectedPath{
         QString::fromLatin1(":/res/BasicDataPlotEmpty.png")};
-    checkPlot(plot, expectedPath);
+    common::checkPlot(plot, expectedPath);
 }
 
 void BasicDataPlotTest::testLegendItemsChecking() const
@@ -92,9 +85,10 @@ void BasicDataPlotTest::testLegendItemsChecking() const
     preparePlot(plot);
 
     auto* legend{::qobject_cast<QwtLegend*>(plot.legend())};
-    emit legend->checked(common::getItemInfo(plot, QStringLiteral("Q25")), false, 0);
+    emit legend->checked(common::getItemInfo(plot, QStringLiteral("Q25")),
+                         false, 0);
 
     const QString expectedPath{
         QString::fromLatin1(":/res/BasicDataPlotItemChecked.png")};
-    checkPlot(plot, expectedPath);
+    common::checkPlot(plot, expectedPath);
 }

@@ -1,5 +1,7 @@
 #include "Common.h"
-#include <qvariant.h>
+
+#include <QTest>
+#include <QVariant>
 
 #include "qwt_legend.h"
 #include "qwt_legend_label.h"
@@ -74,4 +76,12 @@ QVariant getItemInfo(QwtPlot& plot, const QString& text)
 }
 
 QSize getPlotSize() { return {800, 600}; }
+
+void checkPlot(QwtPlot& plot, const QString& expectedPath)
+{
+    QImage actual{plot.grab().toImage()};
+    QImage expected(expectedPath);
+    expected = expected.convertToFormat(actual.format());
+    QCOMPARE(actual, expected);
+}
 }  // namespace common
