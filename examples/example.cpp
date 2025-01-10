@@ -164,7 +164,7 @@ GroupPlotUI* createGroupPlotUI()
     return groupPlotUI;
 }
 
-HistogramPlot* createHistogramPlot(Quantiles& quantiles)
+HistogramPlot* createHistogramPlot(const Quantiles& quantiles)
 {
     QVector<double> plotData;
     const QVector<double> priceSeries{getPriceSeries()};
@@ -193,8 +193,8 @@ HistogramPlotUI* createHistogramPlotUI(const Quantiles& quantiles)
 BasicDataPlot* createBasicDataPlot(Quantiles& quantiles)
 {
     const QVector<double> dateseries{getDateSeries()};
-    const auto [min, max] =
-        std::minmax_element(dateseries.cbegin(), dateseries.cend());
+    const auto [min, max]{
+        std::minmax_element(dateseries.cbegin(), dateseries.cend())};
     const QVector<QPointF> linearRegressionPoints{{*min, 38.002},
                                                   {*max, 78.4491}};
 
@@ -213,6 +213,37 @@ BasicDataPlot* createBasicDataPlot(Quantiles& quantiles)
     return basicDataPlot;
 }
 
+void initUpperSplitter(QSplitter& splitter)
+{
+    splitter.addWidget(
+        wrapPlot(QStringLiteral("Quantiles plot"), createQuantilesPlot()));
+    splitter.addWidget(
+        wrapPlot(QStringLiteral("Grouping plot"), createGroupPlot()));
+    GroupPlotUI* groupPlotUI{createGroupPlotUI()};
+    splitter.addWidget(
+        wrapPlot(QStringLiteral("Grouping plot UI"), groupPlotUI));
+
+    emit groupPlotUI->traitIndexChanged(0);
+}
+
+void initLowerSplitter(QSplitter& splitter)
+{
+    Quantiles quantiles;
+    const QVector<double> priceSeries{getPriceSeries()};
+    const QVector<double> dataForQuantiles(priceSeries);
+    quantiles.init(dataForQuantiles);
+
+    splitter.addWidget(wrapPlot(QStringLiteral("Histogram plot"),
+                                createHistogramPlot(quantiles)));
+    splitter.addWidget(wrapPlot(QStringLiteral("Histogram plot UI"),
+                                createHistogramPlotUI(quantiles)));
+    splitter.addWidget(wrapPlot(QStringLiteral("Basic data plot"),
+                                createBasicDataPlot(quantiles)));
+    splitter.setStretchFactor(0, 1);
+    splitter.setStretchFactor(1, 1);
+    splitter.setStretchFactor(2, 2);
+}
+
 }  // namespace
 
 int main(int argc, char* argv[])
@@ -224,37 +255,17 @@ int main(int argc, char* argv[])
     QWidget widget;
     QVBoxLayout widgetLayout(&widget);
 
-    QSplitter* upperSplitter{new QSplitter(&widget)};
-    upperSplitter->addWidget(
-        wrapPlot(QStringLiteral("Quantiles plot"), createQuantilesPlot()));
-    upperSplitter->addWidget(
-        wrapPlot(QStringLiteral("Grouping plot"), createGroupPlot()));
-    auto* groupPlotUI = createGroupPlotUI();
-    upperSplitter->addWidget(
-        wrapPlot(QStringLiteral("Grouping plot UI"), groupPlotUI));
-    widgetLayout.addWidget(upperSplitter);
+    QSplitter upperSplitter;
+    initUpperSplitter(upperSplitter);
+    widgetLayout.addWidget(&upperSplitter);
 
-    Quantiles quantiles;
-    const QVector<double> priceSeries{getPriceSeries()};
-    const QVector<double> dataForQuantiles(priceSeries);
-    quantiles.init(dataForQuantiles);
-
-    QSplitter* lowerSplitter{new QSplitter(&widget)};
-    lowerSplitter->addWidget(wrapPlot(QStringLiteral("Histogram plot"),
-                                      createHistogramPlot(quantiles)));
-    lowerSplitter->addWidget(wrapPlot(QStringLiteral("Histogram plot UI"),
-                                      createHistogramPlotUI(quantiles)));
-    lowerSplitter->addWidget(wrapPlot(QStringLiteral("Basic data plot"),
-                                      createBasicDataPlot(quantiles)));
-    lowerSplitter->setStretchFactor(0, 1);
-    lowerSplitter->setStretchFactor(1, 1);
-    lowerSplitter->setStretchFactor(2, 2);
-    widgetLayout.addWidget(lowerSplitter);
+    QSplitter lowerSplitter;
+    initLowerSplitter(lowerSplitter);
+    widgetLayout.addWidget(&lowerSplitter);
 
     widget.setLayout(&widgetLayout);
     widget.resize(1000, 750);
     widget.show();
-    Q_EMIT groupPlotUI->traitIndexChanged(0);
 
     return QApplication::exec();
 }
