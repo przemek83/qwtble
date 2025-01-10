@@ -94,8 +94,9 @@ GroupPlot* createGroupPlot()
     GroupPlot* groupPlot{new GroupPlot()};
     groupPlot->setAxisScale(QwtPlot::yLeft, 0, 8);
     groupPlot->setAxisScale(QwtPlot::yRight, 0, 8);
-    groupPlot->setAxisScale(QwtPlot::xBottom, 0.5, exampleValues.size() + 0.5,
-                            1);
+    const double maxValueForBottomAxis{
+        static_cast<double>(exampleValues.size()) + 0.5};
+    groupPlot->setAxisScale(QwtPlot::xBottom, 0.5, maxValueForBottomAxis, 1);
     groupPlot->setNewData(std::move(quantilesVector), exampleNames);
     return groupPlot;
 }
