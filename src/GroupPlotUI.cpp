@@ -40,7 +40,8 @@ void GroupPlotUI::setNewData(const QVector<QString>& intervalsNames,
     const double maxY{quantiles.max_};
     groupPlot_.setAxisScale(QwtPlot::yLeft, minY, maxY);
     groupPlot_.setAxisScale(QwtPlot::yRight, minY, maxY);
-    groupPlot_.setAxisScale(QwtPlot::xBottom, 0, intervalsNames.size() + 1, 1);
+    groupPlot_.setAxisScale(QwtPlot::xBottom, 0,
+                            static_cast<double>(intervalsNames.size()) + 1, 1);
 
     groupPlot_.setNewData(std::move(quantilesForIntervals), intervalsNames);
 

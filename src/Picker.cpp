@@ -18,7 +18,8 @@ Picker::Picker(QWidget* parent) : QwtPlotPicker(parent)
     setTrackerPen(pen);
 
     QFont actualFont{trackerFont()};
-    actualFont.setPointSize(::lround(actualFont.pointSize() * FONT_FACTOR));
+    actualFont.setPointSize(
+        static_cast<int>(::lround(actualFont.pointSize() * FONT_FACTOR)));
     actualFont.setWeight(QFont::Bold);
     setTrackerFont(actualFont);
 }
