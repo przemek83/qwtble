@@ -167,7 +167,7 @@ void BasicDataPlot::legendItemChecked(const QVariant& itemInfo, bool on,
     }
 }
 
-void BasicDataPlot::setLegendLabelChecked(const QVariant& itemInfo)
+void BasicDataPlot::setLegendLabelChecked(const QVariant& itemInfo) const
 {
     QWidget* legendWidget{legend_.legendWidget(itemInfo)};
     if (legendWidget == nullptr)

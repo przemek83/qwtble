@@ -61,7 +61,7 @@ private:
 
     void checkLegendItems();
 
-    void setLegendLabelChecked(const QVariant& itemInfo);
+    void setLegendLabelChecked(const QVariant& itemInfo) const;
 
     QwtPlotCurve plotQ25_;
     QwtPlotCurve plotQ50_;

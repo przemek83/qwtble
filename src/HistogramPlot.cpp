@@ -68,7 +68,7 @@ void HistogramPlot::legendItemChecked(const QVariant& itemInfo, bool on,
     }
 }
 
-void HistogramPlot::setLegendItemChecked(const QVariant& itemInfo)
+void HistogramPlot::setLegendItemChecked(const QVariant& itemInfo) const
 {
     QWidget* legendWidget{legend_.legendWidget(itemInfo)};
     if (legendWidget == nullptr)
