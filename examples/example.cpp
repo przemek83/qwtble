@@ -65,8 +65,8 @@ const QVector<double> exampleDateSeries{
 
 QGroupBox* wrapPlot(const QString& name, QWidget* widget)
 {
-    auto* groupBox = new QGroupBox(name);
-    auto* layout = new QVBoxLayout();
+    QGroupBox* groupBox{new QGroupBox(name)};
+    QVBoxLayout* layout{new QVBoxLayout()};
     layout->addWidget(widget);
     groupBox->setLayout(layout);
     return groupBox;
@@ -74,7 +74,7 @@ QGroupBox* wrapPlot(const QString& name, QWidget* widget)
 
 QuantilesPlot* createQuantilesPlot()
 {
-    auto* quantilesPlot = new QuantilesPlot();
+    QuantilesPlot* quantilesPlot{new QuantilesPlot()};
     Quantiles quantiles;
     quantiles.init(exampleValues.first());
     quantilesPlot->setNewData(quantiles);
@@ -91,7 +91,7 @@ GroupPlot* createGroupPlot()
         quantiles.init(values);
         quantilesVector.push_back(quantiles);
     }
-    auto* groupPlot = new GroupPlot();
+    GroupPlot* groupPlot{new GroupPlot()};
     groupPlot->setAxisScale(QwtPlot::yLeft, 0, 8);
     groupPlot->setAxisScale(QwtPlot::yRight, 0, 8);
     groupPlot->setAxisScale(QwtPlot::xBottom, 0.5, exampleValues.size() + 0.5,
@@ -130,7 +130,7 @@ GroupPlotUI* createGroupPlotUI()
 
     const QVector<std::pair<QString, int>> stringColumns{{"Shape", 0},
                                                          {"Color", 1}};
-    auto* groupPlotUI = new GroupPlotUI(stringColumns);
+    GroupPlotUI* groupPlotUI{new GroupPlotUI(stringColumns)};
     QObject::connect(
         groupPlotUI, &GroupPlotUI::traitIndexChanged, groupPlotUI,
         [=](int column)
@@ -150,7 +150,7 @@ HistogramPlot* createHistogramPlot()
     Quantiles quantiles;
     const QVector<double> dataForQuantiles(examplePriceSeries);
     quantiles.init(dataForQuantiles);
-    auto* histogramPlot = new HistogramPlot();
+    HistogramPlot* histogramPlot{new HistogramPlot()};
     QVector<double> plotData;
     plotData.reserve(examplePriceSeries.size());
     for (const auto& item : examplePriceSeries)
@@ -164,11 +164,13 @@ HistogramPlotUI* createHistogramPlotUI()
     Quantiles quantiles;
     const QVector<double> dataForQuantiles(examplePriceSeries);
     quantiles.init(dataForQuantiles);
-    auto* histogramPlotUI = new HistogramPlotUI();
+    HistogramPlotUI* histogramPlotUI{new HistogramPlotUI()};
+
     QVector<double> plotData;
     plotData.reserve(examplePriceSeries.size());
     for (const auto& item : examplePriceSeries)
         plotData.append(item);
+
     histogramPlotUI->setNewData(std::move(plotData), quantiles);
     return histogramPlotUI;
 }
@@ -178,7 +180,7 @@ BasicDataPlot* createBasicDataPlot()
     Quantiles quantiles;
     const QVector<double> dataForQuantiles(examplePriceSeries);
     quantiles.init(dataForQuantiles);
-    auto* basicDataPlot = new BasicDataPlot();
+    BasicDataPlot* basicDataPlot{new BasicDataPlot()};
     const auto [min, max] =
         std::minmax_element(exampleDateSeries.begin(), exampleDateSeries.end());
     quantiles.minX_ = *min;
@@ -187,10 +189,12 @@ BasicDataPlot* createBasicDataPlot()
     const QVector<QPointF> linearRegressionPoints{{*min, 38.002},
                                                   {*max, 78.4491}};
 
+    const qsizetype seriesSize{examplePriceSeries.size()};
     QVector<QPointF> data;
-    data.reserve(examplePriceSeries.size());
-    for (int i = 0; i < examplePriceSeries.size(); ++i)
+    data.reserve(seriesSize);
+    for (qsizetype i{0}; i < seriesSize; ++i)
         data.append({exampleDateSeries[i], examplePriceSeries[i]});
+
     basicDataPlot->setNewData(data, quantiles, linearRegressionPoints);
     return basicDataPlot;
 }
@@ -206,7 +210,7 @@ int main(int argc, char* argv[])
     QWidget widget;
     QVBoxLayout widgetLayout(&widget);
 
-    auto* upperSplitter = new QSplitter(&widget);
+    QSplitter* upperSplitter{new QSplitter(&widget)};
     upperSplitter->addWidget(
         wrapPlot(QStringLiteral("Quantiles plot"), createQuantilesPlot()));
     upperSplitter->addWidget(
@@ -216,7 +220,7 @@ int main(int argc, char* argv[])
         wrapPlot(QStringLiteral("Grouping plot UI"), groupPlotUI));
     widgetLayout.addWidget(upperSplitter);
 
-    auto* lowerSplitter = new QSplitter(&widget);
+    QSplitter* lowerSplitter{new QSplitter(&widget)};
     lowerSplitter->addWidget(
         wrapPlot(QStringLiteral("Histogram plot"), createHistogramPlot()));
     lowerSplitter->addWidget(
