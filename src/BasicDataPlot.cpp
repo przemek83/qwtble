@@ -60,7 +60,7 @@ void BasicDataPlot::initQ50()
     plotQ50_.setStyle(QwtPlotCurve::Lines);
     QPen pen = plotQ50_.pen();
     pen.setColor(QColor(Qt::magenta));
-    pen.setWidth(4);
+    pen.setWidth(3);
     plotQ50_.setPen(pen);
     plotQ50_.setZ(qwt_ble_utilities::MEDIUM_ORDER);
     plotQ50_.setRenderHint(QwtPlotItem::RenderAntialiased, true);
@@ -86,7 +86,7 @@ void BasicDataPlot::initLinearRegression()
     plotLinearRegression_.setStyle(QwtPlotCurve::Lines);
     QPen pen = plotQ75_.pen();
     pen.setColor(QColor(Qt::cyan));
-    pen.setWidth(4);
+    pen.setWidth(3);
     plotLinearRegression_.setPen(pen);
     plotLinearRegression_.setZ(qwt_ble_utilities::HIGH_ORDER);
     plotLinearRegression_.setRenderHint(QwtPlotItem::RenderAntialiased, true);
