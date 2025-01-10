@@ -61,8 +61,9 @@ QVector<QString> getNames()
 QVariant getItemInfo(QwtPlot& plot, const QString& text)
 {
     const auto* legend{::qobject_cast<QwtLegend*>(plot.legend())};
-    auto children = legend->findChildren<QwtLegendLabel*>();
-    const QwtLegendLabel* label{nullptr};
+    const QList<QwtLegendLabel*> children{
+        legend->findChildren<QwtLegendLabel*>()};
+
     for (const auto* child : children)
     {
         if (child->text().text() == text)

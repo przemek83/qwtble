@@ -18,7 +18,7 @@ QuantilesPlot::QuantilesPlot(QWidget* parent)
 
     enableAxis(yLeft, false);
 
-    QFont font = axisFont(xBottom);
+    QFont font{axisFont(xBottom)};
     font.setStyleStrategy(QFont::PreferAntialias);
     setAxisFont(xBottom, font);
     setAxisMaxMinor(xBottom, 0);

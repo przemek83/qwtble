@@ -41,7 +41,7 @@ void PlotBase::mouseDoubleClickEvent(QMouseEvent* event)
 void PlotBase::resetPlot()
 {
     magnifier_->reset();
-    for (int i = 0; i < QwtPlot::axisCnt; ++i)
+    for (int i{0}; i < QwtPlot::axisCnt; ++i)
     {
         if (initialScaleMap_.contains(i))
             setAxisScale(i, initialScaleMap_[i].rx(), initialScaleMap_[i].ry());

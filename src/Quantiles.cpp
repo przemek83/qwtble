@@ -45,7 +45,7 @@ void Quantiles::setQuantiles(const QVector<double>& values)
     const int count{static_cast<int>(values.size())};
 
     const double q10Level{0.1};
-    double currentInterval = (count - 1) * q10Level;
+    double currentInterval{(count - 1) * q10Level};
     q10_ = computeQuantile(values, currentInterval);
 
     const double q25Level{0.25};

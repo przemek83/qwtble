@@ -29,10 +29,10 @@ BasicDataPlot::~BasicDataPlot() = default;
 void BasicDataPlot::initPlotCurve()
 {
     plotData_.setStyle(QwtPlotCurve::Dots);
-    auto* symbol = new QwtSymbol(QwtSymbol::Ellipse);
+    QwtSymbol* symbol{new QwtSymbol(QwtSymbol::Ellipse)};
     symbol->setSize(pointDiameter_, pointDiameter_);
     plotData_.setSymbol(symbol);
-    QPen pen = plotData_.pen();
+    QPen pen{plotData_.pen()};
     pen.setColor(QColor(Qt::blue));
     pen.setWidth(penWidth_);
     plotData_.setPen(pen);
@@ -45,7 +45,7 @@ void BasicDataPlot::initPlotCurve()
 void BasicDataPlot::initQ25()
 {
     plotQ25_.setStyle(QwtPlotCurve::Lines);
-    QPen pen = plotQ25_.pen();
+    QPen pen{plotQ25_.pen()};
     pen.setColor(QColor(Qt::yellow));
     pen.setWidth(penWidth_);
     plotQ25_.setPen(pen);
@@ -58,7 +58,7 @@ void BasicDataPlot::initQ25()
 void BasicDataPlot::initQ50()
 {
     plotQ50_.setStyle(QwtPlotCurve::Lines);
-    QPen pen = plotQ50_.pen();
+    QPen pen{plotQ50_.pen()};
     pen.setColor(QColor(Qt::magenta));
     pen.setWidth(penWidth_);
     plotQ50_.setPen(pen);
@@ -71,7 +71,7 @@ void BasicDataPlot::initQ50()
 void BasicDataPlot::initQ75()
 {
     plotQ75_.setStyle(QwtPlotCurve::Lines);
-    QPen pen = plotQ75_.pen();
+    QPen pen{plotQ75_.pen()};
     pen.setColor(QColor(Qt::green));
     pen.setWidth(penWidth_);
     plotQ75_.setPen(pen);
@@ -84,7 +84,7 @@ void BasicDataPlot::initQ75()
 void BasicDataPlot::initLinearRegression()
 {
     plotLinearRegression_.setStyle(QwtPlotCurve::Lines);
-    QPen pen = plotQ75_.pen();
+    QPen pen{plotQ75_.pen()};
     pen.setColor(QColor(Qt::cyan));
     pen.setWidth(penWidth_);
     plotLinearRegression_.setPen(pen);
@@ -135,8 +135,8 @@ void BasicDataPlot::setNewData(const QVector<QPointF>& data,
     }
     else
     {
-        const double min = quantiles.minX_;
-        const double max = quantiles.maxX_;
+        const double min{quantiles.minX_};
+        const double max{quantiles.maxX_};
         plotQ50_.setSamples({{min, quantiles.q50_}, {max, quantiles.q50_}});
         plotQ25_.setSamples({{min, quantiles.q25_}, {max, quantiles.q25_}});
         plotQ75_.setSamples({{min, quantiles.q75_}, {max, quantiles.q75_}});

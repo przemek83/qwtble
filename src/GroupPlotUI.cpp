@@ -61,14 +61,14 @@ void GroupPlotUI::resizeEvent(QResizeEvent* event)
 
 QSplitter* GroupPlotUI::setupSplitter()
 {
-    auto* splitter{new QSplitter(Qt::Horizontal, this)};
+    QSplitter* splitter{new QSplitter(Qt::Horizontal, this)};
     connect(splitter, &QSplitter::splitterMoved, this,
             [this]([[maybe_unused]] int pos, [[maybe_unused]] int index)
             {
                 QApplication::processEvents();
                 updateQuantilesPlotExtent();
             });
-    auto* scrollArea{new QScrollArea(this)};
+    QScrollArea* scrollArea{new QScrollArea(this)};
     scrollArea->setWidgetResizable(true);
     scrollArea->setWidget(&groupPlot_);
     splitter->addWidget(scrollArea);
@@ -91,7 +91,7 @@ void GroupPlotUI::updateQuantilesPlotExtent()
         ->setMinimumExtent(expectedExtent);
 
     // Enforce size update of quantiles plot.
-    auto* forceResizeEvent{
+    QResizeEvent* forceResizeEvent{
         new QResizeEvent(quantilesPlot_.size(), quantilesPlot_.size())};
     QCoreApplication::postEvent(&quantilesPlot_, forceResizeEvent);
 }
@@ -111,7 +111,8 @@ double GroupPlotUI::calculateExpectedExtent() const
 
 double GroupPlotUI::getPlotBottomExtent(const QwtPlot& plot)
 {
-    const auto* groupPlotScaleDraw{plot.axisScaleDraw(QwtPlot::xBottom)};
+    const QwtScaleDraw* groupPlotScaleDraw{
+        plot.axisScaleDraw(QwtPlot::xBottom)};
     const double plotExtent{
         groupPlotScaleDraw->extent(plot.axisFont(QwtPlot::xBottom))};
     return plotExtent;

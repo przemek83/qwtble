@@ -26,7 +26,7 @@ Picker::Picker(QWidget* parent) : QwtPlotPicker(parent)
 
 int Picker::getAreaOfMouse() const
 {
-    const auto x{::lround(invTransform(trackerPosition()).x())};
+    const long x{::lround(invTransform(trackerPosition()).x())};
     return static_cast<int>(x);
 }
 

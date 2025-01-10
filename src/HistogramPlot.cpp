@@ -113,7 +113,7 @@ void HistogramPlot::udpatePlotItems(int intervalsCount)
 
     QVector<QwtIntervalSample> samples;
     QVector<QPointF> actualPoints;
-    for (int i = 0; i < intervalsCount; ++i)
+    for (int i{0}; i < intervalsCount; ++i)
     {
         const double from{min + (stepSize * i)};
         samples.append(QwtIntervalSample(intervals[i], from, from + stepSize));

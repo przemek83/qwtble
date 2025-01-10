@@ -27,7 +27,7 @@ Quantiles getQuantiles()
     const QVector<double> prices{common::getPrices()};
     quantiles.init(prices);
     const QVector<double> dates{common::getDates()};
-    const auto [min, max] = std::minmax_element(dates.cbegin(), dates.cend());
+    const auto [min, max]{std::minmax_element(dates.cbegin(), dates.cend())};
     quantiles.minX_ = *min;
     quantiles.maxX_ = *max;
     return quantiles;
