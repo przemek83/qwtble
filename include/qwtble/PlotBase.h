@@ -48,16 +48,6 @@ private:
     class IntervalsScaleDraw : public QwtScaleDraw
     {
     public:
-        IntervalsScaleDraw() = default;
-
-        ~IntervalsScaleDraw() override = default;
-
-        IntervalsScaleDraw& operator=(const IntervalsScaleDraw& other) = delete;
-        IntervalsScaleDraw(const IntervalsScaleDraw& other) = delete;
-
-        IntervalsScaleDraw& operator=(IntervalsScaleDraw&& other) = delete;
-        IntervalsScaleDraw(IntervalsScaleDraw&& other) = delete;
-
         QwtText label(double v) const override;
     };
 
