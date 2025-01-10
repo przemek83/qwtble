@@ -48,9 +48,8 @@ void HistogramPlot::initLegend()
     legend_.setDefaultItemMode(QwtLegendData::Checkable);
     legend_.setFrameStyle(QFrame::Box | QFrame::Sunken);
 
-    // New connect mechanism not working as QwtLegend::checked is not detected.
-    connect(&legend_, SIGNAL(checked(QVariant, bool, int)), this,
-            SLOT(legendItemChecked(QVariant, bool, int)));
+    connect(&legend_, &QwtLegend::checked, this,
+            &HistogramPlot::legendItemChecked);
     insertLegend(&legend_, QwtPlot::BottomLegend);
 
     setLegendItemChecked(QwtPlot::itemToInfo(&histogram_));
