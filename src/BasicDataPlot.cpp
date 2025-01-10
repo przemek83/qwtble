@@ -30,11 +30,11 @@ void BasicDataPlot::initPlotCurve()
 {
     plotData_.setStyle(QwtPlotCurve::Dots);
     auto* symbol = new QwtSymbol(QwtSymbol::Ellipse);
-    symbol->setSize(3, 3);
+    symbol->setSize(pointDiameter_, pointDiameter_);
     plotData_.setSymbol(symbol);
     QPen pen = plotData_.pen();
     pen.setColor(QColor(Qt::blue));
-    pen.setWidth(3);
+    pen.setWidth(penWidth_);
     plotData_.setPen(pen);
     plotData_.setZ(qwt_ble_utilities::LOW_ORDER);
     plotData_.setRenderHint(QwtPlotItem::RenderAntialiased, true);
@@ -47,7 +47,7 @@ void BasicDataPlot::initQ25()
     plotQ25_.setStyle(QwtPlotCurve::Lines);
     QPen pen = plotQ25_.pen();
     pen.setColor(QColor(Qt::yellow));
-    pen.setWidth(3);
+    pen.setWidth(penWidth_);
     plotQ25_.setPen(pen);
     plotQ25_.setZ(qwt_ble_utilities::MEDIUM_ORDER);
     plotQ25_.setRenderHint(QwtPlotItem::RenderAntialiased, true);
@@ -60,7 +60,7 @@ void BasicDataPlot::initQ50()
     plotQ50_.setStyle(QwtPlotCurve::Lines);
     QPen pen = plotQ50_.pen();
     pen.setColor(QColor(Qt::magenta));
-    pen.setWidth(3);
+    pen.setWidth(penWidth_);
     plotQ50_.setPen(pen);
     plotQ50_.setZ(qwt_ble_utilities::MEDIUM_ORDER);
     plotQ50_.setRenderHint(QwtPlotItem::RenderAntialiased, true);
@@ -73,7 +73,7 @@ void BasicDataPlot::initQ75()
     plotQ75_.setStyle(QwtPlotCurve::Lines);
     QPen pen = plotQ75_.pen();
     pen.setColor(QColor(Qt::green));
-    pen.setWidth(3);
+    pen.setWidth(penWidth_);
     plotQ75_.setPen(pen);
     plotQ75_.setZ(qwt_ble_utilities::MEDIUM_ORDER);
     plotQ75_.setRenderHint(QwtPlotItem::RenderAntialiased, true);
@@ -86,7 +86,7 @@ void BasicDataPlot::initLinearRegression()
     plotLinearRegression_.setStyle(QwtPlotCurve::Lines);
     QPen pen = plotQ75_.pen();
     pen.setColor(QColor(Qt::cyan));
-    pen.setWidth(3);
+    pen.setWidth(penWidth_);
     plotLinearRegression_.setPen(pen);
     plotLinearRegression_.setZ(qwt_ble_utilities::HIGH_ORDER);
     plotLinearRegression_.setRenderHint(QwtPlotItem::RenderAntialiased, true);
