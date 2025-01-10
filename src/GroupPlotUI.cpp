@@ -7,8 +7,6 @@
 #include <QScrollBar>
 #include <QSplitter>
 
-#include <qwtble/GroupPlot.h>
-#include <qwtble/QuantilesPlot.h>
 #include <qwtble/QwtBleUtilities.h>
 
 #include "ui_GroupPlotUI.h"
@@ -40,13 +38,13 @@ void GroupPlotUI::setNewData(const QVector<QString>& intervalsNames,
 {
     const double minY{quantiles.min_};
     const double maxY{quantiles.max_};
-    groupPlot_->setAxisScale(QwtPlot::yLeft, minY, maxY);
-    groupPlot_->setAxisScale(QwtPlot::yRight, minY, maxY);
-    groupPlot_->setAxisScale(QwtPlot::xBottom, 0, intervalsNames.size() + 1, 1);
+    groupPlot_.setAxisScale(QwtPlot::yLeft, minY, maxY);
+    groupPlot_.setAxisScale(QwtPlot::yRight, minY, maxY);
+    groupPlot_.setAxisScale(QwtPlot::xBottom, 0, intervalsNames.size() + 1, 1);
 
-    groupPlot_->setNewData(std::move(quantilesForIntervals), intervalsNames);
+    groupPlot_.setNewData(std::move(quantilesForIntervals), intervalsNames);
 
-    quantilesPlot_->setNewData(quantiles);
+    quantilesPlot_.setNewData(quantiles);
 
     QApplication::processEvents();
     updateQuantilesPlotExtent();
@@ -71,11 +69,9 @@ QSplitter* GroupPlotUI::setupSplitter()
             });
     auto* scrollArea{new QScrollArea(this)};
     scrollArea->setWidgetResizable(true);
-    groupPlot_ = new GroupPlot();
-    scrollArea->setWidget(groupPlot_);
+    scrollArea->setWidget(&groupPlot_);
     splitter->addWidget(scrollArea);
-    quantilesPlot_ = new QuantilesPlot();
-    splitter->addWidget(quantilesPlot_);
+    splitter->addWidget(&quantilesPlot_);
     splitter->setStretchFactor(0, 2);
     splitter->setStretchFactor(1, 1);
     return splitter;
@@ -84,29 +80,29 @@ QSplitter* GroupPlotUI::setupSplitter()
 void GroupPlotUI::updateQuantilesPlotExtent()
 {
     const double expectedExtent{calculateExpectedExtent()};
-    if (qwt_ble_utilities::doublesAreEqual(
-            expectedExtent, getPlotBottomExtent(*quantilesPlot_)))
+    if (qwt_ble_utilities::doublesAreEqual(expectedExtent,
+                                           getPlotBottomExtent(quantilesPlot_)))
         return;
 
-    quantilesPlot_->axisScaleDraw(QwtPlot::xBottom)
+    quantilesPlot_.axisScaleDraw(QwtPlot::xBottom)
         ->setMinimumExtent(expectedExtent);
 
     // Enforce size update of quantiles plot.
     auto* forceResizeEvent{
-        new QResizeEvent(quantilesPlot_->size(), quantilesPlot_->size())};
-    QCoreApplication::postEvent(quantilesPlot_, forceResizeEvent);
+        new QResizeEvent(quantilesPlot_.size(), quantilesPlot_.size())};
+    QCoreApplication::postEvent(&quantilesPlot_, forceResizeEvent);
 }
 
 double GroupPlotUI::calculateExpectedExtent() const
 {
     const auto* scrollArea{
-        ::qobject_cast<QScrollArea*>(groupPlot_->parent()->parent())};
+        ::qobject_cast<QScrollArea*>(groupPlot_.parent()->parent())};
     const QScrollBar* groupPlotScrollBar{scrollArea->horizontalScrollBar()};
     int scrollBarSize{0};
     if (groupPlotScrollBar->isVisible())
         scrollBarSize = groupPlotScrollBar->height();
 
-    const double groupPlotExtent{getPlotBottomExtent(*groupPlot_)};
+    const double groupPlotExtent{getPlotBottomExtent(groupPlot_)};
     return groupPlotExtent + scrollBarSize;
 }
 
