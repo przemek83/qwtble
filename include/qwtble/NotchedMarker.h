@@ -57,16 +57,16 @@ private:
 
     struct ElementRecipe
     {
-        double minY{0.};
-        double q10Y{0.};
-        double q25Y{0.};
-        double q50Y{0.};
-        double q75Y{0.};
-        double q90Y{0.};
-        double maxY{0.};
-        double meanY{0.};
-        double fromX{0.};
-        double toX{0.};
+        double minY_{0.};
+        double q10Y_{0.};
+        double q25Y_{0.};
+        double q50Y_{0.};
+        double q75Y_{0.};
+        double q90Y_{0.};
+        double maxY_{0.};
+        double meanY_{0.};
+        double fromX_{0.};
+        double toX_{0.};
     };
 
     void drawElement(QPainter* p, const ElementRecipe& recipe) const;
