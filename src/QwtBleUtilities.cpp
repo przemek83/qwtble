@@ -10,7 +10,11 @@ QString stringFromDays(int daysToAdd)
     return startOfTheWorld.addDays(daysToAdd).toString(getDefaultDateFormat());
 }
 
-QDate getStartOfTheWorld() { return {1970, 1, 1}; }
+QDate getStartOfTheWorld()
+{
+    QDate startOfTheWorld{1970, 1, 1};
+    return startOfTheWorld;
+}
 
 QString getDefaultDateFormat() { return QStringLiteral("d/M/yyyy"); }
 
