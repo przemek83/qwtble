@@ -103,7 +103,7 @@ bool GroupPlot::event(QEvent* event)
         }
         else
         {
-            setToolTip(QLatin1String(""));
+            setToolTip(QStringLiteral(""));
             event->ignore();
             if (QToolTip::isVisible())
                 QToolTip::hideText();

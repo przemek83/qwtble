@@ -25,7 +25,7 @@ void preparePlot(HistogramPlot& plot)
     plot.resize(common::getPlotSize());
 }
 
-void checkPlot(HistogramPlot& plot, QString expectedPath)
+void checkPlot(HistogramPlot& plot, const QString& expectedPath)
 {
     QImage actual{plot.grab().toImage()};
     QImage expected(expectedPath);
@@ -50,7 +50,6 @@ void HistogramPlotTest::testPlotWithoutData() const
     plot.setNewData({}, {}, 10);
     plot.resize(common::getPlotSize());
 
-    QImage actual{plot.grab().toImage()};
     const QString expectedPath{
         QString::fromLatin1(":/res/HistogramPlotWithoutData.png")};
     checkPlot(plot, expectedPath);
@@ -62,7 +61,7 @@ void HistogramPlotTest::testLegendItemsChecking() const
     preparePlot(plot);
 
     auto* legend{::qobject_cast<QwtLegend*>(plot.legend())};
-    legend->checked(common::getItemInfo(plot, "Histogram"), false, 0);
+    emit legend->checked(common::getItemInfo(plot, QStringLiteral("Histogram")), false, 0);
 
     const QString expectedPath{
         QString::fromLatin1(":/res/HistogramPlotItemChecked.png")};

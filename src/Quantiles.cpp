@@ -105,7 +105,7 @@ void Quantiles::init(QVector<double> values)
 QString Quantiles::getValuesAsToolTip() const
 {
     QString toolTipText;
-    toolTipText.append(QLatin1String("<table>"));
+    toolTipText.append(QStringLiteral("<table>"));
     toolTipText += valueAsHtmlRow(PLOT_INFO_COUNT, count_);
     toolTipText += valueAsHtmlRow(PLOT_INFO_MEAN, mean_);
     toolTipText += valueAsHtmlRow(PLOT_INFO_MAX, max_);
@@ -124,7 +124,7 @@ QString Quantiles::getValuesAsToolTip() const
     if (count_ > 1)
         toolTipText += valueAsHtmlRow(PLOT_INFO_STD_DEV, stdDev_);
 
-    toolTipText.append(QLatin1String("</table>"));
+    toolTipText.append(QStringLiteral("</table>"));
 
     return toolTipText;
 }
@@ -133,7 +133,7 @@ std::array<QString, Quantiles::PLOT_INFO_END> Quantiles::getPlotInfoNames()
 {
     std::array<QString, PLOT_INFO_END> plotInfoNames;
     plotInfoNames[PLOT_INFO_COUNT] =
-        QObject::tr("Data count") + QLatin1Char(':');
+        QObject::tr("Data count") + QStringLiteral(":");
     plotInfoNames[PLOT_INFO_MIN] = QStringLiteral("Minimum");
     plotInfoNames[PLOT_INFO_Q10] = QStringLiteral("Q10");
     plotInfoNames[PLOT_INFO_Q25] = QStringLiteral("Q25");
@@ -151,12 +151,12 @@ QString Quantiles::valueAsHtmlRow(PlotInfo name, double value)
     const std::array<QString, PLOT_INFO_END> plotInfoNames{getPlotInfoNames()};
     QString html{QStringLiteral("<tr><td>")};
     html.append(plotInfoNames.at(static_cast<size_t>(name)));
-    html.append(QLatin1String("</td><td ALIGN=RIGHT>"));
+    html.append(QStringLiteral("</td><td ALIGN=RIGHT>"));
     int precision{2};
     if (name == PLOT_INFO_COUNT)
         precision = 0;
     html.append(qwt_ble_utilities::doubleToStringUsingLocale(value, precision));
-    html.append(QLatin1String("</td></tr>\n"));
+    html.append(QStringLiteral("</td></tr>\n"));
 
     return html;
 }

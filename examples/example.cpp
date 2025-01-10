@@ -94,7 +94,7 @@ QuantilesPlot* createQuantilesPlot()
 {
     QuantilesPlot* quantilesPlot{new QuantilesPlot()};
     Quantiles quantiles;
-    quantiles.init(getValues().first());
+    quantiles.init(getValues().constFirst());
     quantilesPlot->setNewData(quantiles);
     return quantilesPlot;
 }

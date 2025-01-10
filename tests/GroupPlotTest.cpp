@@ -30,7 +30,7 @@ void preparePlot(GroupPlot& plot)
     plot.resize(common::getPlotSize());
 }
 
-void checkPlot(GroupPlot& plot, QString expectedPath)
+void checkPlot(GroupPlot& plot, const QString& expectedPath)
 {
     QImage actual{plot.grab().toImage()};
     QImage expected(expectedPath);

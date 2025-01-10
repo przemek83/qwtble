@@ -55,7 +55,7 @@ void preparePlot(BasicDataPlot& plot)
     plot.resize(common::getPlotSize());
 }
 
-void checkPlot(BasicDataPlot& plot, QString expectedPath)
+void checkPlot(BasicDataPlot& plot, const QString& expectedPath)
 {
     QImage actual{plot.grab().toImage()};
     QImage expected(expectedPath);
@@ -92,7 +92,7 @@ void BasicDataPlotTest::testLegendItemsChecking() const
     preparePlot(plot);
 
     auto* legend{::qobject_cast<QwtLegend*>(plot.legend())};
-    legend->checked(common::getItemInfo(plot, "Q25"), false, 0);
+    emit legend->checked(common::getItemInfo(plot, QStringLiteral("Q25")), false, 0);
 
     const QString expectedPath{
         QString::fromLatin1(":/res/BasicDataPlotItemChecked.png")};

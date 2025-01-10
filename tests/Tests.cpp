@@ -43,8 +43,8 @@ void setLightPalette()
 
 void setupFont()
 {
-    int id{QFontDatabase::addApplicationFont(":/res/FiraMono-Regular.ttf")};
-    QString family{QFontDatabase::applicationFontFamilies(id).at(0)};
+    const int id{QFontDatabase::addApplicationFont(QStringLiteral(":/res/FiraMono-Regular.ttf"))};
+    const QString family{QFontDatabase::applicationFontFamilies(id).at(0)};
     QFont font(family);
     font.setPointSize(12);
     QApplication::setFont(font);

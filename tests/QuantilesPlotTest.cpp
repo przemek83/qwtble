@@ -11,12 +11,12 @@ namespace
 void preparePlot(QuantilesPlot& plot)
 {
     Quantiles quantiles;
-    quantiles.init(common::getValues().first());
+    quantiles.init(common::getValues().constFirst());
     plot.setNewData(quantiles);
     plot.resize(common::getPlotSize());
 }
 
-void checkPlot(QuantilesPlot& plot, QString expectedPath)
+void checkPlot(QuantilesPlot& plot, const QString& expectedPath)
 {
     QImage actual{plot.grab().toImage()};
     QImage expected(expectedPath);
