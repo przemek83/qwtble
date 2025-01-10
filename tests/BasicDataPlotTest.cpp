@@ -50,7 +50,7 @@ void preparePlot(BasicDataPlot& plot)
 
     const QVector<QPointF> regressionPoints{{min, 38.002}, {max, 78.4491}};
     const QVector<QPointF> data{getData()};
-    Quantiles quantiles{getQuantiles()};
+    const Quantiles quantiles{getQuantiles()};
     plot.setNewData(data, quantiles, regressionPoints);
     plot.resize(common::getPlotSize());
 }

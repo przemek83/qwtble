@@ -13,9 +13,8 @@ namespace
 void preparePlot(HistogramPlot& plot)
 {
     Quantiles quantiles;
-    QVector<double> prices{common::getPrices()};
-    const QVector<double> dataForQuantiles(prices);
-    quantiles.init(dataForQuantiles);
+    const QVector<double> prices{common::getPrices()};
+    quantiles.init(prices);
 
     QVector<double> plotData;
     plotData.reserve(prices.size());
