@@ -90,10 +90,10 @@ void GroupPlotUI::updateQuantilesPlotExtent()
     quantilesPlot_.axisScaleDraw(QwtPlot::xBottom)
         ->setMinimumExtent(expectedExtent);
 
-    // Enforce size update of quantiles plot.
-    QResizeEvent* forceResizeEvent{
-        new QResizeEvent(quantilesPlot_.size(), quantilesPlot_.size())};
-    QCoreApplication::postEvent(&quantilesPlot_, forceResizeEvent);
+    // Force resize to have both plots on same level.
+    QSize oryginalSize{quantilesPlot_.size()};
+    quantilesPlot_.resize({0, 0});
+    quantilesPlot_.resize(oryginalSize);
 }
 
 double GroupPlotUI::calculateExpectedExtent() const
