@@ -19,10 +19,13 @@ void preparePlot(GroupPlot& plot)
         quantilesVector.push_back(quantiles);
     }
 
-    plot.setAxisScale(QwtPlot::yLeft, 0, 8);
-    plot.setAxisScale(QwtPlot::yRight, 0, 8);
-    plot.setAxisScale(QwtPlot::xBottom, 0.5, common::getValues().size() + 0.5,
-                      1);
+    const double maxValueForXAxis{8};
+    plot.setAxisScale(QwtPlot::yLeft, 0, maxValueForXAxis);
+    plot.setAxisScale(QwtPlot::yRight, 0, maxValueForXAxis);
+
+    const double maxValueForBottomAxis{
+        static_cast<double>(common::getValues().size()) + 0.5};
+    plot.setAxisScale(QwtPlot::xBottom, 0.5, maxValueForBottomAxis, 1);
     plot.setNewData(std::move(quantilesVector), common::getNames());
     plot.resize(common::getPlotSize());
 }

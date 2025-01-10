@@ -5,11 +5,11 @@
 
 #include <qwtble/Quantiles.h>
 
-void QuantilesTest::testToolTip()
+void QuantilesTest::testToolTip() const
 {
     Quantiles quantiles;
     quantiles.init(values_);
-    const QString expected(QStringLiteral(
+    const QString expected{QStringLiteral(
         "<table>"
         "<tr><td>Data count:</td><td ALIGN=RIGHT>11</td></tr>\n"
         "<tr><td>Average</td><td ALIGN=RIGHT>66.62</td></tr>\n"
@@ -21,22 +21,22 @@ void QuantilesTest::testToolTip()
         "<tr><td>Q10</td><td ALIGN=RIGHT>7.02</td></tr>\n"
         "<tr><td>Minimum</td><td ALIGN=RIGHT>5.00</td></tr>\n"
         "<tr><td>Std. deviation</td><td ALIGN=RIGHT>54.48</td></tr>\n"
-        "</table>"));
+        "</table>")};
     QCOMPARE(quantiles.getValuesAsToolTip(), expected);
 }
 
-void QuantilesTest::testToolTipForOneValue()
+void QuantilesTest::testToolTipForOneValue() const
 {
     Quantiles quantiles;
     const QVector<double> singleItemData{3};
     quantiles.init(singleItemData);
-    const QString expected(
+    const QString expected{
         QStringLiteral("<table>"
                        "<tr><td>Data count:</td><td ALIGN=RIGHT>1</td></tr>\n"
                        "<tr><td>Average</td><td ALIGN=RIGHT>3.00</td></tr>\n"
                        "<tr><td>Maximum</td><td ALIGN=RIGHT>3.00</td></tr>\n"
                        "<tr><td>Minimum</td><td ALIGN=RIGHT>3.00</td></tr>\n"
-                       "</table>"));
+                       "</table>")};
     QCOMPARE(quantiles.getValuesAsToolTip(), expected);
 }
 
