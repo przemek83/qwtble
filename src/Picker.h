@@ -21,5 +21,7 @@ protected:
 private:
     bool mouseInWidget_{false};
 
+    int penWidth_{2};
+
     static constexpr double FONT_FACTOR{1.4};
 };

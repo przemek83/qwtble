@@ -36,7 +36,7 @@ void HistogramPlot::initActualDensity()
     distributionCurve_.setCurveAttribute(QwtPlotCurve::Fitted);
     QPen pen{distributionCurve_.pen()};
     pen.setColor(QColor(Qt::blue));
-    pen.setWidth(2);
+    pen.setWidth(penWidth_);
     distributionCurve_.setPen(pen);
     distributionCurve_.setZ(qwt_ble_utilities::HIGH_ORDER);
     distributionCurve_.setRenderHint(QwtPlotItem::RenderAntialiased, true);

@@ -14,7 +14,7 @@ Picker::Picker(QWidget* parent) : QwtPlotPicker(parent)
 
     QPen pen{trackerPen()};
     pen.setColor(Qt::blue);
-    pen.setWidth(2);
+    pen.setWidth(penWidth_);
     setTrackerPen(pen);
 
     QFont actualFont{trackerFont()};

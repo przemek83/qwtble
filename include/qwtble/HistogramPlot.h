@@ -64,6 +64,8 @@ private:
 
     QwtLegend legend_;
 
+    int penWidth_{2};
+
 private Q_SLOTS:
     void legendItemChecked(const QVariant& itemInfo, bool on, int index);
 };
