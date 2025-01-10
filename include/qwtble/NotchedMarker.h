@@ -22,14 +22,6 @@ public:
      */
     explicit NotchedMarker(QVector<Quantiles> quantiles);
 
-    ~NotchedMarker() override = default;
-
-    NotchedMarker& operator=(const NotchedMarker& other) = delete;
-    NotchedMarker(const NotchedMarker& other) = delete;
-
-    NotchedMarker& operator=(NotchedMarker&& other) = delete;
-    NotchedMarker(NotchedMarker&& other) = delete;
-
     int rtti() const override;
 
     void draw(QPainter* painter, const QwtScaleMap& xMap,

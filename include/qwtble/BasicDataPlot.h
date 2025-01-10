@@ -39,14 +39,6 @@ private:
     public:
         TimeScaleDraw();
 
-        ~TimeScaleDraw() override = default;
-
-        TimeScaleDraw& operator=(const TimeScaleDraw& other) = delete;
-        TimeScaleDraw(const TimeScaleDraw& other) = delete;
-
-        TimeScaleDraw& operator=(TimeScaleDraw&& other) = delete;
-        TimeScaleDraw(TimeScaleDraw&& other) = delete;
-
         [[nodiscard]] QwtText label(double v) const override;
     };
 
