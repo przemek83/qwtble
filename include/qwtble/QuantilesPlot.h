@@ -41,14 +41,6 @@ private:
     public:
         explicit IntervalsScaleDraw(int count);
 
-        ~IntervalsScaleDraw() override = default;
-
-        IntervalsScaleDraw& operator=(const IntervalsScaleDraw& other) = delete;
-        IntervalsScaleDraw(const IntervalsScaleDraw& other) = delete;
-
-        IntervalsScaleDraw& operator=(IntervalsScaleDraw&& other) = delete;
-        IntervalsScaleDraw(IntervalsScaleDraw&& other) = delete;
-
         QwtText label(double value) const override;
 
     private:
