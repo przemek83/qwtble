@@ -9,7 +9,7 @@ void UtilitiesTest::testStringFromDays()
     using qwt_ble_utilities::stringFromDays;
     QCOMPARE(stringFromDays(0), QStringLiteral("1/1/1970"));
     QCOMPARE(stringFromDays(-100), QStringLiteral("23/9/1969"));
-    QCOMPARE(stringFromDays(20000), QStringLiteral("4/10/2024"));
+    QCOMPARE(stringFromDays(20'000), QStringLiteral("4/10/2024"));
 }
 
 void UtilitiesTest::testFloatsAreEqual()

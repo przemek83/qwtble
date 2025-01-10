@@ -36,7 +36,7 @@ void checkPlot(GroupPlot& plot, QString expectedPath)
 }
 }  // namespace
 
-void GroupPlotTest::testPlotWithData()
+void GroupPlotTest::testPlotWithData() const
 {
     GroupPlot plot;
     preparePlot(plot);
@@ -46,7 +46,7 @@ void GroupPlotTest::testPlotWithData()
     checkPlot(plot, expectedPath);
 }
 
-void GroupPlotTest::testPlotWithoutData()
+void GroupPlotTest::testPlotWithoutData() const
 {
     GroupPlot plot;
     plot.setNewData({}, {});

@@ -40,24 +40,29 @@ void setLightPalette()
 
     QApplication::setPalette(palette);
 }
+
+void setupFont()
+{
+    int id{QFontDatabase::addApplicationFont(":/res/FiraMono-Regular.ttf")};
+    QString family{QFontDatabase::applicationFontFamilies(id).at(0)};
+    QFont font(family);
+    font.setPointSize(12);
+    QApplication::setFont(font);
+}
 }  // namespace
 
 int main(int argc, char* argv[])
 {
-    const QApplication a(argc, argv);
+    const QApplication app(argc, argv);
 
-    QStyle* style = QStyleFactory::create(QStringLiteral("Fusion"));
+    QStyle* style{QStyleFactory::create(QStringLiteral("Fusion"))};
     QApplication::setStyle(style);
     setLightPalette();
 
     QLocale locale(QLocale::English, QLocale::UnitedStates);
     QLocale::setDefault(locale);
 
-    int id = QFontDatabase::addApplicationFont(":/res/FiraMono-Regular.ttf");
-    QString family = QFontDatabase::applicationFontFamilies(id).at(0);
-    QFont font(family);
-    font.setPointSize(12);
-    a.setFont(font);
+    setupFont();
 
     UtilitiesTest utilitiesTest;
     QTest::qExec(&utilitiesTest);

@@ -14,10 +14,13 @@ QVector<QPointF> getData()
 {
     const QVector<double> prices{common::getPrices()};
     const QVector<double> dates{common::getDates()};
+
+    const qsizetype size{prices.size()};
     QVector<QPointF> data;
-    data.reserve(prices.size());
-    for (int i = 0; i < prices.size(); ++i)
+    data.reserve(size);
+    for (qsizetype i{0}; i < size; ++i)
         data.append({dates[i], prices[i]});
+
     return data;
 }
 
@@ -61,7 +64,7 @@ void checkPlot(BasicDataPlot& plot, QString expectedPath)
 }
 }  // namespace
 
-void BasicDataPlotTest::testPlotWithData()
+void BasicDataPlotTest::testPlotWithData() const
 {
     BasicDataPlot plot;
     preparePlot(plot);
@@ -70,7 +73,7 @@ void BasicDataPlotTest::testPlotWithData()
     checkPlot(plot, expectedPath);
 }
 
-void BasicDataPlotTest::testPlotWithoutData()
+void BasicDataPlotTest::testPlotWithoutData() const
 {
     const QVector<QPointF> regressionPoints{{0, 0}, {0, 0}};
     Quantiles quantiles;
@@ -83,7 +86,7 @@ void BasicDataPlotTest::testPlotWithoutData()
     checkPlot(plot, expectedPath);
 }
 
-void BasicDataPlotTest::testLegendItemsChecking()
+void BasicDataPlotTest::testLegendItemsChecking() const
 {
     BasicDataPlot plot;
     preparePlot(plot);

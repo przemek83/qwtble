@@ -34,7 +34,7 @@ void checkPlot(HistogramPlot& plot, QString expectedPath)
 }
 }  // namespace
 
-void HistogramPlotTest::testPlotWithData()
+void HistogramPlotTest::testPlotWithData() const
 {
     HistogramPlot plot;
     preparePlot(plot);
@@ -44,7 +44,7 @@ void HistogramPlotTest::testPlotWithData()
     checkPlot(plot, expectedPath);
 }
 
-void HistogramPlotTest::testPlotWithoutData()
+void HistogramPlotTest::testPlotWithoutData() const
 {
     HistogramPlot plot;
     plot.setNewData({}, {}, 10);
@@ -56,7 +56,7 @@ void HistogramPlotTest::testPlotWithoutData()
     checkPlot(plot, expectedPath);
 }
 
-void HistogramPlotTest::testLegendItemsChecking()
+void HistogramPlotTest::testLegendItemsChecking() const
 {
     HistogramPlot plot;
     preparePlot(plot);

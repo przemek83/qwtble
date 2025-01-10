@@ -25,7 +25,7 @@ void checkPlot(QuantilesPlot& plot, QString expectedPath)
 }
 }  // namespace
 
-void QuantilesPlotTest::testPlotWithData()
+void QuantilesPlotTest::testPlotWithData() const
 {
     QuantilesPlot plot;
     preparePlot(plot);
@@ -35,7 +35,7 @@ void QuantilesPlotTest::testPlotWithData()
     checkPlot(plot, expectedPath);
 }
 
-void QuantilesPlotTest::testPlotWithoutData()
+void QuantilesPlotTest::testPlotWithoutData() const
 {
     QuantilesPlot plot;
     plot.setNewData({});
@@ -46,7 +46,7 @@ void QuantilesPlotTest::testPlotWithoutData()
     checkPlot(plot, expectedPath);
 }
 
-void QuantilesPlotTest::testReset()
+void QuantilesPlotTest::testReset() const
 {
     QuantilesPlot plot;
     preparePlot(plot);
