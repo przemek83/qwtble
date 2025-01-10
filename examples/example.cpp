@@ -119,24 +119,30 @@ GroupPlot* createGroupPlot()
     return groupPlot;
 }
 
-GroupPlotUI* createGroupPlotUI()
+struct GroupPlotData
 {
-    QVector<Quantiles> quantilesVector;
-    quantilesVector.reserve(getValues().size());
+    Quantiles all_;
+    QVector<Quantiles> primary_;
+    QVector<Quantiles> secondary_;
+};
+
+GroupPlotData prepareDataForGroupPlot()
+{
+    GroupPlotData data;
+    data.primary_.reserve(getValues().size());
     for (const auto& values : getValues())
     {
         Quantiles quantiles;
         quantiles.init(values);
-        quantilesVector.push_back(quantiles);
+        data.primary_.push_back(quantiles);
     }
 
-    QVector<Quantiles> otherQuantilesVector;
-    otherQuantilesVector.reserve(getAlternativeValues().size());
+    data.secondary_.reserve(getAlternativeValues().size());
     for (const auto& values : getAlternativeValues())
     {
         Quantiles quantiles;
         quantiles.init(values);
-        otherQuantilesVector.push_back(quantiles);
+        data.secondary_.push_back(quantiles);
     }
 
     QVector<double> allValues;
@@ -144,22 +150,29 @@ GroupPlotUI* createGroupPlotUI()
     for (const auto& values : getValues())
         allValues.append(values);
 
-    Quantiles generalQuantiles;
-    generalQuantiles.init(allValues);
+    data.all_.init(allValues);
 
+    return data;
+}
+
+GroupPlotUI* createGroupPlotUI()
+{
     const QVector<std::pair<QString, int>> stringColumns{{"Shape", 0},
                                                          {"Color", 1}};
+
     GroupPlotUI* groupPlotUI{new GroupPlotUI(stringColumns)};
-    QObject::connect(
-        groupPlotUI, &GroupPlotUI::traitIndexChanged, groupPlotUI,
-        [=](int column)
-        {
-            const QVector<QString>& names =
-                (column == 0 ? getNames() : getAlternativeNames());
-            const QVector<Quantiles>& quantiles =
-                (column == 0 ? quantilesVector : otherQuantilesVector);
-            groupPlotUI->setNewData(names, quantiles, generalQuantiles);
-        });
+    GroupPlotData groupPlotData{prepareDataForGroupPlot()};
+    auto reaction{[&plot = *groupPlotUI, data = groupPlotData](int column)
+                  {
+                      if (column == 0)
+                          plot.setNewData(getNames(), data.primary_, data.all_);
+                      else
+                          plot.setNewData(getAlternativeNames(),
+                                          data.secondary_, data.all_);
+                  }};
+
+    QObject::connect(groupPlotUI, &GroupPlotUI::traitIndexChanged, groupPlotUI,
+                     reaction);
 
     return groupPlotUI;
 }
