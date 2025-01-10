@@ -22,7 +22,8 @@ QuantilesPlot::QuantilesPlot(QWidget* parent)
     font.setStyleStrategy(QFont::PreferAntialias);
     setAxisFont(xBottom, font);
     setAxisMaxMinor(xBottom, 0);
-    setAxisMaxMajor(xBottom, 3);
+    const int maxNumberOjMajorSteps{3};
+    setAxisMaxMajor(xBottom, maxNumberOjMajorSteps);
 
     setupLegend(width());
 }
@@ -40,6 +41,7 @@ void QuantilesPlot::resizeEvent(QResizeEvent* event)
 void QuantilesPlot::setupLegend(int plotWidth)
 {
     const int minWidthForLegend{90};
+    const double defaultMaxScale{2.0};
     if (plotWidth >= minWidthForLegend)
     {
         const double min{-0.5};
@@ -49,7 +51,7 @@ void QuantilesPlot::setupLegend(int plotWidth)
     }
     else
     {
-        setAxisScale(xBottom, 0, 2, 0);
+        setAxisScale(xBottom, 0, defaultMaxScale, 0);
         marker_->setDrawLegend(false);
     }
 }
