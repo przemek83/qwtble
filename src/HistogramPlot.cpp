@@ -45,14 +45,13 @@ void HistogramPlot::initActualDensity()
 
 void HistogramPlot::initLegend()
 {
-    auto* legend{new QwtLegend()};
-    legend->setDefaultItemMode(QwtLegendData::Checkable);
-    legend->setFrameStyle(QFrame::Box | QFrame::Sunken);
+    legend_.setDefaultItemMode(QwtLegendData::Checkable);
+    legend_.setFrameStyle(QFrame::Box | QFrame::Sunken);
 
     // New connect mechanism not working as QwtLegend::checked is not detected.
-    connect(legend, SIGNAL(checked(QVariant, bool, int)), this,
+    connect(&legend_, SIGNAL(checked(QVariant, bool, int)), this,
             SLOT(legendItemChecked(QVariant, bool, int)));
-    insertLegend(legend, QwtPlot::BottomLegend);
+    insertLegend(&legend_, QwtPlot::BottomLegend);
 
     setLegendItemChecked(QwtPlot::itemToInfo(&histogram_));
     setLegendItemChecked(QwtPlot::itemToInfo(&distributionCurve_));
@@ -71,8 +70,7 @@ void HistogramPlot::legendItemChecked(const QVariant& itemInfo, bool on,
 
 void HistogramPlot::setLegendItemChecked(const QVariant& itemInfo)
 {
-    const auto* currentLegend{::qobject_cast<QwtLegend*>(legend())};
-    QWidget* legendWidget{currentLegend->legendWidget(itemInfo)};
+    QWidget* legendWidget{legend_.legendWidget(itemInfo)};
     if (legendWidget == nullptr)
         return;
 

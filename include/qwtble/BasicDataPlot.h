@@ -2,6 +2,7 @@
 
 #include <memory>
 
+#include <qwt_legend.h>
 #include <qwt_plot_curve.h>
 
 #include "PlotBase.h"
@@ -69,6 +70,8 @@ private:
     QwtPlotCurve plotData_;
 
     std::unique_ptr<XDateYAxisNumberPicker> picker_;
+
+    QwtLegend legend_;
 
 private Q_SLOTS:
     void legendItemChecked(const QVariant& itemInfo, bool on, int index);

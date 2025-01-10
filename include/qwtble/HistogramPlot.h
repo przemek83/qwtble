@@ -1,5 +1,6 @@
 #pragma once
 
+#include <qwt_legend.h>
 #include <qwt_plot_curve.h>
 #include <qwt_plot_histogram.h>
 
@@ -60,6 +61,8 @@ private:
     QVector<double> data_;
 
     Quantiles quantiles_;
+
+    QwtLegend legend_;
 
 private Q_SLOTS:
     void legendItemChecked(const QVariant& itemInfo, bool on, int index);
