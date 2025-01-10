@@ -73,8 +73,10 @@ QSplitter* GroupPlotUI::setupSplitter()
     scrollArea->setWidget(&groupPlot_);
     splitter->addWidget(scrollArea);
     splitter->addWidget(&quantilesPlot_);
-    splitter->setStretchFactor(0, 2);
-    splitter->setStretchFactor(1, 1);
+    constexpr int groupPlotStretchFactor{2};
+    constexpr int quantilesPlotStretchFactor{1};
+    splitter->setStretchFactor(0, groupPlotStretchFactor);
+    splitter->setStretchFactor(1, quantilesPlotStretchFactor);
     return splitter;
 }
 
