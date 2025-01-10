@@ -14,25 +14,28 @@
 #include <qwtble/Quantiles.h>
 #include <qwtble/QuantilesPlot.h>
 
-static QVector<QVector<double>> exampleValues{
+namespace
+{
+const QVector<QVector<double>> exampleValues{
     {3.5, 6.7, 4.7, 6.6, 3., 4.9},
     {5.5, 1.2, 3.2, 7.6, 5., 4.9, 0.3, 7.3},
     {2.1, 1.7, 4.3, 6.6, 1., 3.9, 5.5},
     {1.1, 3.2, 3.8, 6.5, 2., 2.9, 7.5, 3.2, 5.5},
     {2.1, 1.7, 4.3, 6.1, 2.}};
-static QVector<QString> exampleNames{
+
+const QVector<QString> exampleNames{
     QStringLiteral("circle"), QStringLiteral("triangle"),
     QStringLiteral("square"), QStringLiteral("rectangle"),
     QStringLiteral("cube")};
 
-static QVector<QVector<double>> otherExampleValues{
+const QVector<QVector<double>> otherExampleValues{
     {3.5, 6.7, 4.7, 6.6, 3., 4.9, 5.5, 1.2},
     {3.2, 7.6, 5., 4.9, 0.3, 7.3, 2.1, 1.7, 4.3, 6.6, 1., 3.9, 5.5},
     {1.1, 3.2, 3.8, 6.5, 2., 2.9, 7.5, 3.2, 5.5, 2.1, 1.7, 4.3, 6.1, 2.}};
-static QVector<QString> otherExampleNames{
+const QVector<QString> otherExampleNames{
     QStringLiteral("green"), QStringLiteral("black"), QStringLiteral("white")};
 
-static const QVector<double> examplePriceSeries{
+const QVector<double> examplePriceSeries{
     84.66,  40.,    5.,    7.02,   177.01, 110.23, 138.12, 54.94, 20.,   80.,
     15.85,  26.77,  51.61, 144.44, 106.,   8.06,   92.5,   19.57, 91.44, 90.,
     75.,    39.56,  0.2,   25.,    80.,    54.86,  2.13,   4.84,  15.,   2.67,
@@ -46,7 +49,7 @@ static const QVector<double> examplePriceSeries{
     65.,    147.98, 25.,   45.,    5.38};
 
 // As number of days since 1.1.1970.
-static const QVector<double> exampleDateSeries{
+const QVector<double> exampleDateSeries{
     13959., 13941., 13984., 13914., 13999., 13979., 13945., 13999., 14013.,
     13972., 13992., 13969., 13951., 13970., 13951., 13970., 13986., 13993.,
     14011., 13969., 13977., 14026., 13990., 13916., 13972., 13999., 13980.,
@@ -60,7 +63,7 @@ static const QVector<double> exampleDateSeries{
     14042., 13937., 13914., 13915., 13930., 13845., 13864., 13857., 13867.,
     13929., 13972., 13910., 13924., 13924., 13927.};
 
-static QGroupBox* wrapPlot(const QString& name, QWidget* widget)
+QGroupBox* wrapPlot(const QString& name, QWidget* widget)
 {
     auto* groupBox = new QGroupBox(name);
     auto* layout = new QVBoxLayout();
@@ -69,7 +72,7 @@ static QGroupBox* wrapPlot(const QString& name, QWidget* widget)
     return groupBox;
 }
 
-static QuantilesPlot* createQuantilesPlot()
+QuantilesPlot* createQuantilesPlot()
 {
     auto* quantilesPlot = new QuantilesPlot();
     Quantiles quantiles;
@@ -78,11 +81,11 @@ static QuantilesPlot* createQuantilesPlot()
     return quantilesPlot;
 }
 
-static GroupPlot* createGroupPlot()
+GroupPlot* createGroupPlot()
 {
     QVector<Quantiles> quantilesVector;
     quantilesVector.reserve(exampleValues.size());
-    for (auto& values : exampleValues)
+    for (const auto& values : exampleValues)
     {
         Quantiles quantiles;
         quantiles.init(values);
@@ -97,11 +100,11 @@ static GroupPlot* createGroupPlot()
     return groupPlot;
 }
 
-static GroupPlotUI* createGroupPlotUI()
+GroupPlotUI* createGroupPlotUI()
 {
     QVector<Quantiles> quantilesVector;
     quantilesVector.reserve(exampleValues.size());
-    for (auto& values : exampleValues)
+    for (const auto& values : exampleValues)
     {
         Quantiles quantiles;
         quantiles.init(values);
@@ -110,7 +113,7 @@ static GroupPlotUI* createGroupPlotUI()
 
     QVector<Quantiles> otherQuantilesVector;
     otherQuantilesVector.reserve(otherExampleValues.size());
-    for (auto& values : otherExampleValues)
+    for (const auto& values : otherExampleValues)
     {
         Quantiles quantiles;
         quantiles.init(values);
@@ -142,7 +145,7 @@ static GroupPlotUI* createGroupPlotUI()
     return groupPlotUI;
 }
 
-static HistogramPlot* createHistogramPlot()
+HistogramPlot* createHistogramPlot()
 {
     Quantiles quantiles;
     const QVector<double> dataForQuantiles(examplePriceSeries);
@@ -156,7 +159,7 @@ static HistogramPlot* createHistogramPlot()
     return histogramPlot;
 }
 
-static HistogramPlotUI* createHistogramPlotUI()
+HistogramPlotUI* createHistogramPlotUI()
 {
     Quantiles quantiles;
     const QVector<double> dataForQuantiles(examplePriceSeries);
@@ -170,7 +173,7 @@ static HistogramPlotUI* createHistogramPlotUI()
     return histogramPlotUI;
 }
 
-static BasicDataPlot* createBasicDataPlot()
+BasicDataPlot* createBasicDataPlot()
 {
     Quantiles quantiles;
     const QVector<double> dataForQuantiles(examplePriceSeries);
@@ -191,6 +194,8 @@ static BasicDataPlot* createBasicDataPlot()
     basicDataPlot->setNewData(data, quantiles, linearRegressionPoints);
     return basicDataPlot;
 }
+
+}  // namespace
 
 int main(int argc, char* argv[])
 {
