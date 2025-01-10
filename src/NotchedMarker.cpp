@@ -89,9 +89,11 @@ void NotchedMarker::drawElements(QPainter* p, const QwtScaleMap& xMap,
             const double indent{calculateIndent(recipe)};
             p->drawLine(QPointF(recipe.fromX + indent, recipe.minY),
                         QPointF(recipe.toX - indent, recipe.minY));
-            continue;
         }
-        drawElement(p, recipe);
+        else
+        {
+            drawElement(p, recipe);
+        }
     }
 }
 
