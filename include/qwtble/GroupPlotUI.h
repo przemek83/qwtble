@@ -1,5 +1,7 @@
 #pragma once
 
+#include <memory>
+
 #include <QWidget>
 
 #include "Quantiles.h"
@@ -54,7 +56,7 @@ private:
 
     static double getPlotBottomExtent(const QwtPlot& plot);
 
-    Ui::GroupPlotUI* ui;
+    std::unique_ptr<Ui::GroupPlotUI> ui_;
 
     GroupPlot* groupPlot_;
 

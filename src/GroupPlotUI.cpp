@@ -15,24 +15,24 @@
 
 GroupPlotUI::GroupPlotUI(const QVector<std::pair<QString, int> >& stringColumns,
                          QWidget* parent)
-    : QWidget(parent), ui(new Ui::GroupPlotUI)
+    : QWidget(parent), ui_{std::make_unique<Ui::GroupPlotUI>()}
 {
-    ui->setupUi(this);
+    ui_->setupUi(this);
 
-    connect(ui->comboBox, ::qOverload<int>(&QComboBox::currentIndexChanged),
+    connect(ui_->comboBox, ::qOverload<int>(&QComboBox::currentIndexChanged),
             this, &GroupPlotUI::comboBoxCurrentIndexChanged);
 
     QSplitter* splitter{setupSplitter()};
-    ui->verticalLayout->addWidget(splitter);
+    ui_->verticalLayout->addWidget(splitter);
 
     for (const auto& [columnName, index] : stringColumns)
-        ui->comboBox->addItem(columnName, QVariant(index));
+        ui_->comboBox->addItem(columnName, QVariant(index));
 
     connect(this, &GroupPlotUI::syncPlotSizes, this,
             &GroupPlotUI::updateQuantilesPlotExtent);
 }
 
-GroupPlotUI::~GroupPlotUI() { delete ui; }
+GroupPlotUI::~GroupPlotUI() = default;
 
 void GroupPlotUI::setNewData(const QVector<QString>& intervalsNames,
                              QVector<Quantiles> quantilesForIntervals,
@@ -120,5 +120,5 @@ double GroupPlotUI::getPlotBottomExtent(const QwtPlot& plot)
 
 void GroupPlotUI::comboBoxCurrentIndexChanged(int index)
 {
-    Q_EMIT traitIndexChanged(ui->comboBox->itemData(index).toInt());
+    Q_EMIT traitIndexChanged(ui_->comboBox->itemData(index).toInt());
 }

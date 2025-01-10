@@ -1,5 +1,7 @@
 #pragma once
 
+#include <memory>
+
 #include <QWidget>
 
 #include "qwtble_global.h"
@@ -33,7 +35,7 @@ public Q_SLOTS:
     void setNewData(QVector<double> data, const Quantiles& quantiles);
 
 private:
-    Ui::HistogramPlotUI* ui;
+    std::unique_ptr<Ui::HistogramPlotUI> ui_;
 
     HistogramPlot* histogramPlot_;
 };
