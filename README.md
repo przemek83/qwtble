@@ -15,6 +15,9 @@
 - [Plots](#plots)
 - [Markers](#markers)
 
+## Examples screenshot
+![Alt text](examples.png?raw=true "Qwtble examples app screenshot")  
+
 ## About project
 Qwtble is a library of useful plots and one marker based on Qwt library. Created as a result of the division of the code of my other project, Volbx and moving parts of it to an independent library. Library contains:  
  + quantiles plot,
