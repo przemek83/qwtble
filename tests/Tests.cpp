@@ -47,7 +47,7 @@ void setupFont()
         QStringLiteral(":/res/FiraMono-Regular.ttf"))};
     const QString family{QFontDatabase::applicationFontFamilies(id).at(0)};
     QFont font(family);
-    font.setPointSize(12);
+    font.setPixelSize(12);
     font.setStyleStrategy(QFont::NoAntialias);
     QApplication::setFont(font);
 }
