@@ -8,12 +8,26 @@
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=przemek83_qwtble&metric=coverage)](https://sonarcloud.io/summary/new_code?id=przemek83_qwtble)
 [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=przemek83_qwtble&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=przemek83_qwtble)
 
-## Table of content
+## Table of contents
+- [Examples screenshot](#examples-screenshot)
 - [About project](#about-project)
-- [Building](#building)
+- [Getting Started](#getting-started)
+   * [Prerequisites](#prerequisites)
+   * [Building](#building)
+   * [CMake integration](#cmake-integration)
+- [Built with](#built-with)
 - [Usage](#usage)
 - [Plots](#plots)
+   * [Quantiles](#quantiles)
+   * [Grouping](#grouping)
+   * [Histogram](#histogram)
+   * [Basic data](#basic-data)
+   * [Grouping with UI](#grouping-with-ui)
+   * [Histogram with UI](#histogram-with-ui)
 - [Markers](#markers)
+   * [Notched](#notched)
+- [Testing](#testing)
+- [Licensing](#licensing)
 
 ## Examples screenshot
 ![Alt text](examples.png?raw=true "Qwtble examples app screenshot")  
