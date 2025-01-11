@@ -15,8 +15,7 @@
 - [Plots](#plots)
 - [Markers](#markers)
 
-
-# About project
+## About project
  Qwtble is a library of useful plots and one marker based on Qwt library. Created as a result of the division of the code of my other project, Volbx and moving parts of it to an independent library. Library contains:  
  + quantiles plot,
  + grouping plot,
@@ -25,42 +24,65 @@
  + grouping plot UI (quantiles plot + grouping plot + combo box),
  + histogram plot UI (histogram plot + line edit with intervals count),
  + notched marker.
-  
-# Building
-Clone and use CMake directly or via an IDE like Qt Creator. CMake **should**:
-+ configure everything automatically,
-+ detect installation of Qwt (using environment variable QWT_ROOT) or download it and build,
-+ compile library and create binaries.
 
-**TIP**: remember to set properly `CMAKE_PREFIX_PATH` env variable to let CMake `find_package` command work. It should have a Qt installation path.  
+## Getting Started
+This section describes briefly how to setup the environment and build the project.
 
-As a result of compilation, a dynamic lib should be created along with a headers' dir.
+### Prerequisites
+Qt in version 6.5 or greater, a C++ compiler with C++17 support as a minimum, and CMake 3.16+. 
 
-Check out my other project, Volbx to familiarize yourself with how to use it via CMake.
+### Building
+Clone and use CMake directly or via any IDE supporting it. CMake should:
+- configure everything automatically,
+- compile and create binaries.
 
-## Used tools and libs
-| Tool |  Windows | Lubuntu |
+As a result of compilation, binary for simulations and binary for testing should be created.
+
+**TIP**: Remember to set properly the `CMAKE_PREFIX_PATH` env variable. It should have a Qt installation path to let CMake `find_package` command work.  
+
+**TIP**: Make sure you install the `Core5Compat` module, which is part of Qt 6 as QuaZip needs it.  
+
+### CMake integration
+Use `FetchContent` CMake module in your project:
+```cmake
+include(FetchContent)
+
+FetchContent_Declare(
+   qwtble
+   GIT_REPOSITORY https://github.com/przemek83/qwtble
+   GIT_TAG v1.2.0
+)
+
+FetchContent_MakeAvailable(qwtble)
+```
+From that moment, qwtble library can be used in the `target_link_libraries` command:
+```cmake
+add_executable(${PROJECT_NAME} ${SOURCES})
+target_link_libraries(${PROJECT_NAME} shared qwtble)
+```
+Check my other project `Volbx` for real world CMake integration.
+
+## Built with
+| Tool |  Windows | Ubuntu |
 | --- | --- | --- |
-| OS version | 10 22H2 | 22.04 |
-| GCC | 11.2.0 | 11.3.0 |
-| CMake | 3.25.0 | 3.25.0 |
-| Git | 2.38.1 | 2.34.1 |
+| OS version | 10 22H2 | 24.04 |
+| GCC | 13.1.0 | 13.2.0 |
+| CMake | 3.30.2 | 3.28.3 |
+| Git | 2.46.0 | 2.43.0 |
 | Qt | 6.5.2 | 6.5.2 |
-| Qt Creator | 10.0.2 | 10.0.2 |
-| Qwt | 6.2 | 6.2 |
+| Qwt | 6.3.1 | 6.3.1 |
 
-
-# Usage
+## Usage
 The easiest way is to check the examples' subproject, where you can find how to create and interact with each plot and notched marker.  
 Alternatively, tests in a subproject can be checked. Usage can also be found in my other project called Volbx where plots from this library are used.
 
-# Plots
+## Plots
 Set of plots based on Qwt library. Each plot can be used as a widget, with data delivered via a public slot. The grouping plot UI additionally interacts with the calling code via one signal. Each plot consists of mechanisms like magnifying, navigating, resetting, displaying current coordinates, and showing a tooltip with a summary after hovering the mouse.
-## Quantiles
+### Quantiles
 ![Alt text](QuantilesPlot.png?raw=true "Quantiles Plot")  
 Plot showing quantiles (Q10, Q25, Q50, Q75, Q90) along with minimum, maximum and mean. Optionally, a small legend on the left side can be activated. Legend hides when the size of the plot is smaller than the hard-coded pixel threshold.   
 The number of items is displayed at the bottom.  
-## Grouping
+### Grouping
 ![Alt text](GroupingPlot.png?raw=true "Grouping plot")  
 Plot showing quantiles (Q10, Q25, Q50, Q75, Q90) along with minimum, maximum and mean categorized according to trait type. 
 A trait example would be shape for geometrical figures or color for cars. The name of the trait is displayed at the bottom, together with the number of items. Details are displayed after hovering above each notched marker.  
@@ -84,7 +106,7 @@ Quantiles and grouping plots are packed together, along with a combo box for pic
 ![Alt text](QuantilesPlotUI.png?raw=true "Histogram with UI")  
 Histogram plot paired with a spin box. Changing the value on the spin box results in changing the number of intervals used for the histogram.
 
-# Markers
+## Markers
 ### Notched
 ![Alt text](NotchedMarker.png?raw=true "Notched marker")  
 Marker showing:
