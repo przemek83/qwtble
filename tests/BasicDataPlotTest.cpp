@@ -61,6 +61,8 @@ void BasicDataPlotTest::testPlotWithData()
 {
     BasicDataPlot plot;
     preparePlot(plot);
+    plot.setAxisVisible(QwtPlot::xBottom, false);
+
     const QString expectedPath{
         QString::fromLatin1(":/res/BasicDataPlotDefault.png")};
     common::checkPlot(plot, expectedPath);
