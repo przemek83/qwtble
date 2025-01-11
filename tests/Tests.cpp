@@ -64,26 +64,27 @@ int main(int argc, char* argv[])
 
     setupFont();
 
+    int status{EXIT_SUCCESS};
     UtilitiesTest utilitiesTest;
-    QTest::qExec(&utilitiesTest);
+    status |= QTest::qExec(&utilitiesTest);
 
     GroupPlotUITest groupPlotUITest;
-    QTest::qExec(&groupPlotUITest);
+    status |= QTest::qExec(&groupPlotUITest);
 
     QuantilesTest quantilesTest;
-    QTest::qExec(&quantilesTest);
+    status |= QTest::qExec(&quantilesTest);
 
     BasicDataPlotTest basicDataPlotTest;
-    QTest::qExec(&basicDataPlotTest);
+    status |= QTest::qExec(&basicDataPlotTest);
 
     HistogramPlotTest histogramPlotTest;
-    QTest::qExec(&histogramPlotTest);
+    status |= QTest::qExec(&histogramPlotTest);
 
     GroupPlotTest groupPlotTest;
-    QTest::qExec(&groupPlotTest);
+    status |= QTest::qExec(&groupPlotTest);
 
     QuantilesPlotTest quantilesPlotTest;
-    QTest::qExec(&quantilesPlotTest);
+    status |= QTest::qExec(&quantilesPlotTest);
 
-    return 0;
+    return status;
 }
