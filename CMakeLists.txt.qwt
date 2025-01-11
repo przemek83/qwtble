@@ -7,7 +7,7 @@ project(qwt NONE)
 ExternalProject_Add(qwt
     PREFIX qwt
     GIT_REPOSITORY https://git.code.sf.net/p/qwt/git
-    GIT_TAG 9e554a5e03bc3a1fe379bdddfa4d21ced2ed7995
+    GIT_TAG 23bbe1033c4fe128f256c92ff61aae4b54d10c84
     CONFIGURE_COMMAND qmake "${CMAKE_CURRENT_BINARY_DIR}/qwt/qwt/src/qwt/qwt.pro"
     PATCH_COMMAND git apply --allow-empty "@QWT_PATCH_FILE@"
     BUILD_COMMAND "@QWT_BUILD_COMMAND@"
