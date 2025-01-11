@@ -158,3 +158,17 @@ Test project <path>/qwtble/build/tests
 Total Test time (real) =   0.25 sec
 
 ```
+
+## Licensing
+Qwtble library is published under a LGPL license.
+
+The project uses the following software:
+| Name | License | Home | Description |
+| --- | --- | --- | --- |
+| Qt | LGPLv3 | https://www.qt.io/| cross-platform application development framework |
+| Qwt | Qwt License 1.0 | https://qwt.sourceforge.io/ | Qt widgets for technical applications |
+
+Testing subproject uses following software:
+| Name | License | Home | Description |
+| --- | --- | --- | --- |
+| Fira font | SIL Open Font License 1.1| https://github.com/mozilla/Fira | Mozilla's Fira type family |
