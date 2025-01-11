@@ -16,13 +16,13 @@
 - [Markers](#markers)
 
 ## About project
- Qwtble is a library of useful plots and one marker based on Qwt library. Created as a result of the division of the code of my other project, Volbx and moving parts of it to an independent library. Library contains:  
+Qwtble is a library of useful plots and one marker based on Qwt library. Created as a result of the division of the code of my other project, Volbx and moving parts of it to an independent library. Library contains:  
  + quantiles plot,
  + grouping plot,
  + histogram plot,
  + basic data plot,
  + grouping plot UI (quantiles plot + grouping plot + combo box),
- + histogram plot UI (histogram plot + line edit with intervals count),
+ + histogram plot UI (histogram plot + line edit with interval count),
  + notched marker.
 
 ## Getting Started
@@ -39,8 +39,6 @@ Clone and use CMake directly or via any IDE supporting it. CMake should:
 As a result of compilation, binary for simulations and binary for testing should be created.
 
 **TIP**: Remember to set properly the `CMAKE_PREFIX_PATH` env variable. It should have a Qt installation path to let CMake `find_package` command work.  
-
-**TIP**: Make sure you install the `Core5Compat` module, which is part of Qt 6 as QuaZip needs it.  
 
 ### CMake integration
 Use `FetchContent` CMake module in your project:
@@ -106,7 +104,7 @@ Each part of the plot can be enabled or disabled using buttons at the bottom.
 
 ### Grouping with UI
 ![Alt text](GroupingPlotUI.png?raw=true "Grouping with UI")  
-Quantiles and grouping plots are packed together, along with a combo box for picking traits. The quantiles plot is showing summary data; each notched marker on the group plot is showing quantiles for each trait type. The proportion of area used for each plot can be changed by dragging the handle, placed between plots. Dragging the handle to any side results in hiding one of the plots.
+Quantiles and grouping plots are packed together, along with a combo box for picking traits. The quantiles plot is showing summary data; each notched marker on the group plot is showing quantiles for each trait type. The proportion of area used for each plot can be changed by dragging the handle that is placed between plots. Dragging the handle to any side results in hiding one of the plots.
 
 ### Histogram with UI
 ![Alt text](QuantilesPlotUI.png?raw=true "Histogram with UI")  
@@ -168,7 +166,7 @@ The project uses the following software:
 | Qt | LGPLv3 | https://www.qt.io/| cross-platform application development framework |
 | Qwt | Qwt License 1.0 | https://qwt.sourceforge.io/ | Qt widgets for technical applications |
 
-Testing subproject uses following software:
+Testing subproject uses the following software:
 | Name | License | Home | Description |
 | --- | --- | --- | --- |
 | Fira font | SIL Open Font License 1.1| https://github.com/mozilla/Fira | Mozilla's Fira type family |
