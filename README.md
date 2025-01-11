@@ -78,18 +78,22 @@ Alternatively, tests in a subproject can be checked. Usage can also be found in 
 
 ## Plots
 Set of plots based on Qwt library. Each plot can be used as a widget, with data delivered via a public slot. The grouping plot UI additionally interacts with the calling code via one signal. Each plot consists of mechanisms like magnifying, navigating, resetting, displaying current coordinates, and showing a tooltip with a summary after hovering the mouse.
+
 ### Quantiles
 ![Alt text](QuantilesPlot.png?raw=true "Quantiles Plot")  
 Plot showing quantiles (Q10, Q25, Q50, Q75, Q90) along with minimum, maximum and mean. Optionally, a small legend on the left side can be activated. Legend hides when the size of the plot is smaller than the hard-coded pixel threshold.   
-The number of items is displayed at the bottom.  
+The number of items is displayed at the bottom.
+
 ### Grouping
 ![Alt text](GroupingPlot.png?raw=true "Grouping plot")  
 Plot showing quantiles (Q10, Q25, Q50, Q75, Q90) along with minimum, maximum and mean categorized according to trait type. 
 A trait example would be shape for geometrical figures or color for cars. The name of the trait is displayed at the bottom, together with the number of items. Details are displayed after hovering above each notched marker.  
 Scales are drawn at the left and right edges of the plot.
+
 ### Histogram
 ![Alt text](HistogramPlot.png?raw=true "Histogram plot")  
 Plot showing the histogram for the given data. The number of intervals is configurable. Distribution and histograms can be enabled or disabled by clicking buttons at the plot bottom.
+
 ### Basic data
 ![Alt text](BasicDataPlot.png?raw=true "Basic data plot")  
 Plot showing data series in the form of dots. Dates are placed on the x-axis and values on the y-axis. Except for raw data, there are also displayed curves for:
@@ -99,9 +103,11 @@ Plot showing data series in the form of dots. Dates are placed on the x-axis and
 + linear regression.
 
 Each part of the plot can be enabled or disabled using buttons at the bottom.
+
 ### Grouping with UI
 ![Alt text](GroupingPlotUI.png?raw=true "Grouping with UI")  
-Quantiles and grouping plots are packed together, along with a combo box for picking traits. The quantiles plot is showing summary data; each notched marker on the group plot is showing quantiles for each trait type. The proportion of area used for each plot can be changed by dragging the handle, placed between plots. Dragging the handle to any side results in hiding one of the plots. 
+Quantiles and grouping plots are packed together, along with a combo box for picking traits. The quantiles plot is showing summary data; each notched marker on the group plot is showing quantiles for each trait type. The proportion of area used for each plot can be changed by dragging the handle, placed between plots. Dragging the handle to any side results in hiding one of the plots.
+
 ### Histogram with UI
 ![Alt text](QuantilesPlotUI.png?raw=true "Histogram with UI")  
 Histogram plot paired with a spin box. Changing the value on the spin box results in changing the number of intervals used for the histogram.
@@ -120,3 +126,35 @@ Marker showing:
 + mean.
 
 Can be used to show one or multiple sets of data on one plot. Check quantiles and grouping plots for usage examples. 
+
+## Testing
+For testing purposes, the Qt Test framework is used. Build the project first. Make sure that the `qwtble-tests` target is built. Modern IDEs supporting CMake also support running tests with monitoring of failures. But in case you would like to run it manually, go to the `build/tests` directory, where the⁣ binary `qwtble-tests` should be available. Launching it should produce the following output on Linux:
+Example run:
+```
+$ $ ./qwtble-tests
+********* Start testing of UtilitiesTest *********
+Config: Using QtTest library 6.5.2, Qt 6.5.2 (x86_64-little_endian-lp64 shared (dynamic) release build; by GCC 10.3.1 20210422 (Red Hat 10.3.1-1)), ubuntu 24.04
+PASS   : UtilitiesTest::initTestCase()
+PASS   : UtilitiesTest::testStringFromDays()
+PASS   : UtilitiesTest::testFloatsAreEqual()
+
+(...)
+
+PASS   : QuantilesPlotTest::testReset()
+PASS   : QuantilesPlotTest::cleanupTestCase()
+Totals: 5 passed, 0 failed, 0 skipped, 0 blacklisted, 85ms
+********* Finished testing of QuantilesPlotTest *********
+
+```
+As an alternative, CTest can be used to run tests from the `build/tests` directory:
+```
+$ ctest
+Test project <path>/qwtble/build/tests
+    Start 1: qwtble-tests
+1/1 Test #1: qwtble-tests .....................   Passed    0.25 sec
+
+100% tests passed, 0 tests failed out of 1
+
+Total Test time (real) =   0.25 sec
+
+```
