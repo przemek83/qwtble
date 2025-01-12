@@ -47,10 +47,10 @@ void setupFont()
         QStringLiteral(":/res/FiraMono-Regular.ttf"))};
     const QString family{QFontDatabase::applicationFontFamilies(id).at(0)};
     QFont font(family);
-    font.setPixelSize(12);
-    font.setStyleStrategy(static_cast<QFont::StyleStrategy>(QFont::NoAntialias |
-                        QFont::PreferBitmap | QFont::NoSubpixelAntialias | 
-                        QFont::PreferNoShaping | QFont::NoFontMerging));
+    font.setPointSize(12);
+    font.setStyleStrategy(static_cast<QFont::StyleStrategy>(
+        QFont::NoAntialias | QFont::PreferBitmap | QFont::NoSubpixelAntialias |
+        QFont::PreferNoShaping | QFont::NoFontMerging));
     QApplication::setFont(font);
 }
 }  // namespace
@@ -58,15 +58,6 @@ void setupFont()
 int main(int argc, char* argv[])
 {
     const QApplication app(argc, argv);
-
-    QStyle* style{QStyleFactory::create(QStringLiteral("Fusion"))};
-    QApplication::setStyle(style);
-    setLightPalette();
-
-    const QLocale locale(QLocale::English, QLocale::UnitedStates);
-    QLocale::setDefault(locale);
-
-    setupFont();
 
     int status{EXIT_SUCCESS};
     UtilitiesTest utilitiesTest;
@@ -78,6 +69,16 @@ int main(int argc, char* argv[])
     QuantilesTest quantilesTest;
     status |= QTest::qExec(&quantilesTest);
 
+#ifndef Q_OS_WIN
+    QStyle* style{QStyleFactory::create(QStringLiteral("Fusion"))};
+    QApplication::setStyle(style);
+    setLightPalette();
+
+    const QLocale locale(QLocale::English, QLocale::UnitedStates);
+    QLocale::setDefault(locale);
+
+    setupFont();
+    
     BasicDataPlotTest basicDataPlotTest;
     status |= QTest::qExec(&basicDataPlotTest);
 
@@ -89,6 +90,7 @@ int main(int argc, char* argv[])
 
     QuantilesPlotTest quantilesPlotTest;
     status |= QTest::qExec(&quantilesPlotTest);
+#endif
 
     return status;
 }

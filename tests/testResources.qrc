@@ -1,15 +1,17 @@
 <RCC>
     <qresource prefix="/">
-        <file>res/BasicDataPlotDefault.png</file>
-        <file>res/BasicDataPlotEmpty.png</file>
-        <file>res/BasicDataPlotItemChecked.png</file>
-        <file>res/HistogramPlotDefault.png</file>
-        <file>res/HistogramPlotWithoutData.png</file>
-        <file>res/HistogramPlotItemChecked.png</file>
-        <file>res/GroupPlotDefault.png</file>
-        <file>res/GroupPlotPlotWithoutData.png</file>
-        <file>res/QuantilesPlotDefault.png</file>
-        <file>res/QuantilesPlotWithoutData.png</file>
         <file>res/FiraMono-Regular.ttf</file>
+    </qresource>
+    <qresource prefix="/unix-like">
+        <file>res/unix-like/BasicDataPlotDefault.png</file>
+        <file>res/unix-like/BasicDataPlotEmpty.png</file>
+        <file>res/unix-like/BasicDataPlotItemChecked.png</file>
+        <file>res/unix-like/HistogramPlotDefault.png</file>
+        <file>res/unix-like/HistogramPlotWithoutData.png</file>
+        <file>res/unix-like/HistogramPlotItemChecked.png</file>
+        <file>res/unix-like/GroupPlotDefault.png</file>
+        <file>res/unix-like/GroupPlotPlotWithoutData.png</file>
+        <file>res/unix-like/QuantilesPlotDefault.png</file>
+        <file>res/unix-like/QuantilesPlotWithoutData.png</file>
     </qresource>
 </RCC>

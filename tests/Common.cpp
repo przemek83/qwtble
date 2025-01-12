@@ -77,18 +77,11 @@ QVariant getItemInfo(QwtPlot& plot, const QString& text)
 
 QSize getPlotSize() { return {800, 600}; }
 
-void checkPlot(QwtPlot& plot, const QString& expectedPath)
+void checkPlot(QwtPlot& plot, const QString& expectedFileName)
 {
     const QImage actual{plot.grab().toImage()};
-    QImage expected(expectedPath);
-    expected = expected.convertToFormat(actual.format());
-    QCOMPARE(actual, expected);
-}
-
-void checkPlotCanvas(QwtPlot& plot, const QString& expectedPath)
-{
-    const QImage actual{plot.canvas()->grab().toImage()};
-    QImage expected(expectedPath);
+    QString expectedPath{QStringLiteral(":/unix-like/res/unix-like/")};
+    QImage expected(expectedPath + expectedFileName);
     expected = expected.convertToFormat(actual.format());
     QCOMPARE(actual, expected);
 }
