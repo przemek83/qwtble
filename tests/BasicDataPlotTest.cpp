@@ -62,8 +62,8 @@ void BasicDataPlotTest::testPlotWithData()
     BasicDataPlot plot;
     preparePlot(plot);
 
-    // const QImage actual{plot.grab().toImage()};
-    // actual.save("BasicDataPlotDefault.png");
+    const QImage actual{plot.grab().toImage()};
+    actual.save("BasicDataPlotDefault.png");
 
     const QString expectedPath{QString::fromLatin1("BasicDataPlotDefault.png")};
     common::checkPlot(plot, expectedPath);
@@ -77,8 +77,8 @@ void BasicDataPlotTest::testPlotWithoutData()
     plot.setNewData({}, quantiles, regressionPoints);
     plot.resize(common::getPlotSize());
 
-    // const QImage actual{plot.grab().toImage()};
-    // actual.save("BasicDataPlotEmpty.png");
+    const QImage actual{plot.grab().toImage()};
+    actual.save("BasicDataPlotEmpty.png");
 
     const QString expectedPath{QString::fromLatin1("BasicDataPlotEmpty.png")};
     common::checkPlot(plot, expectedPath);
@@ -93,8 +93,8 @@ void BasicDataPlotTest::testLegendItemsChecking()
     emit legend->checked(common::getItemInfo(plot, QStringLiteral("Q25")),
                          false, 0);
 
-    // const QImage actual{plot.grab().toImage()};
-    // actual.save("BasicDataPlotItemChecked.png");
+    const QImage actual{plot.grab().toImage()};
+    actual.save("BasicDataPlotItemChecked.png");
 
     const QString expectedPath{
         QString::fromLatin1("BasicDataPlotItemChecked.png")};
