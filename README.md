@@ -78,14 +78,14 @@ target_link_libraries(${PROJECT_NAME} shared qwtble)
 Check my other project `Volbx` for real world CMake integration.
 
 ## Built with
-| Tool |  Windows | Ubuntu |
-| --- | --- | --- |
-| OS version | 10 22H2 | 24.04 |
-| GCC | 13.1.0 | 13.2.0 |
-| CMake | 3.30.2 | 3.28.3 |
-| Git | 2.46.0 | 2.43.0 |
-| Qt | 6.5.2 | 6.5.2 |
-| Qwt | 6.3.1 | 6.3.1 |
+| Tool |  Windows | Windows | Ubuntu |
+| --- | --- | --- | --- | 
+| OS version | 10 22H2 | 10 22H2 | 24.04 |
+| compiler | GCC 13.1.0 | MSVC 19.29 | GCC 13.2.0 |
+| CMake | 3.30.2 | 3.30.2 |3.28.3 |
+| Git | 2.46.0 | 2.46.0 | 2.43.0 |
+| Qt | 6.5.2 | 6.5.2 | 6.5.2 |
+| Qwt | 6.3.1 | 6.3.1 | 6.3.1 |
 
 ## Usage
 The easiest way is to check the examples' subproject, where you can find how to create and interact with each plot and notched marker.  
