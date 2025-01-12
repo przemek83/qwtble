@@ -51,6 +51,7 @@ void preparePlot(BasicDataPlot& plot)
     const QVector<QPointF> regressionPoints{{min, 38.002}, {max, 78.4491}};
     const QVector<QPointF> data{getData()};
     const Quantiles quantiles{getQuantiles()};
+    static_cast<QwtLegend*>(plot.legend())->contentsWidget()->hide();
     plot.setAxisVisible(QwtPlot::xBottom, false);
     plot.setNewData(data, quantiles, regressionPoints);
     plot.resize(common::getPlotSize());
@@ -65,7 +66,7 @@ void BasicDataPlotTest::testPlotWithData()
 
     const QString expectedPath{
         QString::fromLatin1(":/res/BasicDataPlotDefault.png")};
-    common::checkPlotCanvas(plot, expectedPath);
+    common::checkPlot(plot, expectedPath);
 }
 
 void BasicDataPlotTest::testPlotWithoutData()
@@ -74,12 +75,13 @@ void BasicDataPlotTest::testPlotWithoutData()
     const Quantiles quantiles;
     BasicDataPlot plot;
     plot.setAxisVisible(QwtPlot::xBottom, false);
+    static_cast<QwtLegend*>(plot.legend())->contentsWidget()->hide();
     plot.setNewData({}, quantiles, regressionPoints);
     plot.resize(common::getPlotSize());
 
     const QString expectedPath{
         QString::fromLatin1(":/res/BasicDataPlotEmpty.png")};
-    common::checkPlotCanvas(plot, expectedPath);
+    common::checkPlot(plot, expectedPath);
 }
 
 void BasicDataPlotTest::testLegendItemsChecking()
@@ -93,5 +95,5 @@ void BasicDataPlotTest::testLegendItemsChecking()
 
     const QString expectedPath{
         QString::fromLatin1(":/res/BasicDataPlotItemChecked.png")};
-    common::checkPlotCanvas(plot, expectedPath);
+    common::checkPlot(plot, expectedPath);
 }
