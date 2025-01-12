@@ -47,10 +47,10 @@ void setupFont()
         QStringLiteral(":/res/FiraMono-Regular.ttf"))};
     const QString family{QFontDatabase::applicationFontFamilies(id).at(0)};
     QFont font(family);
-    font.setPixelSize(12);
-    font.setStyleStrategy(static_cast<QFont::StyleStrategy>(QFont::NoAntialias |
-                        QFont::PreferBitmap | QFont::NoSubpixelAntialias | 
-                        QFont::PreferNoShaping | QFont::NoFontMerging));
+    font.setPointSize(12);
+    font.setStyleStrategy(static_cast<QFont::StyleStrategy>(
+        QFont::NoAntialias | QFont::PreferBitmap | QFont::NoSubpixelAntialias |
+        QFont::PreferNoShaping | QFont::NoFontMerging));
     QApplication::setFont(font);
 }
 }  // namespace

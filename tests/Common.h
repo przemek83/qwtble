@@ -19,7 +19,7 @@ QVariant getItemInfo(QwtPlot& plot, const QString& text);
 
 QSize getPlotSize();
 
-void checkPlot(QwtPlot& plot, const QString& expectedPath);
+void checkPlot(QwtPlot& plot, const QString& expectedFileName);
 
-void checkPlotCanvas(QwtPlot& plot, const QString& expectedPath);
+void checkPlotCanvas(QwtPlot& plot, const QString& expectedFileName);
 }  // namespace common

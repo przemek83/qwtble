@@ -51,8 +51,6 @@ void preparePlot(BasicDataPlot& plot)
     const QVector<QPointF> regressionPoints{{min, 38.002}, {max, 78.4491}};
     const QVector<QPointF> data{getData()};
     const Quantiles quantiles{getQuantiles()};
-    static_cast<QwtLegend*>(plot.legend())->contentsWidget()->hide();
-    plot.setAxisVisible(QwtPlot::xBottom, false);
     plot.setNewData(data, quantiles, regressionPoints);
     plot.resize(common::getPlotSize());
 }
@@ -64,8 +62,10 @@ void BasicDataPlotTest::testPlotWithData()
     BasicDataPlot plot;
     preparePlot(plot);
 
-    const QString expectedPath{
-        QString::fromLatin1(":/res/BasicDataPlotDefault.png")};
+    const QImage actual{plot.grab().toImage()};
+    actual.save("BasicDataPlotDefault.png");
+
+    const QString expectedPath{QString::fromLatin1("BasicDataPlotDefault.png")};
     common::checkPlot(plot, expectedPath);
 }
 
@@ -74,13 +74,13 @@ void BasicDataPlotTest::testPlotWithoutData()
     const QVector<QPointF> regressionPoints{{0, 0}, {0, 0}};
     const Quantiles quantiles;
     BasicDataPlot plot;
-    plot.setAxisVisible(QwtPlot::xBottom, false);
-    static_cast<QwtLegend*>(plot.legend())->contentsWidget()->hide();
     plot.setNewData({}, quantiles, regressionPoints);
     plot.resize(common::getPlotSize());
 
-    const QString expectedPath{
-        QString::fromLatin1(":/res/BasicDataPlotEmpty.png")};
+    const QImage actual{plot.grab().toImage()};
+    actual.save("BasicDataPlotEmpty.png");
+
+    const QString expectedPath{QString::fromLatin1("BasicDataPlotEmpty.png")};
     common::checkPlot(plot, expectedPath);
 }
 
@@ -93,7 +93,10 @@ void BasicDataPlotTest::testLegendItemsChecking()
     emit legend->checked(common::getItemInfo(plot, QStringLiteral("Q25")),
                          false, 0);
 
+    const QImage actual{plot.grab().toImage()};
+    actual.save("BasicDataPlotItemChecked.png");
+
     const QString expectedPath{
-        QString::fromLatin1(":/res/BasicDataPlotItemChecked.png")};
+        QString::fromLatin1("BasicDataPlotItemChecked.png")};
     common::checkPlot(plot, expectedPath);
 }

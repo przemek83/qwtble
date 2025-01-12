@@ -77,18 +77,29 @@ QVariant getItemInfo(QwtPlot& plot, const QString& text)
 
 QSize getPlotSize() { return {800, 600}; }
 
-void checkPlot(QwtPlot& plot, const QString& expectedPath)
+void checkPlot(QwtPlot& plot, const QString& expectedFileName)
 {
+    QString expectedPath;
+#ifdef Q_OS_WIN
+    expectedPath = QStringLiteral(":/windows/res/windows/");
+    // QLabel label("Running on Windows");
+    // qDebug() << "This code is compiled for Windows.";
+#else
+    expectedPath = QStringLiteral(":/unix-like/res/unix-like/");
+    // QLabel label("Running on non-Windows OS");
+    // qDebug() << "This code is compiled for a non-Windows OS.";
+#endif
+
     const QImage actual{plot.grab().toImage()};
-    QImage expected(expectedPath);
+    QImage expected(expectedPath + expectedFileName);
     expected = expected.convertToFormat(actual.format());
     QCOMPARE(actual, expected);
 }
 
-void checkPlotCanvas(QwtPlot& plot, const QString& expectedPath)
+void checkPlotCanvas(QwtPlot& plot, const QString& expectedFileName)
 {
     const QImage actual{plot.canvas()->grab().toImage()};
-    QImage expected(expectedPath);
+    QImage expected(expectedFileName);
     expected = expected.convertToFormat(actual.format());
     QCOMPARE(actual, expected);
 }
