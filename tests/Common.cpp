@@ -84,4 +84,12 @@ void checkPlot(QwtPlot& plot, const QString& expectedPath)
     expected = expected.convertToFormat(actual.format());
     QCOMPARE(actual, expected);
 }
+
+void checkPlotCanvas(QwtPlot& plot, const QString& expectedPath)
+{
+    const QImage actual{plot.canvas()->grab().toImage()};
+    QImage expected(expectedPath);
+    expected = expected.convertToFormat(actual.format());
+    QCOMPARE(actual, expected);
+}
 }  // namespace common

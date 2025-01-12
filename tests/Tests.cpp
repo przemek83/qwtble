@@ -48,7 +48,9 @@ void setupFont()
     const QString family{QFontDatabase::applicationFontFamilies(id).at(0)};
     QFont font(family);
     font.setPixelSize(12);
-    font.setStyleStrategy(QFont::NoAntialias);
+    font.setStyleStrategy(static_cast<QFont::StyleStrategy>(QFont::NoAntialias |
+                        QFont::PreferBitmap | QFont::NoSubpixelAntialias | 
+                        QFont::PreferNoShaping | QFont::NoFontMerging));
     QApplication::setFont(font);
 }
 }  // namespace

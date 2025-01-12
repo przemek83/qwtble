@@ -61,11 +61,10 @@ void BasicDataPlotTest::testPlotWithData()
 {
     BasicDataPlot plot;
     preparePlot(plot);
-    plot.setAxisVisible(QwtPlot::xBottom, false);
 
     const QString expectedPath{
         QString::fromLatin1(":/res/BasicDataPlotDefault.png")};
-    common::checkPlot(plot, expectedPath);
+    common::checkPlotCanvas(plot, expectedPath);
 }
 
 void BasicDataPlotTest::testPlotWithoutData()
@@ -78,7 +77,7 @@ void BasicDataPlotTest::testPlotWithoutData()
 
     const QString expectedPath{
         QString::fromLatin1(":/res/BasicDataPlotEmpty.png")};
-    common::checkPlot(plot, expectedPath);
+    common::checkPlotCanvas(plot, expectedPath);
 }
 
 void BasicDataPlotTest::testLegendItemsChecking()
@@ -92,5 +91,5 @@ void BasicDataPlotTest::testLegendItemsChecking()
 
     const QString expectedPath{
         QString::fromLatin1(":/res/BasicDataPlotItemChecked.png")};
-    common::checkPlot(plot, expectedPath);
+    common::checkPlotCanvas(plot, expectedPath);
 }
