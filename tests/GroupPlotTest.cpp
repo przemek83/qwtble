@@ -36,9 +36,6 @@ void GroupPlotTest::testPlotWithData()
     GroupPlot plot;
     preparePlot(plot);
 
-    // const QImage actual{plot.grab().toImage()};
-    // actual.save("GroupPlotDefault.png");
-
     const QString expectedPath{QString::fromLatin1("GroupPlotDefault.png")};
     common::checkPlot(plot, expectedPath);
 }
@@ -48,9 +45,6 @@ void GroupPlotTest::testPlotWithoutData()
     GroupPlot plot;
     plot.setNewData({}, {});
     plot.resize(common::getPlotSize());
-
-    // const QImage actual{plot.grab().toImage()};
-    // actual.save("GroupPlotPlotWithoutData.png");
 
     const QString expectedPath{
         QString::fromLatin1("GroupPlotPlotWithoutData.png")};

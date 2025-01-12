@@ -14,4 +14,16 @@
         <file>res/unix-like/QuantilesPlotDefault.png</file>
         <file>res/unix-like/QuantilesPlotWithoutData.png</file>
     </qresource>
+    <qresource prefix="/windows">
+        <file>res/windows/BasicDataPlotDefault.png</file>
+        <file>res/windows/BasicDataPlotEmpty.png</file>
+        <file>res/windows/BasicDataPlotItemChecked.png</file>
+        <file>res/windows/HistogramPlotDefault.png</file>
+        <file>res/windows/HistogramPlotWithoutData.png</file>
+        <file>res/windows/HistogramPlotItemChecked.png</file>
+        <file>res/windows/GroupPlotDefault.png</file>
+        <file>res/windows/GroupPlotPlotWithoutData.png</file>
+        <file>res/windows/QuantilesPlotDefault.png</file>
+        <file>res/windows/QuantilesPlotWithoutData.png</file>
+    </qresource>
 </RCC>
