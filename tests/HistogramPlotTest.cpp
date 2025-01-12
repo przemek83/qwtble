@@ -30,8 +30,8 @@ void HistogramPlotTest::testPlotWithData()
     HistogramPlot plot;
     preparePlot(plot);
 
-    const QImage actual{plot.grab().toImage()};
-    actual.save("HistogramPlotDefault.png");
+    // const QImage actual{plot.grab().toImage()};
+    // actual.save("HistogramPlotDefault.png");
 
     const QString expectedPath{QString::fromLatin1("HistogramPlotDefault.png")};
     common::checkPlot(plot, expectedPath);
@@ -43,8 +43,8 @@ void HistogramPlotTest::testPlotWithoutData()
     plot.setNewData({}, {}, 10);
     plot.resize(common::getPlotSize());
 
-    const QImage actual{plot.grab().toImage()};
-    actual.save("HistogramPlotWithoutData.png");
+    // const QImage actual{plot.grab().toImage()};
+    // actual.save("HistogramPlotWithoutData.png");
 
     const QString expectedPath{
         QString::fromLatin1("HistogramPlotWithoutData.png")};
@@ -60,8 +60,8 @@ void HistogramPlotTest::testLegendItemsChecking()
     emit legend->checked(common::getItemInfo(plot, QStringLiteral("Histogram")),
                          false, 0);
 
-    const QImage actual{plot.grab().toImage()};
-    actual.save("HistogramPlotItemChecked.png");
+    // const QImage actual{plot.grab().toImage()};
+    // actual.save("HistogramPlotItemChecked.png");
 
     const QString expectedPath{
         QString::fromLatin1("HistogramPlotItemChecked.png")};

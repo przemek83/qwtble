@@ -22,8 +22,8 @@ void QuantilesPlotTest::testPlotWithData()
     QuantilesPlot plot;
     preparePlot(plot);
 
-    const QImage actual{plot.grab().toImage()};
-    actual.save("QuantilesPlotDefault.png");
+    // const QImage actual{plot.grab().toImage()};
+    // actual.save("QuantilesPlotDefault.png");
 
     const QString expectedPath{QString::fromLatin1("QuantilesPlotDefault.png")};
     common::checkPlot(plot, expectedPath);
@@ -35,8 +35,8 @@ void QuantilesPlotTest::testPlotWithoutData()
     plot.setNewData({});
     plot.resize(common::getPlotSize());
 
-    const QImage actual{plot.grab().toImage()};
-    actual.save("QuantilesPlotWithoutData.png");
+    // const QImage actual{plot.grab().toImage()};
+    // actual.save("QuantilesPlotWithoutData.png");
 
     const QString expectedPath{
         QString::fromLatin1("QuantilesPlotWithoutData.png")};
