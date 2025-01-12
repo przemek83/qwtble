@@ -32,7 +32,7 @@ void HistogramPlotTest::testPlotWithData()
 
     const QString expectedPath{
         QString::fromLatin1(":/res/HistogramPlotDefault.png")};
-    common::checkPlot(plot, expectedPath);
+    common::checkPlotCanvas(plot, expectedPath);
 }
 
 void HistogramPlotTest::testPlotWithoutData()
@@ -43,7 +43,7 @@ void HistogramPlotTest::testPlotWithoutData()
 
     const QString expectedPath{
         QString::fromLatin1(":/res/HistogramPlotWithoutData.png")};
-    common::checkPlot(plot, expectedPath);
+    common::checkPlotCanvas(plot, expectedPath);
 }
 
 void HistogramPlotTest::testLegendItemsChecking()
@@ -57,5 +57,5 @@ void HistogramPlotTest::testLegendItemsChecking()
 
     const QString expectedPath{
         QString::fromLatin1(":/res/HistogramPlotItemChecked.png")};
-    common::checkPlot(plot, expectedPath);
+    common::checkPlotCanvas(plot, expectedPath);
 }
