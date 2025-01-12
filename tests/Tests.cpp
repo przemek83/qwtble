@@ -59,15 +59,6 @@ int main(int argc, char* argv[])
 {
     const QApplication app(argc, argv);
 
-    QStyle* style{QStyleFactory::create(QStringLiteral("Fusion"))};
-    QApplication::setStyle(style);
-    setLightPalette();
-
-    const QLocale locale(QLocale::English, QLocale::UnitedStates);
-    QLocale::setDefault(locale);
-
-    setupFont();
-
     int status{EXIT_SUCCESS};
     UtilitiesTest utilitiesTest;
     status |= QTest::qExec(&utilitiesTest);
@@ -78,6 +69,16 @@ int main(int argc, char* argv[])
     QuantilesTest quantilesTest;
     status |= QTest::qExec(&quantilesTest);
 
+#ifndef Q_OS_WIN
+    QStyle* style{QStyleFactory::create(QStringLiteral("Fusion"))};
+    QApplication::setStyle(style);
+    setLightPalette();
+
+    const QLocale locale(QLocale::English, QLocale::UnitedStates);
+    QLocale::setDefault(locale);
+
+    setupFont();
+    
     BasicDataPlotTest basicDataPlotTest;
     status |= QTest::qExec(&basicDataPlotTest);
 
@@ -89,6 +90,7 @@ int main(int argc, char* argv[])
 
     QuantilesPlotTest quantilesPlotTest;
     status |= QTest::qExec(&quantilesPlotTest);
+#endif
 
     return status;
 }

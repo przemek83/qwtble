@@ -37,36 +37,36 @@ void QuantilesPlotTest::testPlotWithoutData()
     common::checkPlot(plot, expectedPath);
 }
 
-// void QuantilesPlotTest::testReset()
-// {
-//     QuantilesPlot plot;
-//     preparePlot(plot);
+void QuantilesPlotTest::testReset()
+{
+    QuantilesPlot plot;
+    preparePlot(plot);
 
-//     QwtPlotPanner panner(plot.canvas());
-//     panner.setMouseButton(Qt::LeftButton);
+    QwtPlotPanner panner(plot.canvas());
+    panner.setMouseButton(Qt::LeftButton);
 
-//     plot.show();
-//     const QPoint endPos(50, 50);
-//     const QPoint startPos(100, 100);
+    plot.show();
+    const QPoint endPos(50, 50);
+    const QPoint startPos(100, 100);
 
-//     // Force showing label.
-//     QTest::mousePress(plot.canvas(), Qt::LeftButton, Qt::NoModifier, endPos);
-//     QTest::mouseMove(plot.canvas(), endPos);
-//     QTest::mouseRelease(plot.canvas(), Qt::LeftButton, Qt::NoModifier, endPos);
+    // Force showing label.
+    QTest::mousePress(plot.canvas(), Qt::LeftButton, Qt::NoModifier, endPos);
+    QTest::mouseMove(plot.canvas(), endPos);
+    QTest::mouseRelease(plot.canvas(), Qt::LeftButton, Qt::NoModifier, endPos);
 
-//     QImage beforeMove{plot.grab().toImage()};
+    QImage beforeMove{plot.grab().toImage()};
 
-//     QTest::mousePress(plot.canvas(), Qt::LeftButton, Qt::NoModifier, startPos);
-//     QTest::mouseMove(plot.canvas(), endPos);
-//     QTest::mouseRelease(plot.canvas(), Qt::LeftButton, Qt::NoModifier, endPos);
+    QTest::mousePress(plot.canvas(), Qt::LeftButton, Qt::NoModifier, startPos);
+    QTest::mouseMove(plot.canvas(), endPos);
+    QTest::mouseRelease(plot.canvas(), Qt::LeftButton, Qt::NoModifier, endPos);
 
-//     QImage afterMove{plot.grab().toImage()};
-//     QCOMPARE_NE(beforeMove, afterMove);
+    QImage afterMove{plot.grab().toImage()};
+    QCOMPARE_NE(beforeMove, afterMove);
 
-//     QMouseEvent customEvent(QEvent::MouseButtonDblClick, endPos, endPos,
-//                             Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
-//     QCoreApplication::sendEvent(plot.canvas(), &customEvent);
+    QMouseEvent customEvent(QEvent::MouseButtonDblClick, endPos, endPos,
+                            Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
+    QCoreApplication::sendEvent(plot.canvas(), &customEvent);
 
-//     const QImage afterReset{plot.grab().toImage()};
-//     QCOMPARE(beforeMove, afterReset);
-// }
+    const QImage afterReset{plot.grab().toImage()};
+    QCOMPARE(beforeMove, afterReset);
+}
