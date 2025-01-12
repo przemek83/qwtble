@@ -66,7 +66,7 @@ int main(int argc, char* argv[])
     const QLocale locale(QLocale::English, QLocale::UnitedStates);
     QLocale::setDefault(locale);
 
-    setupFont();
+    // setupFont();
 
     int status{EXIT_SUCCESS};
     UtilitiesTest utilitiesTest;
