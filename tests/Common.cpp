@@ -85,3 +85,4 @@ void checkPlot(QwtPlot& plot, const QString& expectedFileName)
     expected = expected.convertToFormat(actual.format());
     QCOMPARE(actual, expected);
 }
+}  // namespace common
