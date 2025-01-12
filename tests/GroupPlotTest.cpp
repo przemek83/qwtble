@@ -38,7 +38,7 @@ void GroupPlotTest::testPlotWithData()
 
     const QString expectedPath{
         QString::fromLatin1(":/res/GroupPlotDefault.png")};
-    common::checkPlot(plot, expectedPath);
+    common::checkPlotCanvas(plot, expectedPath);
 }
 
 void GroupPlotTest::testPlotWithoutData()
@@ -49,5 +49,5 @@ void GroupPlotTest::testPlotWithoutData()
 
     const QString expectedPath{
         QString::fromLatin1(":/res/GroupPlotPlotWithoutData.png")};
-    common::checkPlot(plot, expectedPath);
+    common::checkPlotCanvas(plot, expectedPath);
 }
