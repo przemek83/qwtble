@@ -51,6 +51,7 @@ void preparePlot(BasicDataPlot& plot)
     const QVector<QPointF> regressionPoints{{min, 38.002}, {max, 78.4491}};
     const QVector<QPointF> data{getData()};
     const Quantiles quantiles{getQuantiles()};
+    plot.setAxisVisible(QwtPlot::xBottom, false);
     plot.setNewData(data, quantiles, regressionPoints);
     plot.resize(common::getPlotSize());
 }
@@ -72,6 +73,7 @@ void BasicDataPlotTest::testPlotWithoutData()
     const QVector<QPointF> regressionPoints{{0, 0}, {0, 0}};
     const Quantiles quantiles;
     BasicDataPlot plot;
+    plot.setAxisVisible(QwtPlot::xBottom, false);
     plot.setNewData({}, quantiles, regressionPoints);
     plot.resize(common::getPlotSize());
 
