@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.16)
 
 project(qwtble
         LANGUAGES CXX
-        VERSION 1.1.0
+        VERSION 1.2.0
         DESCRIPTION "Library with widgets built on top of Qwt."
         HOMEPAGE_URL "https://github.com/przemek83/qwtble")
 
