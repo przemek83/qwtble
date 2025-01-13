@@ -7,47 +7,35 @@
 
 namespace qwt_ble_utilities
 {
-/**
- * @brief Calculate date 1/1/1970 + given days and return string representation.
- * @param daysToAdd Number of days to add.
- * @return Date as string.
- **/
+/// @brief Calculate date 1/1/1970 + given days and return string.
+/// @param daysToAdd Number of days to add.
+/// @return Date as string.
 QString QWTBLE_EXPORT stringFromDays(int daysToAdd);
 
-/**
- * @brief Date 1/1/1970 used as reference conversions.
- * @return Date 1/1/1970.
- */
+/// @brief Date 1/1/1970 used as reference conversions.
+/// @return Date 1/1/1970.
 QDate QWTBLE_EXPORT getStartOfTheWorld();
 
-/**
- * @brief Get default formatting which should be used.
- * @return Default formatting as string.
- */
+/// @brief Get default formatting which should be used.
+/// @return Default formatting as string.
 QString QWTBLE_EXPORT getDefaultDateFormat();
 
-/**
- * @brief Check if 2 given doubles are equal.
- * @param left Left double.
- * @param right Right double.
- * @return True when equal, false otherwise.
- */
+/// @brief Check if 2 given doubles are equal.
+/// @param left Left double.
+/// @param right Right double.
+/// @return True when equal, false otherwise.
 bool QWTBLE_EXPORT doublesAreEqual(double left, double right);
 
-/**
- * @brief Check if 2 given floats are equal.
- * @param left Left float.
- * @param right Right float.
- * @return True when equal, false otherwise.
- */
+/// @brief Check if 2 given floats are equal.
+/// @param left Left float.
+/// @param right Right float.
+/// @return True when equal, false otherwise.
 bool QWTBLE_EXPORT floatsAreEqual(float left, float right);
 
-/**
- * @brief Visualize given number as string using localization formatting.
- * @param value Double value to visualize.
- * @param precision Precision for visualization.
- * @return Double value as string created using locale.
- **/
+/// @brief Visualize given number as string using localization formatting.
+/// @param value Double value to visualize.
+/// @param precision Precision for visualization.
+/// @return Double value as string created using locale.
 QString QWTBLE_EXPORT doubleToStringUsingLocale(double value, int precision);
 
 static constexpr int BIG_TRANSPARENCY_FACTOR{50};

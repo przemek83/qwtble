@@ -9,10 +9,8 @@
 class YAxisNumberPicker;
 class NotchedMarker;
 
-/**
- * @class QuantilesPlot
- * @brief Plot showing quantiles, min, max, mean and std deviation.
- */
+/// @class QuantilesPlot
+/// @brief Plot showing quantiles, min, max, mean and std deviation.
 class QWTBLE_EXPORT QuantilesPlot : public PlotBase
 {
     Q_OBJECT
@@ -26,10 +24,8 @@ public:
     QSize sizeHint() const override;
 
 public Q_SLOTS:
-    /**
-     * @brief Set new quantiles for plot.
-     * @param quantiles New quantiles.
-     */
+    /// @brief Set new quantiles for plot.
+    /// @param quantiles New quantiles.
     void setNewData(const Quantiles& quantiles);
 
 protected:

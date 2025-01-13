@@ -11,10 +11,8 @@
 class QMouseEvent;
 class XYAxisNumberPicker;
 
-/**
- * @class HistogramPlot
- * @brief Histogram plot with distribution.
- */
+/// @class HistogramPlot
+/// @brief Histogram plot with distribution.
 class QWTBLE_EXPORT HistogramPlot : public PlotBase
 {
     Q_OBJECT
@@ -24,19 +22,15 @@ public:
     ~HistogramPlot() override;
 
 public Q_SLOTS:
-    /**
-     * @brief Set new data for plot.
-     * @param data Series of values.
-     * @param quantiles Quantiles for given data.
-     * @param intervalsCount Number of histogram intervals.
-     */
+    /// @brief Set new data for plot.
+    /// @param data Series of values.
+    /// @param quantiles Quantiles for given data.
+    /// @param intervalsCount Number of histogram intervals.
     void setNewData(QVector<double> data, const Quantiles& quantiles,
                     int intervalsCount);
 
-    /**
-     * @brief Recompute histogram with given intervals count.
-     * @param intervalsCount Intervals count.
-     */
+    /// @brief Recompute histogram with given intervals count.
+    /// @param intervalsCount Intervals count.
     void recompute(int intervalsCount);
 
 private:

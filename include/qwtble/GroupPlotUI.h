@@ -18,10 +18,8 @@ namespace Ui
 class GroupPlotUI;
 }  // namespace Ui
 
-/**
- * @class GroupPlotUI
- * @brief Widget pairing quantiles and grouping plots with trait combo box.
- */
+/// @class GroupPlotUI
+/// @brief Widget pairing quantiles and grouping plots with trait combo box.
 class QWTBLE_EXPORT GroupPlotUI : public QWidget
 {
     Q_OBJECT
@@ -32,12 +30,10 @@ public:
     ~GroupPlotUI() override;
 
 public Q_SLOTS:
-    /**
-     * @brief Set new data for plots.
-     * @param intervalsNames Names used on bottom axis of group plot.
-     * @param quantilesForIntervals Quantiles for each trait type.
-     * @param quantiles General quantiles.
-     */
+    /// @brief Set new data for plots.
+    /// @param intervalsNames Names used on bottom axis of group plot.
+    /// @param quantilesForIntervals Quantiles for each trait type.
+    /// @param quantiles General quantiles.
     void setNewData(const QVector<QString>& intervalsNames,
                     QVector<Quantiles> quantilesForIntervals,
                     const Quantiles& quantiles);
@@ -46,10 +42,8 @@ protected:
     void resizeEvent(QResizeEvent* event) override;
 
 private:
-    /**
-     * @brief Add splitter with group and quantiles plots.
-     * @return Splitter.
-     */
+    /// @brief Add splitter with group and quantiles plots.
+    /// @return Splitter.
     QSplitter* setupSplitter();
 
     double calculateExpectedExtent() const;
@@ -70,9 +64,7 @@ private Q_SLOTS:
 Q_SIGNALS:
     void syncPlotSizes();
 
-    /**
-     * @brief Signal emitted when user changes trait in combo box.
-     * @param newIndex index.
-     */
+    /// @brief Signal emitted when user changes trait in combo box.
+    /// @param newIndex index.
     void traitIndexChanged(int newIndex);
 };

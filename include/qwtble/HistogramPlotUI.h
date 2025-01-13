@@ -14,10 +14,8 @@ class HistogramPlotUI;
 
 struct Quantiles;
 
-/**
- * @class HistogramPlotUI
- * @brief Widget pairing histogram plot with intervals count spin box.
- */
+/// @class HistogramPlotUI
+/// @brief Widget pairing histogram plot with intervals count spin box.
 class QWTBLE_EXPORT HistogramPlotUI : public QWidget
 {
     Q_OBJECT
@@ -27,11 +25,9 @@ public:
     ~HistogramPlotUI() override;
 
 public Q_SLOTS:
-    /**
-     * @brief Set new data for plot.
-     * @param data Series of values.
-     * @param quantiles Quantiles for given data.
-     */
+    /// @brief Set new data for plot.
+    /// @param data Series of values.
+    /// @param quantiles Quantiles for given data.
     void setNewData(QVector<double> data, const Quantiles& quantiles);
 
 private:

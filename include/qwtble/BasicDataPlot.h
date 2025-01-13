@@ -11,10 +11,8 @@
 
 class XDateYAxisNumberPicker;
 
-/**
- * @class BasicDataPlot
- * @brief Plot showing data plus quantiles and linear regression curves.
- */
+/// @class BasicDataPlot
+/// @brief Plot showing data plus quantiles and linear regression curves.
 class QWTBLE_EXPORT BasicDataPlot : public PlotBase
 {
     Q_OBJECT
@@ -24,12 +22,10 @@ public:
     ~BasicDataPlot() override;
 
 public Q_SLOTS:
-    /**
-     * @brief Set new data for plot.
-     * @param data Data points.
-     * @param quantiles Quantiles for data.
-     * @param linearRegression Linear regression points.
-     */
+    /// @brief Set new data for plot.
+    /// @param data Data points.
+    /// @param quantiles Quantiles for data.
+    /// @param linearRegression Linear regression points.
     void setNewData(const QVector<QPointF>& data, const Quantiles& quantiles,
                     const QVector<QPointF>& linearRegression);
 

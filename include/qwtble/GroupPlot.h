@@ -7,10 +7,8 @@
 class NotchedMarker;
 class YAxisNumberPicker;
 
-/**
- * @class GroupPlot
- * @brief Plot showing data grouped by trait types using notched markers.
- */
+/// @class GroupPlot
+/// @brief Plot showing data grouped by trait types using notched markers.
 class QWTBLE_EXPORT GroupPlot : public PlotBase
 {
     Q_OBJECT
@@ -22,11 +20,9 @@ public:
     QSize minimumSizeHint() const override;
 
 public Q_SLOTS:
-    /**
-     * @brief Set new data for group plot.
-     * @param quantilesVector Quantiles for each trait type.
-     * @param intervalStrings Names of trait types.
-     */
+    /// @brief Set new data for group plot.
+    /// @param quantilesVector Quantiles for each trait type.
+    /// @param intervalStrings Names of trait types.
     void setNewData(QVector<Quantiles> quantilesVector,
                     const QVector<QString>& intervalStrings);
 
@@ -36,7 +32,7 @@ protected:
 private:
     static QVector<QString> createAxisIntervalsNames(
         const QVector<QString>& intervalsNames,
-        const QVector<Quantiles>& quantilesVector) ;
+        const QVector<Quantiles>& quantilesVector);
 
     static QVector<QString> createTooltips(
         const QVector<QString>& intervalsNames,

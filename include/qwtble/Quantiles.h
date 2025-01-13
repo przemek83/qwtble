@@ -8,10 +8,8 @@
 
 #include "qwtble_global.h"
 
-/**
- * @class Quantiles
- * @brief Struct for min, max, mean, quantiles and std dev.
- */
+/// @class Quantiles
+/// @brief Struct for min, max, mean, quantiles and std dev.
 struct QWTBLE_EXPORT Quantiles
 {
 public:
@@ -32,21 +30,14 @@ public:
     double minX_{.0};
     double maxX_{.0};
 
-    /**
-     * @brief Clear struct.
-     */
     void clear();
 
-    /**
-     * @brief Initialize structure using given values.
-     * @param values Values using which struct is filled.
-     */
+    /// @brief Initialize structure using given values.
+    /// @param values Values using which struct is filled.
     void init(QVector<double> values);
 
-    /**
-     * @brief Generate HTML like tooltip from current values.
-     * @return HTML like tool tip.
-     */
+    /// @brief Generate HTML like tooltip from current values.
+    /// @return HTML like tool tip.
     QString getValuesAsToolTip() const;
 
 private:

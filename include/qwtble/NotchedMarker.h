@@ -9,17 +9,13 @@
 
 struct Quantiles;
 
-/**
- * @class NotchedMarker
- * @brief Notched marker displaying quantiles, min, max and mean.
- */
+/// @class NotchedMarker
+/// @brief Notched marker displaying quantiles, min, max and mean.
 class QWTBLE_EXPORT NotchedMarker : public QwtPlotItem
 {
 public:
-    /**
-     * @brief NotchedMarker constructor.
-     * @param quantiles Vector of quantiles structures to present.
-     */
+    /// @brief NotchedMarker constructor.
+    /// @param quantiles Vector of quantiles structures to present.
     explicit NotchedMarker(QVector<Quantiles> quantiles);
 
     int rtti() const override;
@@ -27,22 +23,16 @@ public:
     void draw(QPainter* painter, const QwtScaleMap& xMap,
               const QwtScaleMap& yMap, const QRectF& rect) const override;
 
-    /**
-     * @brief Activate or disable drawing of legend.
-     * @param drawLegend Draw legend. True for drawing, false for not drawing.
-     */
+    /// @brief Activate or disable drawing of legend.
+    /// @param drawLegend Draw legend. True for drawing, false for not drawing.
     void setDrawLegend(bool drawLegend);
 
-    /**
-     * @brief Check if legend is drawn.
-     * @return True if active, false if not active.
-     */
+    /// @brief Check if legend is drawn.
+    /// @return True if active, false if not active.
     bool getDrawLegend() const;
 
-    /**
-     * @brief Set new vector of quantiles for present.
-     * @param quantilesVector Vector of quantiles.
-     */
+    /// @brief Set new vector of quantiles for present.
+    /// @param quantilesVector Vector of quantiles.
     void setQuantiles(QVector<Quantiles> quantilesVector);
 
 private:

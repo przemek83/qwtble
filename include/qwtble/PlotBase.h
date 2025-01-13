@@ -11,10 +11,8 @@
 class QwtPlotPanner;
 class PlotMagnifier;
 
-/**
- * @class PlotBase
- * @brief Base class for all plots.
- */
+/// @class PlotBase
+/// @brief Base class for all plots.
 class QWTBLE_EXPORT PlotBase : public QwtPlot
 {
     Q_OBJECT
@@ -23,20 +21,16 @@ public:
 
     ~PlotBase() override;
 
-    /**
-     * @brief Reset state of plot.
-     */
+    /// @brief Reset state of plot.
     void resetPlot();
 
     QSize minimumSizeHint() const override;
 
-    /**
-     * @brief Set axis stale remembering before passed passed parameters.
-     * @param axisId Id of axis.
-     * @param min Minimum on axis.
-     * @param max Maximum on axis.
-     * @param step Step on axis.
-     */
+    /// @brief Set axis stale remembering before passed passed parameters.
+    /// @param axisId Id of axis.
+    /// @param min Minimum on axis.
+    /// @param max Maximum on axis.
+    /// @param step Step on axis.
     void setAxisScale(int axisId, double min, double max, double step = 0);
 
 protected:
