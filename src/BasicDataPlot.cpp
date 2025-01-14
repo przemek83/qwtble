@@ -24,6 +24,8 @@ BasicDataPlot::BasicDataPlot(QWidget* parent)
     checkLegendItems();
 }
 
+BasicDataPlot::BasicDataPlot() : BasicDataPlot(nullptr) {}
+
 BasicDataPlot::~BasicDataPlot() = default;
 
 void BasicDataPlot::initPlotCurve()

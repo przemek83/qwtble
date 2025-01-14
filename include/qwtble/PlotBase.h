@@ -17,7 +17,8 @@ class QWTBLE_EXPORT PlotBase : public QwtPlot
 {
     Q_OBJECT
 public:
-    explicit PlotBase(const QString& title, QWidget* parent = nullptr);
+    PlotBase(const QString& title, QWidget* parent);
+    explicit PlotBase(const QString& title);
 
     ~PlotBase() override;
 

@@ -13,7 +13,8 @@ class QWTBLE_EXPORT GroupPlot : public PlotBase
 {
     Q_OBJECT
 public:
-    explicit GroupPlot(QWidget* parent = nullptr);
+    explicit GroupPlot(QWidget* parent);
+    GroupPlot();
 
     ~GroupPlot() override;
 

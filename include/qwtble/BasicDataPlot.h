@@ -17,7 +17,8 @@ class QWTBLE_EXPORT BasicDataPlot : public PlotBase
 {
     Q_OBJECT
 public:
-    explicit BasicDataPlot(QWidget* parent = nullptr);
+    explicit BasicDataPlot(QWidget* parent);
+    BasicDataPlot();
 
     ~BasicDataPlot() override;
 

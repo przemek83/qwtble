@@ -26,6 +26,8 @@ GroupPlot::GroupPlot(QWidget* parent)
     setAxisFont(QwtPlot::xBottom, font);
 }
 
+GroupPlot::GroupPlot() : GroupPlot(nullptr) {}
+
 // Uncommon construction to allow forward declaration of YAxisNumberPicker.
 GroupPlot::~GroupPlot() = default;
 

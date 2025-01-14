@@ -30,6 +30,11 @@ GroupPlotUI::GroupPlotUI(const QVector<std::pair<QString, int> >& stringColumns,
             &GroupPlotUI::updateQuantilesPlotExtent);
 }
 
+GroupPlotUI::GroupPlotUI(const QVector<std::pair<QString, int> >& stringColumns)
+    : GroupPlotUI(stringColumns, nullptr)
+{
+}
+
 GroupPlotUI::~GroupPlotUI() = default;
 
 void GroupPlotUI::setNewData(const QVector<QString>& intervalsNames,

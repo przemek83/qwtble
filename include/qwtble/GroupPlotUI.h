@@ -24,8 +24,10 @@ class QWTBLE_EXPORT GroupPlotUI : public QWidget
 {
     Q_OBJECT
 public:
-    explicit GroupPlotUI(const QVector<std::pair<QString, int> >& stringColumns,
-                         QWidget* parent = nullptr);
+    GroupPlotUI(const QVector<std::pair<QString, int> >& stringColumns,
+                QWidget* parent);
+    explicit GroupPlotUI(
+        const QVector<std::pair<QString, int> >& stringColumns);
 
     ~GroupPlotUI() override;
 

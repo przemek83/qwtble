@@ -17,6 +17,8 @@ HistogramPlotUI::HistogramPlotUI(QWidget* parent)
             &histogramPlot_, &HistogramPlot::recompute);
 }
 
+HistogramPlotUI::HistogramPlotUI() : HistogramPlotUI(nullptr) {}
+
 HistogramPlotUI::~HistogramPlotUI() = default;
 
 void HistogramPlotUI::setNewData(QVector<double> data,

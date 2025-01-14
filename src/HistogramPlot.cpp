@@ -17,6 +17,8 @@ HistogramPlot::HistogramPlot(QWidget* parent)
     initLegend();
 }
 
+HistogramPlot::HistogramPlot() : HistogramPlot(nullptr) {}
+
 // Uncommon construction to allow forward declaration of XYAxisNumberPicker.
 HistogramPlot::~HistogramPlot() = default;
 

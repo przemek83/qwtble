@@ -28,6 +28,8 @@ PlotBase::PlotBase(const QString& title, QWidget* parent)
     setAxisLabelAlignment(QwtPlot::xBottom, Qt::AlignLeft | Qt::AlignBottom);
 }
 
+PlotBase::PlotBase(const QString& title) : PlotBase(title, nullptr) {}
+
 // Uncommon construction to allow forward declaration of PlotMagnifier class.
 PlotBase::~PlotBase() = default;
 

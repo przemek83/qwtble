@@ -17,7 +17,8 @@ class QWTBLE_EXPORT HistogramPlot : public PlotBase
 {
     Q_OBJECT
 public:
-    explicit HistogramPlot(QWidget* parent = nullptr);
+    explicit HistogramPlot(QWidget* parent);
+    HistogramPlot();
 
     ~HistogramPlot() override;
 

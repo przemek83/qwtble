@@ -28,6 +28,8 @@ QuantilesPlot::QuantilesPlot(QWidget* parent)
     setupLegend(width());
 }
 
+QuantilesPlot::QuantilesPlot() : QuantilesPlot(nullptr) {}
+
 // Uncommon construction to allow forward declaration of YAxisNumberPicker.
 QuantilesPlot::~QuantilesPlot() = default;
 

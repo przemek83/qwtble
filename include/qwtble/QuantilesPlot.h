@@ -15,7 +15,8 @@ class QWTBLE_EXPORT QuantilesPlot : public PlotBase
 {
     Q_OBJECT
 public:
-    explicit QuantilesPlot(QWidget* parent = nullptr);
+    explicit QuantilesPlot(QWidget* parent);
+    QuantilesPlot();
 
     ~QuantilesPlot() override;
 

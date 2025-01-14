@@ -20,7 +20,8 @@ class QWTBLE_EXPORT HistogramPlotUI : public QWidget
 {
     Q_OBJECT
 public:
-    explicit HistogramPlotUI(QWidget* parent = nullptr);
+    explicit HistogramPlotUI(QWidget* parent);
+    HistogramPlotUI();
 
     ~HistogramPlotUI() override;
 
