@@ -23,7 +23,8 @@ NotchedMarker::NotchedMarker(QVector<Quantiles> quantiles)
 int NotchedMarker::rtti() const { return QwtPlotItem::Rtti_PlotUserItem; }
 
 void NotchedMarker::draw(QPainter* painter, const QwtScaleMap& xMap,
-                         const QwtScaleMap& yMap, const QRectF& rect) const
+                         const QwtScaleMap& yMap,
+                         const QRectF& canvasRect) const
 {
     if (quantilesVector_.empty() ||
         plot()->axisScaleDiv(QwtPlot::yLeft).isEmpty())
@@ -32,7 +33,7 @@ void NotchedMarker::draw(QPainter* painter, const QwtScaleMap& xMap,
     painter->save();
     painter->setBrush(QBrush(Qt::red, Qt::NoBrush));
     if (drawLegend_)
-        drawLegend(painter, rect);
+        drawLegend(painter, canvasRect);
     drawElements(painter, xMap, yMap);
     painter->restore();
 }

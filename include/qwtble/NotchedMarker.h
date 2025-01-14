@@ -21,7 +21,7 @@ public:
     int rtti() const override;
 
     void draw(QPainter* painter, const QwtScaleMap& xMap,
-              const QwtScaleMap& yMap, const QRectF& rect) const override;
+              const QwtScaleMap& yMap, const QRectF& canvasRect) const override;
 
     /// @brief Activate or disable drawing of legend.
     /// @param drawLegend Draw legend. True for drawing, false for not drawing.
