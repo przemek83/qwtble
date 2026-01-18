@@ -50,7 +50,6 @@ set(${PROJECT_NAME}_SOURCES
     src/HistogramPlotUI.cpp
 )
 
-
 set(PUBLIC_HEADERS
     include/${PROJECT_NAME}/qwtble_global.h
     include/${PROJECT_NAME}/BasicDataPlot.h
