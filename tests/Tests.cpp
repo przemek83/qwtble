@@ -63,13 +63,13 @@ int main(int argc, char* argv[])
 
     int status{EXIT_SUCCESS};
     UtilitiesTest utilitiesTest;
-    status |= QTest::qExec(&utilitiesTest);
+    status = std::max(status, QTest::qExec(&utilitiesTest));
 
     GroupPlotUITest groupPlotUITest;
-    status |= QTest::qExec(&groupPlotUITest);
+    status = std::max(status, QTest::qExec(&groupPlotUITest));
 
     QuantilesTest quantilesTest;
-    status |= QTest::qExec(&quantilesTest);
+    status = std::max(status, QTest::qExec(&quantilesTest));
 
 #ifndef Q_OS_WIN
     QStyle* style{QStyleFactory::create(QStringLiteral("Fusion"))};
@@ -82,16 +82,16 @@ int main(int argc, char* argv[])
     setupFont();
 
     BasicDataPlotTest basicDataPlotTest;
-    status |= QTest::qExec(&basicDataPlotTest);
+    status = std::max(status, QTest::qExec(&basicDataPlotTest));
 
     HistogramPlotTest histogramPlotTest;
-    status |= QTest::qExec(&histogramPlotTest);
+    status = std::max(status, QTest::qExec(&histogramPlotTest));
 
     GroupPlotTest groupPlotTest;
-    status |= QTest::qExec(&groupPlotTest);
+    status = std::max(status, QTest::qExec(&groupPlotTest));
 
     QuantilesPlotTest quantilesPlotTest;
-    status |= QTest::qExec(&quantilesPlotTest);
+    status = std::max(status, QTest::qExec(&quantilesPlotTest));
 #endif
 
     return status;
