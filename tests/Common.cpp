@@ -80,9 +80,11 @@ QSize getPlotSize() { return {800, 600}; }
 void checkPlot(QwtPlot& plot, const QString& expectedFileName)
 {
     const QImage actual{plot.grab().toImage()};
+    actual.save(expectedFileName, "PNG");
     QString expectedPath{QStringLiteral(":/unix-like/res/unix-like/")};
     QImage expected(expectedPath + expectedFileName);
     expected = expected.convertToFormat(actual.format());
+    // expected.save(expectedFileName + "expected", "PNG");
     QCOMPARE(actual, expected);
 }
 }  // namespace common
