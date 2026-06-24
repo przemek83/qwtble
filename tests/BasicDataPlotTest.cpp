@@ -84,8 +84,8 @@ void BasicDataPlotTest::testLegendItemsChecking()
     preparePlot(plot);
 
     auto* legend{::qobject_cast<QwtLegend*>(plot.legend())};
-    emit legend->checked(common::getItemInfo(plot, QStringLiteral("Q25")),
-                         false, 0);
+    Q_EMIT legend->checked(common::getItemInfo(plot, QStringLiteral("Q25")),
+                           false, 0);
 
     const QString expectedPath{
         QString::fromLatin1("BasicDataPlotItemChecked.png")};

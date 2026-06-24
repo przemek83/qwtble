@@ -51,8 +51,8 @@ void HistogramPlotTest::testLegendItemsChecking()
     preparePlot(plot);
 
     auto* legend{::qobject_cast<QwtLegend*>(plot.legend())};
-    emit legend->checked(common::getItemInfo(plot, QStringLiteral("Histogram")),
-                         false, 0);
+    Q_EMIT legend->checked(
+        common::getItemInfo(plot, QStringLiteral("Histogram")), false, 0);
 
     const QString expectedPath{
         QString::fromLatin1("HistogramPlotItemChecked.png")};

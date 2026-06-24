@@ -236,7 +236,7 @@ void initUpperSplitter(QSplitter& splitter)
     splitter.addWidget(
         wrapPlot(QStringLiteral("Grouping plot UI"), groupPlotUI));
 
-    emit groupPlotUI->traitIndexChanged(0);
+    Q_EMIT groupPlotUI->traitIndexChanged(0);
 }
 
 void initLowerSplitter(QSplitter& splitter)
