@@ -1,5 +1,4 @@
 #include <QFontDatabase>
-#include <QPainter>
 #include <QStyleFactory>
 #include <QTest>
 
@@ -44,8 +43,6 @@ void setLightPalette()
 
 void setupFont()
 {
-    // QPainter::setRenderHint(QPainter::TextAntialiasing, false);
-
     const int id{QFontDatabase::addApplicationFont(
         QStringLiteral(":/res/FiraMono-Regular.ttf"))};
     const QString family{QFontDatabase::applicationFontFamilies(id).at(0)};
@@ -60,6 +57,8 @@ void setupFont()
 
 int main(int argc, char* argv[])
 {
+    qputenv("QT_QPA_PLATFORM", QByteArrayLiteral("offscreen"));
+
     const QApplication app(argc, argv);
 
     int status{EXIT_SUCCESS};
