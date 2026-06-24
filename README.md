@@ -148,7 +148,7 @@ Example run:
 ```
 $ $ ./qwtble-tests
 ********* Start testing of UtilitiesTest *********
-Config: Using QtTest library 6.5.2, Qt 6.5.2 (x86_64-little_endian-lp64 shared (dynamic) release build; by GCC 10.3.1 20210422 (Red Hat 10.3.1-1)), ubuntu 24.04
+Config: Using QtTest library 6.8.3, Qt 6.8.3 (x86_64-little_endian-lp64 shared (dynamic) release build; by GCC 10.3.1 20210422 (Red Hat 10.3.1-1)), ubuntu 24.04
 PASS   : UtilitiesTest::initTestCase()
 PASS   : UtilitiesTest::testStringFromDays()
 PASS   : UtilitiesTest::testFloatsAreEqual()
